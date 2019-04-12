@@ -1,0 +1,26 @@
+// reset
+a {
+  color: darken(@color-blue-aim, 3%);
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 2px @color-blue-vivid;
+    border: 1px solid @color-blue-vivid;
+  }
+}
+
+.link {
+  color: darken(@color-blue-aim, 3%);
+
+  &:hover {
+    color: lighten(@color-blue-aim, 5%);
+  }
+}
+
+.link-discreet {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

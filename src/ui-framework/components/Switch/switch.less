@@ -1,0 +1,32 @@
+@import (inline) '~rc-switch/assets/index.css';
+
+.rc-switch {
+  width: 54px;
+  height: 24px;
+  background-color: @color-gray-mid;
+  border-color: @color-gray-mid;
+
+  .rc-switch-inner {
+    font-size: 16px;
+    left: 27px;
+    font-weight: 200;
+  }
+
+  &.rc-switch-checked {
+    border: 1px solid @color-green;
+    background-color: @color-green;
+
+    &::after {
+      left: 30px;
+    }
+
+    .rc-switch-inner {
+      left: 6px;
+    }
+  }
+
+  &::after {
+    width: 20px;
+    height: 20px;
+  }
+}

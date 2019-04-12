@@ -1,0 +1,58 @@
+.subnav-menu {
+  background: darken(@color-gray-darker, 5%);
+  bottom: 0;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+  height: 52px;
+  left: 0;
+  padding: 0;
+  position: fixed;
+  right: 0;
+  z-index: 3;
+
+  // TODO: refactor the buttons. Maybe create a navbar button component or something
+  .btn {
+    .flex-col-center;
+
+    border: 0;
+    height: 52px;
+    color: #fff;
+    padding: 4px 16px;
+    line-height: 1.7;
+    font-size: 15px;
+
+    .icon-svg {
+      fill: #fff;
+    }
+
+    &.active {
+      background-color: @color-gray-darker;
+      color: #fff;
+
+      .icon-svg {
+        fill: #fff;
+      }
+    }
+
+    &:focus,
+    &:hover {
+      color: #fff;
+      border-color: darken(@color-gray-darker, 2%);
+      box-shadow: none;
+    }
+  }
+
+  @media @md-screen {
+    box-shadow: none;
+    overflow: hidden;
+    top: 3px;
+    bottom: auto;
+    padding: 0;
+    left: auto;
+    right: 112px;
+    background-color: transparent;
+
+    .btn {
+      min-width: 8em;
+    }
+  }
+}

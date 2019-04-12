@@ -1,0 +1,106 @@
+// GRID
+.row {
+  .group;
+
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.col {
+  padding-left: @spacing-base / 2;
+  padding-right: @spacing-base / 2;
+  float: left;
+  min-height: 1px;
+}
+
+@col-values: 2, 3, 4, 5, 6, 7, 8, 9, 10, 12;
+
+each(@col-values, .(@cvalue) {
+  .col-@{cvalue} {
+    &:extend(.col);
+    width: 100% * @cvalue / 12;
+  }
+});
+
+.col-md-6 {
+  &:extend(.col);
+
+  @media screen and (min-width: 48em) {
+    width: 50%;
+  }
+}
+
+@grid-fluid-values: 5em, 6em, 8em, 12em, 14em, 16em, 20em, 24em, 32em;
+
+each(@grid-fluid-values, .(@gvalue) {
+  .grid-fluid-colmin@{gvalue} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(@gvalue, 1fr));
+    grid-gap: @spacing-base;
+  }
+});
+
+// grid that only activates in big screens
+@r-grid-fluid-values: 24em, 32em;
+
+each(@r-grid-fluid-values, .(@gvalue) {
+  .r-grid-fluid-colmin@{gvalue} {
+    @media (min-width: 721px) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(@gvalue, 1fr));
+      grid-gap: @spacing-base;
+    }
+  }
+});
+
+// Used to not have spaces between panels on small screens
+.r-grid-one-col {
+  display: grid;
+  grid-template-columns: 100%;
+
+  @media @md-screen {
+    grid-gap: @spacing-base;
+  }
+}
+
+// FLEX
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-col-center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-row-space-around {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+@media @md-screen {
+  .md-flex-row {
+    display: flex;
+    flex-direction: row;
+  }
+}

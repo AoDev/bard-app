@@ -1,0 +1,277 @@
+/* stylelint-disable */
+
+// Reset
+button {
+  cursor: pointer;
+  vertical-align: bottom;
+  line-height: 1;
+  font-size: @spacing-base;
+
+  &:focus,
+  &:hover {
+    outline: 0;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+
+    &:focus,
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+}
+
+.btn {
+  display: inline-block;
+  position: relative;
+  height: 44px;
+}
+
+// Mixin for style variant
+.btn-variant (@color) {
+  .noselect;
+
+  border: 1px solid @color;
+  background-color: #fff;
+  padding: 0 @spacing-base;
+  border-radius: 4px;
+  color: @color;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+
+  // TODO: wondering if we should create a btn-with-icon class / variant
+  .icon-svg {
+    fill: @color;
+  }
+
+  &:focus,
+  &:hover {
+    color: lighten(@color, 5%);
+    box-shadow: 0 0 1px 1px lighten(@color, 5%);
+  }
+
+  &[disabled] {
+    color: #777;
+    background-color: #fff;
+    border-color: #bbb;
+
+    .icon-svg {
+      fill: #777;
+    }
+
+    &:focus,
+    &:hover {
+      border-color: #bbb;
+      box-shadow: none;
+    }
+  }
+
+  &.active:hover,
+  &.active:focus,
+  &.active {
+    cursor: default;
+    color: #fff;
+    background-color: @color;
+    box-shadow: none;
+
+    // TODO: wondering if we should create a btn-with-icon class / variant
+    .icon-svg {
+      fill: #fff;
+    }
+  }
+
+  &.btn-loading {
+    color: transparent;
+
+    .loader-bar {
+      background-color: @color;
+    }
+  }
+}
+
+// Mixin for style variant
+.btn-variant-inverse (@color) {
+  .noselect;
+
+  border: 1px solid @color;
+  background-color: @color;
+  padding: 0 @spacing-base;
+  border-radius: 4px;
+  color: #fff;
+  text-transform: uppercase;
+  transition: background-color 0.4s linear;
+
+  &:focus,
+  &:hover {
+    color: #fff;
+    background-color: lighten(@color, 5%);
+    border-color: darken(@color, 2%);
+  }
+
+  &[disabled] {
+    color: #f7f7f7;
+    background-color: @color-gray-mid;
+    border-color: @color-gray-mid;
+
+    &:focus,
+    &:hover {
+      border-color: @color-gray-mid;
+    }
+  }
+
+  &.active {
+    color: #fff;
+    background-color: lighten(@color, 1%);
+  }
+
+  &.btn-loading {
+    color: transparent;
+
+    .loader-bar {
+      background-color: #fff;
+    }
+  }
+}
+
+// Button will fill the width of its container
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-neutral {
+  .btn-variant(@color-gray-darker);
+}
+
+.btn-default {
+  .btn-variant(@color-green-aim);
+}
+
+.btn-navlink {
+  .btn-variant(@color-blue-aim);
+}
+
+.btn-danger {
+  .btn-variant(@color-red-aim);
+}
+
+.btn-cta {
+  .btn-variant-inverse(@color-blue-aim);
+}
+
+.btn-cta-green {
+  .btn-variant-inverse(@color-green-aim);
+}
+
+.btn-cta-red {
+  .btn-variant-inverse(@color-red-aim);
+}
+
+.btn-link {
+  background: transparent;
+  border: 0;
+  color: @color-blue-aim;
+  padding: 0 @spacing-base;
+
+  &:focus,
+  &:hover {
+    color: darken(@color-blue-vivid, 5%);
+    text-decoration: underline;
+  }
+
+  &.btn-loading:focus,
+  &.btn-loading:hover,
+  &.btn-loading {
+    color: transparent;
+
+    .loader-bar {
+      background-color: @color-blue-aim;
+    }
+  }
+}
+
+// TODO: might rething this
+.btn-link.link {
+  padding: 0;
+  height: auto;
+  text-decoration: underline;
+  vertical-align: baseline;
+}
+
+.btn-theader {
+  background-color: transparent;
+  border: 0;
+  text-transform: uppercase;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+  width: 100%;
+
+  &:focus,
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+.btn-menu {
+  &:extend(.btn-neutral all);
+  border: 0;
+  color: @color-blue-aim;
+
+  &.active:hover,
+  &.active:focus,
+  &.active,
+  &:hover,
+  &:focus {
+    border: 0;
+    box-shadow: none;
+    background-color: #f0f0f0;
+    color: @color-blue-aim;
+
+    .icon-svg {
+      fill: @color-gray-darker;
+    }
+  }
+}
+
+.btn-invisible {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+}
+
+a.btn {
+  line-height: 2.7; // Needed when the class is set on a link to align text
+
+  &,
+  &.hover,
+  &.active {
+    text-decoration: none;
+  }
+}
+
+.btn.btn-loading {
+  color: transparent;
+}
+
+.btn-small {
+  height: 36px;
+  padding: 0 8px;
+}
+
+.btn-sticked {
+  white-space: nowrap;
+
+  > .btn:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  > .btn:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
+  }
+}

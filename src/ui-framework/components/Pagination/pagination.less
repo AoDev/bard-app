@@ -1,0 +1,60 @@
+.pgr-wrapper {
+  padding-left: 0;
+}
+
+.pgr-item {
+  display: inline-block;
+}
+
+.pgr-link,
+.pgr-link-active {
+  padding: 8px 12px;
+  margin-left: 2px;
+  display: block;
+  min-width: 46px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+}
+
+.pgr-link-light {
+  &:extend(.pgr-link);
+
+  &:focus,
+  &:hover {
+    background-color: darken(#fafafa, 5%);
+    outline: 0;
+  }
+}
+
+.pgr-link-light-active {
+  &:extend(.pgr-link);
+
+  background-color: @color-blue-vivid;
+  color: #fff;
+  cursor: default;
+
+  &:focus,
+  &:hover {
+    background-color: @color-blue-vivid;
+    outline: 0;
+  }
+}
+
+.pgr-disabled {
+  opacity: 0.8;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.pgr-link-dark {
+  &:extend(.pgr-link);
+  // TODO
+}
+
+.pgr-next,
+.pgr-prev {
+  &.pgr-disabled {
+    color: @color-gray-aim;
+  }
+}

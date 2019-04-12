@@ -1,0 +1,95 @@
+@msm-full-width: 300px;
+@msm-width: 64px;
+
+.main-side-menu {
+  background: #fff;
+  bottom: 0;
+  box-shadow: 16px 0 24px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  padding: 0 0 @header-height 0; // <- padding bottom is for when subnav is at the bottom
+  position: fixed;
+  top: 0;
+  transform: translateX(-(@msm-full-width + 100));
+  transition: all 0.2s ease-out;
+  width: @msm-full-width;
+  will-change: transform;
+  z-index: 3; // above header
+
+  .btn-navlink {
+    // TODO: refactor; should not be dependent
+    // add source btn
+    padding-left: 9px;
+  }
+}
+
+.msm--expanded {
+  &:extend(.main-side-menu);
+
+  width: @msm-full-width;
+  transform: translateX(0);
+}
+
+.msm__header {
+  height: @header-height;
+  padding: 16px;
+  background-color: #f5f5f5;
+  margin-bottom: 16px;
+}
+
+.btn-msm {
+  &:extend(.btn-neutral all);
+
+  border: 0;
+  border-radius: 0;
+  line-height: 2.7;
+
+  &:hover,
+  &:focus {
+    box-shadow: none;
+    border: 0;
+  }
+
+  :not(.active)&:focus,
+  :not(.active)&:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+.msm-overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.msm__submenu {
+  transition: all 0.2s ease-out 0.5s;
+  overflow: hidden;
+
+  .btn-menu {
+    padding-left: 6px;
+  }
+}
+
+.msm__submenu--open {
+  &:extend(.msm__submenu all);
+
+  max-height: calc(~'100vh - 60px'); // <- allows animated height in small screens
+}
+
+.msm__submenu--close {
+  &:extend(.msm__submenu all);
+
+  max-height: 0;
+  margin-top: 0;
+}
+
+// TODO: this is actually used only for the crypto sources, should refactor
+.msm__submenu-content {
+  padding: 16px 16px 0 16px;
+}

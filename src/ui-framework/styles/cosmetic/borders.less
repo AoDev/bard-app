@@ -1,0 +1,69 @@
+@border-color-1: #e3e7e8;
+
+// No borders
+.border-0,
+.border-0:focus,
+.border-0:hover {
+  border: 0 !important;
+}
+
+.border-1 {
+  border: 1px solid @border-color-1;
+}
+
+.border-rounded {
+  border: 1px solid @border-color-1;
+  border-radius: @border-radius-base;
+}
+
+.lg-border-rounded {
+  border: 1px solid @border-color-1;
+
+  @media @lg-screen {
+    border-radius: @border-radius-base;
+  }
+}
+
+.border-top {
+  border-top: 1px solid @border-color-1;
+}
+
+.border-bottom {
+  border-bottom: 1px solid @border-color-1;
+}
+
+.border-top-0 {
+  border-top: 0;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.border-bottom-radius-0 {
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+// Rounding
+.border-radius-0 {
+  border-radius: 0 !important;
+}
+
+.border-radius-top-0 {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.border-radius-bottom-0 {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.border-top-radius-1 {
+  border-top-right-radius: @border-radius-base;
+  border-top-left-radius: @border-radius-base;
+}
+
+.border-bottom-radius-1 {
+  border-bottom-right-radius: @border-radius-base;
+  border-bottom-left-radius: @border-radius-base;
+}

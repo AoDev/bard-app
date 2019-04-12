@@ -1,0 +1,31 @@
+@panel-border-color: #e3e7e8;
+
+.panel-header--fixed {
+  height: 60px;
+}
+
+// panel-group is there to wrap a serie of containers into a border
+.panel-group {
+  .border-rounded;
+
+  border: 1px solid @panel-border-color;
+  overflow: hidden;
+}
+
+.md-panel-group {
+  border: 1px solid @panel-border-color;
+  overflow: hidden;
+
+  @media @md-screen {
+    .border-rounded;
+  }
+}
+
+.lg-panel-group {
+  border: 1px solid @panel-border-color;
+  overflow: hidden;
+
+  @media @lg-screen {
+    .border-rounded;
+  }
+}

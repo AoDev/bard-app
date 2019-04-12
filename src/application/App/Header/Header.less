@@ -1,0 +1,26 @@
+.main-header {
+  background: darken(@color-gray-darker, 5%);
+  color: #fff;
+  position: fixed;
+  height: @header-height;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 3; // side menu icon when small screen
+  display: flex;
+  padding: 0 16px;
+  align-items: center;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+
+  .app-title {
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: normal;
+    letter-spacing: 0.1em;
+    position: relative;
+  }
+}
+
+.main-header__menu > .Popover-body {
+  padding: 16px;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="canonical" href="https://your-domain.com" />
+  <meta http-equiv="Content-Security-Policy" content="<%= contentPolicy %>">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bard</title>
+  <!-- Search Engine -->
+  <meta name="description" content="Bard description">
+  <meta name="image" content="https://your-preview-image.png">
+  <!-- Schema.org for Google -->
+  <meta itemprop="name" content="Bard - Mobx react app easy.">
+  <meta itemprop="description" content="Bard description">
+  <meta itemprop="image" content="https://your-preview-image.png">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bard - Mobx react app easy.">
+  <meta name="twitter:description" content="Bard description">
+  <meta name="twitter:image:src" content="https://your-preview-image.png">
+  <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+  <meta name="og:title" content="Bard - Mobx react app easy.">
+  <meta name="og:description" content="Bard description">
+  <meta name="og:image" content="https://your-preview-image.png">
+  <meta name="og:type" content="website">
+</head>
+
+<body>
+  <div id="root" class="height-100p">
+    <div style="position:absolute;top:0;left:0;bottom:0;right:0;display: flex;justify-content: center;align-items:center;">
+      <div style="display: flex;align-items: center;flex-direction: column;">
+        <img src="<%= publicPath %>images/app-logo.svg" height="256" width="256" alt="Bard logo"
+          class="pulse animated" style="width:33vw;height:auto" />
+        <h1 style="font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';letter-spacing: 1px;font-weight: normal;font-size: 1.5em;">Bard</h1>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+body {
+  background-color: #dcdcdc;
+  font-size: 16px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  padding-top: @header-height;
+}
+
+.main-content {
+  @media @md-screen {
+    padding: 16px;
+  }
+}
+
+.app-init-loader {
+  text-align: center;
+  height: 10em;
+  margin: auto;
+  padding: 4em;
+  border-radius: 50%;
+  width: 16em;
+}
+
+// COMMON
+@import './Header/Header.less';
+@import './MainSideMenu/MainSideMenu.less';
+
+// PUBLIC
+
+// PRIVATE

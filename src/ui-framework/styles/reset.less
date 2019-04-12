@@ -1,0 +1,28 @@
+html {
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: @font-default;
+}
+
+hr {
+  border-top: 0;
+  border-bottom: 1px solid #eee;
+  border-left: 0;
+  border-right: 0;
+  margin: 0;
+}
+
+// Prevent images from shrinking by default in a display flex container
+img {
+  flex-shrink: 0;
+}

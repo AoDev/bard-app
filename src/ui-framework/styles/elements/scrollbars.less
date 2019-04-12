@@ -1,0 +1,65 @@
+@color-scroll-track: rgba(0, 0, 0, 0.05);
+@color-scroll-thumb: rgba(56, 56, 56, 0.1);
+@color-scroll-thumb-inactive: rgba(100, 100, 100, 0.4);
+@scrollbar-track-width: 4px;
+
+// Scrollbars
+::-webkit-scrollbar {
+  width: @scrollbar-track-width;
+  height: @scrollbar-track-width;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: @color-scroll-track;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 4px;
+  border-radius: 10px;
+  background: @color-scroll-thumb;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+::-webkit-scrollbar-thumb:window-inactive { /* stylelint-disable */
+  background: @color-scroll-thumb-inactive;
+}
+
+// discreet scrollnbars only appear on hover and try not to displace content
+.scrollbar-discreet-x {
+  overflow-y: hidden;
+  overflow-x: auto;
+  overflow-x: overlay;
+  overscroll-behavior-x: contain;
+
+  @media @hover-support {
+    overflow-x: hidden;
+
+    &:hover {
+      overflow-x: auto;
+      overflow-x: overlay;
+    }
+  }
+}
+
+.scrollbar-discreet-y {
+  overflow-x: hidden;
+  overflow-y: auto;
+  overflow-y: overlay;
+  overscroll-behavior-y: contain;
+
+  @media @hover-support {
+    overflow-y: hidden;
+
+    &:hover {
+      overflow-y: auto;
+      overflow-y: overlay;
+    }
+  }
+}
