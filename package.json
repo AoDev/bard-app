@@ -66,6 +66,7 @@
     "copy-webpack-plugin": "5.0.4",
     "cross-env": "5.2.0",
     "css-loader": "3.2.0",
+    "cytoscape": "3.9.0",
     "dotenv": "6.2.0",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",

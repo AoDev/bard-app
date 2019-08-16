@@ -41,6 +41,10 @@ const routes = {
     windowTitlePlugin: {title: 'App settings'},
   },
 
+  '/public/cytoscape': {
+    windowTitlePlugin: {title: 'Cytoscape'},
+  },
+
   '/private': {
     intercept: authCheck,
   },
