@@ -1,8 +1,8 @@
 .subnav-menu {
-  background: darken(@color-gray-darker, 5%);
+  background-color: @header-bg-color;
   bottom: 0;
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1);
-  height: 52px;
+  height: @header-height;
   left: 0;
   padding: 0;
   position: fixed;
@@ -14,18 +14,17 @@
     .flex-col-center;
 
     border: 0;
-    height: 52px;
+    height: @header-height;
     color: #fff;
-    padding: 4px 16px;
+    padding: 14px 16px 4px 16px;
     line-height: 1.7;
-    font-size: 15px;
 
     .icon-svg {
       fill: #fff;
     }
 
     &.active {
-      background-color: @color-gray-darker;
+      background-color: darken(@header-bg-color, 10%);
       color: #fff;
 
       .icon-svg {
@@ -36,19 +35,19 @@
     &:focus,
     &:hover {
       color: #fff;
-      border-color: darken(@color-gray-darker, 2%);
+      border-color: darken(@header-bg-color, 2%);
       box-shadow: none;
     }
   }
 
-  @media @md-screen {
+  @media @lg-screen {
     box-shadow: none;
     overflow: hidden;
-    top: 3px;
+    top: 0;
     bottom: auto;
     padding: 0;
     left: auto;
-    right: 112px;
+    right: 16px;
     background-color: transparent;
 
     .btn {

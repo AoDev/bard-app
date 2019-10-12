@@ -1,0 +1,38 @@
+.badge--light,
+.badge--dark,
+.badge--positive,
+.badge--negative {
+  display: inline-block;
+  padding: 0 2px;
+  border-radius: 2px;
+  color: #fff;
+  transition: background-color ease-out 0.2s;
+}
+
+.badge--positive {
+  background-color: @color-green-aim;
+}
+
+.badge--negative {
+  background-color: @color-red-aim;
+}
+
+.badge--dark {
+  background-color: #14042a;
+}
+
+.badge--light {
+  background-color: #fff;
+  color: #000;
+}
+
+// Typical counter that can be seen next to a notification icon
+.badge-count {
+  background-color: @color-red-aim;
+  height: 22px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 1;
+  padding: 2px 4px;
+  border: 1px solid #380a77;
+}

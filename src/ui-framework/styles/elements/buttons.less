@@ -12,6 +12,7 @@ button {
     outline: 0;
   }
 
+  &.disabled,
   &[disabled] {
     cursor: not-allowed;
 
@@ -52,6 +53,7 @@ button {
     box-shadow: 0 0 1px 1px lighten(@color, 5%);
   }
 
+  &.disabled,
   &[disabled] {
     color: #777;
     background-color: #fff;
@@ -110,6 +112,7 @@ button {
     border-color: darken(@color, 2%);
   }
 
+  &.disabled,
   &[disabled] {
     color: #f7f7f7;
     background-color: @color-gray-mid;
@@ -132,6 +135,10 @@ button {
     .loader-bar {
       background-color: #fff;
     }
+  }
+
+  .icon-svg {
+    fill: #fff;
   }
 }
 
@@ -274,4 +281,13 @@ a.btn {
     border-bottom-left-radius: 0;
     border-left: 0;
   }
+}
+
+.btn-round,
+.btn-square {
+  width: 44px;
+}
+
+.btn-round {
+  border-radius: 50%;
 }

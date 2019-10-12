@@ -16,7 +16,7 @@ export function Modal (props) {
         <div className={className}>
           {props.withCloseButton &&
             <button type="button" className="btn btn-cta modal-close-btn" onClick={props.modalVM.hide}>
-              Done
+              {this.props.closeText}
             </button>
           }
           {props.children}
@@ -36,9 +36,11 @@ Modal.propTypes = {
   }).isRequired,
   children: PropTypes.node,
   className: PropTypes.string,
+  closeText: PropTypes.string.isRequired,
 }
 
 Modal.defaultProps = {
+  closeText: 'Done',
   withCloseButton: true,
 }
 

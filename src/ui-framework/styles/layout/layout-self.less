@@ -17,20 +17,12 @@ each(@spacer-directions, .(@direction) {
   }
 });
 
-.md-space-top-1 {
-  @media @md-screen {
+@media @md-screen {
+  .md-space-top-1 {
     margin-top: @spacing-base;
   }
-}
 
-.md-space-top-2 {
-  @media @md-screen {
-    margin-top: @spacing-base * 2;
-  }
-}
-
-.lg-space-top-2 {
-  @media @lg-screen {
+  .md-space-top-2 {
     margin-top: @spacing-base * 2;
   }
 }
@@ -53,10 +45,21 @@ each(@spacer-directions, .(@direction) {
   width: 100%;
 }
 
+.width-100p-strict {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.width-100vw {
+  width: 100vw;
+}
+
 .height-100p {
   height: 100%;
 }
 
+// Note, browser vendors have broken the vh units. Can't really use this on mobile browsers.
+// https://nicolas-hoizey.com/2015/02/viewport-height-is-taller-than-the-visible-part-of-the-document-in-some-mobile-browsers.html
 .height-100vh {
   height: 100vh;
 }
@@ -73,7 +76,7 @@ each(@width-values, .(@value) {
 });
 
 // Containers
-@container-values: 24em, 32em, 48em, 64em;
+@container-values: 16em, 24em, 32em, 48em, 64em;
 
 each(@container-values, .(@cvalue) {
   .max-width-@{cvalue} {
@@ -92,12 +95,22 @@ each(@container-values, .(@cvalue) {
 // PADDING -------------------------------------------------------------- //
 // - There are responsive versions for small screens,
 //   where padding is reduced to have more content space.
+.padded-0 {
+  padding: 0 !important;
+}
+
 .padded-1 {
   padding: @spacing-base;
 }
 
 .padded-2 {
   padding: @spacing-base * 2;
+}
+
+.md-padded-1 {
+  @media @md-screen {
+    padding: @spacing-base;
+  }
 }
 
 .lg-padded-2 {
@@ -143,6 +156,9 @@ each(@container-values, .(@cvalue) {
 }
 
 // OVERFLOW -------------------------------------------------------------- //
+.no-overflow-x {
+  overflow-x: hidden;
+}
 
 .scroll-x {
   overflow-x: auto;
@@ -161,6 +177,7 @@ each(@container-values, .(@cvalue) {
 
 // POSITIONING -------------------------------------------------------------- //
 .center-block {
+  display: block;
   margin-left: auto;
   margin-right: auto;
 }
@@ -197,6 +214,10 @@ each(@container-values, .(@cvalue) {
 // FLEX
 .flex-fill {
   flex-grow: 1;
+}
+
+.flex-end {
+  justify-content: flex-end;
 }
 
 .flex-row-end {

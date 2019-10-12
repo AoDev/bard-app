@@ -1,11 +1,13 @@
 html {
   box-sizing: border-box;
-  min-height: 100vh;
+  height: 100%;
 }
 
+// Depending on the project, you may want to disable mobile browser gesture
 *,
 *::before,
 *::after {
+  touch-action: manipulation; // No zoom, etc in mobile browsers - Safari does not support "none"
   box-sizing: inherit;
 }
 

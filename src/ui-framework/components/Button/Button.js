@@ -49,13 +49,13 @@ export default class Button extends React.Component {
    * because assigning a number to a select option value is always a string.
    */
   onClick (event) {
-    const {onClick, preventDefault, onClickEmit, name, value} = this.props
-    if (!onClick) {
-      return
-    }
-
+    const {onClick, preventDefault, disabledMock, onClickEmit, name, value} = this.props
     if (preventDefault) {
       event.preventDefault()
+    }
+
+    if (!onClick || disabledMock) {
+      return
     }
 
     switch (onClickEmit) {
@@ -72,9 +72,11 @@ export default class Button extends React.Component {
     const additionalClass = this.props.className
 
     const btnClassName = classNames(`${areaClass} ${variantClass} ${additionalClass}`, {
+      'btn-round': this.props.round,
+      'btn-square': this.props.square,
       active: this.props.active,
       ripple: this.props.ripple,
-      disabled: this.props.isLoading || this.props.disabled,
+      disabled: this.props.isLoading || this.props.disabled || this.props.disabledMock,
       'btn-loading': this.props.isLoading,
     })
 
@@ -99,13 +101,16 @@ Button.expectedProps = [
   'active',
   'area',
   'disabled',
+  'disabledMock',
   'focusOnMount',
   'isLoading',
   'onClick',
   'onClickEmit',
   'preventDefault',
   'ripple',
+  'round',
   'scrollToOnMount',
+  'square',
   'variant',
 ]
 
@@ -147,6 +152,9 @@ Button.propTypes = {
   focusOnMount: PropTypes.bool.isRequired,
   scrollToOnMount: PropTypes.bool.isRequired,
   ripple: PropTypes.bool.isRequired,
+  square: PropTypes.bool.isRequired,
+  round: PropTypes.bool.isRequired,
+  disabledMock: PropTypes.bool.isRequired,
 }
 
 Button.defaultProps = {
@@ -155,10 +163,13 @@ Button.defaultProps = {
   variant: 'default',
   isLoading: false,
   disabled: false,
+  disabledMock: false,
   onClickEmit: 'event',
   preventDefault: false,
   focusOnMount: false,
   scrollToOnMount: false,
   area: 'normal',
   ripple: false,
+  square: false,
+  round: false,
 }
