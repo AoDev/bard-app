@@ -9,6 +9,11 @@ import classNames from 'classnames'
  * the options it receives and what it emits on change.
  */
 export default class Select extends React.Component {
+  constructor (props) {
+    super(props)
+    this.onSelect = this.onSelect.bind(this)
+  }
+
   static expectedProps = [
     'objectLabelKey',
     'objectIdKey',
@@ -17,11 +22,6 @@ export default class Select extends React.Component {
     'items',
     'onChangeEmit',
   ]
-
-  constructor (props) {
-    super(props)
-    this.onSelect = this.onSelect.bind(this)
-  }
 
   /**
    * Call the onChange handler with different arguments, depending on the
@@ -78,7 +78,7 @@ export default class Select extends React.Component {
         optionSelectedValue = itemSelected[objectIdKey]
       }
       else if (optionsAreObjects) {
-        let option = _.find(items, {[objectIdKey]: itemSelected})
+        const option = _.find(items, {[objectIdKey]: itemSelected})
         optionSelectedLabel = option[objectLabelKey]
         optionSelectedValue = option[objectIdKey]
       }
@@ -95,7 +95,7 @@ export default class Select extends React.Component {
     const wrapperCSS = classNames({
       'form-group select': true,
       'select-activable': this.props.activable,
-      'active': !!itemSelected,
+      active: !!itemSelected,
       'validation-success': hasSuccess,
       'validation-error': hasError,
       disabled

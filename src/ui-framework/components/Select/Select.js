@@ -7,6 +7,11 @@ import _ from 'lodash'
  * the options it receives and what it emits on change.
  */
 export default class Select extends React.Component {
+  constructor (props) {
+    super(props)
+    this.onSelect = this.onSelect.bind(this)
+  }
+
   static expectedProps = [
     'items',
     'itemSelected',
@@ -16,11 +21,6 @@ export default class Select extends React.Component {
     'onChangeEmit',
     'optionalLabel',
   ]
-
-  constructor (props) {
-    super(props)
-    this.onSelect = this.onSelect.bind(this)
-  }
 
   /**
    * Call the onChange handler with different arguments, depending on the
@@ -67,7 +67,7 @@ export default class Select extends React.Component {
         optionSelectedValue = itemSelected[objectIdKey]
       }
       else if (optionsAreObjects) {
-        let option = _.find(items, {[objectIdKey]: itemSelected})
+        const option = _.find(items, {[objectIdKey]: itemSelected})
         if (option) {
           // In case the item ID selected is actually NOT present in the list, prevents a crash.
           optionSelectedValue = option[objectIdKey]

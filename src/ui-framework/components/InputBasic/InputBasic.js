@@ -35,7 +35,7 @@ export default class InputBasic extends Component {
 
     if (type === 'number' || type === 'range' || _.isNumber(this.props.value)) {
       if (value.length > 0) {
-        let convertedValue = Number(value)
+        const convertedValue = Number(value)
         if (!isNaN(convertedValue)) {
           value = convertedValue
         }

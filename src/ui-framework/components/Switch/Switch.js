@@ -11,6 +11,7 @@ export default class Switch extends React.Component {
     super(props)
     this.onChange = this.onChange.bind(this)
   }
+
   /**
    * Handle the native onChange event.
    */

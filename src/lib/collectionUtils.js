@@ -95,8 +95,8 @@ function orderByNumber (collection, sortBy, sortOrder) {
 function distinctByProp (array, prop, max = Infinity) {
   let i = 0
   let j = 0
-  let result = []
-  let distinctProps = []
+  const result = []
+  const distinctProps = []
   while (i < max && j < array.length) {
     if (!_.includes(distinctProps, array[j][prop])) {
       result.push(array[j])
@@ -117,8 +117,8 @@ function distinctByProp (array, prop, max = Infinity) {
 function distinctByPropRight (array, prop, max = Infinity) {
   let i = max
   let j = array.length - 1
-  let result = []
-  let distinctProps = []
+  const result = []
+  const distinctProps = []
   while (i > 0 && j > 0) {
     if (!_.includes(distinctProps, array[j][prop])) {
       result.push(array[j])

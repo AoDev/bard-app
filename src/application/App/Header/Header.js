@@ -14,7 +14,7 @@ export function Header (props) {
           className="space-right-1"
           variant="invisible"
           onClick={uiStore.mainSideMenu.toggleVisibility}>
-          <Icon name="#menubars" color="#fff" bgColor="#1d6dcd" bgCircle bgPadding={6}/>
+          <Icon name="#menubars" white bgColor="#1d6dcd" bgCircle bgPadding={6}/>
         </Button>
         <Button
           className="main-header__back-btn space-right-1"

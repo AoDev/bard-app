@@ -2,8 +2,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const variantCssMap = {
-  'light': 'pgr-link-light',
-  'dark': 'pgr-link-dark',
+  light: 'pgr-link-light',
+  dark: 'pgr-link-dark',
 }
 
 export default class Pagination extends React.Component {
@@ -64,9 +64,9 @@ export default class Pagination extends React.Component {
       pageCount = pageCount + 1
     }
 
-    let range = this.getRange(pageCount, currentPage, maxButtons)
+    const range = this.getRange(pageCount, currentPage, maxButtons)
 
-    let buttons = []
+    const buttons = []
 
     for (let i = range[0]; i <= range[1]; i++) {
       buttons.push(
@@ -92,7 +92,7 @@ export default class Pagination extends React.Component {
                 href="#"
                 className={`${linkClass} pgr-prev ${currentPage === 1 ? 'pgr-disabled' : ''}`}
                 data-page={currentPage - 1}
-                aria-label={`Go to previous page`}
+                aria-label="Go to previous page"
                 onClick={this.onPageClick}>
                 ❮
               </a>
@@ -105,7 +105,7 @@ export default class Pagination extends React.Component {
                 href="#"
                 className={`${linkClass} pgr-next ${currentPage === pageCount ? 'pgr-disabled' : ''}`}
                 data-page={currentPage + 1}
-                aria-label={`Go to previous page`}
+                aria-label="Go to previous page"
                 onClick={this.onPageClick}>
                 ❯
               </a>

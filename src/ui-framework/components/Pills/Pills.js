@@ -53,7 +53,7 @@ export default class Pills extends React.Component {
         optionSelectedValue = itemSelected[objectIdKey]
       }
       else if (optionsAreObjects) {
-        let option = _.find(items, {[objectIdKey]: itemSelected})
+        const option = _.find(items, {[objectIdKey]: itemSelected})
         if (option) {
           // Option can throw an error if the option is not there
           optionSelectedValue = option[objectIdKey]

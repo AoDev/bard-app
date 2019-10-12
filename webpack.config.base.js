@@ -46,7 +46,7 @@ const filesToCopy = [
   },
 ]
 
-let plugins = [
+const plugins = [
   new CleanWebpackPlugin(),
   new webpack.DefinePlugin({
     'process.env.BUILD_PLATFORM': JSON.stringify(process.env.BUILD_PLATFORM),

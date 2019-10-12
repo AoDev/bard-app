@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import classNames from 'classnames'
-import {omit} from 'lodash'
 
 /**
  * Display an icon from our sprites.
@@ -16,27 +14,31 @@ import {omit} from 'lodash'
  * There are multiple options to customize the icon and its background.
  */
 export default function Icon (props) {
-  var {
-    small, height, width, color, size, top, white, display,
-    bgCircle, bgColor, bgPadding, verticalAlign, rendering
+  let {
+    bgCircle, bgColor, bgPadding, className, color, display, height,
+    name, rendering, size, small, top, verticalAlign, white, width, ...otherProps
   } = props
-
-  const otherProps = omit(props, Icon.expectedProps)
 
   size = small ? 16 : size
   height = height || size
   width = width || size
   color = white ? '#fff' : color
 
-  var cssClasses = {
-    'pos-rel': !!top,
-    'icon': true,
-    'icon-inline': display === 'inline',
-    'icon-circle': bgCircle
+  let cssClasses = 'icon'
+  if (typeof top == 'number') { // eslint-disable-line eqeqeq
+    cssClasses += ' pos-rel'
   }
 
-  if (props.type) {
-    cssClasses[`icon-${props.type}`] = true
+  if (display === 'inline') {
+    cssClasses += ' icon-inline'
+  }
+
+  if (bgCircle) {
+    cssClasses += ' icon-circle'
+  }
+
+  if (className) {
+    cssClasses += ' ' + className
   }
 
   var wrapperStyle = {
@@ -65,45 +67,19 @@ export default function Icon (props) {
     wrapperStyle.padding = bgPadding + 'px'
   }
 
-  if (props.className) {
-    cssClasses[props.className] = true
-  }
-
   const renderMode = {
     [rendering]: color,
     strokeWidth: size / 32,
   }
 
   return (
-    <span style={wrapperStyle} className={classNames(cssClasses)} {...otherProps}>
+    <span style={wrapperStyle} className={cssClasses} {...otherProps}>
       <svg width="100%" height="100%" {...renderMode} className="icon-svg">
-        <use xlinkHref={props.name}/>
+        <use xlinkHref={name}/>
       </svg>
     </span>
   )
 }
-
-/**
- * Mainly used to extract any other props passed by the user
- * @type {Array}
- */
-Icon.expectedProps = [
-  'bgPadding',
-  'bgCircle',
-  'bgColor',
-  'className',
-  'color',
-  'display',
-  'height',
-  'name',
-  'size',
-  'small',
-  'top',
-  'verticalAlign',
-  'white',
-  'width',
-  'render',
-]
 
 Icon.propTypes = {
   /**
