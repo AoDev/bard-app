@@ -53,7 +53,7 @@ describe('e2e', () => {
 
   describe('Login', () => {
     it('should allow the user to login', async () => {
-      const passInputID = '#profile-password'
+      const passInputID = '#user-password'
       await page.type(passInputID, TEST_PASS)
       await page.click('[type="submit"]')
       await sleep(2000)
