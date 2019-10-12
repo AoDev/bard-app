@@ -6,16 +6,16 @@ export function Dashboard (props) {
   const {vm} = props
 
   return (
-    <div className="r-grid-fluid-colmin32em">
+    <div className="r-grid-fluid-colmin24em md-padded-1">
       {vm.widgets.map((widget) => {
         return (
           <div key={widget.id} className="md-panel-group flex-col pos-rel">
-            <div className="bg-gray panel-header--fixed flex-row-center lg-padded-v1-h2">
+            <div className="bg-gray panel__header flex-row-center padded-1">
               <h3 className="space-0 h-header">
                 {widget.title}
               </h3>
             </div>
-            <div className="bg-white lg-padded-2 flex-fill">
+            <div className="bg-white padded-1 flex-fill">
               <p>{widget.content}</p>
             </div>
           </div>

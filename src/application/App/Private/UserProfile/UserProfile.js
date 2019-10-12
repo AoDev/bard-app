@@ -6,9 +6,9 @@ export default function UserProfile ({vm}) {
   const {user} = vm
 
   return (
-    <div className="r-grid-fluid-colmin32em space-bottom-2">
-      <form className="lg-panel-group flex-col" onSubmit={vm.submit}>
-        <div className="bg-gray lg-padded-v1-h2 panel-header--fixed flex-row-center">
+    <div className="r-grid-fluid-colmin24em space-bottom-2 md-padded-1">
+      <form className="md-panel-group flex-col" onSubmit={vm.submit}>
+        <div className="panel__header bg-gray padded-1 flex-row-center">
           <h3 className="space-0 h-header">Profile details</h3>
           <Button
             ripple
@@ -20,7 +20,7 @@ export default function UserProfile ({vm}) {
           </Button>
         </div>
 
-        <div className="bg-white lg-padded-2 flex-fill">
+        <div className="bg-white padded-1 flex-fill">
           <input id="profile-id" type="hidden" value={user.id}/>
           <div className="flex-row-center space-bottom-2">
             <label className="label space-right-1" htmlFor="input-profile-name">
@@ -37,8 +37,8 @@ export default function UserProfile ({vm}) {
         </div>
       </form>
 
-      <section className="lg-panel-group flex-col">
-        <div className="bg-gray lg-padded-v1-h2 panel-header--fixed flex-row-center">
+      <section className="md-panel-group flex-col">
+        <div className="panel__header bg-gray padded-1 flex-row-center">
           <h3 className="space-0 h-header">
             Delete this profile
           </h3>
@@ -55,7 +55,7 @@ export default function UserProfile ({vm}) {
           </Button>
         </div>
 
-        <div className="bg-white lg-padded-2">
+        <div className="bg-white padded-1">
 
           <p className="space-top-0">All associated data will be removed as well.</p>
 

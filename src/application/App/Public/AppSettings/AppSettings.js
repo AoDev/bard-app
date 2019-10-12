@@ -5,12 +5,12 @@ import {Switch, InputBasic} from 'ui-framework'
 export default function AppSettings ({vm}) {
   const {settings} = vm
   return (
-    <div className="r-grid-fluid-colmin32em space-bottom-4">
+    <div className="r-grid-fluid-colmin24em md-padded-1 space-bottom-4">
       <section className="md-panel-group flex-col pos-rel">
-        <div className="bg-gray lg-padded-v1-h2">
+        <div className="bg-gray padded-1">
           <h3 className="h-header space-0">Setting section</h3>
         </div>
-        <div className="bg-white lg-padded-2 flex-fill">
+        <div className="bg-white padded-1 flex-fill">
           <div className="input-group">
             <label className="label space-right-1" htmlFor="settings-some-flag">
               Some flag
@@ -26,10 +26,10 @@ export default function AppSettings ({vm}) {
       </section>
 
       <section className="md-panel-group flex-col pos-rel">
-        <div className="bg-gray lg-padded-v1-h2">
+        <div className="bg-gray padded-1">
           <h3 className="h-header space-0">Other settings</h3>
         </div>
-        <div className="bg-white lg-padded-2 flex-fill">
+        <div className="bg-white padded-1 flex-fill">
           <div className="input-group">
             <label className="label space-right-1" htmlFor="settings-some-other-flag">
               Some other flag
