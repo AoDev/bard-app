@@ -84,6 +84,7 @@ let plugins = [
       {
         src: path.join(SRC_FOLDER, 'assets', 'images', 'logo-1024.png'),
         destination: 'icons',
+        ios: true,
         sizes: [36, 48, 72, 96, 128, 192, 256, 384, 512] // multiple sizes
       },
     ]
