@@ -31,9 +31,11 @@ module.exports = {
       '@babel/preset-env',
       {
         'targets': {
-          'browsers': '> 5%',
+          'browsers': 'defaults',
         },
-        'modules': false
+        'modules': false,
+        useBuiltIns: 'usage',
+        corejs: 3,
       }
     ],
     '@babel/preset-react'
