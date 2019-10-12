@@ -1,15 +1,10 @@
 .main-header {
-  background: darken(@color-gray-darker, 5%);
+  position: relative;
+  background-color: @header-bg-color;
   color: #fff;
-  position: fixed;
   height: @header-height;
-  width: 100%;
-  top: 0;
-  left: 0;
+  width: 100vw;
   z-index: 3; // side menu icon when small screen
-  display: flex;
-  padding: 0 16px;
-  align-items: center;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 
   .app-title {
@@ -21,6 +16,14 @@
   }
 }
 
-.main-header__menu > .Popover-body {
-  padding: 16px;
+.main-header__content {
+  width: 100vw;
+  padding: 0 16px 0 12px;
+  display: flex;
+  align-items: center;
+  height: @header-height;
+
+  @media @lg-screen {
+    width: 460px;
+  }
 }

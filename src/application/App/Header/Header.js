@@ -9,24 +9,25 @@ export function Header (props) {
 
   return (
     <div className="main-header">
-      <Button
-        className="space-right-1"
-        variant="invisible"
-        onClick={uiStore.mainSideMenu.toggleVisibility}>
-        <Icon name="#menubars" color="#fff" bgColor="#666" bgCircle bgPadding={6}/>
-      </Button>
-      <Button
-        className="main-header__back-btn space-right-1"
-        id="btn-header-back"
-        variant="invisible"
-        disabled={router.story < 2}
-        onClick={router.goBack}>
-        <Icon name="#arrow-left" color="#fff" bgColor="#666" bgCircle bgPadding={6}/>
-      </Button>
-      <h1 className="app-title unselectable space-right-2">
-        {uiStore.headerTitle}
-      </h1>
-
+      <div className="main-header__content">
+        <Button
+          className="space-right-1"
+          variant="invisible"
+          onClick={uiStore.mainSideMenu.toggleVisibility}>
+          <Icon name="#menubars" color="#fff" bgColor="#1d6dcd" bgCircle bgPadding={6}/>
+        </Button>
+        <Button
+          className="main-header__back-btn space-right-1"
+          id="btn-header-back"
+          variant="invisible"
+          disabled={router.story < 2}
+          onClick={router.goBack}>
+          <Icon name="#arrow-left" color="#fff" bgColor="#1d6dcd" bgCircle bgPadding={6}/>
+        </Button>
+        <h1 className="app-title unselectable space-right-2">
+          {uiStore.headerTitle}
+        </h1>
+      </div>
     </div>
   )
 }
