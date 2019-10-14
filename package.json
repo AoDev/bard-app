@@ -51,6 +51,7 @@
     "@babel/register": "7.6.2",
     "@babel/runtime": "7.6.3",
     "@loadable/component": "3.0.2",
+    "@types/jest": "24.0.18",
     "axios": "0.18.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.3",
