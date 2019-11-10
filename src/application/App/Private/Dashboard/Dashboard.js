@@ -21,6 +21,26 @@ export function Dashboard (props) {
           </div>
         )
       })}
+      <div className="md-panel-group flex-col pos-rel">
+        <table className="table table--padded-1">
+          <thead>
+            <tr>
+              <th className="t__head txt-left">Name</th>
+              <th className="t__head txt-left">Super power</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vm.superHeroes.map((hero) => {
+              return (
+                <tr key={hero.id} className={vm.highlightedHeroId === hero.id ? 'table__row--highlighted' : null}>
+                  <td className="txt-left">{hero.name}</td>
+                  <td className="txt-left">{hero.power}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
