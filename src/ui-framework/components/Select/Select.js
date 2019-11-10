@@ -12,16 +12,6 @@ export default class Select extends React.Component {
     this.onSelect = this.onSelect.bind(this)
   }
 
-  static expectedProps = [
-    'items',
-    'itemSelected',
-    'objectIdKey',
-    'objectLabelKey',
-    'onChange',
-    'onChangeEmit',
-    'optionalLabel',
-  ]
-
   /**
    * Call the onChange handler with different arguments, depending on the
    * emit option.
@@ -82,17 +72,16 @@ export default class Select extends React.Component {
   }
 
   render () {
-    const {objectIdKey, objectLabelKey, items} = this.props
-    const {optionalLabel, disabled, required} = this.props
+    const {
+      items, itemSelected, objectIdKey, objectLabelKey,
+      onChange, onChangeEmit, optionalLabel, ...otherProps
+    } = this.props
     const optionsAreObjects = typeof items[0] === 'object'
-    const otherProps = _.omit(this.props, Select.expectedProps)
 
     return (
       <select
         value={this.getOptionSelectedValue(this.props, optionsAreObjects)}
         onChange={this.onSelect}
-        disabled={disabled}
-        required={required}
         {...otherProps}>
         {optionalLabel && (<option value="">{optionalLabel}</option>)}
         {items.map(option => {

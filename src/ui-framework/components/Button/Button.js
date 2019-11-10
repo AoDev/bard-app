@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import Loader from '../Loader'
-import classNames from 'classnames'
-import _ from 'lodash'
 
 const loaderPlacement = {
   position: 'absolute',
@@ -47,72 +45,55 @@ export default class Button extends React.Component {
    * emit option.
    * It will also take care of converting strings to number when necessary
    * because assigning a number to a select option value is always a string.
+   * @param {Event} event
    */
   onClick (event) {
-    const {onClick, preventDefault, disabledMock, onClickEmit, name, value} = this.props
-    if (preventDefault) {
+    const {onClick, preventDefault, disabledMock, value} = this.props
+    if (preventDefault || disabledMock) {
+      // We call preventDefault with disabledMock because it would submit forms with type="submit"
       event.preventDefault()
     }
 
     if (!onClick || disabledMock) {
-      return
+      return false
     }
 
-    switch (onClickEmit) {
+    switch (this.props.onClickEmit) {
       case 'event': onClick(event); break
       case 'value': onClick(value, event); break
-      case 'name-value': onClick(name, value, event)
+      case 'name-value': onClick(this.props.name, value, event)
     }
   }
 
   render () {
-    const otherProps = _.omit(this.props, Button.expectedProps)
-    const variantClass = 'btn-' + this.props.variant
-    const areaClass = this.props.area === 'small' ? 'btn-small' : 'btn'
-    const additionalClass = this.props.className
+    const {
+      active, area, children, className, disabled, disabledMock, focusOnMount, isLoading, onClick,
+      onClickEmit, preventDefault, ripple, round, scrollToOnMount, square, variant, ...otherProps
+    } = this.props
 
-    const btnClassName = classNames(`${areaClass} ${variantClass} ${additionalClass}`, {
-      'btn-round': this.props.round,
-      'btn-square': this.props.square,
-      active: this.props.active,
-      ripple: this.props.ripple,
-      disabled: this.props.isLoading || this.props.disabled || this.props.disabledMock,
-      'btn-loading': this.props.isLoading,
-    })
+    const variantClass = 'btn-' + variant
+    const areaClass = area === 'small' ? 'btn-small' : 'btn'
+
+    let cssClasses = `${areaClass} ${variantClass} ${className}`
+    round && (cssClasses += ' btn-round')
+    square && (cssClasses += ' btn-square')
+    active && (cssClasses += ' active')
+    ripple && (cssClasses += ' ripple')
+    ;(isLoading || disabled || disabledMock) && (cssClasses += ' disabled')
+    isLoading && (cssClasses += ' btn-loading')
 
     return (
       <button {...otherProps}
         ref={this.btnRef}
         onClick={this.onClick}
-        className={btnClassName}
-        disabled={this.props.disabled || this.props.isLoading}>
-        {this.props.isLoading && loader}
-        {this.props.children}
+        className={cssClasses}
+        disabled={disabled || isLoading}>
+        {isLoading && loader}
+        {children}
       </button>
     )
   }
 }
-
-/**
- * Mainly used to extract any other props passed by the user
- * @type {Array}
- */
-Button.expectedProps = [
-  'active',
-  'area',
-  'disabled',
-  'disabledMock',
-  'focusOnMount',
-  'isLoading',
-  'onClick',
-  'onClickEmit',
-  'preventDefault',
-  'ripple',
-  'round',
-  'scrollToOnMount',
-  'square',
-  'variant',
-]
 
 Button.propTypes = {
   /**

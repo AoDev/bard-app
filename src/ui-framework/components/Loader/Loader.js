@@ -1,19 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 export default function Loader (props) {
-  const {label, className} = props
+  const {label} = props
 
-  const extraClass = classNames('loader', {
-    'loader-sm': props.small,
-    'loader-white': props.white,
-    'loader-inline': props.inline,
-    [className]: true,
-  })
+  let cssClasses = 'loader'
+  props.small && (cssClasses += ' loader-small')
+  props.white && (cssClasses += ' loader-white')
+  props.inline && (cssClasses += ' loader-inline')
+  props.className && (cssClasses += ' ' + props.className)
 
   return (
-    <div className={extraClass}>
+    <div className={cssClasses}>
       <div className="loader-bar-wrapper">
         <div className="loader-bar loader-bar-1"/>
         <div className="loader-bar loader-bar-2"/>

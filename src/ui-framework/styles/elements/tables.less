@@ -1,3 +1,6 @@
+@table-odd-color: #f9fafb;
+@table-even-color: #fff;
+@table-row-highlighted: darken(@color-blue-aim, 10%);
 
 .table,
 .table-fixed,
@@ -17,11 +20,16 @@
     }
 
     tr:nth-child(odd) {
-      background-color: #f9fafb;
+      background-color: @table-odd-color;
     }
 
     tr:nth-child(even) {
-      background-color: #fff;
+      background-color: @table-even-color;
+    }
+
+    tr.table__row--highlighted {
+      background-color: @table-row-highlighted;
+      color: #fff;
     }
   }
 }
@@ -73,6 +81,7 @@
   height: 16px;
 }
 
+// Sticky table header, must be applied on <th/>
 .t__head {
   position: -webkit-sticky;
   position: sticky;
@@ -82,4 +91,16 @@
   text-transform: uppercase;
   background-color: @color-gray-light;
   white-space: nowrap;
+}
+
+.table--padded-1 {
+  td:first-child,
+  th:first-child {
+    padding-left: @spacing-base;
+  }
+
+  td:last-child,
+  th:last-child {
+    padding-right: @spacing-base;
+  }
 }
