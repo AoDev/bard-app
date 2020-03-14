@@ -14,7 +14,7 @@ export function SignIn (props) {
   return (
     <div className="md-max-width-24em center-block md-space-top-2">
       <div className="md-panel-group shadow-1">
-        <div className="bg-gray lg-padded-v1-h2">
+        <div className="bg-gray padded-1">
           <h3 className="h-header flex-row-center space-0">
             <Icon name="#user" size={28} className="flex-no-shrink"/>
             <span className="space-left-1">Sign in</span>
@@ -60,7 +60,7 @@ export function SignIn (props) {
             </Button>
           </form>
         </div>
-        <div className="bg-gray lg-padded-v1-h2">
+        <div className="bg-gray padded-1">
           <div className="txt-center txt-italic">
             * Use any password, this is a demo.
           </div>

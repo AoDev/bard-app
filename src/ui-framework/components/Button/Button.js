@@ -50,7 +50,8 @@ export default class Button extends React.Component {
   onClick (event) {
     const {onClick, preventDefault, disabledMock, value} = this.props
     if (preventDefault || disabledMock) {
-      // We call preventDefault with disabledMock because it would submit forms with type="submit"
+      // disabled mock is to prevent Safari Mobile from doing zoomish gesture
+      // for type="submit" button, it is a form event and preventDefault must be called.
       event.preventDefault()
     }
 
@@ -101,7 +102,7 @@ Button.propTypes = {
    */
   variant: PropTypes.oneOf([
     'default', 'link', 'navlink', 'danger', 'neutral', 'cta', 'cta-red',
-    'theader', 'menu', 'invisible', 'cta-green'
+    'theader', 'menu', 'invisible', 'cta-green', 'tab-section'
   ]),
   /**
    * CSS classes for the button (see below).
@@ -139,18 +140,18 @@ Button.propTypes = {
 }
 
 Button.defaultProps = {
-  type: 'button',
+  area: 'normal',
   className: '',
-  variant: 'default',
-  isLoading: false,
   disabled: false,
   disabledMock: false,
+  focusOnMount: false,
+  isLoading: false,
   onClickEmit: 'event',
   preventDefault: false,
-  focusOnMount: false,
-  scrollToOnMount: false,
-  area: 'normal',
   ripple: false,
-  square: false,
   round: false,
+  scrollToOnMount: false,
+  square: false,
+  type: 'button',
+  variant: 'default',
 }

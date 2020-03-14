@@ -83,14 +83,16 @@
 
 // Sticky table header, must be applied on <th/>
 .t__head {
+  background-color: @color-gray-lighter;
+  font-size: 0.9em;
+  font-weight: bold;
+  min-height: 32px;
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
-  z-index: 1; // prevent content in the table to go above it on scroll.
-  font-size: 0.9em;
   text-transform: uppercase;
-  background-color: @color-gray-light;
+  top: 0;
   white-space: nowrap;
+  z-index: 1; // prevent content in the table to go above it on scroll.
 }
 
 .table--padded-1 {

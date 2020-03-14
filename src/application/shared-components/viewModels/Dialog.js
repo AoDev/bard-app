@@ -5,6 +5,10 @@ const {action, observable} = mobx
 export default class Dialog {
   @observable visible = false
 
+  @action.bound set (prop, value) {
+    this[prop] = value
+  }
+
   @action.bound hide () {
     this.visible = false
   }

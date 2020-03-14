@@ -24,6 +24,22 @@
   }
 }
 
+.modal--small {
+  @height: 226px;
+  @width: 256px;
+
+  .shadow-big;
+  .border-1;
+
+  position: fixed;
+  top: calc(45% - @height / 2);
+  left: calc(50% - @width / 2);
+  width: @width;
+  background-color: #fff;
+  z-index: 2;
+  border-radius: @border-radius-base;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -42,12 +58,8 @@
   color: #222;
 }
 
-.modal-close-btn {
-  right: @spacing-base;
-  top: 8px;
-  position: absolute;
-
-  @media @md-screen {
-    top: @spacing-base;
-  }
+.modal__btn {
+  height: 44px;
+  text-align: center;
+  flex: 1;
 }

@@ -180,8 +180,9 @@ button {
   background: transparent;
   border: 0;
   color: @color-blue-aim;
-  padding: 0 @spacing-base;
   height: auto;
+  line-height: 1.15;
+  padding: 0;
   vertical-align: baseline;
 
   &:focus,
@@ -309,4 +310,27 @@ a.btn {
 
 .btn-round {
   border-radius: 50%;
+}
+
+.btn-tab-section {
+  color: #000;
+  display: inline-block;
+  height: 44px;
+  background: transparent;
+  border: 0;
+  vertical-align: baseline;
+  text-decoration: none;
+  padding: 14px 16px 14px 16px;
+  border-radius: 0;
+  border-bottom: 3px solid @color-gray-light;
+
+  &:focus {
+    outline: 0;
+    box-shadow: none;
+    border: 0;
+  }
+}
+
+.btn-tab-section.active {
+  border-bottom: 3px solid @color-orange-aim;
 }

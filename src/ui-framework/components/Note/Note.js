@@ -11,7 +11,7 @@ export default function Note (props) {
 }
 
 Note.propTypes = {
-  variant: PropTypes.oneOf(['red', 'green', 'blue', 'orange']),
+  variant: PropTypes.oneOf(['red', 'green', 'blue', 'orange', 'default']),
   children: PropTypes.node,
   className: PropTypes.string,
   withBackground: PropTypes.bool.isRequired,
@@ -19,5 +19,6 @@ Note.propTypes = {
 
 Note.defaultProps = {
   className: '',
+  variant: 'default',
   withBackground: false,
 }

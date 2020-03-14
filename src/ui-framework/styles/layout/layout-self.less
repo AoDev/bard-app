@@ -49,6 +49,10 @@ each(@spacer-directions, .(@direction) {
 }
 
 // HEIGHT & WIDTH -------------------------------------------------------------- //
+.width-50p {
+  width: 50%;
+}
+
 .width-100p {
   width: 100%;
 }
@@ -111,12 +115,21 @@ each(@container-values, .(@cvalue) {
   padding: 0 !important;
 }
 
+.padded-05 {
+  padding: @spacing-base / 2;
+}
+
 .padded-1 {
   padding: @spacing-base;
 }
 
 .padded-2 {
   padding: @spacing-base * 2;
+}
+
+.padded-h-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 @media @md-screen {
@@ -134,18 +147,6 @@ each(@container-values, .(@cvalue) {
 
   @media @lg-screen {
     padding: @spacing-base * 2;
-  }
-}
-
-.padded-v1-h2 {
-  padding: @spacing-base @spacing-base * 2;
-}
-
-.lg-padded-v1-h2 {
-  padding: @spacing-base;
-
-  @media @lg-screen {
-    padding: @spacing-base @spacing-base * 2;
   }
 }
 
@@ -174,6 +175,10 @@ each(@container-values, .(@cvalue) {
 // OVERFLOW -------------------------------------------------------------- //
 .no-overflow-x {
   overflow-x: hidden;
+}
+
+.no-overflow {
+  overflow: hidden;
 }
 
 .scroll-x {

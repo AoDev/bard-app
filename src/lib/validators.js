@@ -48,6 +48,14 @@ function isValidPassword (password) {
   return isStringWithoutWhitespace(password, PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH)
 }
 
+/**
+ * @param {string} email
+ * @returns {boolean}
+ */
+function isValidEmail (email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
+
 const assert = {
   isString (arg) {
     if (!_.isString(arg)) {
@@ -94,6 +102,7 @@ export default {
   PASSWORD_MAX_LENGTH,
 
   isValidCommonName,
+  isValidEmail,
   isValidPassword,
   assert,
 }

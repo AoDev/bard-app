@@ -34,7 +34,7 @@ export class ErrorBoundary extends React.PureComponent {
       return (
         <div className="max-width-48em center-block space-bottom-4">
           <div className="md-panel-group">
-            <div className="flex-row-center bg-gray lg-padded-v1-h2">
+            <div className="flex-row-center bg-gray padded-1">
               <Icon name="#smiley-dead" size={96}/>
               <div className="space-left-1">
                 <h1 className="space-top-0">Oops! Bard crashed :(</h1>
@@ -43,7 +43,7 @@ export class ErrorBoundary extends React.PureComponent {
             </div>
 
             <section>
-              <div className="bg-white lg-padded-v1-h2">
+              <div className="bg-white padded-1">
                 <h2>You can help by reporting this issue</h2>
                 <ul className="list-not-padding list-spaced-1 space-bottom-2">
                   <li>
@@ -54,7 +54,7 @@ export class ErrorBoundary extends React.PureComponent {
                   Toggle crash details
                 </button>
               </div>
-              <div className={`bg-white lg-padded-v1-h2${this.state.detailsShown ? '' : ' hidden'}`}>
+              <div className={`bg-white padded-1${this.state.detailsShown ? '' : ' hidden'}`}>
                 <div>
                   <h3>Message</h3>
                   <Note variant="red">

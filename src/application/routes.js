@@ -37,6 +37,10 @@ const routes = {
     }
   },
 
+  '/public/ui-framework': {
+    windowTitlePlugin: {title: 'UI framework'},
+  },
+
   '/public/app-settings': {
     windowTitlePlugin: {title: 'App settings'},
   },

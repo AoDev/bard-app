@@ -66,6 +66,10 @@ export function MainSideMenu (props) {
               </div>
             }
 
+            <Link autoActive id="link-menu-ui-framework" to="/public/ui-framework" className="btn btn-msm btn-block space-bottom-1" onClick={handleMainMenuClick}>
+              <Icon top={6} color="#666" name=""/><span className="space-left-1">UI framework</span>
+            </Link>
+
             <Link autoActive id="link-menu-settings" to="/public/app-settings" className="btn btn-msm btn-block space-bottom-1" onClick={handleMainMenuClick}>
               <Icon top={6} color="#666" name="#menu-settings"/><span className="space-left-1">App Settings</span>
             </Link>

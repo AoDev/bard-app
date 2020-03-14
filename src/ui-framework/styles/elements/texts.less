@@ -4,8 +4,18 @@
   text-overflow: ellipsis;
 }
 
+.truncate--inline {
+  &:extend(.truncate);
+
+  display: inline-block;
+}
+
 .txt-09 {
   font-size: 0.9em;
+}
+
+.txt-1 {
+  font-size: 1em;
 }
 
 .txt-11 {
@@ -61,7 +71,7 @@
 }
 
 .txt-warning {
-  color: #ff7600;
+  color: @color-orange-aim;
 }
 
 .txt-italic {
@@ -82,6 +92,10 @@
 
 .txt-line-through {
   text-decoration: line-through;
+}
+
+.txt-underline {
+  text-decoration: underline;
 }
 
 .txt-uppercase {

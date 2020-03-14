@@ -16,6 +16,9 @@ const compiler = webpack(config)
 const PORT = process.env.PORT || 3000
 
 const wdm = webpackDevMiddleware(compiler, {
+  watchOptions: {
+    ignored: /node_modules/
+  },
   publicPath: config.output.publicPath,
   historyApiFallback: true,
   stats: {
