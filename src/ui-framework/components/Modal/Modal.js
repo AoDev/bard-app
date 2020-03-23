@@ -45,7 +45,7 @@ export function Modal (props) {
               <div className="flex-col-end">
                 <div className="flex-row-center">
                   <Button className="modal__btn" variant="link" onClick={props.modalVM.hide}>
-                    {this.props.closeText}
+                    {props.closeText}
                   </Button>
                 </div>
               </div>
@@ -55,12 +55,12 @@ export function Modal (props) {
                 <div className="flex-row-center">
                   {props.modalVM.canCancel &&
                     <Button className="modal__btn" variant="link" onClick={props.modalVM.cancel}>
-                      {this.props.cancelText}
+                      {props.cancelText}
                     </Button>
                   }
 
                   <Button className="modal__btn" variant="link" onClick={props.modalVM.confirm}>
-                    {this.props.confirmText}
+                    {props.confirmText}
                   </Button>
                 </div>
               </div>
