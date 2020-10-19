@@ -1,7 +1,5 @@
-.badge--light,
-.badge--dark,
-.badge--positive,
-.badge--negative {
+
+.badge {
   display: inline-block;
   padding: 0 2px;
   border-radius: 2px;
@@ -9,24 +7,39 @@
   transition: background-color ease-out 0.2s;
 }
 
+.badge-variant(@txtColor, @bgColor) {
+  &:extend(.badge);
+
+  background-color: @bgColor;
+  color: @txtColor;
+}
+
 .badge--positive {
-  background-color: @color-green-aim;
+  .badge-variant(#fff, @color-green-aim);
 }
 
 .badge--negative {
-  background-color: @color-red-aim;
+  .badge-variant(#fff, @color-red-aim);
 }
 
 .badge--dark {
-  background-color: #14042a;
+  .badge-variant(#fff, #14042a);
 }
 
 .badge--light {
-  background-color: #fff;
-  color: #000;
+  .badge-variant(#000, #fff);
+
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
-// Typical counter that can be seen next to a notification icon
+.badge--yellow {
+  .badge-variant(#000, #ffec3d);
+}
+
+.badge--brand {
+  .badge-variant(#fff, @color-brand-primary);
+}
+
 .badge-count {
   background-color: @color-red-aim;
   height: 22px;

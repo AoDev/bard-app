@@ -1,6 +1,7 @@
 // reset
 a {
-  color: darken(@color-blue-aim, 3%);
+  color: @color-blue-aim;
+  color: var(--color-blue-aim);
 
   &:focus {
     outline: 0;
@@ -10,7 +11,8 @@ a {
 }
 
 .link {
-  color: darken(@color-blue-aim, 3%);
+  color: @color-blue-aim;
+  color: var(--color-blue-aim);
 
   &:hover {
     color: lighten(@color-blue-aim, 5%);

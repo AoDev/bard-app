@@ -1,9 +1,42 @@
+:root {
+  --color-bg-darken: @color-bg-darken;
+  --color-blue-aim: @color-blue-aim;
+  --color-body-bg: @body-color;
+  --color-btn-disabled-bg: @color-gray-mid;
+  --color-content-bg: #fff;
+  --color-content-txt: @color-font-default;
+  --color-green-aim: @color-green-aim;
+  --color-header-bg: @color-header-bg;
+  --color-header-separator: darken(@color-gray-lighter, 5%);
+  --color-line-separator: #ededed;
+  --color-menu-btn-txt: @color-gray-darker;
+  --color-red-aim: @color-red-aim;
+}
+
+:root[theme='dark'] {
+  --color-bg-darken: darken(@color-gray-darkest, 3%);
+  --color-blue-aim: lighten(@color-blue-aim, 10%);
+  --color-body-bg: @color-gray-darkest;
+  --color-btn-disabled-bg: #5e7186;
+  --color-content-bg: @color-gray-darkest;
+  --color-content-txt: #fff;
+  --color-green-aim: lighten(@color-green-aim, 5%);
+  --color-header-bg: lighten(@color-gray-darkest, 3%);
+  --color-header-separator: lighten(@color-gray-darkest, 9%);
+  --color-line-separator: lighten(@color-gray-darkest, 9%);
+  --color-menu-btn-txt: #e6e6e6;
+  --color-red-aim: #ff4163;
+}
+
 html {
   box-sizing: border-box;
   height: 100%;
+  color: @color-font-default;
+  color: var(--color-content-txt);
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--color-content-bg);
 }
 
-// Depending on the project, you may want to disable mobile browser gesture
 *,
 *::before,
 *::after {
@@ -13,12 +46,16 @@ html {
 
 body {
   margin: 0;
+  font-size: 16px;
   font-family: @font-default;
+  background-color: @body-color;
+  background-color: var(--color-body-bg);
 }
 
 hr {
   border-top: 0;
   border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-line-separator);
   border-left: 0;
   border-right: 0;
   margin: 0;
@@ -27,4 +64,8 @@ hr {
 // Prevent images from shrinking by default in a display flex container
 img {
   flex-shrink: 0;
+}
+
+p {
+  margin-top: 0;
 }

@@ -1,1 +1,4 @@
-export {default} from './AppSettingsVM'
+import withVM from 'bard-instruments/lib/react-mobx/withVM'
+import AppSettings from './AppSettings'
+import AppSettingsVM from './AppSettingsVM'
+export default withVM(AppSettings, AppSettingsVM)

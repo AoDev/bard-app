@@ -6,27 +6,29 @@ import {Button, Icon} from 'ui-framework'
 export function Header (props) {
   const {rootStore} = props
   const {uiStore, router} = rootStore
+  const showBackBtn = router.route === '/public/reset-password'
+  const showMenuBtn = !showBackBtn
 
   return (
     <div className="main-header">
       <div className="main-header__content">
-        <Button
-          className="space-right-1"
-          variant="invisible"
-          onClick={uiStore.mainSideMenu.toggleVisibility}>
-          <Icon name="#menubars" white bgColor="#1d6dcd" bgCircle bgPadding={6}/>
-        </Button>
-        <Button
-          className="main-header__back-btn space-right-1"
-          id="btn-header-back"
-          variant="invisible"
-          disabled={router.story < 2}
-          onClick={router.goBack}>
-          <Icon name="#arrow-left" color="#fff" bgColor="#1d6dcd" bgCircle bgPadding={6}/>
-        </Button>
-        <h1 className="app-title unselectable space-right-2">
-          {uiStore.headerTitle}
-        </h1>
+        {showMenuBtn &&
+          <Button
+            className="space-right-1 main-header__btn"
+            variant="invisible"
+            onClick={uiStore.mainSideMenu.toggleVisibility}>
+            <Icon name="#menubars" color={uiStore.colors['color-font-default']} bgPadding={6}/>
+          </Button>
+        }
+
+        {showBackBtn &&
+          <Button
+            className="main-header__btn"
+            variant="invisible"
+            onClick={router.goBack}>
+            <Icon name="#arrow-left" color={uiStore.colors['color-font-default']} bgPadding={6}/>
+          </Button>
+        }
       </div>
     </div>
   )

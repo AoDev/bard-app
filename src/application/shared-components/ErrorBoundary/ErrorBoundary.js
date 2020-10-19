@@ -2,6 +2,11 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {Note, Icon} from 'ui-framework'
 
+const styles = {
+  content: {height: 'calc(100% - 150px)'},
+  wrapper: {height: 'calc(100% - 32px'},
+}
+
 /**
  * Catch errors in components and display an error message
  */
@@ -32,50 +37,57 @@ export class ErrorBoundary extends React.PureComponent {
         .filter((line) => line !== '')
 
       return (
-        <div className="max-width-48em center-block space-bottom-4">
-          <div className="md-panel-group">
-            <div className="flex-row-center bg-gray padded-1">
+        <div className="max-width-48em center-block space-bottom-4 height-100p">
+          <div className="md-panel-group space-v-1" style={styles.wrapper}>
+            <div className="flex-row-center bg-content padded-1">
               <Icon name="#smiley-dead" size={96}/>
               <div className="space-left-1">
-                <h1 className="space-top-0">Oops! Bard crashed :(</h1>
+                <h1 className="space-top-0">Oops! Battle Traders crashed :(</h1>
                 <p className="txt-11 txt-positive space-0">Please, first try to restart the app.</p>
               </div>
             </div>
 
-            <section>
-              <div className="bg-white padded-1">
-                <h2>You can help by reporting this issue</h2>
-                <ul className="list-not-padding list-spaced-1 space-bottom-2">
-                  <li>
-                    at info_example@bard.dev
-                  </li>
-                </ul>
-                <button className="btn btn-neutral" type="button" onClick={this.toggleDetails}>
-                  Toggle crash details
-                </button>
-              </div>
-              <div className={`bg-white padded-1${this.state.detailsShown ? '' : ' hidden'}`}>
-                <div>
-                  <h3>Message</h3>
-                  <Note variant="red">
-                    <textarea className="textarea inputfield txt-mono" defaultValue={this.state.error.message} readOnly/>
-                  </Note>
-
-                  <h3>Stack trace</h3>
-                  <Note variant="red">
-                    <textarea style={{height: '300px'}} className="textarea textarea-no-wrap inputfield txt-mono" defaultValue={this.state.error.stack} readOnly/>
-                  </Note>
-
-                  <h3>Component tree</h3>
-                  <p>
-                    Error in: {componentTree[0]}
-                  </p>
-                  <Note variant="red">
-                    <textarea style={{height: '300px'}} className="textarea inputfield txt-mono" defaultValue={componentTree.join('\n')} readOnly/>
-                  </Note>
+            <div className="scroll-y" style={styles.content}>
+              <section>
+                <div className="bg-content padded-1">
+                  <h2>You can help by reporting this issue</h2>
+                  <ul className="list-not-padding list-spaced-1 space-bottom-2">
+                    <li>
+                      <p>
+                        You can send an email at <strong> <a href="mailto:contact@battletraders.io">contact@battletraders.io</a></strong>.
+                      </p>
+                    </li>
+                    <li>
+                      App version: {process.env.APP_VERSION}
+                    </li>
+                  </ul>
+                  <button className="btn--neutral" type="button" onClick={this.toggleDetails}>
+                    Toggle crash details
+                  </button>
                 </div>
-              </div>
-            </section>
+                <div className={`bg-content padded-1${this.state.detailsShown ? '' : ' hidden'}`}>
+                  <div>
+                    <h3>Message</h3>
+                    <Note variant="red">
+                      <textarea className="textarea inputfield txt-mono" defaultValue={this.state.error.message} readOnly/>
+                    </Note>
+
+                    <h3>Stack trace</h3>
+                    <Note variant="red">
+                      <textarea style={{height: '300px'}} className="textarea textarea-no-wrap inputfield txt-mono" defaultValue={this.state.error.stack} readOnly/>
+                    </Note>
+
+                    <h3>Component tree</h3>
+                    <p>
+                      Error in: {componentTree[0]}
+                    </p>
+                    <Note variant="red">
+                      <textarea style={{height: '300px'}} className="textarea inputfield txt-mono" defaultValue={componentTree.join('\n')} readOnly/>
+                    </Note>
+                  </div>
+                </div>
+              </section>
+            </div>
           </div>
         </div>
       )

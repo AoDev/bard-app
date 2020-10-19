@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+/**
+ * @param {{variant: 'red'|'green'|'blue'|'orange'|'default', withBackground: boolean, className: string}} props
+ */
 export default function Note (props) {
-  const cssClasses = `${props.withBackground ? 'note-with-bg' : 'note'} note-${props.variant} ${props.className}`
+  const cssClasses = `note-${props.variant}${props.withBackground ? '--with-bg' : ''} ${props.className} txt-read`
   return (
     <div className={cssClasses}>
       {props.children}

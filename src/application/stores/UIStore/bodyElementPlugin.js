@@ -4,12 +4,14 @@ import cn from 'classnames'
 function register (uiStore) {
   mobx.autorun(
     () => {
+      const htmlBody = window.document.querySelector('html')
       const bodyClass = cn('bg-with-gradient', {
         'dimensions-locked': uiStore.settingsDialog.visible,
         'bg-light': !uiStore.rootStore.router.route.startsWith('/public'),
       })
 
-      window.document.querySelector('body').setAttribute('class', bodyClass)
+      htmlBody.setAttribute('class', bodyClass)
+      htmlBody.setAttribute('theme', uiStore.theme)
     },
     {name: 'autoUpdateBodyClass'}
   )

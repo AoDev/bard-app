@@ -1,9 +1,11 @@
 .subnav-menu {
-  @subnav-color-text: #fff;
-  @subnav-color-text-active: #fff;
-  @subnav-color-bg: @header-bg-color;
+  @subnav-color-text: @color-gray-darker;
+  @subnav-color-bg: @color-header-bg;
+  @subnav-color-text-active: @color-blue-aim;
+  @subnav-color-bg-active: transparent;
 
-  background-color: @subnav-color-bg;
+  background-color: @color-header-bg;
+  background-color: var(--color-header-bg);
   bottom: 0;
   height: @header-height;
   left: 0;
@@ -11,6 +13,8 @@
   position: fixed;
   right: 0;
   z-index: 3;
+  border-top: 1px solid #ededed;
+  border-top: 1px solid var(--color-line-separator);
 
   // TODO: refactor the buttons. Maybe create a navbar button component or something
   .btn {
@@ -18,26 +22,33 @@
 
     border: 0;
     height: @header-height;
-    color: @subnav-color-text;
+    color: @color-font-default;
+    color: var(--color-content-txt);
+    background-color: transparent;
     padding: 14px 16px 4px 16px;
     line-height: 1.7;
 
     .icon-svg {
-      fill: @subnav-color-text;
+      fill: @color-font-default;
+      fill: var(--color-content-txt);
     }
 
-    &.active {
-      background-color: darken(@subnav-color-bg, 10%);
+    &.active,
+    &.active:focus,
+    &.active:hover {
+      background-color: @subnav-color-bg-active;
       color: @subnav-color-text-active;
 
       .icon-svg {
-        fill: @subnav-color-text-active;
+        fill: @color-blue-aim;
+        fill: var(--color-blue-aim);
       }
     }
 
     &:focus,
     &:hover {
-      color: @subnav-color-text;
+      color: @color-font-default;
+      color: var(--color-content-txt);
       border-color: darken(@subnav-color-bg, 2%);
       box-shadow: none;
     }
@@ -52,6 +63,7 @@
     left: auto;
     right: 0;
     background-color: transparent;
+    border-top: 0;
 
     .btn {
       min-width: 8em;

@@ -48,6 +48,25 @@ each(@spacer-directions, .(@direction) {
   margin: 0 !important;
 }
 
+.space-1 {
+  margin: @spacing-base !important;
+}
+
+.space-v-1 {
+  margin-top: @spacing-base;
+  margin-bottom: @spacing-base;
+}
+
+.space-v-2 {
+  margin-top: @spacing-base * 2;
+  margin-bottom: @spacing-base * 2;
+}
+
+.space-h-1 {
+  margin-left: @spacing-base;
+  margin-right: @spacing-base;
+}
+
 // HEIGHT & WIDTH -------------------------------------------------------------- //
 .width-50p {
   width: 50%;
@@ -84,7 +103,7 @@ each(@spacer-directions, .(@direction) {
   max-width: 100%;
 }
 
-@width-values: 8em, 12em, 16em;
+@width-values: 6ch, 8em, 12em, 16em;
 each(@width-values, .(@value) {
   .width-@{value} {
     width: @value;
@@ -120,11 +139,25 @@ each(@container-values, .(@cvalue) {
 }
 
 .padded-1 {
-  padding: @spacing-base;
+  padding: @spacing-base !important;
+}
+
+.padded-h-1 {
+  padding-left: @spacing-base;
+  padding-right: @spacing-base;
+}
+
+.padded-v-1 {
+  padding-top: @spacing-base;
+  padding-bottom: @spacing-base;
 }
 
 .padded-2 {
   padding: @spacing-base * 2;
+}
+
+.padded-left-0 {
+  padding-left: 0;
 }
 
 .padded-h-0 {
@@ -221,6 +254,7 @@ each(@container-values, .(@cvalue) {
 
 .block {
   display: block;
+  width: 100%; // for buttons/inputs https://stackoverflow.com/questions/16584890/why-does-displayblock-not-stretch-buttons-or-input-elements
 }
 
 .inline-block {

@@ -14,7 +14,7 @@ each(@grid-fluid-values, .(@gvalue) {
 });
 
 // grid that only activates in big screens
-@r-grid-fluid-values: 20em, 24em, 32em;
+@r-grid-fluid-values: 20em, 28em, 24em, 32em;
 
 each(@r-grid-fluid-values, .(@gvalue) {
   .r-grid-fluid-colmin@{gvalue} {
@@ -75,5 +75,10 @@ each(@r-grid-fluid-values, .(@gvalue) {
   .md-flex-row {
     display: flex;
     flex-direction: row;
+  }
+
+  .md-flex-row-center {
+    display: flex;
+    align-items: center;
   }
 }

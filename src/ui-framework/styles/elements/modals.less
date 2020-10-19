@@ -6,7 +6,9 @@
   width: 100%;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
   background-color: #f5f5f5;
+  background-color: var(--color-content-bg);
   color: #222;
+  color: var(--color-content-txt);
   overscroll-behavior-y: contain;
 
   @media @md-screen {
@@ -36,6 +38,7 @@
   left: calc(50% - @width / 2);
   width: @width;
   background-color: #fff;
+  background-color: var(--color-content-bg);
   z-index: 2;
   border-radius: @border-radius-base;
 }

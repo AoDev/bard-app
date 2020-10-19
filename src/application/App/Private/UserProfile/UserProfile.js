@@ -8,7 +8,7 @@ export default function UserProfile ({vm}) {
   return (
     <div className="r-grid-fluid-colmin24em space-bottom-2 md-padded-1">
       <form className="md-panel-group flex-col" onSubmit={vm.submit}>
-        <div className="panel__header bg-gray padded-1 flex-row-center">
+        <div className="panel__header bg-darken padded-1 flex-row-center">
           <h3 className="space-0 h-header">Profile details</h3>
           <Button
             ripple
@@ -20,7 +20,7 @@ export default function UserProfile ({vm}) {
           </Button>
         </div>
 
-        <div className="bg-white padded-1 flex-fill">
+        <div className="padded-1 flex-fill">
           <input id="profile-id" type="hidden" value={user.id}/>
           <div className="flex-row-center space-bottom-2">
             <label className="label space-right-1" htmlFor="input-profile-name">
@@ -38,7 +38,7 @@ export default function UserProfile ({vm}) {
       </form>
 
       <section className="md-panel-group flex-col">
-        <div className="panel__header bg-gray padded-1 flex-row-center">
+        <div className="panel__header bg-darken padded-1 flex-row-center">
           <h3 className="space-0 h-header">
             Delete this profile
           </h3>
@@ -55,7 +55,7 @@ export default function UserProfile ({vm}) {
           </Button>
         </div>
 
-        <div className="bg-white padded-1">
+        <div className="padded-1">
 
           <p className="space-top-0">All associated data will be removed as well.</p>
 

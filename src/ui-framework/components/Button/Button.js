@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import Loader from '../Loader'
+import Icon from '../Icon'
+
+/**
+ * @typedef {Object} buttonProps
+ * @property {boolean} disabled
+ * @property {boolean} disabledMock
+ */
 
 const loaderPlacement = {
   position: 'absolute',
@@ -9,6 +16,8 @@ const loaderPlacement = {
 }
 
 const loader = <div style={loaderPlacement}><Loader/></div>
+const iconCaretRight = <span className="space-left-1ch"><Icon name="#caret-right" size={14} top={-2}/></span>
+const iconCaretRightEnd = <span className="space-left-1ch float-right"><Icon name="#caret-right" size={14} top={-2}/></span>
 
 /**
  * Extended Button component
@@ -19,6 +28,9 @@ const loader = <div style={loaderPlacement}><Loader/></div>
  * * By default it is of type "button" where html has no default value.
  */
 export default class Button extends React.Component {
+  /**
+   * @param {buttonProps} props
+   */
   constructor (props) {
     super(props)
     this.onClick = this.onClick.bind(this)
@@ -68,14 +80,15 @@ export default class Button extends React.Component {
 
   render () {
     const {
-      active, area, children, className, disabled, disabledMock, focusOnMount, isLoading, onClick,
-      onClickEmit, preventDefault, ripple, round, scrollToOnMount, square, variant, ...otherProps
+      active, children, className, disabled, disabledMock, focusOnMount, isLoading, onClick,
+      onClickEmit, preventDefault, ripple, round, scrollToOnMount, square, variant,
+      block, caretRight, caretRightEnd, ...otherProps
     } = this.props
 
-    const variantClass = 'btn-' + variant
-    const areaClass = area === 'small' ? 'btn-small' : 'btn'
+    const variantClass = variant ? 'btn--' + variant : ''
 
-    let cssClasses = `${areaClass} ${variantClass} ${className}`
+    let cssClasses = `${variantClass} ${className}`
+    block && (cssClasses += ' block')
     round && (cssClasses += ' btn-round')
     square && (cssClasses += ' btn-square')
     active && (cssClasses += ' active')
@@ -91,6 +104,8 @@ export default class Button extends React.Component {
         disabled={disabled || isLoading}>
         {isLoading && loader}
         {children}
+        {caretRight && iconCaretRight}
+        {caretRightEnd && iconCaretRightEnd}
       </button>
     )
   }
@@ -100,10 +115,7 @@ Button.propTypes = {
   /**
    * Change appearance of the button
    */
-  variant: PropTypes.oneOf([
-    'default', 'link', 'navlink', 'danger', 'neutral', 'cta', 'cta-red',
-    'theader', 'menu', 'invisible', 'cta-green', 'tab-section'
-  ]),
+  variant: PropTypes.string,
   /**
    * CSS classes for the button (see below).
    */
@@ -130,17 +142,18 @@ Button.propTypes = {
   name: PropTypes.string,
   value: PropTypes.any, // eslint-disable-line
   active: PropTypes.bool,
-  area: PropTypes.oneOf(['normal', 'small']).isRequired,
   focusOnMount: PropTypes.bool.isRequired,
   scrollToOnMount: PropTypes.bool.isRequired,
   ripple: PropTypes.bool.isRequired,
   square: PropTypes.bool.isRequired,
   round: PropTypes.bool.isRequired,
   disabledMock: PropTypes.bool.isRequired,
+  block: PropTypes.bool.isRequired,
+  caretRight: PropTypes.bool.isRequired,
+  caretRightEnd: PropTypes.bool.isRequired,
 }
 
 Button.defaultProps = {
-  area: 'normal',
   className: '',
   disabled: false,
   disabledMock: false,
@@ -150,8 +163,10 @@ Button.defaultProps = {
   preventDefault: false,
   ripple: false,
   round: false,
+  block: false,
   scrollToOnMount: false,
   square: false,
   type: 'button',
-  variant: 'default',
+  caretRight: false,
+  caretRightEnd: false,
 }

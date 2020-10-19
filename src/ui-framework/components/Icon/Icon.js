@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import classNames from 'classnames'
+import {omit} from 'lodash'
 
 /**
  * Display an icon from our sprites.
@@ -14,31 +16,27 @@ import React from 'react'
  * There are multiple options to customize the icon and its background.
  */
 export default function Icon (props) {
-  let {
-    bgCircle, bgColor, bgPadding, className, color, display, height,
-    name, rendering, size, small, top, verticalAlign, white, width, ...otherProps
+  var {
+    small, height, width, color, size, top, left, white, display,
+    bgCircle, bgColor, bgPadding, verticalAlign, rendering
   } = props
+
+  const otherProps = omit(props, Icon.expectedProps)
 
   size = small ? 16 : size
   height = height || size
   width = width || size
   color = white ? '#fff' : color
 
-  let cssClasses = 'icon'
-  if (typeof top == 'number') { // eslint-disable-line eqeqeq
-    cssClasses += ' pos-rel'
+  var cssClasses = {
+    'pos-rel': typeof top === 'number' || typeof left === 'number',
+    icon: true,
+    'icon-inline': display === 'inline',
+    'icon-circle': bgCircle
   }
 
-  if (display === 'inline') {
-    cssClasses += ' icon-inline'
-  }
-
-  if (bgCircle) {
-    cssClasses += ' icon-circle'
-  }
-
-  if (className) {
-    cssClasses += ' ' + className
+  if (props.type) {
+    cssClasses[`icon-${props.type}`] = true
   }
 
   var wrapperStyle = {
@@ -49,6 +47,10 @@ export default function Icon (props) {
 
   if (top) {
     wrapperStyle.top = top + 'px'
+  }
+
+  if (left) {
+    wrapperStyle.left = left + 'px'
   }
 
   if (display === 'block') {
@@ -67,19 +69,50 @@ export default function Icon (props) {
     wrapperStyle.padding = bgPadding + 'px'
   }
 
+  if (props.className) {
+    cssClasses[props.className] = true
+  }
+
   const renderMode = {
     [rendering]: color,
     strokeWidth: size / 32,
   }
 
+  const style = {
+    [rendering]: color,
+  }
+
   return (
-    <span style={wrapperStyle} className={cssClasses} {...otherProps}>
-      <svg width="100%" height="100%" {...renderMode} className="icon-svg">
-        <use xlinkHref={name}/>
+    <span style={wrapperStyle} className={classNames(cssClasses)} {...otherProps}>
+      <svg width="100%" height="100%" {...renderMode} style={style} className="icon-svg">
+        <use xlinkHref={props.name}/>
       </svg>
     </span>
   )
 }
+
+/**
+ * Mainly used to extract any other props passed by the user
+ * @type {Array}
+ */
+Icon.expectedProps = [
+  'bgPadding',
+  'bgCircle',
+  'bgColor',
+  'className',
+  'color',
+  'display',
+  'height',
+  'name',
+  'size',
+  'small',
+  'top',
+  'left',
+  'verticalAlign',
+  'white',
+  'width',
+  'render',
+]
 
 Icon.propTypes = {
   /**
@@ -137,6 +170,10 @@ Icon.propTypes = {
    */
   top: PropTypes.number,
   /**
+   * left offset; helper to align with text by offseting the relative position
+   */
+  left: PropTypes.number,
+  /**
    * verticalAlign; if you need a different inline alignment (top, baseline, ...)
    */
   verticalAlign: PropTypes.string,
@@ -157,5 +194,5 @@ Icon.defaultProps = {
   size: 32,
   display: 'inline',
   rendering: 'fill',
-  color: '#000',
+  color: 'currentColor',
 }

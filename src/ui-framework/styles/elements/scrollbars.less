@@ -1,5 +1,5 @@
 @color-scroll-track: rgba(0, 0, 0, 0.05);
-@color-scroll-thumb: rgba(56, 56, 56, 0.1);
+@color-scroll-thumb: rgba(56, 56, 56, 0.2);
 @color-scroll-thumb-inactive: rgba(100, 100, 100, 0.4);
 @scrollbar-track-width: 4px;
 
@@ -37,6 +37,9 @@
   overflow-x: auto;
   overflow-x: overlay;
   overscroll-behavior-x: contain;
+  // https://stackoverflow.com/questions/6165472/custom-css-scrollbar-for-firefox/53739309#53739309
+  scrollbar-color: @color-scroll-thumb @color-scroll-track;
+  scrollbar-width: thin;
 
   @media @hover-support {
     overflow-x: hidden;
@@ -53,6 +56,9 @@
   overflow-y: auto;
   overflow-y: overlay;
   overscroll-behavior-y: contain;
+  // https://stackoverflow.com/questions/6165472/custom-css-scrollbar-for-firefox/53739309#53739309
+  scrollbar-color: @color-scroll-thumb @color-scroll-track;
+  scrollbar-width: thin;
 
   @media @hover-support {
     overflow-y: hidden;

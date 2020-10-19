@@ -6,6 +6,7 @@ const {action, observable} = mobx
 export default class ConfirmDialog extends Dialog {
   isConfirmDialog = true
   @observable canCancel = true
+  @observable canConfirm = true
   @observable.ref onConfirm = null
   @observable.ref onCancel = null
 

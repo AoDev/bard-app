@@ -3,18 +3,23 @@ import React from 'react'
 import {observer} from 'mobx-react'
 import {Note} from 'ui-framework'
 
+/**
+ * @param {{error: Error, stackHidden: boolean}} props
+ */
 export function ErrorInfo (props) {
-  const {error} = props
+  const {error, stackHidden} = props
   return (
     <React.Fragment>
-      {error.message && !error.stack &&
+      {error.message &&
         <Note variant="red">
+          Message
           <textarea className="textarea inputfield txt-mono" defaultValue={error.message} readOnly/>
         </Note>
       }
 
-      {error.stack &&
+      {!stackHidden && error.stack &&
         <Note variant="red">
+          Stack
           <textarea className="textarea inputfield txt-mono" defaultValue={error.stack} readOnly/>
         </Note>
       }
@@ -24,6 +29,10 @@ export function ErrorInfo (props) {
 
 ErrorInfo.propTypes = {
   error: PropTypes.oneOfType([PropTypes.instanceOf(Error), PropTypes.instanceOf(TypeError)]),
+}
+
+ErrorInfo.defaultProps = {
+  stackHidden: false,
 }
 
 export default observer(ErrorInfo)

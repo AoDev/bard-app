@@ -11,16 +11,14 @@ import NotFound from './NotFound'
 import MainSideMenu from './MainSideMenu'
 import Public from './Public'
 const Private = loadable(() => import(/* webpackChunkName: "private" */'./Private'))
-setTimeout(() => Private.prefetch(), 1000)
+setTimeout(() => Private.preload(), 1000)
 
-export function App (props) {
-  const {uiStore, rootStore} = props
-
+export function App ({uiStore, rootStore}) {
   return (
     <ErrorBoundary rootStore={rootStore}>
       <div className="height-100p">
         <Header/>
-        <MainSideMenu/>
+        <MainSideMenu vm={uiStore.mainSideMenuVM}/>
         <div className="main-content">
           <Route path="/not-found" Component={NotFound}/>
           <Route path="/public" Component={Public}/>

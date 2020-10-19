@@ -24,14 +24,21 @@ button {
 }
 
 .btn {
+  .noselect;
   display: inline-block;
   position: relative;
   height: 44px;
+  text-decoration: none;
+
+  &.hover,
+  &.active {
+    text-decoration: none;
+  }
 }
 
 // Mixin for style variant
 .btn-variant (@color) {
-  .noselect;
+  &:extend(.btn);
 
   border: 1px solid @color;
   background-color: #fff;
@@ -49,8 +56,16 @@ button {
 
   &:focus,
   &:hover {
-    color: lighten(@color, 5%);
-    box-shadow: 0 0 1px 1px lighten(@color, 5%);
+    color: @color;
+  }
+
+  @media @hover-support {
+    &:focus,
+    &:hover {
+      color: @color;
+      box-shadow: inset 0 0 0 1px @color;
+      border: 1px solid @color;
+    }
   }
 
   &.disabled,
@@ -74,36 +89,36 @@ button {
   &.active:focus,
   &.active {
     cursor: default;
-    color: #fff;
-    background-color: @color;
+    color: @color-blue-aim;
+    font-weight: bold;
+    // background-color: @color;
     box-shadow: none;
 
     // TODO: wondering if we should create a btn-with-icon class / variant
     .icon-svg {
-      fill: #fff;
+      fill: @color-blue-aim;
     }
   }
 
-  &.btn-loading {
-    color: transparent;
-
-    .loader-bar {
-      background-color: @color;
-    }
+  .loader-bar {
+    background-color: @color;
   }
 }
 
 // Mixin for style variant
 .btn-variant-inverse (@color) {
-  .noselect;
+  &:extend(.btn);
 
   border: 1px solid @color;
   background-color: @color;
   padding: 0 @spacing-base;
   border-radius: 4px;
+  border: 1px solid darken(@color, 5%);
   color: #fff;
   text-transform: uppercase;
-  transition: background-color 0.4s linear;
+  transition-property: background-color, border-color;
+  transition-duration: 0.4s;
+  transition-timing-function: linear;
 
   &:focus,
   &:hover {
@@ -116,11 +131,14 @@ button {
   &[disabled] {
     color: #f7f7f7;
     background-color: @color-gray-mid;
+    background-color: var(--color-btn-disabled-bg);
     border-color: @color-gray-mid;
+    border-color: var(--color-btn-disabled-bg);
 
     &:focus,
     &:hover {
       border-color: @color-gray-mid;
+      border-color: var(--color-btn-disabled-bg);
     }
   }
 
@@ -129,12 +147,8 @@ button {
     background-color: lighten(@color, 1%);
   }
 
-  &.btn-loading {
-    color: transparent;
-
-    .loader-bar {
-      background-color: #fff;
-    }
+  .loader-bar {
+    background-color: #fff;
   }
 
   .icon-svg {
@@ -142,48 +156,79 @@ button {
   }
 }
 
-// Button will fill the width of its container
-.btn-block {
-  display: block;
-  width: 100%;
-}
-
-.btn-neutral {
+.btn--neutral {
   .btn-variant(@color-gray-darker);
 }
 
-.btn-default {
+.btn--default {
   .btn-variant(@color-green-aim);
 }
 
-.btn-navlink {
+.btn--navlink {
   .btn-variant(@color-blue-aim);
 }
 
-.btn-danger {
+.btn--danger {
   .btn-variant(@color-red-aim);
 }
 
-.btn-cta {
+.btn--cta {
   .btn-variant-inverse(@color-blue-aim);
 }
 
-.btn-cta-green {
-  .btn-variant-inverse(@color-green-aim);
+.btn--cta-green {
+  .btn-variant-inverse(@color-brand-green);
 }
 
-.btn-cta-red {
+.btn--cta-red {
   .btn-variant-inverse(@color-red-aim);
 }
 
-.btn-link {
+.btn--neutral-inverse {
+  @color: lighten(@color-gray-darkest, 3%);
+  @border-color: lighten(@color-gray-darkest, 12%);
+  .btn-variant-inverse(@color);
+
+  border-color: @border-color;
+
+  &:focus,
+  &:hover {
+    color: #fff;
+    background-color: @color;
+    border-color: @border-color;
+    box-shadow: none;
+  }
+
+  &.active {
+    color: @color-blue-aim;
+    color: var(--color-blue-aim);
+    background-color: @color;
+    font-weight: bold;
+  }
+
+  @media @hover-support {
+    &:focus,
+    &:hover {
+      box-shadow: inset 0 0 0 1px @border-color;
+    }
+  }
+}
+
+.btn--link {
   background: transparent;
   border: 0;
   color: @color-blue-aim;
+  color: var(--color-blue-aim);
   height: auto;
   line-height: 1.15;
   padding: 0;
   vertical-align: baseline;
+  position: relative;
+
+  .icon-svg {
+    fill: @color-blue-aim;
+    fill: var(--color-blue-aim);
+  }
 
   &:focus,
   &:hover {
@@ -191,19 +236,20 @@ button {
     text-decoration: underline;
   }
 
-  &.btn-loading:focus,
-  &.btn-loading:hover,
-  &.btn-loading {
-    color: transparent;
+  .loader-bar {
+    background-color: @color-blue-aim;
+    background-color: var(--color-blue-aim);
+  }
 
-    .loader-bar {
-      background-color: @color-blue-aim;
-    }
+  &.disabled,
+  &[disabled] {
+    color: @color-gray-aim;
+    text-decoration: none;
   }
 }
 
 // TODO: might rething this
-.btn-link.link {
+.btn--link.link {
   padding: 0;
   height: auto;
   text-decoration: underline;
@@ -226,7 +272,7 @@ button {
 }
 
 .btn-menu {
-  &:extend(.btn-neutral all);
+  &:extend(.btn--neutral all);
   border: 0;
   color: @color-blue-aim;
 
@@ -246,40 +292,29 @@ button {
   }
 }
 
-.btn-invisible {
+.btn--invisible {
+  &:extend(.btn);
+
   border: 0;
   background-color: transparent;
   padding: 0;
+  color: @color-font-default;
+  color: var(--color-content-txt);
 }
 
 a.btn {
   line-height: 2.7; // Needed when the class is set on a link to align text
-
-  &,
-  &.hover,
-  &.active {
-    text-decoration: none;
-  }
 }
 
-.btn.btn-loading {
-  color: transparent;
-}
-
-.btn-small {
-  height: 36px;
-  padding: 0 8px;
-}
-
-.btn-sticked {
+.btn--sticked-horizontal {
   white-space: nowrap;
 
-  > .btn:not(:last-child) {
+  > .btn--sticked:not(:last-child) {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  > .btn:not(:first-child) {
+  > .btn--sticked:not(:first-child) {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left: 0;
@@ -287,16 +322,16 @@ a.btn {
 }
 
 .btn--sticked-vertical {
-  > .btn {
+  > .btn--sticked {
     display: block;
   }
 
-  > .btn:not(:last-child) {
+  > .btn--sticked:not(:last-child) {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  > .btn:not(:first-child) {
+  > .btn--sticked:not(:first-child) {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-top: 0;
@@ -312,17 +347,28 @@ a.btn {
   border-radius: 50%;
 }
 
-.btn-tab-section {
-  color: #000;
-  display: inline-block;
-  height: 44px;
+.btn--tab-section {
   background: transparent;
   border: 0;
-  vertical-align: baseline;
-  text-decoration: none;
+  color: @color-font-default;
+  color: var(--color-content-txt);
+  display: inline-block;
+  height: 44px;
   padding: 14px 16px 14px 16px;
-  border-radius: 0;
-  border-bottom: 3px solid @color-gray-light;
+  position: relative;
+  text-decoration: none;
+  vertical-align: baseline;
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 3px;
+    background-color: @color-gray-light;
+    border-radius: 2px;
+  }
 
   &:focus {
     outline: 0;
@@ -331,6 +377,27 @@ a.btn {
   }
 }
 
-.btn-tab-section.active {
-  border-bottom: 3px solid @color-orange-aim;
+.btn--tab-section.active {
+  &:before {
+    background-color: @color-blue-aim;
+  }
+}
+
+.btn--sticked-header {
+  .noselect;
+  &:extend(.btn);
+
+  background-color: @color-gray-lighter;
+  color: @color-gray-darker;
+  border-radius: 4px;
+  border: 1px solid @color-gray-darker;
+}
+
+.btn--with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.btn-loading {
+  color: transparent !important;
 }

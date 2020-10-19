@@ -28,6 +28,10 @@ export default class UIFrameworkVM {
     Object.assign(this, props)
   }
 
+  @action.bound onBtnClick ({name, value}) {
+    console.log(name, value)
+  }
+
   /**
    * @param {{rootStore: RootStore}} param0
    */

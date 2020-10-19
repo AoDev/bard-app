@@ -48,6 +48,7 @@
 
 .txt-blue {
   color: @color-blue-aim;
+  color: var(--color-blue-aim);
 }
 
 .txt-gray {
@@ -63,11 +64,13 @@
 }
 
 .txt-positive {
-  color: #138013;
+  color: @color-green-aim;
+  color: var(--color-green-aim);
 }
 
 .txt-negative {
   color: @color-red-aim;
+  color: var(--color-red-aim);
 }
 
 .txt-warning {
@@ -104,6 +107,11 @@
 
 .txt-mono {
   font-family: @font-mono;
+  font-size: 1.05em;
+}
+
+.txt-lh-1 {
+  line-height: 1;
 }
 
 .txt-lh-12 {
@@ -122,4 +130,27 @@
 
 .txt-wrap-break {
   word-wrap: break-word;
+}
+
+.heading-section {
+  letter-spacing: 1px;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  padding: @spacing-base;
+  position: relative;
+}
+
+.h-minor {
+  text-transform: none;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+}
+
+.txt-read {
+  line-height: 1.4;
+}
+
+.txt-content {
+  color: @color-font-default;
+  color: var(--color-content-txt);
 }

@@ -9,15 +9,18 @@
 
 .border-1 {
   border: 1px solid @border-color-1;
+  border: 1px solid var(--color-line-separator);
 }
 
 .border-rounded {
   border: 1px solid @border-color-1;
+  border: 1px solid var(--color-line-separator);
   border-radius: @border-radius-base;
 }
 
 .lg-border-rounded {
   border: 1px solid @border-color-1;
+  border: 1px solid var(--color-line-separator);
 
   @media @lg-screen {
     border-radius: @border-radius-base;
@@ -26,10 +29,19 @@
 
 .border-top {
   border-top: 1px solid @border-color-1;
+  border-top: 1px solid var(--color-line-separator);
 }
 
 .border-bottom {
   border-bottom: 1px solid @border-color-1;
+  border-bottom: 1px solid var(--color-line-separator);
+}
+
+.border-v {
+  border-top: 1px solid @border-color-1;
+  border-top: 1px solid var(--color-line-separator);
+  border-bottom: 1px solid @border-color-1;
+  border-bottom: 1px solid var(--color-line-separator);
 }
 
 .border-top-0 {

@@ -1,23 +1,22 @@
-@msm-full-width: 300px;
+@msm-full-width: 320px;
 @msm-width: 64px;
+@msm-z-index: 5; // above header and above other modals
 
 .main-side-menu {
-  background: #fff;
+  background-color: #fff;
+  background-color: var(--color-content-bg);
   bottom: 0;
   box-shadow: 16px 0 24px rgba(0, 0, 0, 0.3);
-  color: #fff;
-  overflow-x: hidden;
-  overscroll-behavior-y: contain;
-  padding: 0 0 @header-height 0; // <- padding bottom is for when subnav is at the bottom
+  overflow: hidden;
   position: fixed;
   top: 0;
   transform: translateX(-(@msm-full-width + 100));
   transition: all 0.2s ease-out;
   width: @msm-full-width;
   will-change: transform;
-  z-index: 4; // above header
+  z-index: @msm-z-index;
 
-  .btn-navlink {
+  .btn--navlink {
     // TODO: refactor; should not be dependent
     // add source btn
     padding-left: 9px;
@@ -33,17 +32,36 @@
 
 .msm__header {
   height: @header-height;
-  padding: 16px;
-  background-color: #f5f5f5;
-  margin-bottom: 16px;
+  padding: 4px 16px;
+  background-color: @color-header-bg;
+  background-color: var(--color-header-bg);
+  border-bottom: 1px solid darken(@color-header-bg, 5%);
+  border-bottom: 1px solid var(--color-line-separator);
 }
 
-.btn-msm {
-  &:extend(.btn-neutral all);
+.msm__content,
+.msm__content--sub {
+  height: calc(100% - @header-height);
+}
+
+.btn--msm {
+  .noselect;
+  &:extend(.btn);
 
   border: 0;
   border-radius: 0;
   line-height: 2.7;
+  text-align: left;
+  background-color: var(--color-content-bg);
+  color: var(--color-menu-btn-txt);
+  text-transform: uppercase;
+  overflow: hidden;
+  letter-spacing: 0.05em;
+  padding: 0 @spacing-base;
+
+  .icon-svg {
+    fill: var(--color-menu-btn-txt);
+  }
 
   &:hover,
   &:focus {
@@ -51,9 +69,26 @@
     border: 0;
   }
 
+  &.active {
+    background-color: var(--color-bg-darken);
+  }
+
   :not(.active)&:focus,
   :not(.active)&:hover {
-    background-color: #f0f0f0;
+    color: var(--color-menu-btn-txt);
+    background-color: @color-header-bg;
+    background-color: var(--color-header-bg);
+  }
+
+  &.disabled,
+  &[disabled],
+  &.disabled:focus,
+  &.disabled:hover {
+    color: #777;
+
+    .icon-svg {
+      fill: #777;
+    }
   }
 }
 
@@ -64,7 +99,7 @@
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 4;
+  z-index: @msm-z-index;
 }
 
 .msm__submenu {
@@ -79,7 +114,7 @@
 .msm__submenu--open {
   &:extend(.msm__submenu all);
 
-  max-height: calc(~'100vh - 60px'); // <- allows animated height in small screens
+  max-height: calc(~'100% - 60px'); // <- allows animated height in small screens
 }
 
 .msm__submenu--close {
@@ -92,4 +127,97 @@
 // TODO: this is actually used only for the crypto sources, should refactor
 .msm__submenu-content {
   padding: 16px 16px 0 16px;
+}
+
+.msm__btn-menu {
+  position: relative;
+  left: -6px;
+}
+
+.msm__btn-back {
+  position: relative;
+  left: -12px;
+}
+
+.msm__section {
+  width: @msm-full-width;
+  transform: translateX(-(@msm-full-width + 100));
+  transition: all 0.2s ease-out;
+}
+
+.msm__section--visible {
+  &:extend(.msm__section);
+
+  transform: translateX(0);
+}
+
+.msm__section-title {
+  color: @color-gray-darker;
+  color: var(--color-content-txt);
+  position: relative;
+}
+
+.msm__btn-info {
+  text-transform: capitalize;
+  font-style: italic;
+}
+
+.msm__btn-info--red {
+  color: @color-brand-red;
+  &:extend(.msm__btn-info all);
+}
+
+.msm__btn-info--green {
+  color: @color-brand-green;
+  &:extend(.msm__btn-info all);
+}
+
+.msm__btn-with-info {
+  line-height: 1.3;
+
+  &.disabled {
+    .msm__btn-info {
+      color: #777;
+    }
+  }
+}
+
+.msm__footer,
+.msm__footer--hidden {
+  .txt-italic;
+
+  background-color: @color-header-bg;
+  background-color: var(--color-header-bg);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  transition: opacity 0.2s ease-in-out;
+  width: 100%;
+  padding-top: @spacing-base / 2;
+  padding-bottom: @spacing-base / 2;
+  text-align: center;
+}
+
+.msm__footer--hidden {
+  opacity: 0;
+}
+
+.msm__footer__cr {
+  padding-left: 24px;
+  padding-right: 26px;
+}
+
+.msm__title-promoted {
+  padding-left: 16px;
+  .h-minor;
+}
+
+.msm__new-badge {
+  &:extend(.badge--brand);
+
+  line-height: 1.2;
+  font-size: 13px;
+  position: relative;
+  top: 16px;
+  float: right;
 }

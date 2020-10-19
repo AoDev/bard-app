@@ -1,6 +1,6 @@
-@table-odd-color: #f9fafb;
+@table-odd-color: @color-gray-lightest;
 @table-even-color: #fff;
-@table-row-highlighted: darken(@color-blue-aim, 10%);
+@table-row-highlighted: #9f7dcf;
 
 .table,
 .table-fixed,
@@ -11,25 +11,19 @@
   th {
     text-transform: uppercase;
     font-size: 0.9em;
-    white-space: nowrap; // table heading text should not wrap
+    white-space: nowrap;
   }
 
   > tbody > {
     tr > td {
       border-top: 1px solid #ededed;
-    }
-
-    tr:nth-child(odd) {
-      background-color: @table-odd-color;
-    }
-
-    tr:nth-child(even) {
-      background-color: @table-even-color;
+      border-top: 1px solid var(--color-line-separator);
     }
 
     tr.table__row--highlighted {
-      background-color: @table-row-highlighted;
-      color: #fff;
+      color: @color-green-aim;
+      color: var(--color-green-aim);
+      font-weight: bold;
     }
   }
 }
@@ -38,35 +32,27 @@
 .table-fixed {
   th {
     padding: 8px;
+
+    &:first-child {
+      padding: 8px 8px 8px 0;
+    }
+
+    &:last-child {
+      padding: 8px 0 8px 8px;
+    }
   }
 
   > tbody > {
     tr > td {
       padding: 8px;
     }
-  }
 
-  @media @md-screen {
-    th {
-      padding: 8px 12px;
+    tr > td:first-child {
+      padding: 8px 8px 8px 0;
     }
 
-    > tbody > {
-      tr > td {
-        padding: 8px 12px;
-      }
-    }
-  }
-}
-
-.table-narrow {
-  th {
-    padding: 8px 8px;
-  }
-
-  > tbody > {
-    tr > td {
-      padding: 4px 8px;
+    tr > td:last-child {
+      padding: 8px 0 8px 8px;
     }
   }
 }
@@ -81,28 +67,41 @@
   height: 16px;
 }
 
-// Sticky table header, must be applied on <th/>
 .t__head {
-  background-color: @color-gray-lighter;
+  background-color: var(--color-content-bg);
+  color: var(--color-content-txt);
   font-size: 0.9em;
   font-weight: bold;
   min-height: 32px;
+  padding: 8px;
   position: -webkit-sticky;
   position: sticky;
   text-transform: uppercase;
   top: 0;
+  letter-spacing: 0.05em;
   white-space: nowrap;
   z-index: 1; // prevent content in the table to go above it on scroll.
-}
 
-.table--padded-1 {
-  td:first-child,
-  th:first-child {
-    padding-left: @spacing-base;
+  &:first-child {
+    padding: 8px 8px 8px 0;
   }
 
-  td:last-child,
-  th:last-child {
-    padding-right: @spacing-base;
+  &:last-child {
+    padding: 8px 0 8px 8px;
+  }
+}
+
+.t__head--narrow {
+  &:extend(.t__head);
+
+  padding-left: 2px;
+  padding-right: 2px;
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
   }
 }

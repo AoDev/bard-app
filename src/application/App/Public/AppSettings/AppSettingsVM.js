@@ -1,10 +1,12 @@
-import withVM from 'bard-instruments/lib/react-mobx/withVM'
-import AppSettings from './AppSettings'
+/**
+ * @typedef {import('../../../stores/RootStore.js').default} RootStore
+ */
 
-class AppSettingsVM {
+export default class AppSettingsVM {
+  /**
+   * @param {{rootStore: RootStore}} props
+   */
   constructor ({rootStore}) {
     this.settings = rootStore.coreStore.settings
   }
 }
-
-export default withVM(AppSettings, AppSettingsVM)

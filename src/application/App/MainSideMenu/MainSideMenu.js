@@ -1,98 +1,132 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import {inject, observer} from 'mobx-react'
-import {Icon} from 'ui-framework'
+import {observer} from 'mobx-react'
+import {Icon, Button} from 'ui-framework'
 import Link from 'shared-components/Link'
-import Submenu from './Submenu'
-import {appLogo} from 'app-images'
+import {appLogoHorizontal, appLogoHorizontalInverse} from 'app-images'
 
-export function MainSideMenu (props) {
-  const {rootStore} = props
-  const {uiStore, router, coreStore} = rootStore
-  const {session} = coreStore
+/**
+ * @typedef {import('./MainSideMenuVM').default} MainSideMenuVM
+ */
+
+/**
+ * @param {{vm: MainSideMenuVM}} props
+ */
+export function MainSideMenu ({vm}) {
+  const {rootStore} = vm
+  const {uiStore} = rootStore
   const {mainSideMenu, handleMainMenuClick} = uiStore
-  const onUserProfile = router.route.startsWith('/private/user-profile')
+  const contentClass = (vm.subsectionMode ? 'msm__content--sub' : 'msm__content') + ' scrollbar-discreet-y'
 
   return (
     <React.Fragment>
       {mainSideMenu.visible &&
-        <div className="msm-overlay animated fadeIn" onClick={mainSideMenu.hide}/>
+        <div className="msm-overlay animated fadeIn" onClick={vm.hideMenu}/>
       }
       <div className={mainSideMenu.visible ? 'msm--expanded' : 'main-side-menu'}>
-        <div className="height-100p scrollbar-discreet-y">
-          <div className="flex-col">
-            <div className="msm__header flex-row-center">
-              <img src={appLogo} height="32" width="32"/>
-              <div className="space-left-1 txt-black txt-15 txt-italic">Bard</div>
-            </div>
-            {session.signedIn && <React.Fragment>
-              <Link autoActive id="link-menu-dashboard" to="/private/dashboards" className="btn btn-msm btn-block space-bottom-1" onClick={handleMainMenuClick}>
-                <Icon top={6} color="#666" name="#dashboard"/><span className="space-left-1">Dashboards</span>
-              </Link>
-            </React.Fragment>}
-            {!session.signedIn &&
-              <Link
-                onClick={handleMainMenuClick}
-                autoActive
-                id="link-menu-my-cryptos"
-                to="/public/signin"
-                className="btn btn-msm btn-block space-bottom-1">
-                <Icon top={6} color="#666" name="#dashboard"/><span className="space-left-1">Dashboard</span>
-              </Link>
-            }
-            {session.signedIn &&
-              <div className="space-bottom-1">
-                <Link
-                  onClick={handleMainMenuClick}
-                  autoActive
-                  id="link-menu-profile"
-                  to="/private/user-profile"
-                  className="btn btn-msm btn-block">
-                  <Icon top={6} color="#666" name="#menu-profile"/><span className="space-left-1">User profile</span>
+        {vm.section === '' &&
+          <div className="msm__header flex-row-center">
+            <Button
+              className="msm__btn-menu"
+              round
+              variant="invisible"
+              onClick={uiStore.mainSideMenu.toggleVisibility}>
+              <Icon name="#menubars" color={uiStore.colors['color-font-default']} bgPadding={6}/>
+            </Button>
+            <img src={uiStore.theme === 'dark' ? appLogoHorizontalInverse : appLogoHorizontal} height="32"/>
+          </div>
+        }
+        {vm.section !== '' &&
+          <div className="msm__header">
+            <Button
+              className="msm__btn-back"
+              variant="invisible"
+              onClick={vm.back}
+              aria-label="Back">
+              <div className="flex-row-center">
+                <Icon
+                  name="#caret-left"
+                  color={uiStore.colors['color-font-default']}
+                  bgPadding={8}/>
+                <span className="msm__section-title txt-11 txt-uppercase">{vm.headerTitle || vm.section}</span>
+              </div>
+            </Button>
+          </div>
+        }
+        <div className={contentClass}>
+          <div className="flex-col space-bottom-2">
+            {vm.section === '' &&
+              <React.Fragment>
+                {vm.session.signedIn &&
+                  <React.Fragment>
+                    <Link autoActive id="link-menu-profile" to="/private/user-profile" className="btn--msm msm__btn-with-info block space-v-1" onClick={handleMainMenuClick}>
+                      <div className="flex-row-center">
+                        <Icon name="#user"/>
+                        <span className="space-left-1">
+                          <div className="">User profile</div>
+                          <div className="msm__btn-info--red">{vm.session.user.name}</div>
+                        </span>
+                      </div>
+                    </Link>
+                  </React.Fragment>
+                }
+
+                <Link autoActive id="link-menu-dashboard" to="/private/dashboards" className="btn--msm block space-bottom-1" onClick={handleMainMenuClick}>
+                  <Icon top={6} name="#dashboard"/><span className="space-left-1">Dashboards</span>
                 </Link>
 
-                <Submenu visible={onUserProfile}>
-                  <Link
-                    onClick={handleMainMenuClick}
-                    autoActive
-                    to="/private/signout"
-                    className="btn btn-menu btn-block txt-left">
-                    <Icon
-                      name="#logout"
-                      size={20}
-                      className="space-right-1"/> Sign out
-                  </Link>
-                </Submenu>
-              </div>
+                <Link autoActive id="link-menu-ui-framework" to="/public/ui-framework" className="btn--msm block space-bottom-1" onClick={handleMainMenuClick}>
+                  <Icon top={6} name=""/><span className="space-left-1">UI framework</span>
+                </Link>
+
+                <Link autoActive id="link-menu-settings" to="/public/app-settings" className="btn--msm block space-bottom-1" onClick={handleMainMenuClick}>
+                  <Icon top={6} name="#menu-settings"/><span className="space-left-1">App Settings</span>
+                </Link>
+
+                <Link autoActive id="link-menu-faq" to="/public/faq" className="btn--msm block space-bottom-1" onClick={handleMainMenuClick}>
+                  <Icon top={6} name="#faq"/><span className="space-left-1">FAQ</span>
+                </Link>
+
+                {vm.session.signedIn &&
+                  <React.Fragment>
+                    <Link autoActive id="link-menu-signout" to="/private/signout" className="btn--msm block" onClick={handleMainMenuClick}>
+                      <Icon top={6} name="#logout2"/><span className="space-left-1">Log out</span>
+                    </Link>
+                  </React.Fragment>
+                }
+              </React.Fragment>
             }
-
-            <Link autoActive id="link-menu-ui-framework" to="/public/ui-framework" className="btn btn-msm btn-block space-bottom-1" onClick={handleMainMenuClick}>
-              <Icon top={6} color="#666" name=""/><span className="space-left-1">UI framework</span>
-            </Link>
-
-            <Link autoActive id="link-menu-settings" to="/public/app-settings" className="btn btn-msm btn-block space-bottom-1" onClick={handleMainMenuClick}>
-              <Icon top={6} color="#666" name="#menu-settings"/><span className="space-left-1">App Settings</span>
-            </Link>
-
-            <Link autoActive id="link-menu-faq" to="/public/faq" className="btn btn-msm btn-block space-bottom-1" onClick={handleMainMenuClick}>
-              <Icon top={6} color="#666" name="#faq"/><span className="space-left-1">FAQ</span>
-            </Link>
           </div>
+        </div>
+
+        <div className={vm.section === '' ? 'msm__footer' : 'msm__footer--hidden'}>
+          <span className="txt-muted">© Battle Traders - v.{process.env.APP_VERSION} BETA</span>
         </div>
       </div>
     </React.Fragment>
   )
 }
 
-export default inject('rootStore')(observer(MainSideMenu))
+export default observer(MainSideMenu)
 
 MainSideMenu.propTypes = {
-  rootStore: PropTypes.shape({
-    uiStore: PropTypes.shape({
-      mainSideMenu: PropTypes.shape({
-        visible: PropTypes.bool.isRequired,
-        hide: PropTypes.func.isRequired,
+  vm: PropTypes.shape({
+    changeSection: PropTypes.func.isRequired,
+    hideMenu: PropTypes.func.isRequired,
+    section: PropTypes.string.isRequired,
+    session: PropTypes.shape({
+      signedIn: PropTypes.bool.isRequired,
+      user: PropTypes.shape({}).isRequired,
+    }),
+    rootStore: PropTypes.shape({
+      uiStore: PropTypes.shape({
+        handleMainMenuClick: PropTypes.func.isRequired,
+        mainSideMenu: PropTypes.shape({
+          toggleVisibility: PropTypes.func.isRequired,
+          visible: PropTypes.bool.isRequired,
+          hide: PropTypes.func.isRequired,
+        }).isRequired,
       }).isRequired,
     }).isRequired,
-  }).isRequired,
+  })
 }

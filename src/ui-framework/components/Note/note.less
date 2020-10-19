@@ -1,34 +1,65 @@
+@note-border-width: 4px;
 
-.note,
-.note-with-bg {
-  border-left: 4px solid;
-  padding: 1px @spacing-base;
-}
-
-.note-with-bg {
-  background-color: rgba(0, 0, 0, 0.05);
+.note {
+  border-left: @note-border-width solid;
+  padding: 1px @spacing-base 1px (@spacing-base - @note-border-width);
 }
 
 .note-default {
   border-left-color: rgba(0, 0, 0, 0.2);
+  &:extend(.note);
 }
 
 .note-red {
   border-left-color: @color-red-vivid;
   color: @color-red-aim;
+  color: var(--color-red-aim);
+  &:extend(.note);
 }
 
 .note-blue {
-  border-left-color: @color-blue-vivid;
+  border-left-color: @color-blue-aim;
+  border-left-color: var(--color-blue-aim);
   color: @color-blue-aim;
+  color: var(--color-blue-aim);
+  &:extend(.note);
 }
 
 .note-green {
   border-left-color: @color-green-aim;
+  border-left-color: var(--color-green-aim);
   color: @color-green-aim;
+  color: var(--color-green-aim);
+  &:extend(.note);
 }
 
 .note-orange {
   border-left-color: @color-orange-aim;
   color: @color-orange-aim;
+  &:extend(.note);
+}
+
+.note-red--with-bg {
+  background-color: fade(@color-red-aim, 4%);
+  &:extend(.note-red);
+}
+
+.note-blue--with-bg {
+  background-color: fade(@color-blue-aim, 4%);
+  &:extend(.note-blue);
+}
+
+.note-green--with-bg {
+  background-color: fade(@color-green-aim, 4%);
+  &:extend(.note-green);
+}
+
+.note-orange--with-bg {
+  background-color: fade(@color-orange-aim, 4%);
+  &:extend(.note-orange);
+}
+
+.note-default--with-bg {
+  background-color: rgba(0, 0, 0, 0.03);
+  &:extend(.note-default);
 }
