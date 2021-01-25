@@ -4,7 +4,7 @@ import sleep from 'bard-instruments/lib/async/sleep'
  * For demo purposes
  * TODO: replace by true auth service
  */
-async function authenticate (credentials) {
+async function authenticate(credentials) {
   await sleep(1000)
   // Toggle this for testing
   // throw new Error('Signin failed')
@@ -18,7 +18,7 @@ async function authenticate (credentials) {
  * For demo purposes
  * TODO: replace by true auth service
  */
-async function signout () {
+async function signout() {
   await sleep(1000)
   // Toggle this for testing
   // throw new Error('Signout failed')

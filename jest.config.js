@@ -1,11 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  transformIgnorePatterns: [
-    'node_modules/(?!(bard-router)/)'
-  ],
-  moduleNameMapper: {
-  },
+  moduleNameMapper: {},
   clearMocks: true,
   noStackTrace: true,
   resetMocks: true,

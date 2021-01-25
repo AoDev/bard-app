@@ -1,8 +1,8 @@
 import React from 'react'
 import {observer} from 'mobx-react'
-import Link from 'shared-components/Link'
+import {Link} from 'bard-router'
 
-export function AlreadySignedIn () {
+export function AlreadySignedIn() {
   return (
     <div className="md-max-width-24em center-block md-space-top-2">
       <div className="md-panel-group bg-white shadow-1">

@@ -15,10 +15,22 @@ import {omit} from 'lodash'
  *
  * There are multiple options to customize the icon and its background.
  */
-export default function Icon (props) {
+export default function Icon(props) {
   var {
-    small, height, width, color, size, top, left, white, display,
-    bgCircle, bgColor, bgPadding, verticalAlign, rendering
+    small,
+    height,
+    width,
+    color,
+    size,
+    top,
+    left,
+    white,
+    display,
+    bgCircle,
+    bgColor,
+    bgPadding,
+    verticalAlign,
+    rendering,
   } = props
 
   const otherProps = omit(props, Icon.expectedProps)
@@ -32,7 +44,7 @@ export default function Icon (props) {
     'pos-rel': typeof top === 'number' || typeof left === 'number',
     icon: true,
     'icon-inline': display === 'inline',
-    'icon-circle': bgCircle
+    'icon-circle': bgCircle,
   }
 
   if (props.type) {
@@ -42,7 +54,7 @@ export default function Icon (props) {
   var wrapperStyle = {
     width: width,
     height: height,
-    fontSize: 0 // needed because of character white space
+    fontSize: 0, // needed because of character white space
   }
 
   if (top) {
@@ -85,7 +97,7 @@ export default function Icon (props) {
   return (
     <span style={wrapperStyle} className={classNames(cssClasses)} {...otherProps}>
       <svg width="100%" height="100%" {...renderMode} style={style} className="icon-svg">
-        <use xlinkHref={props.name}/>
+        <use xlinkHref={props.name} />
       </svg>
     </span>
   )
@@ -142,10 +154,7 @@ Icon.propTypes = {
   /**
    * The icon height. CSS value or number.
    */
-  height: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
    * Name of the icon = name of the svg file
    */
@@ -153,10 +162,7 @@ Icon.propTypes = {
   /**
    * Shorcut to set width and height to same size (square format). CSS value or number.
    */
-  size: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
    * Use fill or stroke mode
    */
@@ -184,10 +190,7 @@ Icon.propTypes = {
   /**
    * The icon width. CSS value or number.
    */
-  width: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 Icon.defaultProps = {

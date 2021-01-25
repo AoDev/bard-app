@@ -1,9 +1,9 @@
 import React from 'react'
 import {observer} from 'mobx-react'
 import {Note} from 'ui-framework'
-import Link from 'shared-components/Link'
+import {Link} from 'bard-router'
 
-export function NotFound (props) {
+export function NotFound(props) {
   return (
     <div className="max-width-24em center-block space-top-2">
       <div className="md-panel-group">

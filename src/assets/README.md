@@ -1,5 +1,5 @@
-
 # Assets
+
 Images and other files used in one way or another in the project.
 
 ## Overview
@@ -12,6 +12,7 @@ Images and other files used in one way or another in the project.
 ```
 
 ## About the app (brand) logo
+
 I wish there was a way to generate everything (favicon, manifest, ...) from a single "logo" file but in practice there are a few constraints that make the process more complicated.
 
 ## Favicon
@@ -29,6 +30,7 @@ Configuration is in `webpack.config.base`; search for `WebpackPwaManifest`.
 ## UI icons
 
 ## Other images
+
 Basically anything that is not an icon, like a beautiful illustration for example.
 
 ```
@@ -36,6 +38,7 @@ app-icon-source.svg
 ```
 
 ### How to update the favicon?
+
 You need to update the file in the source code.  
 You can choose whatever tool to generate a .ico file, but here is a way:
 

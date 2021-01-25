@@ -3,7 +3,7 @@ import React from 'react'
 import {observer, inject} from 'mobx-react'
 import {Button, Icon} from 'ui-framework'
 
-export function Header (props) {
+export function Header(props) {
   const {rootStore} = props
   const {uiStore, router} = rootStore
   const showBackBtn = router.route === '/public/reset-password'
@@ -12,23 +12,21 @@ export function Header (props) {
   return (
     <div className="main-header">
       <div className="main-header__content">
-        {showMenuBtn &&
+        {showMenuBtn && (
           <Button
             className="space-right-1 main-header__btn"
             variant="invisible"
-            onClick={uiStore.mainSideMenu.toggleVisibility}>
-            <Icon name="#menubars" color={uiStore.colors['color-font-default']} bgPadding={6}/>
+            onClick={uiStore.mainSideMenu.toggleVisibility}
+          >
+            <Icon name="#menubars" color={uiStore.colors['color-font-default']} bgPadding={6} />
           </Button>
-        }
+        )}
 
-        {showBackBtn &&
-          <Button
-            className="main-header__btn"
-            variant="invisible"
-            onClick={router.goBack}>
-            <Icon name="#arrow-left" color={uiStore.colors['color-font-default']} bgPadding={6}/>
+        {showBackBtn && (
+          <Button className="main-header__btn" variant="invisible" onClick={router.goBack}>
+            <Icon name="#arrow-left" color={uiStore.colors['color-font-default']} bgPadding={6} />
           </Button>
-        }
+        )}
       </div>
     </div>
   )

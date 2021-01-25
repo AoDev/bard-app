@@ -5,39 +5,39 @@ import viewModels from 'shared-components/viewModels'
  * @typedef {import('../../../stores/RootStore').default} RootStore
  */
 
-const {observable, action, computed} = mobx
-
 export default class UIFrameworkVM {
-  @observable something = ''
-  testModal = new viewModels.Dialog({id: 'test-modal'})
-  testConfirmDialog = new viewModels.ConfirmDialog({
+  /**
+   * @type {boolean|null}
+   */
+  userHasConfirmedModal = null
+  testModal = new viewModels.DialogVM({id: 'test-modal'})
+  testConfirmDialog = new viewModels.ConfirmDialogVM({
     id: 'test-confirm',
-    onConfirm: () => window.alert('you confirmed'),
-    onCancel: () => window.alert('you canceled'),
+    onConfirm: () => this.confirmUserAction(true),
+    onCancel: () => this.confirmUserAction(false),
   })
 
-  @computed get formattedData () {
-    return ''
-  }
-
-  @action.bound set (prop, value) {
+  set(prop, value) {
     this[prop] = value
   }
 
-  @action.bound assign (props) {
-    Object.assign(this, props)
-  }
-
-  @action.bound onBtnClick ({name, value}) {
-    console.log(name, value)
+  /**
+   * @param {boolean} hasConfirmed
+   */
+  confirmUserAction(hasConfirmed) {
+    this.userHasConfirmedModal = hasConfirmed
+    setTimeout(() => {
+      this.set('userHasConfirmedModal', null)
+    }, 2000)
   }
 
   /**
    * @param {{rootStore: RootStore}} param0
    */
-  constructor ({rootStore}) {
-    this.coreStore = rootStore.coreStore
+  constructor({rootStore}) {
+    this.rootStore = rootStore
     this.router = rootStore.router
     this.uiStore = rootStore.uiStore
+    mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
   }
 }

@@ -1,48 +1,47 @@
 import * as mobx from 'mobx'
 import {validators} from 'app-lib'
 
-const {observable, action, computed} = mobx
+/**
+ * @typedef {import ('../../../stores/RootStore.js').default} RootStore
+ */
 
 /**
  * UI Model for the login form
  */
 export default class SignInVM {
-  @observable name = ''
-  @observable password = ''
+  name = ''
+  password = ''
 
-  @computed get isValid () {
-    return (
-      validators.isValidCommonName(this.password)
-    )
+  get isValid() {
+    return validators.isValidCommonName(this.password)
   }
 
-  @action.bound set (prop, value) {
+  set(prop, value) {
     this[prop] = value
   }
 
   /**
    * Check that the pass is ok and the redirect to dashboards
    */
-  @action.bound async submit (event) {
+  async submit(event) {
     event.preventDefault()
 
-    const signedIn = await this.coreStore.startSession({password: this.password})
+    const signedIn = await this.rootStore.startSession({password: this.password})
     if (signedIn) {
       this.router.goTo({route: '/private/dashboards'})
-    }
-    else {
+    } else {
       window.alert(`Authentication failed ${this.session.error.message}`)
     }
   }
 
   /**
    * New profile form model
-   * @param {Object} options
-   * @param options.profilesStore
+   * @param {{rootStore: RootStore}} arg
    */
-  constructor (rootStore) {
-    this.coreStore = rootStore.coreStore
-    this.session = rootStore.coreStore.session
+  constructor({rootStore}) {
+    this.rootStore = rootStore
+    this.session = rootStore.session
     this.router = rootStore.router
+    mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
   }
 }

@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import {observer} from 'mobx-react'
 
-export function Dashboard (props) {
+export default function Dashboard(props) {
   const {vm} = props
 
   return (
@@ -11,9 +10,7 @@ export function Dashboard (props) {
         return (
           <div key={widget.id} className="md-panel-group flex-col pos-rel">
             <div className="bg-darken padded-1">
-              <h3 className="space-0 h-header">
-                {widget.title}
-              </h3>
+              <h3 className="space-0 h-header">{widget.title}</h3>
             </div>
             <div className="padded-1 flex-fill">
               <p>{widget.content}</p>
@@ -23,9 +20,7 @@ export function Dashboard (props) {
       })}
       <div className="md-panel-group flex-col pos-rel">
         <div className="bg-darken padded-1">
-          <h3 className="space-0 h-header">
-            Super heroes
-          </h3>
+          <h3 className="space-0 h-header">Super heroes</h3>
         </div>
         <div className="padded-1">
           <table className="table">
@@ -38,7 +33,10 @@ export function Dashboard (props) {
             <tbody>
               {vm.superHeroes.map((hero) => {
                 return (
-                  <tr key={hero.id} className={vm.highlightedHeroId === hero.id ? 'table__row--highlighted' : null}>
+                  <tr
+                    key={hero.id}
+                    className={vm.highlightedHeroId === hero.id ? 'table__row--highlighted' : null}
+                  >
                     <td className="txt-left">{hero.name}</td>
                     <td className="txt-left">{hero.power}</td>
                   </tr>
@@ -54,7 +52,8 @@ export function Dashboard (props) {
 
 Dashboard.propTypes = {
   vm: PropTypes.shape({
+    highlightedHeroId: PropTypes.string.isRequired,
+    superHeroes: PropTypes.array.isRequired,
+    widgets: PropTypes.array.isRequired,
   }).isRequired,
 }
-
-export default observer(Dashboard)

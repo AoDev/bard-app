@@ -7,17 +7,17 @@ const variantCssMap = {
 }
 
 export default class Pagination extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onPageClick = this.onPageClick.bind(this)
   }
 
-  getRange (pageCount, currentPage, maxButtons) {
+  getRange(pageCount, currentPage, maxButtons) {
     let range
     if (maxButtons) {
       range = [
         currentPage > maxButtons ? currentPage - maxButtons : 1,
-        currentPage < pageCount - maxButtons ? currentPage + maxButtons : pageCount
+        currentPage < pageCount - maxButtons ? currentPage + maxButtons : pageCount,
       ]
 
       const rangeDiff = range[1] - range[0]
@@ -27,35 +27,31 @@ export default class Pagination extends React.Component {
         if (range[0] === 1) {
           if (pageCount >= offset + 1) {
             range[1] = offset + 1
-          }
-          else {
+          } else {
             range[1] = pageCount
           }
-        }
-        else if (range[1] === pageCount) {
+        } else if (range[1] === pageCount) {
           if (pageCount - offset > 1) {
             range[0] = pageCount - offset
-          }
-          else {
+          } else {
             range[0] = 1
           }
         }
       }
-    }
-    else {
+    } else {
       range = [1, pageCount]
     }
 
     return range
   }
 
-  onPageClick (event) {
+  onPageClick(event) {
     event.preventDefault()
     const page = parseInt(event.currentTarget.dataset.page, 10)
     this.props.onPageClick(this.props.zeroBased ? page - 1 : page)
   }
 
-  render () {
+  render() {
     const {totalItems, itemsPerPage, variant, currentPage, withPrevNext, maxButtons} = this.props
     const linkClass = variantCssMap[variant] || 'pgr-link'
     const rest = totalItems % itemsPerPage
@@ -76,7 +72,8 @@ export default class Pagination extends React.Component {
             className={i === currentPage ? `${linkClass}-active` : linkClass}
             data-page={i}
             aria-label={`Go to page ${i}`}
-            onClick={this.onPageClick}>
+            onClick={this.onPageClick}
+          >
             {i}
           </a>
         </li>
@@ -86,31 +83,35 @@ export default class Pagination extends React.Component {
     return (
       <nav aria-label="Pagination Navigation" className={this.props.className}>
         <ul className="pgr-wrapper">
-          {withPrevNext &&
+          {withPrevNext && (
             <li className="pgr-item">
               <a
                 href="#"
                 className={`${linkClass} pgr-prev ${currentPage === 1 ? 'pgr-disabled' : ''}`}
                 data-page={currentPage - 1}
                 aria-label="Go to previous page"
-                onClick={this.onPageClick}>
+                onClick={this.onPageClick}
+              >
                 ❮
               </a>
             </li>
-          }
+          )}
           {buttons}
-          {withPrevNext &&
+          {withPrevNext && (
             <li className="pgr-item">
               <a
                 href="#"
-                className={`${linkClass} pgr-next ${currentPage === pageCount ? 'pgr-disabled' : ''}`}
+                className={`${linkClass} pgr-next ${
+                  currentPage === pageCount ? 'pgr-disabled' : ''
+                }`}
                 data-page={currentPage + 1}
                 aria-label="Go to previous page"
-                onClick={this.onPageClick}>
+                onClick={this.onPageClick}
+              >
                 ❯
               </a>
             </li>
-          }
+          )}
         </ul>
       </nav>
     )

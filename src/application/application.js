@@ -1,17 +1,26 @@
+import {configure} from 'mobx'
 import React from 'react'
 import reactDom from 'react-dom'
-import * as mobx from 'mobx'
 import App from './App'
 import RootStore from './stores/RootStore'
 import {Provider} from 'mobx-react'
-import {AppContainer} from 'react-hot-loader'
 import routes from './routes'
 // import mobxSpyLogger from 'mobx-spy-logger'
 // mobxSpyLogger.start()
 
+configure({
+  // useProxies: 'never',
+  enforceActions: 'always',
+  // computedRequiresReaction: true,
+  // reactionRequiresObservable: true,
+  // observableRequiresReaction: true,
+  // disableErrorBoundaries: true
+})
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
+    navigator.serviceWorker
+      .register('/service-worker.js')
       .then((registration) => {
         console.log('SW registered: ', registration)
       })
@@ -21,23 +30,16 @@ if ('serviceWorker' in navigator) {
   })
 }
 
-mobx.configure({enforceActions: true})
-
 const rootStore = new RootStore({routes})
 rootStore.init()
-const {coreStore, uiStore, router} = rootStore
-
-// @see https://github.com/gaearon/react-hot-loader/issues/462#issuecomment-273666754
-delete AppContainer.prototype.unstable_handleError
+const {uiStore, router} = rootStore
 
 // AppContainer is a necessary wrapper component for HMR
 const render = (Component) => {
   reactDom.render(
-    <AppContainer>
-      <Provider coreStore={coreStore} router={router} rootStore={rootStore} uiStore={uiStore}>
-        <Component />
-      </Provider>
-    </AppContainer>,
+    <Provider rootStore={rootStore} router={router} uiStore={uiStore}>
+      <Component />
+    </Provider>,
     document.getElementById('root')
   )
 }
@@ -51,11 +53,10 @@ if (module.hot) {
   })
 }
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' || localStorage.getItem('devExposeStore')) {
   window.rootStore = rootStore
-  window.coreStore = coreStore
 }
 
 export default {
-  coreStore
+  rootStore,
 }

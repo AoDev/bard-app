@@ -3,24 +3,29 @@ import * as mobx from 'mobx'
 const {observable, action} = mobx
 
 export default class ObservableViewport {
-  static getViewPortSize () {
+  static getViewPortSize() {
     return {
       width: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
       height: Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
     }
   }
 
-  @observable.ref size = ObservableViewport.getViewPortSize()
+  size = ObservableViewport.getViewPortSize()
 
-  @action.bound updateViewportSize () {
+  updateViewportSize() {
     this.size = ObservableViewport.getViewPortSize()
   }
 
-  destroy () {
+  destroy() {
     window.removeEventListener('resize', this.throttledUpdateViewportSize)
   }
 
-  constructor () {
+  constructor() {
+    mobx.makeObservable(this, {
+      size: observable.ref,
+      updateViewportSize: action.bound,
+    })
+
     // Track viewport dimensions
     this.throttledUpdateViewportSize = _.throttle(this.updateViewportSize, 250, {
       leading: false,

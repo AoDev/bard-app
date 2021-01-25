@@ -15,7 +15,7 @@ const USERNAME_MAX_LENGTH = 11
  * @param {String} str
  * @return {Boolean} hasWhiteSpace
  */
-function hasWhiteSpace (str) {
+function hasWhiteSpace(str) {
   return /^\s/.test(str) || /\s$/.test(str)
 }
 
@@ -27,8 +27,10 @@ function hasWhiteSpace (str) {
  * @param {Number} [maxLength=Infinity]
  * @return {Boolean} shouldn't start and end with whitespace
  */
-function isStringWithoutWhitespace (str, minLength = 0, maxLength = Infinity) {
-  return _.isString(str) && !hasWhiteSpace(str) && str.length >= minLength && str.length <= maxLength
+function isStringWithoutWhitespace(str, minLength = 0, maxLength = Infinity) {
+  return (
+    _.isString(str) && !hasWhiteSpace(str) && str.length >= minLength && str.length <= maxLength
+  )
 }
 
 /**
@@ -36,7 +38,7 @@ function isStringWithoutWhitespace (str, minLength = 0, maxLength = Infinity) {
  * @param {String} name
  * @return {Boolean} true is valid
  */
-function isValidCommonName (name) {
+function isValidCommonName(name) {
   return isStringWithoutWhitespace(name, COMMON_NAME_MIN_LENGTH, PASSWORD_MAX_LENGTH)
 }
 
@@ -45,7 +47,7 @@ function isValidCommonName (name) {
  * @param {String} name
  * @return {Boolean} true is valid
  */
-function isValidUsername (name) {
+function isValidUsername(name) {
   return isStringWithoutWhitespace(name, USERNAME_MIN_LENGTH, USERNAME_MAX_LENGTH)
 }
 
@@ -55,7 +57,7 @@ function isValidUsername (name) {
  * @param {String} password
  * @return {Boolean} true is valid
  */
-function isValidPassword (password) {
+function isValidPassword(password) {
   return isStringWithoutWhitespace(password, PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH)
 }
 
@@ -63,68 +65,68 @@ function isValidPassword (password) {
  * @param {string} email
  * @returns {boolean}
  */
-function isValidEmail (email) {
+function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
 const assert = {
-  isString (arg) {
+  isString(arg) {
     if (!_.isString(arg)) {
       throw new TypeError('Expected a string')
     }
     return assert
   },
 
-  isNonEmptyString (arg) {
+  isNonEmptyString(arg) {
     if (!isStringWithoutWhitespace(arg, 1)) {
       throw new TypeError('Expected a non-empty string')
     }
     return assert
   },
 
-  isBoolean (arg) {
+  isBoolean(arg) {
     if (!_.isBoolean(arg)) {
       throw new TypeError('Expected a boolean')
     }
     return assert
   },
 
-  isNumber (arg) {
+  isNumber(arg) {
     if (!_.isNumber(arg)) {
       throw new TypeError('Expected a number')
     }
     return assert
   },
 
-  min (num, minValue) {
+  min(num, minValue) {
     if (num < minValue) {
       throw new Error(num + ' smaller than ' + minValue)
     }
     return assert
   },
 
-  max (num, maxValue) {
+  max(num, maxValue) {
     if (num > maxValue) {
       throw new Error(num + ' greater than ' + maxValue)
     }
     return assert
   },
 
-  isObject (arg) {
+  isObject(arg) {
     if (!_.isObject(arg)) {
       throw new TypeError('Expected an object')
     }
     return assert
   },
 
-  isArray (arg) {
+  isArray(arg) {
     if (!_.isArray(arg)) {
       throw new TypeError('Expected an array')
     }
     return assert
   },
 
-  isNonEmptyArray (arg) {
+  isNonEmptyArray(arg) {
     this.isArray(arg)
     if (_.isEmpty(arg)) {
       throw new Error('Expected non empty array')
@@ -132,7 +134,7 @@ const assert = {
     return assert
   },
 
-  isFunction (arg) {
+  isFunction(arg) {
     if (!_.isFunction(arg)) {
       throw new Error('Expected a function')
     }
@@ -143,12 +145,12 @@ const assert = {
    * @param {*[]} array
    * @param {*} value
    */
-  includes (array, value) {
+  includes(array, value) {
     if (!array.includes(value)) {
       throw new Error(`"${value}" value is not valid`)
     }
     return assert
-  }
+  },
 }
 
 export default {

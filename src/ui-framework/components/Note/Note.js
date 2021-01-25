@@ -4,13 +4,11 @@ import React from 'react'
 /**
  * @param {{variant: 'red'|'green'|'blue'|'orange'|'default', withBackground: boolean, className: string}} props
  */
-export default function Note (props) {
-  const cssClasses = `note-${props.variant}${props.withBackground ? '--with-bg' : ''} ${props.className} txt-read`
-  return (
-    <div className={cssClasses}>
-      {props.children}
-    </div>
-  )
+export default function Note(props) {
+  const cssClasses = `note-${props.variant}${props.withBackground ? '--with-bg' : ''} ${
+    props.className
+  } txt-read`
+  return <div className={cssClasses}>{props.children}</div>
 }
 
 Note.propTypes = {

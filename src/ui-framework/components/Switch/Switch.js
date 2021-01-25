@@ -7,7 +7,7 @@ import RcSwitch from 'rc-switch'
  * Note: the switch is animated but it doesn't work in the styleguide docs.
  */
 export default class Switch extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onChange = this.onChange.bind(this)
   }
@@ -15,23 +15,21 @@ export default class Switch extends React.Component {
   /**
    * Handle the native onChange event.
    */
-  onChange (newValue) {
+  onChange(newValue) {
     const onChange = this.props.onChange
 
     switch (this.props.onChangeEmit) {
-      case 'value': onChange(newValue, event); break
-      case 'name-value': onChange(this.props.name, newValue, event)
+      case 'value':
+        onChange(newValue, event)
+        break
+      case 'name-value':
+        onChange(this.props.name, newValue, event)
     }
   }
 
-  render () {
+  render() {
     const {value, onChangeEmit, ...otherProps} = this.props
-    return (
-      <RcSwitch
-        {...otherProps}
-        onChange={this.onChange}
-        checked={value}/>
-    )
+    return <RcSwitch {...otherProps} onChange={this.onChange} checked={value} />
   }
 }
 
@@ -46,8 +44,8 @@ Switch.propTypes = {
   onChange: PropTypes.func.isRequired,
   /**
    * Choose what the argument of the onChange callback will be.
-   * - value: onChange(event.target.value, event);
-   * - name-value: onChange(event.target.name, event.target.value, event);
+   * - value: onChange(event.target.value, event)
+   * - name-value: onChange(event.target.name, event.target.value, event)
    */
   onChangeEmit: PropTypes.oneOf(['value', 'name-value']),
   /**

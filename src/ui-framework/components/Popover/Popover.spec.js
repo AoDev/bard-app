@@ -15,9 +15,9 @@ describe('<Popover />', () => {
     props = {
       body: popoverContent,
       isOpen: true,
-      onOuterAction () {},
+      onOuterAction() {},
       preferPlace: 'below',
-      className: 'some-extra-class'
+      className: 'some-extra-class',
     }
 
     wrapper = shallow(<Popover {...props}>{popoverTarget}</Popover>)
@@ -41,8 +41,8 @@ describe('<Popover />', () => {
   })
 
   it.skip('should have the target without the popover on server side', () => {
-    // expect(wrapper.contains(popoverTarget)).toEqual(true);
-    // expect(wrapper.contains(ReactPopover)).toEqual(false);
+    // expect(wrapper.contains(popoverTarget)).toEqual(true)
+    // expect(wrapper.contains(ReactPopover)).toEqual(false)
   })
 
   // TODO: currently it's not clear how many variants there will be. Only "primary" is defined.

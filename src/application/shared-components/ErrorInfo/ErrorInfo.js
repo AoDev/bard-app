@@ -6,23 +6,27 @@ import {Note} from 'ui-framework'
 /**
  * @param {{error: Error, stackHidden: boolean}} props
  */
-export function ErrorInfo (props) {
+export function ErrorInfo(props) {
   const {error, stackHidden} = props
   return (
     <React.Fragment>
-      {error.message &&
+      {error.message && (
         <Note variant="red">
           Message
-          <textarea className="textarea inputfield txt-mono" defaultValue={error.message} readOnly/>
+          <textarea
+            className="textarea inputfield txt-mono"
+            defaultValue={error.message}
+            readOnly
+          />
         </Note>
-      }
+      )}
 
-      {!stackHidden && error.stack &&
+      {!stackHidden && error.stack && (
         <Note variant="red">
           Stack
-          <textarea className="textarea inputfield txt-mono" defaultValue={error.stack} readOnly/>
+          <textarea className="textarea inputfield txt-mono" defaultValue={error.stack} readOnly />
         </Note>
-      }
+      )}
     </React.Fragment>
   )
 }

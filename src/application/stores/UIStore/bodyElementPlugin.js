@@ -1,15 +1,19 @@
 import * as mobx from 'mobx'
-import cn from 'classnames'
+/**
+ * @typedef {import ('./UIStore').default} UIStore
+ */
 
-function register (uiStore) {
+/**
+ * @param {UIStore} uiStore
+ */
+function register(uiStore) {
   mobx.autorun(
     () => {
       const htmlBody = window.document.querySelector('html')
-      const bodyClass = cn('bg-with-gradient', {
-        'dimensions-locked': uiStore.settingsDialog.visible,
-        'bg-light': !uiStore.rootStore.router.route.startsWith('/public'),
-      })
-
+      let bodyClass = ''
+      if (uiStore.settingsDialog.visible) {
+        bodyClass += 'dimensions-locked'
+      }
       htmlBody.setAttribute('class', bodyClass)
       htmlBody.setAttribute('theme', uiStore.theme)
     },
@@ -18,5 +22,5 @@ function register (uiStore) {
 }
 
 export default {
-  register
+  register,
 }

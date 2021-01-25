@@ -1,64 +1,57 @@
 module.exports = {
-  'plugins': [
+  plugins: [
     [
       'module-resolver',
       {
-        'alias': {
+        alias: {
+          src: './src',
           'ui-framework': './src/ui-framework',
           'app-images': './src/assets/images',
           'app-lib': './src/lib',
           'app-services': './src/application/services',
-          'shared-components': './src/application/shared-components'
-        }
-      }
+          'shared-components': './src/application/shared-components',
+        },
+      },
     ],
     ['@babel/plugin-syntax-dynamic-import'],
     [
-      '@babel/plugin-proposal-decorators',
-      {
-        'legacy': true
-      }
-    ],
-    [
       '@babel/plugin-proposal-class-properties',
       {
-        'loose': true
-      }
-    ]
+        loose: false,
+      },
+    ],
   ],
-  'presets': [
+  presets: [
     [
       '@babel/preset-env',
       {
-        'targets': {
-          'browsers': 'defaults',
+        targets: {
+          browsers: 'defaults',
         },
-        'modules': false,
+        modules: false,
         useBuiltIns: 'usage',
         corejs: 3,
-      }
+      },
     ],
-    '@babel/preset-react'
+    '@babel/preset-react',
   ],
-  'env': {
-    'production': {},
-    'development': {
-      'plugins': [
-        'react-hot-loader/babel'
-      ]
+  env: {
+    production: {},
+    development: {
+      plugins: ['react-refresh/babel'],
     },
-    'test': {
-      'presets': [
+    test: {
+      presets: [
         [
           '@babel/preset-env',
           {
-            'targets': {
-              'node': true
+            targets: {
+              node: true,
             },
-            'modules': 'commonjs'
-          }
-        ]
-      ]
-    }
-  }
+            modules: 'commonjs',
+          },
+        ],
+      ],
+    },
+  },
 }

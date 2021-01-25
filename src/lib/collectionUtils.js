@@ -5,7 +5,7 @@ import _ from 'lodash'
  * @param {Number} goal - find the closest value to this one
  * @returns {Number}
  */
-function findClosest (array, goal) {
+function findClosest(array, goal) {
   if (array.length === 0) {
     return
   }
@@ -26,7 +26,7 @@ function findClosest (array, goal) {
  * @param {String} prop - key mapping the prop value we want to check
  * @returns {Number}
  */
-function findClosestProp (array, goal, prop) {
+function findClosestProp(array, goal, prop) {
   if (array.length === 0) {
     return
   }
@@ -47,7 +47,7 @@ function findClosestProp (array, goal, prop) {
  * @param {*} obj
  * @returns array
  */
-function mapToArray (obj) {
+function mapToArray(obj) {
   return _.flatMap(obj, (item) => item)
 }
 
@@ -55,20 +55,24 @@ function mapToArray (obj) {
  * @param {Array} collection
  * @param {String} property
  */
-function findMinMaxBy (collection, property) {
+function findMinMaxBy(collection, property) {
   if (_.size(collection) < 1) {
     return
   }
-  return _.reduce(collection, (acc, item) => {
-    const itemValue = item[property]
-    if (itemValue < acc[0]) {
-      acc[0] = itemValue
-    }
-    if (itemValue > acc[1]) {
-      acc[1] = itemValue
-    }
-    return acc
-  }, [collection[0][property], collection[0][property]])
+  return _.reduce(
+    collection,
+    (acc, item) => {
+      const itemValue = item[property]
+      if (itemValue < acc[0]) {
+        acc[0] = itemValue
+      }
+      if (itemValue > acc[1]) {
+        acc[1] = itemValue
+      }
+      return acc
+    },
+    [collection[0][property], collection[0][property]]
+  )
 }
 
 /**
@@ -78,10 +82,10 @@ function findMinMaxBy (collection, property) {
  * @param {String} sortBy
  * @param {String} sortOrder - asc | desc
  */
-function orderByNumber (collection, sortBy, sortOrder) {
+function orderByNumber(collection, sortBy, sortOrder) {
   return _.orderBy(
     collection,
-    [(item) => _.isNumber(item[sortBy]) ? item[sortBy] : -Infinity],
+    [(item) => (_.isNumber(item[sortBy]) ? item[sortBy] : -Infinity)],
     [sortOrder]
   )
 }
@@ -92,7 +96,7 @@ function orderByNumber (collection, sortBy, sortOrder) {
  * @param {String} prop
  * @param {Number} max
  */
-function distinctByProp (array, prop, max = Infinity) {
+function distinctByProp(array, prop, max = Infinity) {
   let i = 0
   let j = 0
   const result = []
@@ -114,7 +118,7 @@ function distinctByProp (array, prop, max = Infinity) {
  * @param {String} prop
  * @param {Number} max
  */
-function distinctByPropRight (array, prop, max = Infinity) {
+function distinctByPropRight(array, prop, max = Infinity) {
   let i = max
   let j = array.length - 1
   const result = []
@@ -135,7 +139,7 @@ function distinctByPropRight (array, prop, max = Infinity) {
  * @param {Array<Function>} filterFunctions
  * @returns {Boolean}
  */
-function composeFilters (filterFunctions) {
+function composeFilters(filterFunctions) {
   return function (item) {
     for (let i = 0; i < filterFunctions.length; i++) {
       if (!filterFunctions[i](item)) {

@@ -1,4 +1,3 @@
-
 import validators from './validators.js'
 
 describe('validators', () => {

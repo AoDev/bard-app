@@ -4,7 +4,7 @@ import ReactPopover from 'react-popover'
 
 const variantClasses = {
   primary: 'Popover-primary',
-  white: 'Popover-white'
+  white: 'Popover-white',
 }
 
 /**
@@ -24,7 +24,7 @@ const variantClasses = {
  * </Popover>
  */
 export default class Popover extends Component {
-  render () {
+  render() {
     let extraClasses = variantClasses[this.props.variant]
     let props = this.props
 
@@ -34,15 +34,13 @@ export default class Popover extends Component {
       props = otherProps
     }
 
-    return (
-      <ReactPopover {...props} className={extraClasses} />
-    )
+    return <ReactPopover {...props} className={extraClasses} />
   }
 }
 
 Popover.propTypes = {
   variant: PropTypes.oneOf(['primary', 'white']),
-  className: PropTypes.string
+  className: PropTypes.string,
 }
 
 Popover.defaultProps = {

@@ -10,10 +10,10 @@ describe('<Pills />', () => {
     props = {
       itemSelected: 'one',
       items: ['one', 'two', 'three'],
-      onChange: jest.fn()
+      onChange: jest.fn(),
     }
 
-    wrapper = shallow(<Pills {...props}/>)
+    wrapper = shallow(<Pills {...props} />)
   })
 
   it('should create as many pills as props.items', () => {
@@ -54,7 +54,7 @@ describe('<Pills />', () => {
       const pillTwoLink = wrapper.find('a').at(1)
       const dummyEvent = {
         preventDefault: function () {},
-        target: {dataset: {pill: 'two'}}
+        target: {dataset: {pill: 'two'}},
       }
       pillTwoLink.simulate('click', dummyEvent)
       expect(props.onChange).toHaveBeenCalled()
@@ -82,14 +82,14 @@ describe('<Pills />', () => {
         items: [
           {_id: 'one', name: 'pill one'},
           {_id: 'two', name: 'pill two'},
-          {_id: 'three', name: 'pill three'}
+          {_id: 'three', name: 'pill three'},
         ],
         objectIdKey: '_id',
         objectLabelKey: 'name',
-        onChange: jest.fn()
+        onChange: jest.fn(),
       }
 
-      wrapper = shallow(<Pills {...props}/>)
+      wrapper = shallow(<Pills {...props} />)
     })
 
     it('should use the objectLabelKey to set the label for each item', () => {

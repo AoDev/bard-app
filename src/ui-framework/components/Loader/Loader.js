@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default function Loader (props) {
+export default function Loader(props) {
   const {label} = props
 
   let cssClasses = 'loader'
@@ -13,15 +13,13 @@ export default function Loader (props) {
   return (
     <div className={cssClasses}>
       <div className="loader-bar-wrapper">
-        <div className="loader-bar loader-bar-1"/>
-        <div className="loader-bar loader-bar-2"/>
-        <div className="loader-bar loader-bar-3"/>
-        <div className="loader-bar loader-bar-4"/>
-        <div className="loader-bar loader-bar-5"/>
+        <div className="loader-bar loader-bar-1" />
+        <div className="loader-bar loader-bar-2" />
+        <div className="loader-bar loader-bar-3" />
+        <div className="loader-bar loader-bar-4" />
+        <div className="loader-bar loader-bar-5" />
       </div>
-      {label &&
-        <p className="loader-label">{label}</p>
-      }
+      {label && <p className="loader-label">{label}</p>}
     </div>
   )
 }
@@ -42,9 +40,9 @@ Loader.propTypes = {
   /**
    * Remove the default label.
    */
-  noLabel: PropTypes.bool
+  noLabel: PropTypes.bool,
 }
 
 Loader.defaultProps = {
-  className: ''
+  className: '',
 }

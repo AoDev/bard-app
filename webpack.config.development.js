@@ -7,6 +7,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const baseConfig = require('./webpack.config.base')
 
 const port = process.env.PORT || 3000
@@ -17,26 +18,30 @@ module.exports = merge(baseConfig, {
 
   entry: {
     app: [
-      // 'react-hot-loader/patch',
       `webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`,
       './src/index',
     ],
     css: [
       `webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`,
       './src/styles/index.less',
-    ]
+    ],
   },
 
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
-    publicPath: `http://localhost:${port}/`
+    publicPath: `http://localhost:${port}/`,
   },
 
   plugins: [
     new webpack.NamedModulesPlugin(),
     // https://webpack.github.io/docs/hot-module-replacement-with-webpack.html
     new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin({
+      overlay: {
+        sockIntegration: 'whm',
+      },
+    }),
 
     // “If you are using the CLI, the webpack process will not exit with an error code by enabling this plugin.”
     // https://github.com/webpack/docs/wiki/list-of-plugins#noerrorsplugin

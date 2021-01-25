@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "module": "commonjs",
     "paths": {
+      "src/*": ["./src/*"],
       "ui-framework": ["./src/ui-framework"],
       "app-lib/*": ["./src/lib/*"],
       "app-services": ["./src/application/services"],

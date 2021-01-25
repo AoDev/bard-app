@@ -7,7 +7,7 @@ import _ from 'lodash'
  * @param  {Number} precision
  * @return {Number} Between 0 and 100
  */
-function percentage (num1, num2, precision) {
+function percentage(num1, num2, precision) {
   const percentage = (num1 / num2) * 100
   return _.isNumber(precision) ? _.round(percentage, precision) : percentage
 }
@@ -19,7 +19,7 @@ function percentage (num1, num2, precision) {
  * @param {Number} precision
  * @return {Number} Between 0 and 1
  */
-function ratio (num1, num2, precision) {
+function ratio(num1, num2, precision) {
   const ratio = num1 / num2
   return _.isNumber(precision) ? _.round(ratio, precision) : ratio
 }
@@ -31,7 +31,7 @@ function ratio (num1, num2, precision) {
  * @param  {Number} precision
  * @return {Number}
  */
-function percentageGain (num1, num2, precision) {
+function percentageGain(num1, num2, precision) {
   return percentage(num1, num2, precision) - 100
 }
 

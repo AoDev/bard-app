@@ -1,9 +1,9 @@
-import List from './List'
-import Dialog from './Dialog'
-import ConfirmDialog from './ConfirmDialog'
+import ListVM from './ListVM'
+import DialogVM from './DialogVM'
+import ConfirmDialogVM from './ConfirmDialogVM'
 
 export default {
-  List,
-  Dialog,
-  ConfirmDialog,
+  ListVM,
+  DialogVM,
+  ConfirmDialogVM,
 }

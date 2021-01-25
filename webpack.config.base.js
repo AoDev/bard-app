@@ -2,6 +2,7 @@
  * Base webpack config used across other specific configs
  */
 const webpack = require('webpack')
+const packageJson = require('./package.json')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CleanCSSPlugin = require('less-plugin-clean-css')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
@@ -18,7 +19,7 @@ const dotenv = require('dotenv')
 
 if (fs.existsSync('.env')) {
   const envConfig = dotenv.parse(fs.readFileSync('.env'))
-  for (var k in envConfig) {
+  for (const k in envConfig) {
     process.env[k] = envConfig[k]
   }
 }
@@ -50,6 +51,7 @@ const plugins = [
   new CleanWebpackPlugin(),
   new webpack.DefinePlugin({
     'process.env.BUILD_PLATFORM': JSON.stringify(process.env.BUILD_PLATFORM),
+    'process.env.APP_VERSION': JSON.stringify(packageJson.version),
   }),
   new FixStyleOnlyEntriesPlugin(),
   new HtmlWebpackPlugin({
@@ -59,7 +61,7 @@ const plugins = [
     templateParameters: {
       contentPolicy: mainContentPolicy[process.env.NODE_ENV],
       publicPath: '/',
-    }
+    },
   }),
 
   new CopyWebpackPlugin(filesToCopy),
@@ -85,9 +87,9 @@ const plugins = [
         src: path.join(SRC_FOLDER, 'assets', 'images', 'logo-1024.png'),
         destination: 'icons',
         ios: true,
-        sizes: [36, 48, 72, 96, 128, 192, 256, 384, 512] // multiple sizes
+        sizes: [36, 48, 72, 96, 128, 192, 256, 384, 512], // multiple sizes
       },
-    ]
+    ],
   }),
 ]
 
@@ -101,15 +103,12 @@ module.exports = {
       {
         test: /\.jsx?$/,
         use: ['babel-loader'],
-        include: [
-          /bard-router/,
-          path.resolve(__dirname, 'src'),
-        ],
+        include: [path.resolve(__dirname, 'src')],
       },
       {
         test: /\.json$/,
         loader: 'json-loader',
-        type: 'javascript/auto'
+        type: 'javascript/auto',
       },
       {
         test: /\.less$/,
@@ -120,10 +119,10 @@ module.exports = {
             loader: 'less-loader',
             options: {
               javascriptEnabled: true,
-              plugins: IS_DEVELOPMENT ? [] : [new CleanCSSPlugin({advanced: true})]
-            }
-          }
-        ]
+              plugins: IS_DEVELOPMENT ? [] : [new CleanCSSPlugin({advanced: true})],
+            },
+          },
+        ],
       },
       {
         test: /.*images.+\.(svg|jpg|png)$/,
@@ -133,8 +132,8 @@ module.exports = {
         test: /.*svg-sprite.+\.svg$/,
         loader: 'svg-sprite-loader',
         // options: {extract: true}
-      }
-    ]
+      },
+    ],
   },
 
   optimization: {
@@ -143,14 +142,14 @@ module.exports = {
         commons: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          chunks: 'all'
+          chunks: 'all',
         },
         'ui-framework': {
           test: /ui-framework/,
           name: 'ui-framework',
-          chunks: 'all'
-        }
-      }
+          chunks: 'all',
+        },
+      },
     },
     runtimeChunk: {
       name: 'manifest',
@@ -159,11 +158,9 @@ module.exports = {
 
   // https://webpack.github.io/docs/configuration.html#resolve
   resolve: {
-    modules: [
-      path.join(__dirname, 'node_modules')
-    ],
+    modules: [path.join(__dirname, 'node_modules')],
     extensions: ['.js', '.jsx', '.json'],
-    mainFields: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
+    mainFields: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
   },
 
   plugins,

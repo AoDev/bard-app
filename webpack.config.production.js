@@ -12,12 +12,8 @@ module.exports = merge(baseConfig, {
   mode: 'production',
 
   entry: {
-    app: [
-      './src/index',
-    ],
-    css: [
-      './src/styles/index.less',
-    ]
+    app: ['./src/index'],
+    css: ['./src/styles/index.less'],
   },
 
   output: {
@@ -34,20 +30,20 @@ module.exports = merge(baseConfig, {
         loader: 'url-loader',
         options: {
           limit: 8192,
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
 
   plugins: [
     // NODE_ENV should be production so that modules do not perform certain development checks
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
 
     new MiniCssExtractPlugin({
       filename: 'style.[chunkhash].css',
-    })
+    }),
   ],
 
   target: 'web',

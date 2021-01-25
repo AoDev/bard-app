@@ -7,7 +7,7 @@ import _ from 'lodash'
  * Usually used for filtering in lists.
  */
 export default class Pills extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onSelect = this.onSelect.bind(this)
   }
@@ -18,12 +18,13 @@ export default class Pills extends React.Component {
    * It will also take care of converting strings to number when necessary
    * because assigning a number to a select option value is always a string.
    */
-  onSelect (event) {
+  onSelect(event) {
     var value = event.target.dataset.pill
     const {items, onChange, preventDefault, onChangeEmit, objectIdKey, name} = this.props
     const firstOption = items[0]
     const optionsAreObjects = typeof firstOption === 'object'
-    const shouldParse = typeof (optionsAreObjects ? firstOption[objectIdKey] : firstOption) === 'number'
+    const shouldParse =
+      typeof (optionsAreObjects ? firstOption[objectIdKey] : firstOption) === 'number'
 
     if (shouldParse) {
       value = parseInt(value, 10)
@@ -34,14 +35,21 @@ export default class Pills extends React.Component {
     }
 
     switch (onChangeEmit) {
-      case 'event': onChange(event); break
-      case 'item': onChange(_.find(items, {[objectIdKey]: value}), event); break
-      case 'value': onChange(value, event); break
-      case 'name-value': onChange(name, value, event)
+      case 'event':
+        onChange(event)
+        break
+      case 'item':
+        onChange(_.find(items, {[objectIdKey]: value}), event)
+        break
+      case 'value':
+        onChange(value, event)
+        break
+      case 'name-value':
+        onChange(name, value, event)
     }
   }
 
-  render () {
+  render() {
     const {items, itemSelected, objectIdKey, objectLabelKey, vertical} = this.props
     const optionsAreObjects = typeof items[0] === 'object'
     const optionSelectedIsObject = typeof itemSelected === 'object'
@@ -51,19 +59,16 @@ export default class Pills extends React.Component {
     if (itemSelected) {
       if (optionSelectedIsObject) {
         optionSelectedValue = itemSelected[objectIdKey]
-      }
-      else if (optionsAreObjects) {
+      } else if (optionsAreObjects) {
         const option = _.find(items, {[objectIdKey]: itemSelected})
         if (option) {
           // Option can throw an error if the option is not there
           optionSelectedValue = option[objectIdKey]
         }
-      }
-      else {
+      } else {
         optionSelectedValue = itemSelected
       }
-    }
-    else {
+    } else {
       optionSelectedValue = ''
     }
 
@@ -78,7 +83,9 @@ export default class Pills extends React.Component {
 
           return (
             <li key={id} className={`nav-pill-light ${cssClass}`}>
-              <a onClick={active || item.disabled ? null : this.onSelect} data-pill={id}>{label}</a>
+              <a onClick={active || item.disabled ? null : this.onSelect} data-pill={id}>
+                {label}
+              </a>
             </li>
           )
         })}
@@ -107,7 +114,7 @@ Pills.propTypes = {
   /**
    * Key name for the name of the options.
    */
-  objectLabelKey (props, propName, componentName) {
+  objectLabelKey(props, propName, componentName) {
     const firstOption = props.items && props.items[0]
     const optionsAreObjects = typeof firstOption === 'object'
 
@@ -121,7 +128,7 @@ Pills.propTypes = {
   /**
    * Key name for the value of the options.
    */
-  objectIdKey (props, propName, componentName) {
+  objectIdKey(props, propName, componentName) {
     const firstOption = props.items && props.items[0]
     const optionsAreObjects = typeof firstOption === 'object'
 
@@ -135,7 +142,7 @@ Pills.propTypes = {
   /**
    * Display the pills vertically if true
    */
-  vertical: PropTypes.bool
+  vertical: PropTypes.bool,
 }
 
 Pills.defaultProps = {

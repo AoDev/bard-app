@@ -1,27 +1,27 @@
 import * as mobx from 'mobx'
-import Dialog from './Dialog'
+import DialogVM from './DialogVM'
 
 const {action, observable} = mobx
 
-export default class ConfirmDialog extends Dialog {
+export default class ConfirmDialog extends DialogVM {
   isConfirmDialog = true
-  @observable canCancel = true
-  @observable canConfirm = true
-  @observable.ref onConfirm = null
-  @observable.ref onCancel = null
+  canCancel = true
+  canConfirm = true
+  onConfirm = null
+  onCancel = null
 
-  @action.bound assign (props) {
+  assign(props) {
     Object.assign(this, props)
   }
 
-  @action.bound cancel () {
+  cancel() {
     if (this.onCancel) {
       this.onCancel()
     }
     this.hide()
   }
 
-  @action.bound confirm () {
+  confirm() {
     if (this.onConfirm) {
       this.onConfirm()
     }
@@ -31,8 +31,16 @@ export default class ConfirmDialog extends Dialog {
   /**
    * @param {{id: String, visible: Boolean, onConfirm: function, onCancel: function, canCancel: boolean}} props
    */
-  constructor (props = {}) {
+  constructor(props = {}) {
     super(props)
+
     Object.assign(this, props)
+    mobx.makeObservable(this, {
+      canCancel: observable,
+      canConfirm: observable,
+      assign: action.bound,
+      cancel: action.bound,
+      confirm: action.bound,
+    })
   }
 }

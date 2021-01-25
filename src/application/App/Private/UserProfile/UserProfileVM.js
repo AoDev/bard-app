@@ -1,50 +1,53 @@
 import * as mobx from 'mobx'
 import {validators} from 'app-lib'
-import UserProfile from './UserProfile'
-import withVM from 'bard-instruments/lib/react-mobx/withVM'
 
-const {observable, action, computed} = mobx
+/**
+ * @typedef {import('../../../stores/RootStore').default} RootStore
+ */
 
-class UserProfileVM {
-  @observable userName = ''
-  @observable password = ''
-  @observable.ref error = null
+export default class UserProfileVM {
+  userName = ''
+  password = ''
+  error = null
 
-  @computed get isValidDetails () {
-    return (
-      validators.isValidCommonName(this.userName)
-    )
+  get isValidDetails() {
+    return validators.isValidCommonName(this.userName)
   }
 
-  @computed get canSubmitDelete () {
+  get canSubmitDelete() {
     return validators.isValidCommonName(this.password)
   }
 
-  @action.bound set (prop, value) {
+  set(prop, value) {
     this[prop] = value
   }
 
-  @action.bound submit (event) {
+  submit(event) {
     event.preventDefault()
     const changes = {name: this.userName}
     this.user.updateData(changes)
   }
 
-  @action.bound askDeleteProfile () {
-    if (window.confirm(`${this.user.name}, your account and all its data will be deleted. Are you sure?`)) {
+  askDeleteProfile() {
+    if (
+      window.confirm(
+        `${this.user.name}, your account and all its data will be deleted. Are you sure?`
+      )
+    ) {
       this.rootStore.signout()
       // Delete profile
-      // this.coreStore.profilesStore.deleteProfile(this.originalProfile.id)
+      // this.rootStore.profilesStore.deleteProfile(this.originalProfile.id)
     }
   }
 
-  constructor ({rootStore}) {
-    const {coreStore} = rootStore
-    this.user = coreStore.session.user
+  /**
+   * @param {{rootStore: RootStore}} arg
+   */
+  constructor({rootStore}) {
+    this.user = rootStore.session.user
     this.rootStore = rootStore
-    this.coreStore = rootStore.coreStore
+    this.rootStore = rootStore
     this.userName = this.user.name
+    mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
   }
 }
-
-export default withVM(UserProfile, UserProfileVM)

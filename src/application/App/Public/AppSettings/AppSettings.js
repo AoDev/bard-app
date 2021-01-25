@@ -3,13 +3,13 @@ import React from 'react'
 import {Switch, InputBasic, Button, Icon} from 'ui-framework'
 
 /**
-* @typedef {import ('./AppSettingsVM').default} AppSettingsVM
-*/
+ * @typedef {import ('./AppSettingsVM').default} AppSettingsVM
+ */
 
 /**
-* @param {{vm: AppSettingsVM}} props
-*/
-export default function AppSettings ({vm}) {
+ * @param {{vm: AppSettingsVM}} props
+ */
+export default function AppSettings({vm}) {
   const {settings} = vm
   const btnVariant = settings.theme === 'light' ? 'neutral' : 'neutral-inverse'
 
@@ -29,7 +29,8 @@ export default function AppSettings ({vm}) {
               name="someFlag"
               value={settings.someFlag}
               onChange={settings.set}
-              onChangeEmit="name-value"/>
+              onChangeEmit="name-value"
+            />
           </div>
         </div>
       </section>
@@ -49,7 +50,8 @@ export default function AppSettings ({vm}) {
               name="someOtherFlag"
               value={settings.someOtherFlag}
               onChange={settings.set}
-              onChangeEmit="name-value"/>
+              onChangeEmit="name-value"
+            />
           </div>
         </div>
       </section>
@@ -65,12 +67,8 @@ export default function AppSettings ({vm}) {
             </label>
           </div>
 
-          <Button
-            square
-            className="padded-0"
-            variant={btnVariant}
-            onClick={settings.switchTheme}>
-            <Icon name={settings.theme === 'light' ? '#sun' : '#moon'} small/>
+          <Button square className="padded-0" variant={btnVariant} onClick={settings.switchTheme}>
+            <Icon name={settings.theme === 'light' ? '#sun' : '#moon'} small />
           </Button>
         </div>
       </section>
@@ -81,9 +79,11 @@ export default function AppSettings ({vm}) {
 AppSettings.propTypes = {
   vm: PropTypes.shape({
     settings: PropTypes.shape({
+      set: PropTypes.func.isRequired,
       someFlag: PropTypes.bool.isRequired,
       someOtherFlag: PropTypes.bool.isRequired,
-      set: PropTypes.func.isRequired,
-    }).isRequired,
-  }).isRequired,
+      switchTheme: PropTypes.func.isRequired,
+      theme: PropTypes.oneOf(['light', 'dark']),
+    }),
+  }),
 }

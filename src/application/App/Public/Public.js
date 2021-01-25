@@ -5,33 +5,33 @@ import SignIn from './SignIn'
 import Faq from './Faq'
 import AppSettings from './AppSettings'
 import UIFramework from './UIFramework'
-import Route from 'shared-components/Route'
+import {Route} from 'bard-router'
 import {Loader} from 'ui-framework'
 
-export function Public (props) {
-  const {coreStore} = props
+export function Public(props) {
+  const {rootStore} = props
 
   return (
     <React.Fragment>
-      {coreStore.appIsLoading &&
+      {rootStore.appIsLoading && (
         <div className="app-init-loader panel">
-          <Loader label="app is loading..."/>
+          <Loader label="app is loading..." />
         </div>
-      }
+      )}
 
       <React.Fragment>
-        <Route path="/public/signin" Component={SignIn}/>
-        <Route path="/public/faq" Component={Faq}/>
-        <Route path="/public/app-settings" Component={AppSettings}/>
-        <Route path="/public/ui-framework" Component={UIFramework}/>
+        <Route path="/public/signin" Component={SignIn} />
+        <Route path="/public/faq" Component={Faq} />
+        <Route path="/public/app-settings" Component={AppSettings} />
+        <Route path="/public/ui-framework" Component={UIFramework} />
       </React.Fragment>
     </React.Fragment>
   )
 }
 
-export default inject(({coreStore}) => ({
-  coreStore,
-  profilesStore: coreStore.profilesStore
+export default inject(({rootStore}) => ({
+  rootStore,
+  profilesStore: rootStore.profilesStore,
 }))(observer(Public))
 
 Public.propTypes = {

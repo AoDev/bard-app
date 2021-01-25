@@ -4,30 +4,34 @@ import _ from 'lodash'
 const {computed, action, observable} = mobx
 
 export default class List {
-  @observable currentPage = 1
-  @observable.ref items = []
-  @observable itemsPerPage = 10
-  @observable sortBy = ''
-  @observable sortOrder = 'desc'
-  @observable sortByFallback
-  @observable.ref filters = {}
+  currentPage = 1
+  items = []
+  itemsPerPage = 10
+  sortBy = ''
+  sortOrder = 'desc'
+  sortByFallback
+  filters = {}
 
-  @computed get filteredItems () {
+  get filteredItems() {
     let items = this.items
     if (!_.isEmpty(this.filters)) {
       items = _.filter(items, this.filters)
     }
     if (this.sortBy) {
-      items = _.orderBy(items, [(item) => item[this.sortBy] || this.sortByFallback], [this.sortOrder])
+      items = _.orderBy(
+        items,
+        [(item) => item[this.sortBy] || this.sortByFallback],
+        [this.sortOrder]
+      )
     }
     return items
   }
 
-  @computed get itemCount () {
+  get itemCount() {
     return this.filteredItems.length
   }
 
-  @computed get pageCount () {
+  get pageCount() {
     const rest = this.itemsCount % this.itemsPerPage
     let totalPages = (this.itemsCount - rest) / this.itemsPerPage
     if (rest > 0) {
@@ -36,15 +40,13 @@ export default class List {
     return totalPages
   }
 
-  @computed get paginatedItems () {
+  get paginatedItems() {
     const chained = _(this.filteredItems)
     const offset = (this.currentPage - 1) * this.itemsPerPage
-    return chained
-      .slice(offset, offset + this.itemsPerPage)
-      .value()
+    return chained.slice(offset, offset + this.itemsPerPage).value()
   }
 
-  @action.bound setItems (items) {
+  setItems(items) {
     this.items = items
     this.currentPage = 1
   }
@@ -55,29 +57,28 @@ export default class List {
    * @param {String} prop - Property to filter
    * @param {String} value - Value expected
    */
-  @action.bound setFilter (prop, value) {
+  setFilter(prop, value) {
     this.filters = _.isUndefined(value) ? {} : {[prop]: value}
     this.currentPage = 1 // we might be on page 5 and when new filter is set, we have only 3 pages
   }
 
-  @action.bound sort (sortBy) {
+  sort(sortBy) {
     if (sortBy !== this.sortBy) {
       this.sortBy = sortBy
-    }
-    else {
+    } else {
       this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc'
     }
   }
 
-  @action.bound goToPage (newPage) {
+  goToPage(newPage) {
     this.currentPage = newPage
   }
 
-  @action.bound goToNextPage () {
+  goToNextPage() {
     this.currentPage++
   }
 
-  @action.bound goToPreviousPage () {
+  goToPreviousPage() {
     this.currentPage--
   }
 
@@ -86,7 +87,27 @@ export default class List {
    * @param {Array} options.items
    * @param {String} options.sortBy
    */
-  constructor (options) {
+  constructor(options) {
+    mobx.makeObservable(this, {
+      currentPage: observable,
+      items: observable.ref,
+      itemsPerPage: observable,
+      sortBy: observable,
+      sortOrder: observable,
+      sortByFallback: observable,
+      filters: observable.ref,
+      filteredItems: computed,
+      itemCount: computed,
+      pageCount: computed,
+      paginatedItems: computed,
+      setItems: action.bound,
+      setFilter: action.bound,
+      sort: action.bound,
+      goToPage: action.bound,
+      goToNextPage: action.bound,
+      goToPreviousPage: action.bound,
+    })
+
     Object.assign(this, options)
   }
 }

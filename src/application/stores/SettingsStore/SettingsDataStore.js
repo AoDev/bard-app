@@ -11,7 +11,7 @@ export default class SettingsDataStore {
   /**
    * @returns {Promise} settings
    */
-  getSettings () {
+  getSettings() {
     return storage.get('app.settings', {})
   }
 
@@ -19,7 +19,7 @@ export default class SettingsDataStore {
    * @param {Object} settings
    * @returns {Promise}
    */
-  saveSettings (settings) {
+  saveSettings(settings) {
     assert.isObject(settings)
     return storage.save('app.settings', settings)
   }
@@ -27,7 +27,7 @@ export default class SettingsDataStore {
   /**
    * Setup automatic persistence
    */
-  async init () {
+  async init() {
     const storedSettings = await this.getSettings()
     this.settingsStore.assign(storedSettings)
 
@@ -45,11 +45,11 @@ export default class SettingsDataStore {
     )
   }
 
-  destroy () {
+  destroy() {
     this.stopAutoSaveSettings()
   }
 
-  constructor (settingsStore) {
+  constructor(settingsStore) {
     this.settingsStore = settingsStore
     this.init()
   }

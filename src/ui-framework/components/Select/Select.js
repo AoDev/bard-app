@@ -7,7 +7,7 @@ import _ from 'lodash'
  * the options it receives and what it emits on change.
  */
 export default class Select extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onSelect = this.onSelect.bind(this)
   }
@@ -18,18 +18,18 @@ export default class Select extends React.Component {
    * It will also take care of converting strings to number when necessary
    * because assigning a number to a select option value is always a string.
    */
-  onSelect (event) {
+  onSelect(event) {
     var {name, value} = event.target
     const {items, onChange, preventDefault, onChangeEmit, objectIdKey, optionalLabel} = this.props
     const firstOption = items[0]
     const optionsAreObjects = typeof firstOption === 'object'
-    const shouldParse = typeof (optionsAreObjects ? firstOption[objectIdKey] : firstOption) === 'number'
+    const shouldParse =
+      typeof (optionsAreObjects ? firstOption[objectIdKey] : firstOption) === 'number'
     const isOptionalLabel = event.target.selectedOptions[0].innerText === optionalLabel
 
     if (shouldParse) {
       value = parseInt(value, 10)
-    }
-    else if (isOptionalLabel) {
+    } else if (isOptionalLabel) {
       value = undefined
     }
 
@@ -38,15 +38,25 @@ export default class Select extends React.Component {
     }
 
     switch (onChangeEmit) {
-      case 'event': onChange(event); break
-      case 'item': onChange(_.find(items, {[objectIdKey]: value}), event); break
-      case 'value': onChange(value, event); break
-      case 'name-value': onChange(name, value, event); break
-      case 'nameItem': onChange(name, _.find(items, {[objectIdKey]: value}), event); break
+      case 'event':
+        onChange(event)
+        break
+      case 'item':
+        onChange(_.find(items, {[objectIdKey]: value}), event)
+        break
+      case 'value':
+        onChange(value, event)
+        break
+      case 'name-value':
+        onChange(name, value, event)
+        break
+      case 'nameItem':
+        onChange(name, _.find(items, {[objectIdKey]: value}), event)
+        break
     }
   }
 
-  getOptionSelectedValue (props, optionsAreObjects) {
+  getOptionSelectedValue(props, optionsAreObjects) {
     const {objectIdKey, itemSelected, items} = props
     const optionSelectedIsObject = typeof itemSelected === 'object'
 
@@ -55,15 +65,13 @@ export default class Select extends React.Component {
     if (itemSelected) {
       if (optionSelectedIsObject) {
         optionSelectedValue = itemSelected[objectIdKey]
-      }
-      else if (optionsAreObjects) {
+      } else if (optionsAreObjects) {
         const option = _.find(items, {[objectIdKey]: itemSelected})
         if (option) {
           // In case the item ID selected is actually NOT present in the list, prevents a crash.
           optionSelectedValue = option[objectIdKey]
         }
-      }
-      else {
+      } else {
         optionSelectedValue = itemSelected
       }
     }
@@ -71,10 +79,16 @@ export default class Select extends React.Component {
     return optionSelectedValue
   }
 
-  render () {
+  render() {
     const {
-      items, itemSelected, objectIdKey, objectLabelKey,
-      onChange, onChangeEmit, optionalLabel, ...otherProps
+      items,
+      itemSelected,
+      objectIdKey,
+      objectLabelKey,
+      onChange,
+      onChangeEmit,
+      optionalLabel,
+      ...otherProps
     } = this.props
     const optionsAreObjects = typeof items[0] === 'object'
 
@@ -82,11 +96,16 @@ export default class Select extends React.Component {
       <select
         value={this.getOptionSelectedValue(this.props, optionsAreObjects)}
         onChange={this.onSelect}
-        {...otherProps}>
-        {optionalLabel && (<option value="">{optionalLabel}</option>)}
-        {items.map(option => {
+        {...otherProps}
+      >
+        {optionalLabel && <option value="">{optionalLabel}</option>}
+        {items.map((option) => {
           const id = optionsAreObjects ? option[objectIdKey] : option
-          return <option key={id} value={id}>{optionsAreObjects ? option[objectLabelKey] : option}</option>
+          return (
+            <option key={id} value={id}>
+              {optionsAreObjects ? option[objectLabelKey] : option}
+            </option>
+          )
         })}
       </select>
     )
@@ -125,11 +144,13 @@ Select.propTypes = {
   /**
    * An array of option objects to display. See 'objectIdKey' and 'objectLabelKey' props.
    */
-  items: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.string])).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.string])
+  ).isRequired,
   /**
    * Key name for the name of the options.
    */
-  objectLabelKey (props, propName, componentName) {
+  objectLabelKey(props, propName, componentName) {
     const firstOption = props.items && props.items[0]
     const optionsAreObjects = typeof firstOption === 'object'
 
@@ -143,7 +164,7 @@ Select.propTypes = {
   /**
    * Key name for the value of the options.
    */
-  objectIdKey (props, propName, componentName) {
+  objectIdKey(props, propName, componentName) {
     const firstOption = props.items && props.items[0]
     const optionsAreObjects = typeof firstOption === 'object'
 
@@ -157,10 +178,7 @@ Select.propTypes = {
   /**
    * Initial value of the `select` (the default option's value). Has to be the value of one of the options you passed in.
    */
-  initialValue: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
    * Disables the control.
    */

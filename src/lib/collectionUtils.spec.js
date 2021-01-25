@@ -1,7 +1,11 @@
 import collectionUtils from './collectionUtils'
 
 const {
-  findClosest, findClosestProp, findMinMaxBy, distinctByProp, distinctByPropRight,
+  findClosest,
+  findClosestProp,
+  findMinMaxBy,
+  distinctByProp,
+  distinctByPropRight,
 } = collectionUtils
 
 describe('collectionUtils', () => {
@@ -57,10 +61,7 @@ describe('collectionUtils', () => {
           {someProp: 'b'},
           {someProp: 'b'},
         ]
-        expect(distinctByProp(mock, 'someProp', 5)).toEqual([
-          {someProp: 'a'},
-          {someProp: 'b'},
-        ])
+        expect(distinctByProp(mock, 'someProp', 5)).toEqual([{someProp: 'a'}, {someProp: 'b'}])
       })
     })
   })
@@ -117,10 +118,7 @@ describe('collectionUtils', () => {
           {someProp: 'b'},
           {someProp: 'b'},
         ]
-        expect(distinctByPropRight(mock, 'someProp', 5)).toEqual([
-          {someProp: 'b'},
-          {someProp: 'a'},
-        ])
+        expect(distinctByPropRight(mock, 'someProp', 5)).toEqual([{someProp: 'b'}, {someProp: 'a'}])
       })
     })
   })
@@ -187,17 +185,9 @@ describe('collectionUtils', () => {
     })
 
     it('should use -Infinity as fallback if an item has the property undefined', () => {
-      const collection = [
-        {id: 1, value: 10},
-        {id: 2},
-        {id: 5, value: 5},
-      ]
+      const collection = [{id: 1, value: 10}, {id: 2}, {id: 5, value: 5}]
 
-      const expected = [
-        {id: 1, value: 10},
-        {id: 5, value: 5},
-        {id: 2},
-      ]
+      const expected = [{id: 1, value: 10}, {id: 5, value: 5}, {id: 2}]
 
       expect(collectionUtils.orderByNumber(collection, 'value', 'desc')).toEqual(expected)
     })

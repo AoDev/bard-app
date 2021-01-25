@@ -2,12 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import InputBasic from '../InputBasic'
 
-export default function Input (props) {
+export default function Input(props) {
   const {className, discreet, ...otherProps} = props
   const extraClass = `${discreet ? 'inputfield-discreet' : 'inputfield'} ${className || ''}`
-  return (
-    <InputBasic className={extraClass} {...otherProps}/>
-  )
+  return <InputBasic className={extraClass} {...otherProps} />
 }
 
 Input.propTypes = {
@@ -16,5 +14,5 @@ Input.propTypes = {
 }
 
 Input.defaultProps = {
-  discreet: false
+  discreet: false,
 }

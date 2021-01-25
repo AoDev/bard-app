@@ -14,8 +14,8 @@ const localStore = {
    * @param {*} defaultValue
    * @returns {Promise}
    */
-  get (key, defaultValue) {
-    return store.getItem(key).then((value) => value === null ? defaultValue : value)
+  get(key, defaultValue) {
+    return store.getItem(key).then((value) => (value === null ? defaultValue : value))
   },
 
   /**
@@ -24,7 +24,7 @@ const localStore = {
    * @param {*} value
    * @returns {Promise}
    */
-  save (key, value) {
+  save(key, value) {
     return store.setItem(key, value)
   },
 
@@ -33,9 +33,9 @@ const localStore = {
    * @param {String} key identifies the value
    * @returns {Promise}
    */
-  delete (key) {
+  delete(key) {
     return store.removeItem(key)
-  }
+  },
 }
 
 export default localStore

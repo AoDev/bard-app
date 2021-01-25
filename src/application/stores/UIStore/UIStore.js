@@ -1,5 +1,6 @@
 import * as mobx from 'mobx'
 import viewModels from 'shared-components/viewModels'
+import MediaQuery from './MediaQuery'
 import ObservableViewport from './ObservableViewport'
 import bodyElementPlugin from './bodyElementPlugin'
 import MainSideMenuVM from '../../App/MainSideMenu/MainSideMenuVM'
@@ -7,8 +8,6 @@ import MainSideMenuVM from '../../App/MainSideMenu/MainSideMenuVM'
 /**
  * @typedef {import ('../RootStore').default} RootStore
  */
-
-const {computed, action} = mobx
 
 export default class UIStore {
   static colors = {
@@ -64,23 +63,24 @@ export default class UIStore {
    * @type {MainSideMenuVM}
    */
   mainSideMenuVM = null
-  mainSideMenu = new viewModels.Dialog({id: 'main-side-menu'})
-  settingsDialog = new viewModels.Dialog({id: 'settingsDialog'})
-  unexpectedErrorDialog = new viewModels.Dialog({id: 'appUnexpectedError'})
+  mainSideMenu = new viewModels.DialogVM({id: 'main-side-menu'})
+  settingsDialog = new viewModels.DialogVM({id: 'settingsDialog'})
+  unexpectedErrorDialog = new viewModels.DialogVM({id: 'appUnexpectedError'})
   viewPort = new ObservableViewport()
+  media = new MediaQuery()
 
   /**
    * @type {'dark'|'light'}
    */
-  @computed get theme () {
-    return this.coreStore.settings.theme
+  get theme() {
+    return this.rootStore.settings.theme
   }
 
-  @computed get colors () {
+  get colors() {
     return UIStore.colors[this.theme]
   }
 
-  @computed get headerTitle () {
+  get headerTitle() {
     const {route} = this.router
 
     if (route.startsWith('/public/app-settings')) {
@@ -93,37 +93,27 @@ export default class UIStore {
     return 'Bard'
   }
 
-  @computed get screenSize () {
-    const {width} = this.viewPort.size
-    return {
-      sm: width <= 720,
-      mdMinus: width <= 960,
-      md: width > 720 && width <= 960,
-      lg: width > 960,
-      mdPlus: width > 720,
-    }
-  }
-
-  @action.bound set (prop, value) {
+  set(prop, value) {
     this[prop] = value
   }
 
-  @action.bound toggleProp (prop) {
+  toggleProp(prop) {
     this[prop] = !this[prop]
   }
 
-  @action.bound handleMainMenuClick () {
+  handleMainMenuClick() {
     this.mainSideMenu.hide()
   }
 
   /**
    * @param {RootStore} rootStore
    */
-  constructor (rootStore) {
-    this.coreStore = rootStore.coreStore
+  constructor(rootStore) {
+    this.rootStore = rootStore
     this.router = rootStore.router
     this.rootStore = rootStore
     this.mainSideMenuVM = new MainSideMenuVM({rootStore})
     bodyElementPlugin.register(this)
+    mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
   }
 }
