@@ -15,22 +15,27 @@ const app = express()
 const compiler = webpack(config)
 const PORT = process.env.PORT || 3000
 
-const wdm = webpackDevMiddleware(compiler, {
-  watchOptions: {
-    ignored: /node_modules/
-  },
-  publicPath: config.output.publicPath,
-  historyApiFallback: true,
-  stats: {
-    colors: true
+const historyFallback = (req, res, next) => {
+  if (!/(\.(?!html)\w+$|__webpack.*)/.test(req.url)) {
+    req.url = '/' // this would make express-js serve index.html
   }
+  next()
+}
+
+app.use(historyFallback)
+
+const wdm = webpackDevMiddleware(compiler, {
+  publicPath: config.output.publicPath,
+  stats: {
+    colors: true,
+  },
 })
 
 app.use(wdm)
 
-app.use(webpackHotMiddleware(compiler))
+app.use(webpackHotMiddleware(compiler, {path: '/__webpack_hmr'}))
 
-const server = app.listen(PORT, 'localhost', serverError => {
+const server = app.listen(PORT, 'localhost', (serverError) => {
   if (serverError) {
     return console.error(serverError)
   }

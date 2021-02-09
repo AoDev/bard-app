@@ -1,3 +1,4 @@
+import serviceWorkerManager from './serviceWorkerManager'
 import {configure} from 'mobx'
 import React from 'react'
 import reactDom from 'react-dom'
@@ -17,22 +18,11 @@ configure({
   // disableErrorBoundaries: true
 })
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/service-worker.js')
-      .then((registration) => {
-        console.log('SW registered: ', registration)
-      })
-      .catch((registrationError) => {
-        console.log('SW registration failed: ', registrationError)
-      })
-  })
-}
-
 const rootStore = new RootStore({routes})
 rootStore.init()
 const {uiStore, router} = rootStore
+
+serviceWorkerManager.run(uiStore)
 
 // AppContainer is a necessary wrapper component for HMR
 const render = (Component) => {

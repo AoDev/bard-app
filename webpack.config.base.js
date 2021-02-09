@@ -9,7 +9,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries')
+const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
 const path = require('path')
@@ -38,12 +38,16 @@ const filesToCopy = [
   {
     from: path.join(SRC_FOLDER, 'assets', 'favicon'),
     to: path.join(DIST_FOLDER),
-    ignore: [],
+    globOptions: {
+      ignore: [],
+    },
   },
   {
     from: path.join(SRC_FOLDER, 'assets', 'images'),
     to: path.join(DIST_FOLDER, 'images'),
-    ignore: ['index.js'],
+    globOptions: {
+      ignore: ['index.js'],
+    },
   },
 ]
 
@@ -53,7 +57,7 @@ const plugins = [
     'process.env.BUILD_PLATFORM': JSON.stringify(process.env.BUILD_PLATFORM),
     'process.env.APP_VERSION': JSON.stringify(packageJson.version),
   }),
-  new FixStyleOnlyEntriesPlugin(),
+  new RemoveEmptyScriptsPlugin(),
   new HtmlWebpackPlugin({
     filename: 'index.html',
     template: path.join(SRC_FOLDER, 'index.html'),
@@ -64,15 +68,7 @@ const plugins = [
     },
   }),
 
-  new CopyWebpackPlugin(filesToCopy),
-
-  new WorkboxPlugin.InjectManifest({
-    swSrc: './src/sw.js',
-    swDest: 'service-worker.js',
-    // In dev, prevents SW from intercepting hot-updates so cache nothing.
-    // In prod, removes default exclude of workbox that prevents Webpack manifest to be cached.
-    exclude: IS_DEVELOPMENT ? [/.*/] : [],
-  }),
+  new CopyWebpackPlugin({patterns: filesToCopy}),
 
   new WebpackPwaManifest({
     name: 'Bard',
@@ -90,6 +86,14 @@ const plugins = [
         sizes: [36, 48, 72, 96, 128, 192, 256, 384, 512], // multiple sizes
       },
     ],
+  }),
+
+  new WorkboxPlugin.InjectManifest({
+    swSrc: './src/service-worker.js',
+    swDest: 'service-worker.js',
+    // In dev, prevents SW from intercepting hot-updates so cache nothing.
+    // In prod, removes default exclude of workbox that prevents Webpack manifest to be cached.
+    exclude: IS_DEVELOPMENT ? [/.*/] : [],
   }),
 ]
 
@@ -118,8 +122,10 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-              javascriptEnabled: true,
-              plugins: IS_DEVELOPMENT ? [] : [new CleanCSSPlugin({advanced: true})],
+              lessOptions: {
+                javascriptEnabled: true,
+                plugins: IS_DEVELOPMENT ? [] : [new CleanCSSPlugin({advanced: true})],
+              },
             },
           },
         ],
@@ -137,6 +143,7 @@ module.exports = {
   },
 
   optimization: {
+    moduleIds: 'named',
     splitChunks: {
       cacheGroups: {
         commons: {

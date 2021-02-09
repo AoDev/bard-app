@@ -66,6 +66,7 @@ export default class UIStore {
   mainSideMenu = new viewModels.DialogVM({id: 'main-side-menu'})
   settingsDialog = new viewModels.DialogVM({id: 'settingsDialog'})
   unexpectedErrorDialog = new viewModels.DialogVM({id: 'appUnexpectedError'})
+  appUpdateDialog = new viewModels.ConfirmDialogVM({id: 'app-update', canCancel: false})
   viewPort = new ObservableViewport()
   media = new MediaQuery()
 

@@ -6,7 +6,7 @@
 
 const path = require('path')
 const webpack = require('webpack')
-const merge = require('webpack-merge')
+const {merge} = require('webpack-merge')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const baseConfig = require('./webpack.config.base')
 
@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000
 
 module.exports = merge(baseConfig, {
   mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-cheap-module-source-map',
 
   entry: {
     app: [
@@ -34,7 +34,6 @@ module.exports = merge(baseConfig, {
   },
 
   plugins: [
-    new webpack.NamedModulesPlugin(),
     // https://webpack.github.io/docs/hot-module-replacement-with-webpack.html
     new webpack.HotModuleReplacementPlugin(),
     new ReactRefreshWebpackPlugin({
