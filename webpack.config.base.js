@@ -12,6 +12,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
+const brandConfig = require('./brand.config')
 const path = require('path')
 
 const fs = require('fs')
@@ -46,7 +47,8 @@ const filesToCopy = [
     from: path.join(SRC_FOLDER, 'assets', 'images'),
     to: path.join(DIST_FOLDER, 'images'),
     globOptions: {
-      ignore: ['index.js'],
+      gitignore: true,
+      ignore: ['**/index.js'],
     },
   },
 ]
@@ -65,25 +67,32 @@ const plugins = [
     templateParameters: {
       contentPolicy: mainContentPolicy[process.env.NODE_ENV],
       publicPath: '/',
+      ...brandConfig,
     },
   }),
 
   new CopyWebpackPlugin({patterns: filesToCopy}),
 
   new WebpackPwaManifest({
-    name: 'Bard',
-    short_name: 'Bard',
-    description: 'Mobx react framework',
-    background_color: '#ffffff',
+    name: brandConfig.appName,
+    short_name: brandConfig.appShortName,
+    description: brandConfig.shortDescription,
+    background_color: brandConfig.backgroundColor,
     crossorigin: 'use-credentials', // can be null, use-credentials or anonymous
     orientation: 'any',
+    theme_color: brandConfig.themeColor,
     ios: true,
     icons: [
       {
+        src: path.join(SRC_FOLDER, 'assets', 'images', 'logo-1024-ios.png'),
+        destination: 'icons',
+        sizes: [36, 48, 72, 96, 128, 192, 256, 384, 512],
+        ios: true,
+      },
+      {
         src: path.join(SRC_FOLDER, 'assets', 'images', 'logo-1024.png'),
         destination: 'icons',
-        ios: true,
-        sizes: [36, 48, 72, 96, 128, 192, 256, 384, 512], // multiple sizes
+        sizes: [36, 48, 72, 96, 128, 192, 256, 384, 512],
       },
     ],
   }),

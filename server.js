@@ -1,6 +1,5 @@
 /**
- * Setup and run the development server for Hot-Module-Replacement
- * https://webpack.github.io/docs/hot-module-replacement-with-webpack.html
+ * Setup and run the webpack development server with webpack dev middleware
  */
 
 const express = require('express')

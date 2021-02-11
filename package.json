@@ -9,7 +9,7 @@
     "bundle-stats": "npm run compile -- --stats=detailed --json > webpack.stats.json",
     "compile": "cross-env NODE_ENV=production node ./node_modules/webpack/bin/webpack --config webpack.config.production.js --profile",
     "dev": "cross-env NODE_ENV=development node --max_old_space_size=2096 server.js",
-    "icon-gen": "icon-gen -i ./src/assets/images/app-icon-source.svg -o ./buildResources -m ico,icns -n ico=icon,icns=icon -s icns=[16,24,32,48,64,96,128,256,512,1024] -r",
+    "icon-gen": "icon-gen -i ./src/assets/images/favicon-source.svg -o ./src/assets/favicon --favicon --favicon-name=favicon --favicon-png-sizes=[16,24,32,48,64,96,128,256,512,1024] -r",
     "lint:css": "stylelint \"src/**/*.less\"",
     "lint:js": "eslint src --quiet",
     "lint": "npm run lint:js && npm run lint:css",
@@ -39,7 +39,6 @@
     "react"
   ],
   "homepage": "",
-  "readmeBeforeDepsUpdate": "Updating react-hot-loader to 4.x lead to multiple problems. Good luck if you want to try. || Mobx v4.x is used for browsers that dont support proxies. Update major only if you don't care. || In general, be careful with a new major version which is at 0, like 1.1.2 -> 2.0.0, they are usually buggy. Wait for first fixes.",
   "devDependencies": {
     "@babel/core": "7.12.13",
     "@babel/plugin-proposal-class-properties": "7.12.13",

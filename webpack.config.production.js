@@ -1,7 +1,3 @@
-/**
- * Build config for electron 'Renderer Process' file
- */
-
 const path = require('path')
 const webpack = require('webpack')
 const {merge} = require('webpack-merge')
