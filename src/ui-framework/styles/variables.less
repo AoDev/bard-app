@@ -1,7 +1,7 @@
 // COLORS
 // "aim" = "web accessibility in mind". https://webaim.org/resources/contrastchecker/
 // color-*-aim should ideally pass the "WCAG AA large text" threshold on a slighly gray bg.
-@color-brand-primary: #00b7ff;
+@color-brand-primary: #000000;
 @color-blue-aim: #009ddb;
 @color-blue-vivid: #00b7ff;
 @color-gray-aim: #65727b;
@@ -50,3 +50,34 @@
 @lg-screen: ~'screen and (min-width: 961px)';
 @md-screen: ~'screen and (min-width: 721px)';
 @hover-support: ~'not all and (hover: none)';
+
+// Theme variable
+:root {
+  --color-bg-darken: @color-bg-darken;
+  --color-blue-aim: @color-blue-aim;
+  --color-body-bg: @body-color;
+  --color-btn-disabled-bg: @color-gray-mid;
+  --color-content-bg: #fff;
+  --color-content-txt: @color-font-default;
+  --color-green-aim: @color-green-aim;
+  --color-header-bg: @color-header-bg;
+  --color-header-separator: darken(@color-gray-lighter, 5%);
+  --color-line-separator: darken(@color-gray-lighter, 5%);
+  --color-menu-btn-txt: @color-gray-darker;
+  --color-red-aim: @color-red-aim;
+}
+
+:root[theme='dark'] {
+  --color-bg-darken: darken(@color-gray-darkest, 3%);
+  --color-blue-aim: lighten(@color-blue-aim, 10%);
+  --color-body-bg: @color-gray-darkest;
+  --color-btn-disabled-bg: #5e7186;
+  --color-content-bg: @color-gray-darkest;
+  --color-content-txt: #fff;
+  --color-green-aim: lighten(@color-green-aim, 5%);
+  --color-header-bg: lighten(@color-gray-darkest, 3%);
+  --color-header-separator: lighten(@color-gray-darkest, 9%);
+  --color-line-separator: lighten(@color-gray-darkest, 9%);
+  --color-menu-btn-txt: #e6e6e6;
+  --color-red-aim: #ff4163;
+}

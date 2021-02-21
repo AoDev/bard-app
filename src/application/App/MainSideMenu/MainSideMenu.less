@@ -3,7 +3,6 @@
 @msm-z-index: 5; // above header and above other modals
 
 .main-side-menu {
-  background-color: #fff;
   background-color: var(--color-content-bg);
   bottom: 0;
   box-shadow: 16px 0 24px rgba(0, 0, 0, 0.3);
@@ -33,7 +32,6 @@
 .msm__header {
   height: @header-height;
   padding: 4px 16px;
-  background-color: @color-header-bg;
   background-color: var(--color-header-bg);
   border-bottom: 1px solid darken(@color-header-bg, 5%);
   border-bottom: 1px solid var(--color-line-separator);
@@ -76,7 +74,6 @@
   :not(.active)&:focus,
   :not(.active)&:hover {
     color: var(--color-menu-btn-txt);
-    background-color: @color-header-bg;
     background-color: var(--color-header-bg);
   }
 
@@ -152,7 +149,6 @@
 }
 
 .msm__section-title {
-  color: @color-gray-darker;
   color: var(--color-content-txt);
   position: relative;
 }
@@ -186,7 +182,6 @@
 .msm__footer--hidden {
   .txt-italic;
 
-  background-color: @color-header-bg;
   background-color: var(--color-header-bg);
   bottom: 0;
   left: 0;

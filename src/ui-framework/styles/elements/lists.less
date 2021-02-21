@@ -25,15 +25,12 @@
 
 .list-btn__row {
   position: relative;
-  background-color: #fff;
   background-color: var(--color-content-bg);
   margin: 0 0 1px 0;
-  border-top: 1px solid #ededed;
   border-top: 1px solid var(--color-line-separator);
 
   &:focus,
   &:hover {
-    background-color: #fafafa;
     background-color: var(--color-bg-darken);
   }
 
@@ -47,7 +44,6 @@
 .list-btn__row--selected:hover {
   &:extend(.list-btn__row all);
 
-  background-color: #fafafa;
   background-color: var(--color-bg-darken);
 }
 
