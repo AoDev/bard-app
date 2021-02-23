@@ -48,8 +48,26 @@
   }
 }
 
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+}
+
 .zoomIn {
   animation-name: zoomIn;
+  animation-duration: 0.2s;
+  animation-fill-mode: both;
+}
+
+.zoomOut {
+  animation-name: zoomOut;
   animation-duration: 0.2s;
   animation-fill-mode: both;
 }

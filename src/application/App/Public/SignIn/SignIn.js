@@ -11,10 +11,10 @@ export default function SignIn(props) {
   }
 
   return (
-    <div className="md-max-width-24em center-block md-space-top-2">
-      <div className="md-panel-group">
-        <div className="bg-darken padded-1">
-          <h3 className="h-header flex-row-center space-0">
+    <div className="padded-1">
+      <div className="space-top-2 max-width-24em center-block md-panel-group panel--simple">
+        <div className="padded-1 bg-alternative">
+          <h3 className="flex-row-center space-0">
             <Icon name="#user" size={28} className="flex-no-shrink" />
             <span className="space-left-1">Sign in</span>
           </h3>
@@ -56,16 +56,17 @@ export default function SignIn(props) {
             </div>
             <Button
               type="submit"
+              caretRight
               className="btn-block"
               disabledMock={!vm.isValid}
               isLoading={vm.session.isAuthenticating}
-              variant="cta"
+              variant="plain-blue"
             >
-              Start <span className="float-right">❯</span>
+              Start
             </Button>
           </form>
         </div>
-        <div className="bg-darken padded-1">
+        <div className="padded-1">
           <div className="txt-center txt-italic">* Use any password, this is a demo.</div>
         </div>
       </div>

@@ -15,7 +15,7 @@
   will-change: transform;
   z-index: @msm-z-index;
 
-  .btn--navlink {
+  .btn--blue {
     // TODO: refactor; should not be dependent
     // add source btn
     padding-left: 9px;
@@ -68,13 +68,13 @@
   }
 
   &.active {
-    background-color: var(--color-bg-darken);
+    background-color: var(--color-bg-alternative);
   }
 
   :not(.active)&:focus,
   :not(.active)&:hover {
     color: var(--color-menu-btn-txt);
-    background-color: var(--color-header-bg);
+    background-color: var(--color-bg-alternative);
   }
 
   &.disabled,

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import {Switch, InputBasic, Button, Icon} from 'ui-framework'
+import {Button, Icon} from 'ui-framework'
 
 /**
  * @typedef {import ('./AppSettingsVM').default} AppSettingsVM
@@ -11,67 +11,33 @@ import {Switch, InputBasic, Button, Icon} from 'ui-framework'
  */
 export default function AppSettings({vm}) {
   const {settings} = vm
-  const btnVariant = settings.theme === 'light' ? 'neutral' : 'neutral-inverse'
 
   return (
-    <div className="r-grid-fluid-colmin24em md-padded-1 space-bottom-4">
-      <section className="md-panel-group flex-col pos-rel">
-        <div className="bg-darken padded-1">
-          <h3 className="h-header space-0">Setting section</h3>
-        </div>
-        <div className="padded-1 flex-fill">
-          <div className="input-group">
-            <label className="label space-right-1" htmlFor="settings-some-flag">
-              Some flag
-            </label>
-            <Switch
-              id="settings-some-flag"
-              name="someFlag"
-              value={settings.someFlag}
-              onChange={settings.set}
-              onChangeEmit="name-value"
-            />
+    <div className="padded-1">
+      <div className="r-grid-fluid-colmin24em space-bottom-4">
+        <section className="panel--simple pos-rel padded-2 flex-center txt-center">
+          <div>
+            <h3 className="heading-section space-0">App Settings</h3>
+            <p>All changes are saved on the device automatically.</p>
           </div>
-        </div>
-      </section>
-
-      <section className="md-panel-group flex-col pos-rel">
-        <div className="bg-darken padded-1">
-          <h3 className="h-header space-0">Other settings</h3>
-        </div>
-        <div className="padded-1 flex-fill">
-          <div className="input-group">
-            <label className="label space-right-1" htmlFor="settings-some-other-flag">
-              Some other flag
-            </label>
-            <InputBasic
-              type="checkbox"
-              id="settings-some-other-flag"
-              name="someOtherFlag"
-              value={settings.someOtherFlag}
-              onChange={settings.set}
-              onChangeEmit="name-value"
-            />
+        </section>
+        <section className="panel--simple flex-col pos-rel">
+          <div className="bg-alternative padded-1">
+            <h3 className="space-0">UI Settings</h3>
           </div>
-        </div>
-      </section>
+          <div className="padded-1 flex-fill">
+            <div className="space-bottom-1">
+              <label className="label space-right-1">
+                Color theme: <i>{settings.theme}</i>
+              </label>
+            </div>
 
-      <section className="md-panel-group flex-col pos-rel">
-        <div className="bg-darken padded-1">
-          <h3 className="h-header space-0">UI</h3>
-        </div>
-        <div className="padded-1 flex-fill">
-          <div className="space-bottom-1">
-            <label className="label space-right-1">
-              Color theme: <i>{settings.theme}</i>
-            </label>
+            <Button square className="padded-0" variant="neutral" onClick={settings.switchTheme}>
+              <Icon name={settings.theme === 'light' ? '#sun' : '#moon'} small />
+            </Button>
           </div>
-
-          <Button square className="padded-0" variant={btnVariant} onClick={settings.switchTheme}>
-            <Icon name={settings.theme === 'light' ? '#sun' : '#moon'} small />
-          </Button>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   )
 }

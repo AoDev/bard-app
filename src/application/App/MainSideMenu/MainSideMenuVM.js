@@ -67,7 +67,7 @@ export default class MainSideMenuVM {
   }
 
   hideMenu() {
-    this.rootStore.uiStore.mainSideMenu.toggleVisibility()
+    this.rootStore.uiStore.mainSideMenu.toggle()
     setTimeout(() => {
       this.assign({section: '', backBehaviour: [], headerTitle: ''})
     }, 500)

@@ -18,10 +18,11 @@ each(@grid-fluid-values, .(@gvalue) {
 
 each(@r-grid-fluid-values, .(@gvalue) {
   .r-grid-fluid-colmin@{gvalue} {
-    @media (min-width: 721px) {
-      display: grid;
+    display: grid;
+    grid-gap: @spacing-base;
+
+    @media @md-screen {
       grid-template-columns: repeat(auto-fit, minmax(@gvalue, 1fr));
-      grid-gap: @spacing-base;
     }
   }
 });

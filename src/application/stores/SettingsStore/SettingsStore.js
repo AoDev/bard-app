@@ -1,7 +1,5 @@
 import * as mobx from 'mobx'
 
-const {observable, action} = mobx
-
 /**
  * Settings for the application
  */
@@ -12,17 +10,6 @@ export default class SettingsStore {
   theme = 'light'
   someFlag = true
   someOtherFlag = false
-
-  constructor() {
-    mobx.makeObservable(this, {
-      theme: observable,
-      someFlag: observable,
-      someOtherFlag: observable,
-      set: action.bound,
-      assign: action.bound,
-      switchTheme: action.bound,
-    })
-  }
 
   switchTheme() {
     this.theme = this.theme === 'light' ? 'dark' : 'light'
@@ -40,5 +27,9 @@ export default class SettingsStore {
 
   assign(props) {
     Object.assign(this, props)
+  }
+
+  constructor() {
+    mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
   }
 }

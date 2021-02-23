@@ -31,7 +31,7 @@ export function MainSideMenu({vm}) {
               className="msm__btn-menu"
               round
               variant="invisible"
-              onClick={uiStore.mainSideMenu.toggleVisibility}
+              onClick={uiStore.mainSideMenu.toggle}
             >
               <Icon name="#menubars" color={uiStore.colors['color-font-default']} bgPadding={6} />
             </Button>
@@ -169,7 +169,7 @@ MainSideMenu.propTypes = {
       uiStore: PropTypes.shape({
         handleMainMenuClick: PropTypes.func.isRequired,
         mainSideMenu: PropTypes.shape({
-          toggleVisibility: PropTypes.func.isRequired,
+          toggle: PropTypes.func.isRequired,
           visible: PropTypes.bool.isRequired,
           hide: PropTypes.func.isRequired,
         }).isRequired,

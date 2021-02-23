@@ -38,11 +38,11 @@ button {
 }
 
 // Mixin for style variant
-.btn-variant (@color) {
+.btn-variant-wireframe (@color) {
   &:extend(.btn);
 
   border: 1px solid @color;
-  background-color: #fff;
+  background-color: var(--color-content-bg);
   padding: 0 @spacing-base;
   border-radius: 4px;
   color: @color;
@@ -65,12 +65,25 @@ button {
     &:hover {
       color: @color;
       box-shadow: inset 0 0 0 1px @color;
-      border: 1px solid @color;
+      border-color: @color;
     }
   }
 
-  &.disabled,
-  &[disabled] {
+  &.active:hover,
+  &.active:focus,
+  &.active {
+    cursor: default;
+    color: #fff;
+    background-color: @color;
+    box-shadow: none;
+
+    // TODO: wondering if we should create a btn-with-icon class / variant
+    .icon-svg {
+      fill: #fff;
+    }
+  }
+
+  &.disabled {
     color: #777;
     background-color: #fff;
     border-color: #bbb;
@@ -86,36 +99,21 @@ button {
     }
   }
 
-  &.active:hover,
-  &.active:focus,
-  &.active {
-    cursor: default;
-    color: @color-blue-aim;
-    font-weight: bold;
-    // background-color: @color;
-    box-shadow: none;
-
-    // TODO: wondering if we should create a btn-with-icon class / variant
-    .icon-svg {
-      fill: @color-blue-aim;
-    }
-  }
-
   .loader-bar {
     background-color: @color;
   }
 }
 
 // Mixin for style variant
-.btn-variant-inverse (@color) {
+.btn-variant-plain (@color) {
   &:extend(.btn);
 
   border: 1px solid @color;
   background-color: @color;
   padding: 0 @spacing-base;
   border-radius: 4px;
-  border: 1px solid darken(@color, 5%);
-  color: #fff;
+  border: 1px solid @color;
+  color: #000;
   text-transform: uppercase;
   transition-property: background-color, border-color;
   transition-duration: 0.4s;
@@ -123,13 +121,12 @@ button {
 
   &:focus,
   &:hover {
-    color: #fff;
-    background-color: lighten(@color, 5%);
-    border-color: darken(@color, 2%);
+    color: #000;
+    background-color: @color;
+    border-color: @color;
   }
 
-  &.disabled,
-  &[disabled] {
+  &.disabled {
     color: #f7f7f7;
     background-color: var(--color-btn-disabled-bg);
     border-color: var(--color-btn-disabled-bg);
@@ -141,74 +138,49 @@ button {
   }
 
   &.active {
-    color: #fff;
-    background-color: lighten(@color, 1%);
+    color: #000;
+    background-color: @color;
   }
 
   .loader-bar {
-    background-color: #fff;
+    background-color: #000;
   }
 
   .icon-svg {
-    fill: #fff;
+    fill: #000;
   }
 }
 
 .btn--neutral {
-  .btn-variant(@color-gray-darker);
+  .btn-variant-wireframe(var(--color-gray-aim));
 }
 
-.btn--default {
-  .btn-variant(@color-green-aim);
+.btn--green {
+  .btn-variant-wireframe(var(--color-green-aim));
 }
 
-.btn--navlink {
-  .btn-variant(@color-blue-aim);
+.btn--blue {
+  .btn-variant-wireframe(var(--color-blue-aim));
 }
 
-.btn--danger {
-  .btn-variant(@color-red-aim);
+.btn--red {
+  .btn-variant-wireframe(var(--color-red-aim));
 }
 
-.btn--cta {
-  .btn-variant-inverse(@color-blue-aim);
+.btn--plain-blue {
+  .btn-variant-plain(@color-blue-vivid);
 }
 
-.btn--cta-green {
-  .btn-variant-inverse(@color-brand-green);
+.btn--plain-green {
+  .btn-variant-plain(@color-green-vivid);
 }
 
-.btn--cta-red {
-  .btn-variant-inverse(@color-red-aim);
+.btn--plain-red {
+  .btn-variant-plain(@color-red-vivid);
 }
 
-.btn--neutral-inverse {
-  @color: lighten(@color-gray-darkest, 3%);
-  @border-color: lighten(@color-gray-darkest, 12%);
-  .btn-variant-inverse(@color);
-
-  border-color: @border-color;
-
-  &:focus,
-  &:hover {
-    color: #fff;
-    background-color: @color;
-    border-color: @border-color;
-    box-shadow: none;
-  }
-
-  &.active {
-    color: var(--color-blue-aim);
-    background-color: @color;
-    font-weight: bold;
-  }
-
-  @media @hover-support {
-    &:focus,
-    &:hover {
-      box-shadow: inset 0 0 0 1px @border-color;
-    }
-  }
+.btn--plain-neutral {
+  .btn-variant-plain(@color-gray-lightest);
 }
 
 .btn--link {

@@ -12,8 +12,10 @@ import ButtonBasic from '../ButtonBasic'
 
 const loaderPlacement = {
   position: 'absolute',
+  top: '50%',
   left: '50%',
   marginLeft: '-20px',
+  marginTop: '-10px',
 }
 
 const loader = (
@@ -65,7 +67,7 @@ export function Button(props) {
   round && (cssClasses += ' btn-round')
   square && (cssClasses += ' btn-square')
   active && (cssClasses += ' active')
-  ;(isLoading || disabled || disabledMock) && (cssClasses += ' disabled')
+  ;(disabled || disabledMock) && (cssClasses += ' disabled')
   isLoading && (cssClasses += ' btn-loading')
 
   return (

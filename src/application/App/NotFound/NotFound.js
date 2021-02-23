@@ -13,7 +13,7 @@ export function NotFound(props) {
             <p>Oops, we could not find what you were looking for.</p>
           </Note>
         </div>
-        <div className="bg-darken padded-1">
+        <div className="bg-alternative padded-1">
           <Link className="btn btn-block btn-cta txt-center" to="/">
             Go back home <span className="float-right">❯</span>
           </Link>

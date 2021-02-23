@@ -37,8 +37,8 @@ export default class SettingsDataStore {
     this.stopAutoSaveSettings = mobx.reaction(
       () => {
         // "We enumerate which props/setting need to be sync so mobx observe them."
-        const {someFlag, someOtherFlag} = this.settingsStore
-        return {someFlag, someOtherFlag}
+        const {theme} = this.settingsStore
+        return {theme}
       },
       (settings) => this.saveSettings(settings),
       {name: 'autoSaveSettings', delay: 200}

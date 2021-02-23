@@ -3,7 +3,7 @@
 // color-*-aim should ideally pass the "WCAG AA large text" threshold on a slighly gray bg.
 @color-brand-primary: #000000;
 @color-blue-aim: #009ddb;
-@color-blue-vivid: #00b7ff;
+@color-blue-vivid: #0fbbff;
 @color-gray-aim: #65727b;
 @color-gray-dark: #7e8995;
 @color-gray-darker: #505d62;
@@ -13,15 +13,12 @@
 @color-gray-lightest: #f7f7f8;
 @color-gray-mid: #aab1b9;
 @color-green-aim: #3e8500;
-@color-green-vivid: #51ac00;
+@color-green-vivid: #0bd480;
 @color-green: #0a0;
 @color-orange-aim: #ff7a07;
 @color-red-aim: #d90146;
-@color-red-vivid: #ff020a;
+@color-red-vivid: #ff3d51;
 @color-teal: #009daa;
-
-// BACKGROUNDS
-@color-bg-darken: @color-gray-lightest;
 
 // FONTS
 @color-font-default: #192d44;
@@ -53,31 +50,35 @@
 
 // Theme variable
 :root {
-  --color-bg-darken: @color-bg-darken;
+  --color-bg-alternative: @color-gray-lightest;
   --color-blue-aim: @color-blue-aim;
-  --color-body-bg: @body-color;
-  --color-btn-disabled-bg: @color-gray-mid;
+  --color-body-bg: #dedee3;
+  --color-btn-disabled-bg: @color-gray-dark;
   --color-content-bg: #fff;
   --color-content-txt: @color-font-default;
-  --color-green-aim: @color-green-aim;
-  --color-header-bg: @color-header-bg;
-  --color-header-separator: darken(@color-gray-lighter, 5%);
-  --color-line-separator: darken(@color-gray-lighter, 5%);
+  --color-gray-aim: @color-gray-aim;
+  --color-green-aim: #13aa6b;
+  --color-header-bg: #fff;
+  --color-header-separator: #000;
+  --color-line-separator: #000;
   --color-menu-btn-txt: @color-gray-darker;
   --color-red-aim: @color-red-aim;
+  --color-shadow: rgba(0, 0, 0, 0.1);
 }
 
 :root[theme='dark'] {
-  --color-bg-darken: darken(@color-gray-darkest, 3%);
+  --color-bg-alternative: #212126;
   --color-blue-aim: lighten(@color-blue-aim, 10%);
-  --color-body-bg: @color-gray-darkest;
-  --color-btn-disabled-bg: #5e7186;
-  --color-content-bg: @color-gray-darkest;
+  --color-body-bg: #28282f;
+  --color-btn-disabled-bg: @color-gray-dark;
+  --color-content-bg: #1a1a1e;
   --color-content-txt: #fff;
-  --color-green-aim: lighten(@color-green-aim, 5%);
-  --color-header-bg: lighten(@color-gray-darkest, 3%);
-  --color-header-separator: lighten(@color-gray-darkest, 9%);
-  --color-line-separator: lighten(@color-gray-darkest, 9%);
+  --color-gray-aim: @color-gray-lightest;
+  --color-green-aim: #0bd480;
+  --color-header-bg: #000;
+  --color-header-separator: @color-gray-light;
+  --color-line-separator: @color-gray-light;
   --color-menu-btn-txt: #e6e6e6;
   --color-red-aim: #ff4163;
+  --color-shadow: #000;
 }

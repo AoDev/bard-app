@@ -9,8 +9,8 @@ export default function Dashboard(props) {
       {vm.widgets.map((widget) => {
         return (
           <div key={widget.id} className="md-panel-group flex-col pos-rel">
-            <div className="bg-darken padded-1">
-              <h3 className="space-0 h-header">{widget.title}</h3>
+            <div className="bg-alternative padded-1">
+              <h3 className="space-0">{widget.title}</h3>
             </div>
             <div className="padded-1 flex-fill">
               <p>{widget.content}</p>
@@ -19,8 +19,8 @@ export default function Dashboard(props) {
         )
       })}
       <div className="md-panel-group flex-col pos-rel">
-        <div className="bg-darken padded-1">
-          <h3 className="space-0 h-header">Super heroes</h3>
+        <div className="bg-alternative padded-1">
+          <h3 className="space-0">Super heroes</h3>
         </div>
         <div className="padded-1">
           <table className="table">

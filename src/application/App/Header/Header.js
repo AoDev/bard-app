@@ -16,7 +16,7 @@ export function Header(props) {
           <Button
             className="space-right-1 main-header__btn"
             variant="invisible"
-            onClick={uiStore.mainSideMenu.toggleVisibility}
+            onClick={uiStore.mainSideMenu.toggle}
           >
             <Icon name="#menubars" color={uiStore.colors['color-font-default']} bgPadding={6} />
           </Button>
@@ -40,7 +40,7 @@ Header.propTypes = {
       hideMainNavMenu: PropTypes.func.isRequired,
       toggleProp: PropTypes.func.isRequired,
       mainSideMenu: PropTypes.shape({
-        toggleVisibility: PropTypes.func.isRequired,
+        toggle: PropTypes.func.isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,

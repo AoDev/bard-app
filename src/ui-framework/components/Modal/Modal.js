@@ -5,14 +5,14 @@ import Button from '../Button'
 import {Portal} from 'react-portal'
 
 /**
- * @typedef {import ('../../../application/shared-components/viewModels/ConfirmDialog').default} ConfirmDialog
- * @typedef {import ('../../../application/shared-components/viewModels/Dialog').default} Dialog
+ * @typedef {import ('../../../application/shared-components/viewModels/ConfirmDialogVM').default} ConfirmDialogVM
+ * @typedef {import ('../../../application/shared-components/viewModels/DialogVM').default} DialogVM
  */
 
 /**
  * @typedef {Object} modalProps
  * @property {boolean} withCloseButton
- * @property {ConfirmDialog|Dialog} modalVM
+ * @property {ConfirmDialogVM|DialogVM} modalVM
  * @property {string} cancelText
  * @property {string} btnVariant
  * @property {object} children
@@ -27,33 +27,34 @@ import {Portal} from 'react-portal'
  * @param {modalProps} props
  */
 export function Modal(props) {
+  const {modalVM} = props
   let modalClasses = props.small ? 'modal--small' : 'modal'
-  modalClasses += ' zoomIn'
+  modalClasses += modalVM.state === 'showing' || modalVM.state === 'visible' ? ' zoomIn' : ''
+  modalClasses += modalVM.state === 'hiding' ? ' zoomOut' : ''
+
   if (props.className) {
     modalClasses += props.className
   }
 
-  if (!props.modalVM.visible) {
+  if (!modalVM.visible) {
     return null
   }
 
-  const {isConfirmDialog} = props.modalVM
+  const {isConfirmDialog} = modalVM
   const btnWrapperCss = props.btnVariant === 'link' ? 'flex-col-end' : 'flex-col-end padded-1'
+  const hideByOverlayClick =
+    (isConfirmDialog && modalVM.canCancel) || !isConfirmDialog ? modalVM.hide : null
 
   return (
     <Portal>
-      <div className="modal-overlay">
+      <div className="modal-overlay" onClick={hideByOverlayClick}>
         <div className={modalClasses}>
           <div className="flex-col height-100p">
             <div className="scroll-y">{props.children}</div>
             {!isConfirmDialog && props.withCloseButton && (
               <div className={btnWrapperCss}>
                 <div className="flex-row-center">
-                  <Button
-                    className="modal__btn"
-                    variant={props.btnVariant}
-                    onClick={props.modalVM.hide}
-                  >
+                  <Button className="modal__btn" variant={props.btnVariant} onClick={modalVM.hide}>
                     {props.closeText}
                   </Button>
                 </div>
@@ -62,21 +63,21 @@ export function Modal(props) {
             {isConfirmDialog && (
               <div className={btnWrapperCss}>
                 <div className="flex-row-center">
-                  {props.modalVM.canCancel && (
+                  {modalVM.canCancel && (
                     <Button
                       className="modal__btn"
                       variant={props.btnVariant}
-                      onClick={props.modalVM.cancel}
+                      onClick={modalVM.cancel}
                     >
                       {props.cancelText}
                     </Button>
                   )}
 
-                  {props.modalVM.canConfirm && (
+                  {modalVM.canConfirm && (
                     <Button
                       className="modal__btn"
                       variant={props.btnVariant}
-                      onClick={props.modalVM.confirm}
+                      onClick={modalVM.confirm}
                     >
                       {props.confirmText}
                     </Button>
@@ -99,7 +100,7 @@ Modal.propTypes = {
     visible: PropTypes.bool.isRequired,
     canConfirm: PropTypes.bool,
     canCancel: PropTypes.bool,
-    toggleVisibility: PropTypes.func,
+    toggle: PropTypes.func,
   }).isRequired,
   cancelText: PropTypes.string.isRequired,
   children: PropTypes.node,

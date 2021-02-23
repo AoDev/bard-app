@@ -28,7 +28,7 @@ const routes = {
     },
   },
   '/public/signin': {
-    windowTitlePlugin: {title: 'Start a session'},
+    windowTitlePlugin: {title: 'Start'},
   },
 
   '/public/ui-framework': {
