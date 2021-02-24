@@ -3,7 +3,7 @@ import DialogVM from './DialogVM'
 
 const {action, observable} = mobx
 
-export default class ConfirmDialog extends DialogVM {
+export default class ConfirmDialogVM extends DialogVM {
   isConfirmDialog = true
   canCancel = true
   canConfirm = true

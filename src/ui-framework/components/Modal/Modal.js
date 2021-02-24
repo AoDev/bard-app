@@ -42,12 +42,17 @@ export function Modal(props) {
 
   const {isConfirmDialog} = modalVM
   const btnWrapperCss = props.btnVariant === 'link' ? 'flex-col-end' : 'flex-col-end padded-1'
-  const hideByOverlayClick =
-    (isConfirmDialog && modalVM.canCancel) || !isConfirmDialog ? modalVM.hide : null
+  const onOverlayClick = (event) => {
+    if (props.hideOnOverlayClick && event.currentTarget === event.target) {
+      if ((isConfirmDialog && modalVM.canCancel) || !isConfirmDialog) {
+        modalVM.hide()
+      }
+    }
+  }
 
   return (
     <Portal>
-      <div className="modal-overlay" onClick={hideByOverlayClick}>
+      <div className="modal-overlay" onClick={onOverlayClick}>
         <div className={modalClasses}>
           <div className="flex-col height-100p">
             <div className="scroll-y">{props.children}</div>
@@ -110,6 +115,7 @@ Modal.propTypes = {
   canCancel: PropTypes.bool.isRequired,
   small: PropTypes.bool.isRequired,
   btnVariant: PropTypes.string.isRequired,
+  hideOnOverlayClick: PropTypes.bool.isRequired,
 }
 
 Modal.defaultProps = {
@@ -120,6 +126,7 @@ Modal.defaultProps = {
   confirmText: 'Confirm',
   cancelText: 'Cancel',
   canCancel: true,
+  hideOnOverlayClick: true,
 }
 
 export default observer(Modal)
