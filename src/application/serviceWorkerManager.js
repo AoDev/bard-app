@@ -5,15 +5,17 @@ import {Workbox, messageSW} from 'workbox-window'
 
 /**
  * @param {UIStore} uiStore
+ * @see https://developers.google.com/web/tools/workbox/guides/advanced-recipes#offer_a_page_reload_for_users
  */
 async function run(uiStore) {
   if ('serviceWorker' in navigator) {
-    // const {Workbox, messageSW} = await import('workbox-window')
     const wb = new Workbox('/service-worker.js')
     let registration
 
+    // Show app update dialog
     const showSkipWaitingPrompt = (event) => {
-      uiStore.appUpdateDialog.set('onConfirm', () => {
+      const {appUpdateDialog} = uiStore
+      appUpdateDialog.set('onConfirm', () => {
         wb.addEventListener('controlling', () => {
           window.location.reload()
         })
@@ -21,18 +23,13 @@ async function run(uiStore) {
           messageSW(registration.waiting, {type: 'SKIP_WAITING'})
         }
       })
+      appUpdateDialog.show()
     }
 
     wb.addEventListener('activated', (event) => {
       if (!event.isUpdate) {
         console.log('First time service worker activation.')
       }
-    })
-
-    wb.addEventListener('waiting', (event) => {
-      console.log(
-        "A new service worker is available, but can't activate until all tabs running the current version have fully unloaded."
-      )
     })
 
     // Add an event listener to detect when the registered

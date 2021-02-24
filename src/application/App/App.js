@@ -10,6 +10,8 @@ import Header from './Header'
 import NotFound from './NotFound'
 import MainSideMenu from './MainSideMenu'
 import Public from './Public'
+import AppUpdateNotification from './AppUpdateNotification'
+
 const Private = loadable(() => import(/* webpackChunkName: "private" */ './Private'))
 setTimeout(() => Private.preload(), 1000)
 
@@ -24,6 +26,7 @@ export function App({uiStore, rootStore}) {
           <Route path="/public" Component={Public} />
           <Route path="/private" Component={Private} />
         </div>
+        <AppUpdateNotification appUpdateDialog={uiStore.appUpdateDialog} />
         <Modal modalVM={uiStore.unexpectedErrorDialog}>
           <UnexpectedError rootStore={rootStore} />
         </Modal>

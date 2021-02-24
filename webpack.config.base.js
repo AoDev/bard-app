@@ -100,9 +100,9 @@ const plugins = [
   new WorkboxPlugin.InjectManifest({
     swSrc: './src/service-worker.js',
     swDest: 'service-worker.js',
-    // In dev, prevents SW from intercepting hot-updates so cache nothing.
-    // In prod, removes default exclude of workbox that prevents Webpack manifest to be cached.
-    exclude: IS_DEVELOPMENT ? [/.*/] : [],
+    // In dev, prevents SW from intercepting hot-updates so cache nothing except the index.html.
+    // In prod, explicitely include everything because workbox prevents Webpack manifest to be cached by default.
+    include: IS_DEVELOPMENT ? [/html/] : [/.*/],
   }),
 ]
 

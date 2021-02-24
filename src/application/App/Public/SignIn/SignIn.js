@@ -12,7 +12,7 @@ export default function SignIn(props) {
 
   return (
     <div className="padded-1">
-      <div className="space-top-2 max-width-24em center-block md-panel-group panel--simple">
+      <div className="space-top-2 max-width-24em center-block panel--simple">
         <div className="padded-1 bg-alternative">
           <h3 className="flex-row-center space-0">
             <Icon name="#user" size={28} className="flex-no-shrink" />
