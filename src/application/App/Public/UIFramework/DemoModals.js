@@ -19,14 +19,17 @@ export function DemoModals({vm}) {
           <Modal
             modalVM={vm.testModal}
             small={vm.inputSmallModal}
+            hideOnOverlayClick={vm.inputHideOnOverlayClick}
             withCloseButton={vm.inputModalWithCloseButton}
           >
-            <h3>Modal title</h3>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla, at aperiam!
-              Recusandae, architecto obcaecati perspiciatis odio, asperiores quaerat nulla iure rem
-              praesentium et, in aperiam. Ipsum maiores et incidunt ad.
-            </p>
+            <div className="padded-1">
+              <h3>Modal title</h3>
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla, at aperiam!
+                Recusandae, architecto obcaecati perspiciatis odio, asperiores quaerat nulla iure
+                rem praesentium et, in aperiam. Ipsum maiores et incidunt ad.
+              </p>
+            </div>
           </Modal>
         </div>
         <div className="space-bottom-1">
@@ -34,14 +37,17 @@ export function DemoModals({vm}) {
           <Modal
             modalVM={vm.testModalWithTransition}
             small={vm.inputSmallModal}
+            hideOnOverlayClick={vm.inputHideOnOverlayClick}
             withCloseButton={vm.inputModalWithCloseButton}
           >
-            <h3>Modal title</h3>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla, at aperiam!
-              Recusandae, architecto obcaecati perspiciatis odio, asperiores quaerat nulla iure rem
-              praesentium et, in aperiam. Ipsum maiores et incidunt ad.
-            </p>
+            <div className="padded-1">
+              <h3>Modal title</h3>
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla, at aperiam!
+                Recusandae, architecto obcaecati perspiciatis odio, asperiores quaerat nulla iure
+                rem praesentium et, in aperiam. Ipsum maiores et incidunt ad.
+              </p>
+            </div>
           </Modal>
         </div>
         <div className="space-bottom-1">
@@ -60,20 +66,23 @@ export function DemoModals({vm}) {
           <Modal
             modalVM={vm.testConfirmDialog}
             small={vm.inputSmallModal}
+            hideOnOverlayClick={vm.inputHideOnOverlayClick}
             withCloseButton={vm.inputModalWithCloseButton}
           >
-            <h3>Modal title</h3>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla, at aperiam!
-              Recusandae, architecto obcaecati perspiciatis odio, asperiores quaerat nulla iure rem
-              praesentium et, in aperiam. Ipsum maiores et incidunt ad.
-            </p>
+            <div className="padded-1">
+              <h3>Modal title</h3>
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla, at aperiam!
+                Recusandae, architecto obcaecati perspiciatis odio, asperiores quaerat nulla iure
+                rem praesentium et, in aperiam. Ipsum maiores et incidunt ad.
+              </p>
+            </div>
           </Modal>
         </div>
       </div>
 
-      <div className="bg-alternative padded-1 flex-row-center">
-        <div className="space-right-2">
+      <div className="bg-alternative padded-1">
+        <div className="space-bottom-1">
           <Input
             id="inputSmallModal"
             type="checkbox"
@@ -86,7 +95,7 @@ export function DemoModals({vm}) {
             small
           </label>
         </div>
-        <div className="space-right-2">
+        <div className="space-bottom-1">
           <Input
             id="inputModalWithCloseButton"
             type="checkbox"
@@ -99,6 +108,19 @@ export function DemoModals({vm}) {
             withCloseButton
           </label>
         </div>
+        <div className="space-bottom-1">
+          <Input
+            id="inputHideOnOverlayClick"
+            type="checkbox"
+            value={vm.inputHideOnOverlayClick}
+            onChange={vm.toggle}
+            onChangeEmit="name-value"
+            name="inputHideOnOverlayClick"
+          />
+          <label className="label space-left-1" htmlFor="inputHideOnOverlayClick">
+            hideOnOverlayClick
+          </label>
+        </div>
       </div>
     </React.Fragment>
   )
@@ -106,6 +128,7 @@ export function DemoModals({vm}) {
 
 DemoModals.propTypes = {
   vm: PropTypes.shape({
+    inputHideOnOverlayClick: PropTypes.any,
     inputModalWithCloseButton: PropTypes.any,
     inputSmallModal: PropTypes.any,
     testConfirmDialog: PropTypes.shape({

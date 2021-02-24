@@ -40,6 +40,7 @@ export default class UIFrameworkVM {
   inputButtonActive = false
   inputSmallModal = false
   inputModalWithCloseButton = true
+  inputHideOnOverlayClick = true
 
   set(prop, value) {
     this[prop] = value
