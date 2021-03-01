@@ -7,6 +7,8 @@ import viewModels from 'shared-components/viewModels'
 
 class DemoFormVM {
   inputSwitch = false
+  inputSelect = 1
+  inputSelectOptions = [1, 2, 3, 4, 5]
 
   set(prop, value) {
     this[prop] = value
@@ -38,6 +40,8 @@ export default class UIFrameworkVM {
   inputButtonIsLoading = false
   inputButtonDisabled = false
   inputButtonActive = false
+  inputButtonFocused = false
+  inputNoteWithBackground = false
   inputSmallModal = false
   inputModalWithCloseButton = true
   inputHideOnOverlayClick = true

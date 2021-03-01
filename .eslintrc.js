@@ -30,5 +30,6 @@ module.exports = {
 
   rules: {
     'react/prop-types': 1,
+    'react/no-unescaped-entities': 0,
   },
 }
