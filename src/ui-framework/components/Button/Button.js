@@ -57,6 +57,7 @@ export function Button(props) {
     disabledMock,
     caretRight,
     caretRightEnd,
+    focused,
     ...otherProps
   } = props
 
@@ -67,6 +68,7 @@ export function Button(props) {
   round && (cssClasses += ' btn-round')
   square && (cssClasses += ' btn-square')
   active && (cssClasses += ' active')
+  focused && (cssClasses += ' focus')
   ;(disabled || disabledMock) && (cssClasses += ' disabled')
   isLoading && (cssClasses += ' btn-loading')
 
@@ -109,6 +111,10 @@ Button.propTypes = {
    * Html type of button (button | submit)
    */
   active: PropTypes.bool,
+  /**
+   * Focus / hover state programmatically
+   */
+  focused: PropTypes.bool.isRequired,
   block: PropTypes.bool.isRequired,
   caretRight: PropTypes.bool.isRequired,
   caretRightEnd: PropTypes.bool.isRequired,
@@ -124,6 +130,7 @@ Button.defaultProps = {
   caretRightEnd: false,
   className: '',
   disabledMock: false,
+  focused: false,
   isLoading: false,
   round: false,
   square: false,

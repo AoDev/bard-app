@@ -126,7 +126,7 @@ Select.propTypes = {
   /**
    * Item currently selected
    */
-  itemSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
   /**
    * An optional 'placeholder' option (like 'Choose an option!'). It can be used instead of or alongside with a normal `label`.
    * Since it has no value, it's possible for the user to not select anything, or unselect the active option. This option will only

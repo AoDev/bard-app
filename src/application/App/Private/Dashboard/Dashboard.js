@@ -8,7 +8,7 @@ export default function Dashboard(props) {
     <div className="r-grid-fluid-colmin24em md-padded-1">
       {vm.widgets.map((widget) => {
         return (
-          <div key={widget.id} className="md-panel-group flex-col pos-rel">
+          <div key={widget.id} className="md-panel--simple flex-col pos-rel">
             <div className="bg-alternative padded-1">
               <h3 className="space-0">{widget.title}</h3>
             </div>
@@ -18,7 +18,7 @@ export default function Dashboard(props) {
           </div>
         )
       })}
-      <div className="md-panel-group flex-col pos-rel">
+      <div className="md-panel--simple flex-col pos-rel">
         <div className="bg-alternative padded-1">
           <h3 className="space-0">Super heroes</h3>
         </div>

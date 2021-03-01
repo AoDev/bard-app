@@ -14,7 +14,7 @@ export default function UserProfile({vm}) {
 
   return (
     <div className="r-grid-fluid-colmin24em space-bottom-2 md-padded-1">
-      <form className="panel--simple flex-col" onSubmit={vm.submit}>
+      <form className="md-panel--simple flex-col" onSubmit={vm.submit}>
         <div className="panel__header bg-alternative padded-1 flex-row-center">
           <h3 className="space-0">Profile</h3>
           <Button
@@ -45,7 +45,7 @@ export default function UserProfile({vm}) {
         </div>
       </form>
 
-      <section className="panel--simple flex-col">
+      <section className="md-panel--simple flex-col">
         <div className="panel__header bg-alternative padded-1 flex-row-center">
           <h3 className="space-0">Delete this profile</h3>
           <Button

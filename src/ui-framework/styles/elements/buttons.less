@@ -55,12 +55,14 @@ button {
     fill: @color;
   }
 
+  &.focus,
   &:focus,
   &:hover {
     color: @color;
   }
 
   @media @hover-support {
+    &.focus,
     &:focus,
     &:hover {
       color: @color;
@@ -69,11 +71,12 @@ button {
     }
   }
 
+  &.active.focus,
   &.active:hover,
   &.active:focus,
   &.active {
     cursor: default;
-    color: #fff;
+    color: #000;
     background-color: @color;
     box-shadow: none;
 
@@ -92,6 +95,7 @@ button {
       fill: #777;
     }
 
+    &.focus,
     &:focus,
     &:hover {
       border-color: #bbb;
@@ -119,11 +123,12 @@ button {
   transition-duration: 0.4s;
   transition-timing-function: linear;
 
+  &.focus,
   &:focus,
   &:hover {
     color: #000;
-    background-color: @color;
-    border-color: @color;
+    background-color: spin(lighten(@color, 8%), 5);
+    border-color: spin(lighten(@color, 8%), 5);
   }
 
   &.disabled {
@@ -131,6 +136,7 @@ button {
     background-color: var(--color-btn-disabled-bg);
     border-color: var(--color-btn-disabled-bg);
 
+    &.focus,
     &:focus,
     &:hover {
       border-color: var(--color-btn-disabled-bg);
@@ -198,6 +204,7 @@ button {
     fill: var(--color-blue-aim);
   }
 
+  &.focus,
   &:focus,
   &:hover {
     color: darken(@color-blue-vivid, 5%);
@@ -232,6 +239,7 @@ button {
   font-weight: bold;
   width: 100%;
 
+  &.focus,
   &:focus,
   &:hover {
     background-color: #f5f5f5;
@@ -243,6 +251,7 @@ button {
   border: 0;
   color: @color-blue-aim;
 
+  &.focus,
   &.active:hover,
   &.active:focus,
   &.active,
@@ -335,6 +344,7 @@ a.btn {
     border-radius: 2px;
   }
 
+  &.focus,
   &:focus {
     outline: 0;
     box-shadow: none;

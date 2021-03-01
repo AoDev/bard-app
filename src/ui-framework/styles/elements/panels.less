@@ -11,6 +11,17 @@
   overflow: hidden;
 }
 
+.md-panel--simple {
+  background-color: var(--color-content-bg);
+  overflow: hidden;
+
+  @media @md-screen {
+    .border-1;
+    .border-rounded;
+    .shadow-1;
+  }
+}
+
 // panel-group is there to wrap a serie of containers into a border
 .panel-group {
   .border-rounded;
