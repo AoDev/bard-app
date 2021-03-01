@@ -4,9 +4,11 @@ import {observer, inject} from 'mobx-react'
 import SignIn from './SignIn'
 import Faq from './Faq'
 import AppSettings from './AppSettings'
-import UIFramework from './UIFramework'
+import loadable from '@loadable/component'
 import {Route} from 'bard-router'
 import {Loader} from 'ui-framework'
+
+const UIFramework = loadable(() => import(/* webpackChunkName: "UIFramework" */ './UIFramework'))
 
 export function Public(props) {
   const {rootStore} = props

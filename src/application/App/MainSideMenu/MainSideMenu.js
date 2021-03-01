@@ -116,16 +116,18 @@ export function MainSideMenu({vm}) {
                   <span className="space-left-1">FAQ</span>
                 </Link>
 
-                <Link
-                  autoActive
-                  id="link-menu-ui-framework"
-                  to="/public/ui-framework"
-                  className="btn--msm block space-top-1"
-                  onClick={handleMainMenuClick}
-                >
-                  <Icon top={6} name="#ui-framework" />
-                  <span className="space-left-1">UI framework</span>
-                </Link>
+                {process.env.NODE_ENV !== 'production' && (
+                  <Link
+                    autoActive
+                    id="link-menu-ui-framework"
+                    to="/public/ui-framework"
+                    className="btn--msm block space-top-1"
+                    onClick={handleMainMenuClick}
+                  >
+                    <Icon top={6} name="#ui-framework" />
+                    <span className="space-left-1">UI framework</span>
+                  </Link>
+                )}
 
                 {vm.session.signedIn && (
                   <React.Fragment>
