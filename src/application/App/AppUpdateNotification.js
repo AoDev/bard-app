@@ -17,7 +17,7 @@ export function AppUpdateNotification({appUpdateDialog}) {
       <div className="padded-1">
         <div className="flex-row-center">
           <img src={appLogo} height="64" width="64" alt="Bard" />
-          <h2 className="h-header space-left-1">Update available</h2>
+          <h2 className="h-header margin-left-1">Update available</h2>
         </div>
         <p>The app will restart to get the latest improvements.</p>
       </div>

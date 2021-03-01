@@ -1,68 +1,68 @@
 // SPACERS -------------------------------------------------------------- //
-// generates classes like space-top-1, space-bottom-2, space-left-3, ...
+// generates classes like margin-top-1, margin-bottom-2, margin-left-3, ...
 @spacer-directions: top, right, bottom, left;
 @spacer-values: 0, 1, 2, 3, 4;
 
 each(@spacer-values, .(@svalue) {
   each(@spacer-directions, .(@direction) {
-    .space-@{direction}-@{svalue} {
+    .margin-@{direction}-@{svalue} {
       margin-@{direction}: @spacing-base * @svalue;
     }
   })
 });
 
 each(@spacer-directions, .(@direction) {
-  .space-@{direction}-05 {
+  .margin-@{direction}-05 {
     margin-@{direction}: @spacing-base * 0.5;
   }
 });
 
-.md-space-top-1 {
+.md-margin-top-1 {
   @media @md-screen {
     margin-top: @spacing-base;
   }
 }
 
-.md-space-top-2 {
+.md-margin-top-2 {
   @media @md-screen {
     margin-top: @spacing-base * 2;
   }
 }
 
-.lg-space-top-2 {
+.lg-margin-top-2 {
   @media @lg-screen {
     margin-top: @spacing-base * 2;
   }
 }
 
 // When needed to add a char space between words in two spans for example.
-.space-left-1ch {
+.margin-left-1ch {
   margin-left: 1ch;
 }
 
-.space-right-1ch {
+.margin-right-1ch {
   margin-right: 1ch;
 }
 
-.space-0 {
+.margin-0 {
   margin: 0 !important;
 }
 
-.space-1 {
+.margin-1 {
   margin: @spacing-base !important;
 }
 
-.space-v-1 {
+.margin-v-1 {
   margin-top: @spacing-base;
   margin-bottom: @spacing-base;
 }
 
-.space-v-2 {
+.margin-v-2 {
   margin-top: @spacing-base * 2;
   margin-bottom: @spacing-base * 2;
 }
 
-.space-h-1 {
+.margin-h-1 {
   margin-left: @spacing-base;
   margin-right: @spacing-base;
 }

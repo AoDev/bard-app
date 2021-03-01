@@ -14,7 +14,7 @@ export function DemoModals({vm}) {
   return (
     <React.Fragment>
       <div className="padded-1">
-        <div className="space-bottom-1">
+        <div className="margin-bottom-1">
           <Button onClick={vm.testModal.show}>Show modal</Button>
           <Modal
             modalVM={vm.testModal}
@@ -32,7 +32,7 @@ export function DemoModals({vm}) {
             </div>
           </Modal>
         </div>
-        <div className="space-bottom-1">
+        <div className="margin-bottom-1">
           <Button onClick={vm.testModalWithTransition.show}>Show modal with transition</Button>
           <Modal
             modalVM={vm.testModalWithTransition}
@@ -50,7 +50,7 @@ export function DemoModals({vm}) {
             </div>
           </Modal>
         </div>
-        <div className="space-bottom-1">
+        <div className="margin-bottom-1">
           <div className="flex-row-center">
             <Button
               onClick={vm.testConfirmDialog.show}
@@ -82,7 +82,7 @@ export function DemoModals({vm}) {
       </div>
 
       <div className="bg-alternative padded-1">
-        <div className="space-bottom-1">
+        <div className="margin-bottom-1">
           <Input
             id="inputSmallModal"
             type="checkbox"
@@ -91,11 +91,11 @@ export function DemoModals({vm}) {
             onChangeEmit="name-value"
             name="inputSmallModal"
           />
-          <label className="label space-left-1" htmlFor="inputSmallModal">
+          <label className="label margin-left-1" htmlFor="inputSmallModal">
             small
           </label>
         </div>
-        <div className="space-bottom-1">
+        <div className="margin-bottom-1">
           <Input
             id="inputModalWithCloseButton"
             type="checkbox"
@@ -104,11 +104,11 @@ export function DemoModals({vm}) {
             onChangeEmit="name-value"
             name="inputModalWithCloseButton"
           />
-          <label className="label space-left-1" htmlFor="inputModalWithCloseButton">
+          <label className="label margin-left-1" htmlFor="inputModalWithCloseButton">
             withCloseButton
           </label>
         </div>
-        <div className="space-bottom-1">
+        <div className="margin-bottom-1">
           <Input
             id="inputHideOnOverlayClick"
             type="checkbox"
@@ -117,7 +117,7 @@ export function DemoModals({vm}) {
             onChangeEmit="name-value"
             name="inputHideOnOverlayClick"
           />
-          <label className="label space-left-1" htmlFor="inputHideOnOverlayClick">
+          <label className="label margin-left-1" htmlFor="inputHideOnOverlayClick">
             hideOnOverlayClick
           </label>
         </div>

@@ -14,7 +14,7 @@ export function DemoButtons({vm}) {
   return (
     <div className="panel--simple">
       <div className="bg-alternative padded-1">
-        <h3 className="space-0">Buttons</h3>
+        <h3 className="margin-0">Buttons</h3>
       </div>
       <div className="grid-fluid-colmin8em padded-1">
         <Button
@@ -100,8 +100,8 @@ export function DemoButtons({vm}) {
         </Button>
       </div>
       <div className="bg-alternative padded-1">
-        <div className="flex-row-center space-bottom-1">
-          <div className="space-right-2">
+        <div className="flex-row-center margin-bottom-1">
+          <div className="margin-right-2">
             <Input
               id="inputButtonIsLoading"
               type="checkbox"
@@ -110,11 +110,11 @@ export function DemoButtons({vm}) {
               onChangeEmit="name-value"
               name="inputButtonIsLoading"
             />
-            <label className="label space-left-1" htmlFor="inputButtonIsLoading">
+            <label className="label margin-left-1" htmlFor="inputButtonIsLoading">
               isLoading
             </label>
           </div>
-          <div className="space-right-2">
+          <div className="margin-right-2">
             <Input
               id="inputButtonDisabled"
               type="checkbox"
@@ -123,13 +123,13 @@ export function DemoButtons({vm}) {
               onChangeEmit="name-value"
               name="inputButtonDisabled"
             />
-            <label className="label space-left-1" htmlFor="inputButtonDisabled">
+            <label className="label margin-left-1" htmlFor="inputButtonDisabled">
               disabled
             </label>
           </div>
         </div>
         <div className="flex-row-center">
-          <div className="space-right-2">
+          <div className="margin-right-2">
             <Input
               id="inputButtonActive"
               type="checkbox"
@@ -138,11 +138,11 @@ export function DemoButtons({vm}) {
               onChangeEmit="name-value"
               name="inputButtonActive"
             />
-            <label className="label space-left-1" htmlFor="inputButtonActive">
+            <label className="label margin-left-1" htmlFor="inputButtonActive">
               active
             </label>
           </div>
-          <div className="space-right-2">
+          <div className="margin-right-2">
             <Input
               id="inputButtonFocused"
               type="checkbox"
@@ -151,7 +151,7 @@ export function DemoButtons({vm}) {
               onChangeEmit="name-value"
               name="inputButtonFocused"
             />
-            <label className="label space-left-1" htmlFor="inputButtonFocused">
+            <label className="label margin-left-1" htmlFor="inputButtonFocused">
               focused/hover
             </label>
           </div>

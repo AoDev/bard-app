@@ -6,7 +6,7 @@ import {Loader} from 'ui-framework'
 export function SignOut(props) {
   const {sessionStore} = props
   return (
-    <div className="max-width-24em block-center space-top-2">
+    <div className="max-width-24em block-center margin-top-2">
       <div className="txt-center">
         {sessionStore.isAuthenticating && <Loader white label="Signing out" />}
         {sessionStore.error && (

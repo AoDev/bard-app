@@ -14,20 +14,20 @@ export default function AppSettings({vm}) {
 
   return (
     <div className="padded-1">
-      <div className="r-grid-fluid-colmin24em space-bottom-4">
+      <div className="r-grid-fluid-colmin24em margin-bottom-4">
         <section className="panel--simple pos-rel padded-2 flex-center txt-center">
           <div>
-            <h3 className="heading-section space-0">App Settings</h3>
+            <h3 className="heading-section margin-0">App Settings</h3>
             <p>All changes are saved on the device automatically.</p>
           </div>
         </section>
         <section className="panel--simple flex-col pos-rel">
           <div className="bg-alternative padded-1">
-            <h3 className="space-0">UI Settings</h3>
+            <h3 className="margin-0">UI Settings</h3>
           </div>
           <div className="padded-1 flex-fill">
-            <div className="space-bottom-1">
-              <label className="label space-right-1">
+            <div className="margin-bottom-1">
+              <label className="label margin-right-1">
                 Color theme: <i>{settings.theme}</i>
               </label>
             </div>

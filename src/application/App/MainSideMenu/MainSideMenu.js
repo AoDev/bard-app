@@ -35,7 +35,7 @@ export function MainSideMenu({vm}) {
             >
               <Icon name="#menubars" color={uiStore.colors['color-font-default']} bgPadding={6} />
             </Button>
-            <img className="space-right-1ch" src={appLogo} height="32" /> Bard
+            <img className="margin-right-1ch" src={appLogo} height="32" /> Bard
           </div>
         )}
         {vm.section !== '' && (
@@ -60,7 +60,7 @@ export function MainSideMenu({vm}) {
           </div>
         )}
         <div className={contentClass}>
-          <div className="flex-col space-bottom-2">
+          <div className="flex-col margin-bottom-2">
             {vm.section === '' && (
               <React.Fragment>
                 {vm.session.signedIn && (
@@ -69,12 +69,12 @@ export function MainSideMenu({vm}) {
                       autoActive
                       id="link-menu-profile"
                       to="/private/user-profile"
-                      className="btn--msm msm__btn-with-info block space-top-1"
+                      className="btn--msm msm__btn-with-info block margin-top-1"
                       onClick={handleMainMenuClick}
                     >
                       <div className="flex-row-center">
                         <Icon name="#user" />
-                        <span className="space-left-1">
+                        <span className="margin-left-1">
                           <div className="">User profile</div>
                           <div className="msm__btn-info--red">{vm.session.user.name}</div>
                         </span>
@@ -87,33 +87,33 @@ export function MainSideMenu({vm}) {
                   autoActive
                   id="link-menu-dashboard"
                   to="/private/dashboards"
-                  className="btn--msm block space-top-1"
+                  className="btn--msm block margin-top-1"
                   onClick={handleMainMenuClick}
                 >
                   <Icon top={6} name="#dashboard" />
-                  <span className="space-left-1">Dashboards</span>
+                  <span className="margin-left-1">Dashboards</span>
                 </Link>
 
                 <Link
                   autoActive
                   id="link-menu-settings"
                   to="/public/app-settings"
-                  className="btn--msm block space-top-1"
+                  className="btn--msm block margin-top-1"
                   onClick={handleMainMenuClick}
                 >
                   <Icon top={6} name="#menu-settings" />
-                  <span className="space-left-1">App Settings</span>
+                  <span className="margin-left-1">App Settings</span>
                 </Link>
 
                 <Link
                   autoActive
                   id="link-menu-faq"
                   to="/public/faq"
-                  className="btn--msm block space-top-1"
+                  className="btn--msm block margin-top-1"
                   onClick={handleMainMenuClick}
                 >
                   <Icon top={6} name="#faq" />
-                  <span className="space-left-1">FAQ</span>
+                  <span className="margin-left-1">FAQ</span>
                 </Link>
 
                 {process.env.NODE_ENV !== 'production' && (
@@ -121,11 +121,11 @@ export function MainSideMenu({vm}) {
                     autoActive
                     id="link-menu-ui-framework"
                     to="/public/ui-framework"
-                    className="btn--msm block space-top-1"
+                    className="btn--msm block margin-top-1"
                     onClick={handleMainMenuClick}
                   >
                     <Icon top={6} name="#ui-framework" />
-                    <span className="space-left-1">UI framework</span>
+                    <span className="margin-left-1">UI framework</span>
                   </Link>
                 )}
 
@@ -135,11 +135,11 @@ export function MainSideMenu({vm}) {
                       autoActive
                       id="link-menu-signout"
                       to="/private/signout"
-                      className="btn--msm block space-top-1"
+                      className="btn--msm block margin-top-1"
                       onClick={handleMainMenuClick}
                     >
                       <Icon top={6} name="#logout2" />
-                      <span className="space-left-1">Log out</span>
+                      <span className="margin-left-1">Log out</span>
                     </Link>
                   </React.Fragment>
                 )}

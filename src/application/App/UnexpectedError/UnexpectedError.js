@@ -13,7 +13,7 @@ export function UnexpectedError(props) {
     <React.Fragment>
       <h3 className="padded-h-2 txt-negative">An unexpected error has occured</h3>
       <div className="r-panel padded-2">
-        <p className="space-top-0">
+        <p className="margin-top-0">
           It is recommended that you restart the application and report the issue.
         </p>
         <h4>How to report the issue</h4>

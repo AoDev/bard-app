@@ -42,13 +42,15 @@ export class ErrorBoundary extends React.PureComponent {
         .filter((line) => line !== '')
 
       return (
-        <div className="max-width-48em center-block space-bottom-4 height-100p">
-          <div className="md-panel-group space-v-1" style={styles.wrapper}>
+        <div className="max-width-48em center-block margin-bottom-4 height-100p">
+          <div className="md-panel-group margin-v-1" style={styles.wrapper}>
             <div className="flex-row-center bg-content padded-1">
               <Icon name="#smiley-dead" size={96} />
-              <div className="space-left-1">
-                <h1 className="space-top-0">Oops! Bard crashed :(</h1>
-                <p className="txt-11 txt-positive space-0">Please, first try to restart the app.</p>
+              <div className="margin-left-1">
+                <h1 className="margin-top-0">Oops! Bard crashed :(</h1>
+                <p className="txt-11 txt-positive margin-0">
+                  Please, first try to restart the app.
+                </p>
               </div>
             </div>
 
@@ -56,7 +58,7 @@ export class ErrorBoundary extends React.PureComponent {
               <section>
                 <div className="bg-content padded-1">
                   <h2>You can help by reporting this issue</h2>
-                  <ul className="list-not-padding list-spaced-1 space-bottom-2">
+                  <ul className="list-not-padding list-spaced-1 margin-bottom-2">
                     <li>
                       <p>
                         You can send an email at{' '}

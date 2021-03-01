@@ -11,7 +11,7 @@ export function InputX({vm, name, label, id, ...otherProps}) {
   return (
     <React.Fragment>
       {label && (
-        <label htmlFor={inputId} className="label space-right-1">
+        <label htmlFor={inputId} className="label margin-right-1">
           {label}
         </label>
       )}

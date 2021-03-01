@@ -13,10 +13,10 @@ export default function UserProfile({vm}) {
   const {user} = vm
 
   return (
-    <div className="r-grid-fluid-colmin24em space-bottom-2 md-padded-1">
+    <div className="r-grid-fluid-colmin24em margin-bottom-2 md-padded-1">
       <form className="md-panel--simple flex-col" onSubmit={vm.submit}>
         <div className="panel__header bg-alternative padded-1 flex-row-center">
-          <h3 className="space-0">Profile</h3>
+          <h3 className="margin-0">Profile</h3>
           <Button
             variant="plain-green"
             className="flex-row-end"
@@ -29,8 +29,8 @@ export default function UserProfile({vm}) {
 
         <div className="padded-1 flex-fill">
           <input id="profile-id" type="hidden" value={user.id} />
-          <div className="flex-row-center space-bottom-2">
-            <label className="label space-right-1" htmlFor="input-profile-name">
+          <div className="flex-row-center margin-bottom-2">
+            <label className="label margin-right-1" htmlFor="input-profile-name">
               User name
             </label>
             <Input
@@ -47,7 +47,7 @@ export default function UserProfile({vm}) {
 
       <section className="md-panel--simple flex-col">
         <div className="panel__header bg-alternative padded-1 flex-row-center">
-          <h3 className="space-0">Delete this profile</h3>
+          <h3 className="margin-0">Delete this profile</h3>
           <Button
             className="flex-row-end"
             id="btn-submit-delete-profile"
@@ -62,10 +62,10 @@ export default function UserProfile({vm}) {
         </div>
 
         <div className="padded-1">
-          <p className="space-top-0">All associated data will be removed as well.</p>
+          <p className="margin-top-0">All associated data will be removed as well.</p>
 
-          <div className="flex-row-center space-bottom-2">
-            <label className="label space-right-1" htmlFor="input-profile-password">
+          <div className="flex-row-center margin-bottom-2">
+            <label className="label margin-right-1" htmlFor="input-profile-password">
               Your password
             </label>
             <Input

@@ -24,12 +24,12 @@ const loader = (
   </div>
 )
 const iconCaretRight = (
-  <span className="space-left-1ch">
+  <span className="margin-left-1ch">
     <Icon name="#caret-right" size={14} top={-2} />
   </span>
 )
 const iconCaretRightEnd = (
-  <span className="space-left-1ch float-right">
+  <span className="margin-left-1ch float-right">
     <Icon name="#caret-right" size={14} top={-2} />
   </span>
 )

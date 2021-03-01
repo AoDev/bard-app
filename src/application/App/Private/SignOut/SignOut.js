@@ -4,7 +4,7 @@ import {Loader} from 'ui-framework'
 
 export function SignOut() {
   return (
-    <div className="max-width-24em center-block space-top-2">
+    <div className="max-width-24em center-block margin-top-2">
       <div className="txt-center">
         <Loader label="Signing out" />
       </div>

@@ -16,25 +16,25 @@ export function DemoForms({vm}) {
   return (
     <div className="panel--simple">
       <div className="bg-alternative padded-1">
-        <h3 className="space-0">Forms</h3>
+        <h3 className="margin-0">Forms</h3>
       </div>
       <div className="padded-1">
-        <div className="space-bottom-1">
-          <label className="label space-right-1" htmlFor="my-input">
+        <div className="margin-bottom-1">
+          <label className="label margin-right-1" htmlFor="my-input">
             My Input
           </label>
-          <Input id="my-input" placeHolder="placeHolder" />
+          <Input id="my-input" placeholder="placeholder" />
         </div>
 
-        <div className="space-bottom-1">
-          <label className="label space-right-1" htmlFor="my-discreet-input">
+        <div className="margin-bottom-1">
+          <label className="label margin-right-1" htmlFor="my-discreet-input">
             My Discreet Input
           </label>
-          <Input id="my-discreet-input" discreet placeHolder="placeHolder" />
+          <Input id="my-discreet-input" discreet placeholder="placeholder" />
         </div>
 
-        <div className="space-bottom-1">
-          <label className="label space-right-1" htmlFor="inputSwitch">
+        <div className="margin-bottom-1">
+          <label className="label margin-right-1" htmlFor="inputSwitch">
             Switch
           </label>
           <Switch
@@ -46,8 +46,8 @@ export function DemoForms({vm}) {
           />
         </div>
 
-        <div className="space-bottom-1">
-          <label className="label space-right-1" htmlFor="inputSelect">
+        <div className="margin-bottom-1">
+          <label className="label margin-right-1" htmlFor="inputSelect">
             Select
           </label>
           <Select

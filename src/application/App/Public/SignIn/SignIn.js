@@ -12,16 +12,16 @@ export default function SignIn(props) {
 
   return (
     <div className="padded-1">
-      <div className="space-top-2 max-width-24em center-block panel--simple">
+      <div className="margin-top-2 max-width-24em center-block panel--simple">
         <div className="padded-1 bg-alternative">
-          <h3 className="flex-row-center space-0">
+          <h3 className="flex-row-center margin-0">
             <Icon name="#user" size={28} className="flex-no-shrink" />
-            <span className="space-left-1">Sign in</span>
+            <span className="margin-left-1">Sign in</span>
           </h3>
         </div>
         <div className="lg-padded-2">
           <form onSubmit={vm.submit}>
-            <div className="flex-row-center space-bottom-1">
+            <div className="flex-row-center margin-bottom-1">
               <label className="label width-8em" htmlFor="user-name">
                 Username
               </label>
@@ -38,7 +38,7 @@ export default function SignIn(props) {
               />
             </div>
 
-            <div className="flex-row-center space-bottom-2">
+            <div className="flex-row-center margin-bottom-2">
               <label className="label width-8em" htmlFor="user-password">
                 Password
               </label>

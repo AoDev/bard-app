@@ -13,7 +13,7 @@ export function DemoTables({vm}) {
   return (
     <div className="panel--simple">
       <div className="bg-alternative padded-1">
-        <h3 className="space-0">Tables</h3>
+        <h3 className="margin-0">Tables</h3>
       </div>
       <div className="padded-1">
         <table className="table">

@@ -14,7 +14,7 @@ export function Header(props) {
       <div className="main-header__content">
         {showMenuBtn && (
           <Button
-            className="space-right-1 main-header__btn"
+            className="margin-right-1 main-header__btn"
             variant="invisible"
             onClick={uiStore.mainSideMenu.toggle}
           >

@@ -14,32 +14,36 @@ export function DemoNotes({vm}) {
   return (
     <div className="panel--simple">
       <div className="bg-alternative padded-1">
-        <h3 className="space-0">Notes</h3>
+        <h3 className="margin-0">Notes</h3>
       </div>
       <div className="padded-1">
         <Note
           variant="default"
-          className="space-bottom-1"
+          className="margin-bottom-1"
           withBackground={vm.inputNoteWithBackground}
         >
           <p>variant = "default"</p>
         </Note>
         <Note
           variant="green"
-          className="space-bottom-1"
+          className="margin-bottom-1"
           withBackground={vm.inputNoteWithBackground}
         >
           <p>variant = "green"</p>
         </Note>
-        <Note variant="blue" className="space-bottom-1" withBackground={vm.inputNoteWithBackground}>
+        <Note
+          variant="blue"
+          className="margin-bottom-1"
+          withBackground={vm.inputNoteWithBackground}
+        >
           <p>variant = "blue"</p>
         </Note>
-        <Note variant="red" className="space-bottom-1" withBackground={vm.inputNoteWithBackground}>
+        <Note variant="red" className="margin-bottom-1" withBackground={vm.inputNoteWithBackground}>
           <p>variant = "red"</p>
         </Note>
         <Note
           variant="orange"
-          className="space-bottom-1"
+          className="margin-bottom-1"
           withBackground={vm.inputNoteWithBackground}
         >
           <p>variant = "orange"</p>
@@ -47,7 +51,7 @@ export function DemoNotes({vm}) {
       </div>
       <div className="bg-alternative padded-1">
         <div className="flex-row-center">
-          <div className="space-right-2">
+          <div className="margin-right-2">
             <Input
               id="inputNoteWithBackground"
               type="checkbox"
@@ -56,7 +60,7 @@ export function DemoNotes({vm}) {
               onChangeEmit="name-value"
               name="inputNoteWithBackground"
             />
-            <label className="label space-left-1" htmlFor="inputNoteWithBackground">
+            <label className="label margin-left-1" htmlFor="inputNoteWithBackground">
               withBackground
             </label>
           </div>
