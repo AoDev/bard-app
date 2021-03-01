@@ -3,6 +3,7 @@
  */
 const webpack = require('webpack')
 const packageJson = require('./package.json')
+const gitCommitId = require('git-commit-id')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CleanCSSPlugin = require('less-plugin-clean-css')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
@@ -24,6 +25,12 @@ if (fs.existsSync('.env')) {
     process.env[k] = envConfig[k]
   }
 }
+
+const enVars = {
+  APP_VERSION_TYPE: process.env.APP_VERSION_TYPE,
+}
+
+const commitHash = gitCommitId().slice(0, 7)
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 const ROOT_FOLDER = __dirname
@@ -56,8 +63,11 @@ const filesToCopy = [
 const plugins = [
   new CleanWebpackPlugin(),
   new webpack.DefinePlugin({
+    'process.env.GIT_COMMIT': JSON.stringify(commitHash),
     'process.env.BUILD_PLATFORM': JSON.stringify(process.env.BUILD_PLATFORM),
-    'process.env.APP_VERSION': JSON.stringify(packageJson.version),
+    'process.env.APP_VERSION': JSON.stringify(
+      enVars.APP_VERSION_TYPE === 'commit' ? commitHash : packageJson.version
+    ),
   }),
   new RemoveEmptyScriptsPlugin(),
   new HtmlWebpackPlugin({
@@ -103,6 +113,7 @@ const plugins = [
     // In dev, prevents SW from intercepting hot-updates so cache nothing except the index.html.
     // In prod, explicitely include everything because workbox prevents Webpack manifest to be cached by default.
     include: IS_DEVELOPMENT ? [/html/] : [/.*/],
+    exclude: [],
   }),
 ]
 
