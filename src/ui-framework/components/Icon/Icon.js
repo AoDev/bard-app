@@ -16,7 +16,7 @@ import {omit} from 'lodash'
  * There are multiple options to customize the icon and its background.
  */
 export default function Icon(props) {
-  var {
+  let {
     small,
     height,
     width,
@@ -40,7 +40,7 @@ export default function Icon(props) {
   width = width || size
   color = white ? '#fff' : color
 
-  var cssClasses = {
+  const cssClasses = {
     'pos-rel': typeof top === 'number' || typeof left === 'number',
     icon: true,
     'icon-inline': display === 'inline',
@@ -51,7 +51,7 @@ export default function Icon(props) {
     cssClasses[`icon-${props.type}`] = true
   }
 
-  var wrapperStyle = {
+  const wrapperStyle = {
     width: width,
     height: height,
     fontSize: 0, // needed because of character white space

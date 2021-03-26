@@ -61,7 +61,7 @@ export function Button(props) {
     ...otherProps
   } = props
 
-  const variantClass = variant ? 'btn--' + variant : ''
+  const variantClass = variant ? 'btn btn--' + variant : ''
 
   let cssClasses = `${variantClass} ${className}`
   block && (cssClasses += ' block')

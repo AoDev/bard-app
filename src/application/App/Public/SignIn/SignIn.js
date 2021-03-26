@@ -57,7 +57,7 @@ export default function SignIn(props) {
             <Button
               type="submit"
               caretRight
-              className="btn-block"
+              className="block"
               disabledMock={!vm.isValid}
               isLoading={vm.session.isAuthenticating}
               variant="plain-blue"

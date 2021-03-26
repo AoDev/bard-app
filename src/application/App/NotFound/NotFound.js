@@ -14,7 +14,7 @@ export function NotFound(props) {
           </Note>
         </div>
         <div className="bg-alternative padded-1">
-          <Link className="btn btn-block btn-cta txt-center" to="/">
+          <Link className="btn block btn-cta txt-center" to="/">
             Go back home <span className="float-right">❯</span>
           </Link>
         </div>

@@ -34,17 +34,16 @@ button {
   &.hover,
   &.active {
     text-decoration: none;
+    cursor: default;
   }
 }
 
 // Mixin for style variant
 .btn-variant-wireframe (@color) {
-  &:extend(.btn);
-
   border: 1px solid @color;
-  background-color: var(--color-content-bg);
+  background-color: var(--color-bg-default);
   padding: 0 @spacing-base;
-  border-radius: 4px;
+  border-radius: 22px;
   color: @color;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -75,20 +74,19 @@ button {
   &.active:hover,
   &.active:focus,
   &.active {
-    cursor: default;
-    color: #000;
+    color: var(--color-bg-default);
     background-color: @color;
     box-shadow: none;
 
     // TODO: wondering if we should create a btn-with-icon class / variant
     .icon-svg {
-      fill: #fff;
+      fill: var(--color-bg-default);
     }
   }
 
   &.disabled {
     color: #777;
-    background-color: #fff;
+    background-color: #fafafa;
     border-color: #bbb;
 
     .icon-svg {
@@ -110,25 +108,23 @@ button {
 
 // Mixin for style variant
 .btn-variant-plain (@color) {
-  &:extend(.btn);
-
   border: 1px solid @color;
   background-color: @color;
   padding: 0 @spacing-base;
-  border-radius: 4px;
-  border: 1px solid @color;
-  color: #000;
+  border-radius: 22px;
+  border: 2px solid @color;
+  color: var(--color-bg-default);
   text-transform: uppercase;
   transition-property: background-color, border-color;
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
   transition-timing-function: linear;
 
   &.focus,
   &:focus,
   &:hover {
-    color: #000;
-    background-color: spin(lighten(@color, 8%), 5);
-    border-color: spin(lighten(@color, 8%), 5);
+    color: var(--color-bg-default);
+    background-color: @color;
+    border-color: var(--color-txt-default);
   }
 
   &.disabled {
@@ -141,19 +137,23 @@ button {
     &:hover {
       border-color: var(--color-btn-disabled-bg);
     }
+
+    .icon-svg {
+      fill: #f7f7f7;
+    }
   }
 
   &.active {
-    color: #000;
+    color: var(--color-bg-default);
     background-color: @color;
   }
 
   .loader-bar {
-    background-color: #000;
+    background-color: var(--color-bg-default);
   }
 
   .icon-svg {
-    fill: #000;
+    fill: var(--color-bg-default);
   }
 }
 
@@ -174,19 +174,19 @@ button {
 }
 
 .btn--plain-blue {
-  .btn-variant-plain(@color-blue-vivid);
+  .btn-variant-plain(var(--color-blue-aim));
 }
 
 .btn--plain-green {
-  .btn-variant-plain(@color-green-vivid);
+  .btn-variant-plain(var(--color-green-aim));
 }
 
 .btn--plain-red {
-  .btn-variant-plain(@color-red-vivid);
+  .btn-variant-plain(var(--color-red-aim));
 }
 
 .btn--plain-neutral {
-  .btn-variant-plain(@color-gray-lightest);
+  .btn-variant-plain(var(--color-gray-aim));
 }
 
 .btn--link {
@@ -200,7 +200,6 @@ button {
   position: relative;
 
   .icon-svg {
-    fill: @color-blue-aim;
     fill: var(--color-blue-aim);
   }
 
@@ -217,7 +216,7 @@ button {
 
   &.disabled,
   &[disabled] {
-    color: @color-gray-aim;
+    color: var(--color-gray-aim);
     text-decoration: none;
   }
 }
@@ -249,7 +248,6 @@ button {
 .btn-menu {
   &:extend(.btn--neutral all);
   border: 0;
-  color: @color-blue-aim;
 
   &.focus,
   &.active:hover,
@@ -259,7 +257,7 @@ button {
   &:focus {
     border: 0;
     box-shadow: none;
-    background-color: #f0f0f0;
+    background-color: transparent;
     color: @color-blue-aim;
 
     .icon-svg {
@@ -269,12 +267,10 @@ button {
 }
 
 .btn--invisible {
-  &:extend(.btn);
-
   border: 0;
   background-color: transparent;
   padding: 0;
-  color: var(--color-content-txt);
+  color: var(--color-txt-default);
 }
 
 a.btn {
@@ -284,12 +280,12 @@ a.btn {
 .btn--sticked-horizontal {
   white-space: nowrap;
 
-  > .btn--sticked:not(:last-child) {
+  > .btn:not(:last-child) {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  > .btn--sticked:not(:first-child) {
+  > .btn:not(:first-child) {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left: 0;
@@ -297,16 +293,16 @@ a.btn {
 }
 
 .btn--sticked-vertical {
-  > .btn--sticked {
+  > .btn {
     display: block;
   }
 
-  > .btn--sticked:not(:last-child) {
+  > .btn:not(:last-child) {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  > .btn--sticked:not(:first-child) {
+  > .btn:not(:first-child) {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-top: 0;
@@ -325,7 +321,7 @@ a.btn {
 .btn--tab-section {
   background: transparent;
   border: 0;
-  color: var(--color-content-txt);
+  color: var(--color-txt-default);
   display: inline-block;
   height: 44px;
   padding: 14px 16px 14px 16px;
@@ -360,8 +356,6 @@ a.btn {
 
 .btn--sticked-header {
   .noselect;
-  &:extend(.btn);
-
   background-color: @color-gray-lighter;
   color: @color-gray-darker;
   border-radius: 4px;
@@ -375,4 +369,15 @@ a.btn {
 
 .btn-loading {
   color: transparent !important;
+}
+
+.btn--theader {
+  background: transparent;
+  color: var(--color-txt-default);
+  text-transform: uppercase;
+  border: 0;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 0;
+  letter-spacing: 0.05em;
 }

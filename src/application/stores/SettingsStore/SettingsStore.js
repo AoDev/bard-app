@@ -8,8 +8,6 @@ export default class SettingsStore {
    * @type {'light'|'dark'}
    */
   theme = 'light'
-  someFlag = true
-  someOtherFlag = false
 
   switchTheme() {
     this.theme = this.theme === 'light' ? 'dark' : 'light'

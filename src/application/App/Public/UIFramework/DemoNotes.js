@@ -12,44 +12,44 @@ import {Note, Input} from 'ui-framework'
  */
 export function DemoNotes({vm}) {
   return (
-    <div className="panel--simple">
-      <div className="bg-alternative padded-1">
+    <section className="panel--simple">
+      <div className="panel__header">
         <h3 className="margin-0">Notes</h3>
       </div>
-      <div className="padded-1">
+      <div className="md-padded-2">
         <Note
-          variant="default"
+          variant="neutral"
           className="margin-bottom-1"
           withBackground={vm.inputNoteWithBackground}
         >
-          <p>variant = "default"</p>
+          variant = "neutral"
         </Note>
         <Note
           variant="green"
           className="margin-bottom-1"
           withBackground={vm.inputNoteWithBackground}
         >
-          <p>variant = "green"</p>
+          variant = "green"
         </Note>
         <Note
           variant="blue"
           className="margin-bottom-1"
           withBackground={vm.inputNoteWithBackground}
         >
-          <p>variant = "blue"</p>
+          variant = "blue"
         </Note>
         <Note variant="red" className="margin-bottom-1" withBackground={vm.inputNoteWithBackground}>
-          <p>variant = "red"</p>
+          variant = "red"
         </Note>
         <Note
           variant="orange"
           className="margin-bottom-1"
           withBackground={vm.inputNoteWithBackground}
         >
-          <p>variant = "orange"</p>
+          variant = "orange"
         </Note>
       </div>
-      <div className="bg-alternative padded-1">
+      <div className="bg-alternative md-padded-2">
         <div className="flex-row-center">
           <div className="margin-right-2">
             <Input
@@ -66,7 +66,7 @@ export function DemoNotes({vm}) {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

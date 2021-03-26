@@ -41,10 +41,14 @@ export default class UIFrameworkVM {
   inputButtonDisabled = false
   inputButtonActive = false
   inputButtonFocused = false
+  inputButtonCaretRightEnd = false
+  inputButtonCaretRight = false
   inputNoteWithBackground = false
   inputSmallModal = false
   inputModalWithCloseButton = true
   inputHideOnOverlayClick = true
+  inputTableNarrow = false
+  inputButtonIcon = false
 
   set(prop, value) {
     this[prop] = value

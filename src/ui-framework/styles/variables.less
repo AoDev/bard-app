@@ -24,7 +24,8 @@
 @color-font-default: #192d44;
 @font-default: -system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
   sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-@font-mono: monospace;
+@font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro',
+  monospace;
 
 // BODY
 @body-color: #fcfcfd;
@@ -50,35 +51,53 @@
 
 // Theme variable
 :root {
-  --color-bg-alternative: @color-gray-lightest;
-  --color-blue-aim: @color-blue-aim;
+  --color-txt-default: #192d44;
+  --color-txt-muted: #78899b;
+  --color-bg-alternative: #f6f6f7;
+  --color-bg-default: #fff;
+  --color-blue-aim: #009ddb;
   --color-body-bg: #dedee3;
-  --color-btn-disabled-bg: @color-gray-dark;
-  --color-content-bg: #fff;
-  --color-content-txt: @color-font-default;
-  --color-gray-aim: @color-gray-aim;
+  --color-btn-disabled-bg: #7b8993;
+  --color-gray-aim: #65727b;
   --color-green-aim: #13aa6b;
   --color-header-bg: #fff;
-  --color-header-separator: #000;
-  --color-line-separator: #000;
-  --color-menu-btn-txt: @color-gray-darker;
-  --color-red-aim: @color-red-aim;
+  --color-header-separator: #fff;
+  --color-line-separator: #fff;
+  --color-menu-btn-txt: var(--color-txt-default);
+  --color-orange-aim: #ff7b00;
+  --color-red-aim: #d00;
   --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-table-separator: #f4f5f6;
+  // Translucid backgrounds
+  --color-bg-neutral-soft: #2c343608;
+  --color-bg-blue-soft: #009ddb08;
+  --color-bg-green-soft: #13aa6b08;
+  --color-bg-orange-soft: #ff7b0008;
+  --color-bg-red-soft: #dd000008;
 }
 
 :root[theme='dark'] {
-  --color-bg-alternative: #2b2b31;
-  --color-blue-aim: lighten(@color-blue-aim, 10%);
+  --color-txt-default: #ededed;
+  --color-txt-muted: #818e98;
+  --color-bg-alternative: #161617;
+  --color-bg-default: #212126;
+  --color-blue-aim: #1fd2ff;
   --color-body-bg: #28282f;
-  --color-btn-disabled-bg: @color-gray-dark;
-  --color-content-bg: #1a1a1e;
-  --color-content-txt: #fff;
-  --color-gray-aim: @color-gray-lightest;
+  --color-btn-disabled-bg: #505d62;
+  --color-gray-aim: #f5f5f5;
   --color-green-aim: #0bd480;
-  --color-header-bg: #000;
-  --color-header-separator: @color-gray-light;
-  --color-line-separator: @color-gray-light;
-  --color-menu-btn-txt: #e6e6e6;
+  --color-header-bg: #1a1a1e;
+  --color-header-separator: #1a1a1e;
+  --color-line-separator: #4b4b4c;
+  --color-menu-btn-txt: var(--color-txt-default);
+  --color-orange-aim: #f90;
   --color-red-aim: #ff4163;
   --color-shadow: #000;
+  --color-table-separator: #2c3436;
+  // Translucid backgrounds
+  --color-bg-neutral-soft: #fff1;
+  --color-bg-blue-soft: #009ddb20;
+  --color-bg-green-soft: #13aa6b20;
+  --color-bg-orange-soft: #ff7b0020;
+  --color-bg-red-soft: #dd000020;
 }

@@ -1,107 +1,52 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import {observer} from 'mobx-react'
-import {Button, Input} from 'ui-framework'
+import {Button, Input, Icon} from 'ui-framework'
 
 /**
  * @typedef {import('./UIFrameworkVM').default} UIFrameworkVM
  */
+
+const btnVariants = [
+  'neutral',
+  'green',
+  'blue',
+  'red',
+  'plain-neutral',
+  'plain-green',
+  'plain-blue',
+  'plain-red',
+  'link',
+]
 
 /**
  * @param {{vm: UIFrameworkVM}} props
  */
 export function DemoButtons({vm}) {
   return (
-    <div className="panel--simple">
-      <div className="bg-alternative padded-1">
+    <section className="panel--simple">
+      <div className="panel__header">
         <h3 className="margin-0">Buttons</h3>
       </div>
-      <div className="grid-fluid-colmin8em padded-1">
-        <Button
-          variant="neutral"
-          active={vm.inputButtonActive}
-          isLoading={vm.inputButtonIsLoading}
-          disabled={vm.inputButtonDisabled}
-          focused={vm.inputButtonFocused}
-        >
-          neutral
-        </Button>
-        <Button
-          variant="green"
-          active={vm.inputButtonActive}
-          isLoading={vm.inputButtonIsLoading}
-          disabled={vm.inputButtonDisabled}
-          focused={vm.inputButtonFocused}
-        >
-          green
-        </Button>
-        <Button
-          variant="blue"
-          active={vm.inputButtonActive}
-          isLoading={vm.inputButtonIsLoading}
-          disabled={vm.inputButtonDisabled}
-          focused={vm.inputButtonFocused}
-        >
-          blue
-        </Button>
-        <Button
-          variant="red"
-          active={vm.inputButtonActive}
-          isLoading={vm.inputButtonIsLoading}
-          disabled={vm.inputButtonDisabled}
-          focused={vm.inputButtonFocused}
-        >
-          red
-        </Button>
-        <Button
-          variant="plain-neutral"
-          active={vm.inputButtonActive}
-          isLoading={vm.inputButtonIsLoading}
-          disabled={vm.inputButtonDisabled}
-          focused={vm.inputButtonFocused}
-        >
-          plain-neutral
-        </Button>
-        <Button
-          variant="plain-green"
-          active={vm.inputButtonActive}
-          isLoading={vm.inputButtonIsLoading}
-          disabled={vm.inputButtonDisabled}
-          focused={vm.inputButtonFocused}
-        >
-          plain-green
-        </Button>
-        <Button
-          variant="plain-blue"
-          active={vm.inputButtonActive}
-          isLoading={vm.inputButtonIsLoading}
-          disabled={vm.inputButtonDisabled}
-          focused={vm.inputButtonFocused}
-        >
-          plain-blue
-        </Button>
-        <Button
-          variant="plain-red"
-          active={vm.inputButtonActive}
-          isLoading={vm.inputButtonIsLoading}
-          disabled={vm.inputButtonDisabled}
-          focused={vm.inputButtonFocused}
-        >
-          plain-red
-        </Button>
-        <Button
-          variant="link"
-          active={vm.inputButtonActive}
-          isLoading={vm.inputButtonIsLoading}
-          disabled={vm.inputButtonDisabled}
-          focused={vm.inputButtonFocused}
-        >
-          link
-        </Button>
+      <div className="grid-fluid-colmin12em md-padded-2">
+        {btnVariants.map((variant) => (
+          <Button
+            key={variant}
+            variant={variant}
+            active={vm.inputButtonActive}
+            isLoading={vm.inputButtonIsLoading}
+            disabled={vm.inputButtonDisabled}
+            focused={vm.inputButtonFocused}
+            caretRight={vm.inputButtonCaretRight}
+            caretRightEnd={vm.inputButtonCaretRightEnd}
+          >
+            {vm.inputButtonIcon && <Icon name="#star" size={24} className="margin-right-1" />}
+            {variant}
+          </Button>
+        ))}
       </div>
-      <div className="bg-alternative padded-1">
-        <div className="flex-row-center margin-bottom-1">
-          <div className="margin-right-2">
+      <div className="bg-alternative md-padded-2">
+        <div className="grid-fluid-colmin10em">
+          <div>
             <Input
               id="inputButtonIsLoading"
               type="checkbox"
@@ -114,7 +59,7 @@ export function DemoButtons({vm}) {
               isLoading
             </label>
           </div>
-          <div className="margin-right-2">
+          <div>
             <Input
               id="inputButtonDisabled"
               type="checkbox"
@@ -127,9 +72,8 @@ export function DemoButtons({vm}) {
               disabled
             </label>
           </div>
-        </div>
-        <div className="flex-row-center">
-          <div className="margin-right-2">
+
+          <div>
             <Input
               id="inputButtonActive"
               type="checkbox"
@@ -142,7 +86,7 @@ export function DemoButtons({vm}) {
               active
             </label>
           </div>
-          <div className="margin-right-2">
+          <div>
             <Input
               id="inputButtonFocused"
               type="checkbox"
@@ -155,14 +99,51 @@ export function DemoButtons({vm}) {
               focused/hover
             </label>
           </div>
+
+          <div>
+            <Input
+              id="inputButtonCaretRight"
+              type="checkbox"
+              value={vm.inputButtonCaretRight}
+              onChange={vm.toggle}
+              onChangeEmit="name-value"
+              name="inputButtonCaretRight"
+            />
+            <label className="label margin-left-1" htmlFor="inputButtonCaretRight">
+              caretRight
+            </label>
+          </div>
+          <div>
+            <Input
+              id="inputButtonCaretRightEnd"
+              type="checkbox"
+              value={vm.inputButtonCaretRightEnd}
+              onChange={vm.toggle}
+              onChangeEmit="name-value"
+              name="inputButtonCaretRightEnd"
+            />
+            <label className="label margin-left-1" htmlFor="inputButtonCaretRightEnd">
+              caretRightEnd
+            </label>
+          </div>
+
+          <div>
+            <Input
+              id="inputButtonIcon"
+              type="checkbox"
+              value={vm.inputButtonIcon}
+              onChange={vm.toggle}
+              onChangeEmit="name-value"
+              name="inputButtonIcon"
+            />
+            <label className="label margin-left-1" htmlFor="inputButtonIcon">
+              Demo with icon
+            </label>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   )
-}
-
-DemoButtons.propTypes = {
-  vm: PropTypes.shape({}),
 }
 
 export default observer(DemoButtons)

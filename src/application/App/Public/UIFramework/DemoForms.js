@@ -14,11 +14,11 @@ export function DemoForms({vm}) {
   const {demoFormVM} = vm
 
   return (
-    <div className="panel--simple">
-      <div className="bg-alternative padded-1">
+    <section className="panel--simple">
+      <div className="panel__header">
         <h3 className="margin-0">Forms</h3>
       </div>
-      <div className="padded-1">
+      <div className="md-padded-2">
         <div className="margin-bottom-1">
           <label className="label margin-right-1" htmlFor="my-input">
             My Input
@@ -51,6 +51,7 @@ export function DemoForms({vm}) {
             Select
           </label>
           <Select
+            className="select"
             id="inputSelect"
             items={demoFormVM.inputSelectOptions}
             onChange={demoFormVM.set}
@@ -60,7 +61,7 @@ export function DemoForms({vm}) {
           />
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

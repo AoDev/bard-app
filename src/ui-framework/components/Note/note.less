@@ -5,56 +5,48 @@
   padding: 1px @spacing-base 1px (@spacing-base - @note-border-width);
 }
 
-.note-default {
-  border-left-color: var(--color-content-txt);
-  &:extend(.note);
-}
-
-.note-red {
-  border-left-color: @color-red-vivid;
+.note--red {
+  border-left-color: var(--color-red-aim);
   color: var(--color-red-aim);
-  &:extend(.note);
 }
 
-.note-blue {
+.note--blue {
   border-left-color: var(--color-blue-aim);
   color: var(--color-blue-aim);
-  &:extend(.note);
 }
 
-.note-green {
+.note--green {
   border-left-color: var(--color-green-aim);
   color: var(--color-green-aim);
-  &:extend(.note);
 }
 
-.note-orange {
-  border-left-color: @color-orange-aim;
-  color: @color-orange-aim;
-  &:extend(.note);
+.note--orange {
+  border-left-color: var(--color-orange-aim);
+  color: var(--color-orange-aim);
 }
 
-.note-red--with-bg {
-  background-color: fade(@color-red-aim, 4%);
-  &:extend(.note-red);
+.note--neutral {
+  border-left-color: var(--color-txt-default);
+  color: var(--color-txt-default);
 }
 
-.note-blue--with-bg {
-  background-color: fade(@color-blue-aim, 4%);
-  &:extend(.note-blue);
+.note--blue--with-bg {
+  background-color: var(--color-bg-blue-soft);
+  &:extend(.note--blue);
 }
-
-.note-green--with-bg {
-  background-color: fade(@color-green-aim, 4%);
-  &:extend(.note-green);
+.note--neutral--with-bg {
+  background-color: var(--color-bg-neutral-soft);
+  &:extend(.note--neutral);
 }
-
-.note-orange--with-bg {
-  background-color: fade(@color-orange-aim, 4%);
-  &:extend(.note-orange);
+.note--red--with-bg {
+  background-color: var(--color-bg-red-soft);
+  &:extend(.note--red);
 }
-
-.note-default--with-bg {
-  background-color: rgba(0, 0, 0, 0.03);
-  &:extend(.note-default);
+.note--green--with-bg {
+  background-color: var(--color-bg-green-soft);
+  &:extend(.note--green);
+}
+.note--orange--with-bg {
+  background-color: var(--color-bg-orange-soft);
+  &:extend(.note--orange);
 }

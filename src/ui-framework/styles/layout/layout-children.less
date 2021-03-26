@@ -1,27 +1,24 @@
 // GRID
-@grid-fluid-values: 5em, 6em, 8em, 12em, 14em, 16em, 20em, 24em, 32em;
 
-.grid-fluid {
-  display: grid;
-  grid-gap: @spacing-base;
-}
+@grid-fluid-values: 5em, 6em, 8em, 10em, 12em, 14em, 16em, 20em, 24em, 32em;
 
 each(@grid-fluid-values, .(@gvalue) {
   .grid-fluid-colmin@{gvalue} {
-    &:extend(.grid-fluid);
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(@gvalue, 1fr));
+    grid-gap: @spacing-base;
   }
 });
 
 // grid that only activates in big screens
-@r-grid-fluid-values: 20em, 28em, 24em, 32em;
+@r-grid-fluid-values: 22em, 24em, 32em;
 
 each(@r-grid-fluid-values, .(@gvalue) {
   .r-grid-fluid-colmin@{gvalue} {
     display: grid;
     grid-gap: @spacing-base;
 
-    @media @md-screen {
+    @media (min-width: 721px) {
       grid-template-columns: repeat(auto-fit, minmax(@gvalue, 1fr));
     }
   }
@@ -65,21 +62,16 @@ each(@r-grid-fluid-values, .(@gvalue) {
   align-items: center;
 }
 
-.flex-row-space-around {
+.flex-row-margin-around {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: margin-around;
 }
 
 @media @md-screen {
   .md-flex-row {
     display: flex;
     flex-direction: row;
-  }
-
-  .md-flex-row-center {
-    display: flex;
-    align-items: center;
   }
 }

@@ -8,7 +8,7 @@ export function AlreadySignedIn() {
       <div className="md-panel-group bg-white shadow-1">
         <div className="padded-1 max-width-24em center-block txt-center">
           <h3 className="margin-top-0 padded-2">You have an active session</h3>
-          <Link className="btn btn-block btn-cta" to="/private/dashboards">
+          <Link className="btn block btn-cta" to="/private/dashboards">
             Return to dashboards <span className="float-right">❯</span>
           </Link>
           <div className="margin-top-1 margin-bottom-1">or</div>
