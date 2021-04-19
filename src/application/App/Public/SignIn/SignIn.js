@@ -56,7 +56,7 @@ export default function SignIn(props) {
             </div>
             <Button
               type="submit"
-              caretRight
+              caretRightEnd
               className="block"
               disabledMock={!vm.isValid}
               isLoading={vm.session.isAuthenticating}
