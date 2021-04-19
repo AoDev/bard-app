@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import {observer} from 'mobx-react'
-import {Input, Switch, Select} from 'ui-framework'
+import {Input, InputBasic, Switch, Select} from 'ui-framework'
 
 /**
  * @typedef {import('./UIFrameworkVM').default} UIFrameworkVM
@@ -59,6 +59,10 @@ export function DemoForms({vm}) {
             name="inputSelect"
             value={demoFormVM.inputSelect}
           />
+        </div>
+
+        <div className="margin-bottom-1">
+          <InputBasic type="range" className="input-range" min="1" max="10" />
         </div>
       </div>
     </section>
