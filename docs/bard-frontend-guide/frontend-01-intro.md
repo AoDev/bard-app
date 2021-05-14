@@ -6,4 +6,6 @@ There are infinite ways to build frontend and software in general. Thus the solu
 
 > Simpler is better. Less is more.
 
-[Next: A Frontend SPA Recipe](frontend-02-spa-recipe-principles.md)
+---
+
+[Next: "A Frontend SPA Recipe"](frontend-02-spa-recipe-principles.md)

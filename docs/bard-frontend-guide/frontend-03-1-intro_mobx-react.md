@@ -51,3 +51,7 @@ If you need to show the UI in order to get the list of products, then it means t
 To know if I am doing it right, there is one sentence I always keep in mind for frontend development:
 
 > "If I can't run my use cases without the UI, then I am doing it wrong".
+
+---
+
+[Next: "Structure of the data layer (mobx-react)"](frontend-03-2-structure-of-datalayer_mobx-react.md)

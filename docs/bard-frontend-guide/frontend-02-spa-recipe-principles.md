@@ -17,3 +17,7 @@ What follows is a single page app (SPA) recipe that is continously evolving by k
    The framework encapsulates all the reusable styles and UI components, boosting consistency and productivity.
 
 I recommend to have a look at these links in your "free time" if such thing exists for a developer ;)
+
+---
+
+[Next: "The Mobx / React combo"](frontend-03-1-intro_mobx-react.md)
