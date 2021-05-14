@@ -9,6 +9,8 @@ This way, React components become simple reactive "templates".
 - Feature specific stores
 - "Models"
 
+<img width="300" alt="3-layers-stores" src="https://user-images.githubusercontent.com/1526150/118300431-346b7c00-b4e2-11eb-812d-8eec8c6e7b61.png">
+
 ## RootStore: where everything starts
 
 The **RootStore** is the backbone of the data layer.
