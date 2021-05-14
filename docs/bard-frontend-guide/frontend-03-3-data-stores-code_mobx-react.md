@@ -1,4 +1,4 @@
-# What is a (Mobx) store really? (mobx-react)
+# What is a (Mobx) store at code level? (mobx-react)
 
 A store is an ES6 class. It has properties and methods to get, hold and manipulate data for a **specific** area of the business. eg: userStore, productStore, ...
 
@@ -9,24 +9,24 @@ _Conclusion_: "stores" are just "models" supercharged with observable capabiliti
 ## Typical store structure
 
 ```ts
-import * as mobx from "mobx";
+import * as mobx from 'mobx'
 
 export default class MyStore {
-  myValue = true;
+  myValue = true
 
   get myValueNegated() {
-    return !this.myValue;
+    return !this.myValue
   }
 
   changeMyValue(newValue: boolean) {
-    this.myValue = newValue;
+    this.myValue = newValue
   }
 
   constructor(rootStore) {
-    this.rootStore = rootStore;
+    this.rootStore = rootStore
 
     // (*) Explanation below
-    mobx.makeAutoObservable(this, undefined, { autoBind: true, deep: false });
+    mobx.makeAutoObservable(this, undefined, {autoBind: true, deep: false})
   }
 }
 ```

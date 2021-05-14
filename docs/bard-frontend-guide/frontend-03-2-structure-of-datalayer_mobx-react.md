@@ -33,7 +33,7 @@ Depending on your app, you'll have clearly defined features that are usually mat
 
 ## Models
 
-Models and stores are kind of the same thing but a model is our context is a small standalone entity.
+Models and stores are kind of the same thing but a model in our context is a small standalone entity.
 
 Like the _ProductStore_ has a list of _ProductModels_.
 
@@ -42,4 +42,4 @@ Like the _ProductStore_ has a list of _ProductModels_.
 
 ---
 
-[Next: "What is a (Mobx) store really? (mobx-react)"](frontend-03-3-data-stores_mobx-react.md)
+[Next: "What is a (Mobx) store at code level? (mobx-react)"](frontend-03-3-data-stores-code_mobx-react.md)

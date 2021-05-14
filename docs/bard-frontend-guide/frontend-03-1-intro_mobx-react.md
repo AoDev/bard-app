@@ -8,7 +8,7 @@ For a simplified gist, check the next chapter: `04 feature gist`.
 - **External Data Stores**: our data layer that holds the app global state.
 - **View Models (VM)**: temporary UI state + connect external store to UI components.
 - **UI components**: usually plain React functional components, no internal state. (internal state in VM)
-- **UI framework**: won't be discussed here but worth mentioning that it involves generic and reusable UI components. It is a key ingredient to scale UI development.
+- **UI framework**: generic and reusable UI styles and components. It is a key ingredient to scale UI development.
 
 <img width="576" alt="frontend-layers" src="https://user-images.githubusercontent.com/1526150/107215672-ea1ebe80-6a0b-11eb-9c47-9630179875b2.png">
 
