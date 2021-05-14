@@ -1,0 +1,53 @@
+# The Mobx / React combo
+
+This is a detailed explanation of the usage of Mobx with React.  
+For a simplified gist, check the next chapter: `04 feature gist`.
+
+## Overview of the Entities
+
+- **External Data Stores**: our data layer that holds the app state.
+- **View Models (VM)**: temporary UI state + connect external store to UI components.
+- **UI components**: usually plain React functional components, no internal state. (internal state in VM)
+- **UI framework**: won't be discussed here but worth mentioning that it involves generic and reusable UI components. It is a key ingredient to scale UI development.
+
+<img width="576" alt="frontend-layers" src="https://user-images.githubusercontent.com/1526150/107215672-ea1ebe80-6a0b-11eb-9c47-9630179875b2.png">
+
+## Intro to Mobx
+
+Mobx official docs are [here](http://mobx.js.org/).
+
+Mobx itself is a library that lets you implement business logic following the **observer pattern**.
+
+### Mobx is NOT a Framework
+
+It does not impose, nor help you with structuring your code.
+
+_There are many ways to use Mobx_ to write React App.
+
+Mobx' goal is to provide an **easy way** to deal with observables.
+It is that simplicity of use that makes it powerful and enjoyable at the same time. ([Transparent Functional Reactive Programming](https://medium.com/hackernoon/becoming-fully-reactive-an-in-depth-explanation-of-mobservable-55995262a254#.9aufnt6up))
+
+### About the Mobx lib version
+
+Mobx API has changed over time. This guide is using Mobx V6 (latest at the time of this writing).
+
+## The relation between Stores and React UI
+
+**The UI layer should limit itself to consume the data layer.**
+
+- The app state is in external stores.
+- No need for component react internal state most of the time. (no hooks or classes setState)
+- We want most components to be [controlled from outside](https://reactjs.org/docs/forms.html#controlled-components).
+- Local component state is provided through a "view-model" (VM) which in the end, is just a store as well. (More details below)
+
+The external stores (= data layer) live on their own and don't need the UI for the business goal to be achieved.
+
+**How to know if you do it right; with an example:**
+
+If you had to get a list of product, you should be able to do it through the data layer only. Once your data layer has loaded the list, any interface could consume it, browser, nodejs process, CLI,...
+
+If you need to show the UI in order to get the list of products, then it means that the data layer is mixed with the UI and this my friend will lead to serious headaches when the app complexity grows. Then you'd have to lose your time refactoring. Instead make it right from the start so you can build your product.
+
+To know if I am doing it right, there is one sentence I always keep in mind for frontend development:
+
+> "If I can't run my use cases without the UI, then I am doing it wrong".
