@@ -5,7 +5,7 @@ For a simplified gist, check the next chapter: `04 feature gist`.
 
 ## Overview of the Entities
 
-- **External Data Stores**: our data layer that holds the app state.
+- **External Data Stores**: our data layer that holds the app global state.
 - **View Models (VM)**: temporary UI state + connect external store to UI components.
 - **UI components**: usually plain React functional components, no internal state. (internal state in VM)
 - **UI framework**: won't be discussed here but worth mentioning that it involves generic and reusable UI components. It is a key ingredient to scale UI development.
@@ -38,15 +38,15 @@ Mobx API has changed over time. This guide is using Mobx V6 (latest at the time 
 - The app state is in external stores.
 - No need for component react internal state most of the time. (no hooks or classes setState)
 - We want most components to be [controlled from outside](https://reactjs.org/docs/forms.html#controlled-components).
-- Local component state is provided through a "view-model" (VM) which in the end, is just a store as well. (More details below)
+- Local component state is provided through a "view-model" (VM) which in the end, is just a store as well. (More details in next chapters.)
 
-The external stores (= data layer) live on their own and don't need the UI for the business goal to be achieved.
+> The external stores (= data layer) live on their own and don't need the UI for the business goal to be achieved.
 
 **How to know if you do it right; with an example:**
 
 If you had to get a list of product, you should be able to do it through the data layer only. Once your data layer has loaded the list, any interface could consume it, browser, nodejs process, CLI,...
 
-If you need to show the UI in order to get the list of products, then it means that the data layer is mixed with the UI and this my friend will lead to serious headaches when the app complexity grows. Then you'd have to lose your time refactoring. Instead make it right from the start so you can build your product.
+If you need to show the UI in order to get the list of products, then it means that the data layer is mixed with the UI and this my friend will lead to serious headaches when the app complexity grows. Then you'd lose your time refactoring. Instead, make it right from the start so that most of your time is put in building your product.
 
 To know if I am doing it right, there is one sentence I always keep in mind for frontend development:
 

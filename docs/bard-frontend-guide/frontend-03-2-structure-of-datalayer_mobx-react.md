@@ -24,15 +24,22 @@ It is responsible:
 They hold and manipulate the state for a particular feature.
 By feature I don't mean a small thing but rather something like:
 
-`userStore`: everything about the user
-`productStore`:
+- a `userStore` to represent everything about the user
+- a `paymentStore` to model, check and list payments
+- a `productStore` to fetch, save and filter the list of products
+- ...
+
+Depending on your app, you'll have clearly defined features that are usually matching a page / screen.
 
 ## Models
 
-RootStore
+Models and stores are kind of the same thing but a model is our context is a small standalone entity.
 
-- UIStore
-- StakingStore
-  - UserBalance
-  - Rewards
-  - Representatives
+Like the _ProductStore_ has a list of _ProductModels_.
+
+> A model has only one responsibility. It represents one single "thing".
+> A store can be interacting with all kinds of smaller models.
+
+---
+
+[Next: "What is a (Mobx) store really? (mobx-react)"](frontend-03-3-data-stores_mobx-react.md)
