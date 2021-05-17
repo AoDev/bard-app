@@ -46,3 +46,7 @@ In general you will want **to use the same options that were in the example abov
 
 - `deep: false` the observable changes are limited at the reference level only.  
   **In practice**: Mobx has [different "levels"](https://mobx.js.org/observable-state.html#available-annotations) to track values. Setting `deep` to false allows to avoid some problems with external libraries and native structures like arrays. **It is a sane default**. But keep in mind that: `array.push()` won't trigger an observable change, because the array reference has not changed while `array.concat()` will because it returns a new reference.
+
+---
+
+[Next: "What is a VM - View-Model? (mobx-react)"](frontend-03-3-view-models_mobx-react.md)
