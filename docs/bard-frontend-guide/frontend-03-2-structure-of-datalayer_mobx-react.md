@@ -6,10 +6,12 @@ This way, React components become simple reactive "templates".
 **There are 3 levels**
 
 - RootStore
-- Feature specific stores
+- "Feature" stores
 - "Models"
 
 <img width="450" alt="3-layers-stores" src="https://user-images.githubusercontent.com/1526150/118300431-346b7c00-b4e2-11eb-812d-8eec8c6e7b61.png">
+
+All of these are implemented using the observable capabilities of Mobx.
 
 ## RootStore: where everything starts
 
@@ -18,10 +20,10 @@ The **RootStore** is the backbone of the data layer.
 It is responsible:
 
 - for instantiating and connecting the other stores between themselves.
-- for allowing the app state to be shared in the entire app and to the UI layer.
+- for allowing the app state to be shared to the UI layer.
 - for implementing use cases (or user stories) that depend on multiple stores.
 
-## Features specific stores
+## "Feature" stores
 
 They hold and manipulate the state for a particular feature.
 By feature I don't mean a small thing but rather something like:

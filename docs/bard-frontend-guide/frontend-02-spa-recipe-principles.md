@@ -13,7 +13,7 @@ What follows is a single page app (SPA) recipe that is continously evolving by k
 - [Decouple state and UI article](https://hackernoon.com/how-to-decouple-state-and-ui-a-k-a-you-dont-need-componentwillmount-cc90b787aa37) by Michel Weststrate (Mobx creator)
 - [App shell architecture](https://developers.google.com/web/fundamentals/architecture/app-shell) on developers.google.com.
 
-3. **The use of a UI Framework**.  
+3. **Building a UI Framework**.  
    The framework encapsulates all the reusable styles and UI components, boosting consistency and productivity.
 
 I recommend to have a look at these links in your "free time" if such thing exists for a developer ;)

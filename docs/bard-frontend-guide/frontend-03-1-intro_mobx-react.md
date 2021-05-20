@@ -46,11 +46,11 @@ Mobx API has changed over time. This guide is using Mobx V6 (latest at the time 
 
 If you had to get a list of product, you should be able to do it through the data layer only. Once your data layer has loaded the list, any interface could consume it, browser, nodejs process, CLI,...
 
-If you need to show the UI in order to get the list of products, then it means that the data layer is mixed with the UI and this my friend will lead to serious headaches when the app complexity grows. Then you'd lose your time refactoring. Instead, make it right from the start so that most of your time is put in building your product.
+If you need to show the UI in order to get the list of products, then it means that the data layer is mixed with the UI and this my friend will lead to serious headaches when the app complexity grows. Then you'd lose your time refactoring.
 
-To know if I am doing it right, there is one sentence I always keep in mind for frontend development:
+Instead, separate the layers right from the start so that most of your time is put in building your app.
 
-> "If I can't run my use cases without the UI, then I am doing it wrong".
+> Remember, even though the UI is built to match the data, UI and data are separate layers. You should be able to throw away your entire UI without touching the stores or throw away the stores and feed the data to your UI in a different way.
 
 ---
 
