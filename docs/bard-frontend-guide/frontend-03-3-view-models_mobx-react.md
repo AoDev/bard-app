@@ -25,7 +25,7 @@ If you know _Redux_ it's a bit similar to using `connect state to props`.
   The way to code local state and global app state are the same. (declarative observable stores)
 
 - **With VM, you don't need wrappers for 3rd party imperative libraries**.  
-  Because React is declarative while some libs are imperative, you will find tons of React "wrappers" that serve as bridge. That means that sometimes you need to learn both the wrapper and the original library api's.
+  Because React is declarative while some libs are imperative, you will find tons of React "wrappers" that serve as bridge. That means that sometimes you need to learn both the wrapper and the original library api's. The wrappers sometimes have bugs or may be outdated. We avoid all these problems.
 
 ---
 

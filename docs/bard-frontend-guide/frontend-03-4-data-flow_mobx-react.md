@@ -1,4 +1,4 @@
-# How the data flows throughout the app (mobx-react)
+# Passing data to UI components (mobx-react)
 
 ## How React components get the stores data?
 

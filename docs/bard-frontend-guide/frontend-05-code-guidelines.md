@@ -79,7 +79,7 @@ Reason:
   }
 }
 
-// BETTER (BEM)
+// Correct
 .parent__child {
   color: #000;
 }
@@ -88,4 +88,4 @@ Reason:
 }
 ```
 
-Reason: hard to find the class in the code base.
+Reason: finding the actual class in the code base is a nightmare.

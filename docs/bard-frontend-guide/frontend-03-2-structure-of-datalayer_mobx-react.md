@@ -42,7 +42,7 @@ Models and stores are kind of the same thing but a model in our context is a sma
 Like the _ProductStore_ has a list of _ProductModels_.
 
 > A model has only one responsibility. It represents one single "thing".
-> A store can be interacting with all kinds of smaller models.
+> A store can be interacting with all kinds of smaller models to implement a business use case.
 
 ---
 

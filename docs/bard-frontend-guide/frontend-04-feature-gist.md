@@ -1,6 +1,6 @@
 # A Frontend Recipe: Gist
 
-Almost no explanations, very summarized guide through a pseudo code example for a feature.
+Almost no explanations, very summarized guide through a pseudo code example.
 
 <img width="576" alt="frontend-layers" src="https://user-images.githubusercontent.com/1526150/107215672-ea1ebe80-6a0b-11eb-9c47-9630179875b2.png">
 
@@ -13,7 +13,7 @@ src/
   App/
     Feature/
       index.ts
-      Feature.scss
+      Feature.less
       Feature.tsx
       FeatureItemList.tsx
       FeatureVM.ts
@@ -24,18 +24,19 @@ src/
     FeatureStore.ts
 
   styles/
-    index.scss
+    index.less
 
   ui-framework/
     components/
       Button.js
+      Button.less
 
     styles/
-      index.scss
+      index.less
 
       elements/
-        buttons.scss
-        panels.scss
+        buttons.less
+        panels.less
 ```
 
 _Note the naming conventions. Folder, styles, VM, Component with same name..._
@@ -45,7 +46,7 @@ _Note the naming conventions. Folder, styles, VM, Component with same name..._
 Where app is bootstrapped, UI mounted, RootStore instantiated.
 
 ```tsx
-import { Provider } from 'mobx-react'
+import {Provider} from 'mobx-react'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
@@ -100,7 +101,7 @@ export default withVM(Feature, FeatureVM)
 
 ```ts
 import * as mobx from 'mobx'
-import { RootStore, FeatureStore } from 'src/stores'
+import {RootStore, FeatureStore} from 'src/stores'
 
 export default class FeatureVM {
   public rootStore: RootStore
@@ -112,10 +113,10 @@ export default class FeatureVM {
     this.word = 'There'
   }
 
-  constructor({ rootStore }: { rootStore: RootStore }) {
+  constructor({rootStore}: {rootStore: RootStore}) {
     this.rootStore = rootStore
     this.featureStore = rootStore.featureStore
-    mobx.makeAutoObservable(this, undefined, { autoBind: true, deep: false })
+    mobx.makeAutoObservable(this, undefined, {autoBind: true, deep: false})
   }
 }
 ```
@@ -191,7 +192,7 @@ export default class FeatureStore {
 
   constructor(rootStore: RootStore) {
     this.rootStore = RootStore
-    mobx.makeAutoObservable(this, undefined, { autoBind: true, deep: false })
+    mobx.makeAutoObservable(this, undefined, {autoBind: true, deep: false})
   }
 }
 ```
@@ -200,8 +201,8 @@ export default class FeatureStore {
 
 = app root state.
 
-* Injected in UI components with `withVM` util. (React Context)
-* Instantiates other stores.
+- Injected in UI components with `withVM` util. (React Context)
+- Instantiates other stores.
 
 ```ts
 import * as mobx from 'mobx'
@@ -210,7 +211,7 @@ import FeatureStore from './FeatureStore'
 export default class RootStore {
   constructor() {
     this.featureStore = new FeatureStore(this)
-    mobx.makeAutoObservable(this, undefined, { autoBind: true, deep: false })
+    mobx.makeAutoObservable(this, undefined, {autoBind: true, deep: false})
   }
 }
 ```
