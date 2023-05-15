@@ -121,7 +121,7 @@ function UserDetails ({user}) {
 </App>
 ```
 
-Here, if user.firstName changes, <App /> will not re-render, but <UserDetails /> will.
+Here, if user.firstName changes, `<App />` will not re-render, but `<UserDetails />` will.
 
 ## Summary
 
