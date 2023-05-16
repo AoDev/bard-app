@@ -50,7 +50,7 @@ import {Provider} from 'mobx-react'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import './styles/index.scss'
+import './styles/index.less'
 
 const rootStore = new RootStore()
 
@@ -167,11 +167,11 @@ export class Feature {{vm} : {vm: FeatureVM}} {
 export default observer(FeatureItemList)
 ```
 
-**Feature.scss** (optional)
+**Feature.less** (optional)
 
 = specific styles for the feature UI if needed.
 
-```scss
+```less
 .feature__very-specific-style {
   position: absolute;
   top: 100px;
@@ -218,14 +218,14 @@ export default class RootStore {
 
 ## /styles
 
-**index.scss**
+**index.less**
 
 = imports all styles from ui framework and app specific.
 
-```scss
-@import '../ui-framework/styles/index.scss';
+```less
+@import '../ui-framework/styles/index.less';
 
-@import '../App/Feature/Feature.scss';
+@import '../App/Feature/Feature.less';
 ```
 
 ---
