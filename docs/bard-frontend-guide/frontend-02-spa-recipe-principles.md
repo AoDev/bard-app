@@ -11,7 +11,7 @@ What follows is a single page app (SPA) recipe that is continously evolving by k
 
 - [Clean architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) by Robert C. Martin (Uncle Bob)
 - [Decouple state and UI article](https://hackernoon.com/how-to-decouple-state-and-ui-a-k-a-you-dont-need-componentwillmount-cc90b787aa37) by Michel Weststrate (Mobx creator)
-- [App shell architecture](https://developers.google.com/web/fundamentals/architecture/app-shell) on developers.google.com.
+- [App shell architecture](https://developer.chrome.com/blog/app-shell/) on developers.google.com.
 
 3. **Building a UI Framework**.  
    The framework encapsulates all the reusable styles and UI components, boosting consistency and productivity.
