@@ -65,7 +65,7 @@ class UserProfileVM {
   }
 }
 
-// UserProfile.tsx codes purely implements the view, keeping it simple and easy to update the UI/UX layer.
+// UserProfile.tsx codes purely implements the view, keeping it simple and easy to update the design/UX layer.
 function UserProfile ({vm}: {vm: UserProfileVM}) {
   return (
     <form submit={vm.updateUser}>
