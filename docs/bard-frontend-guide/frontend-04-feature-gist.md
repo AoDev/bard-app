@@ -104,12 +104,11 @@ import * as mobx from 'mobx'
 import {RootStore, FeatureStore} from 'src/stores'
 
 export default class FeatureVM {
-  public rootStore: RootStore
-  public featureStore: FeatureStore
+  rootStore: RootStore
+  featureStore: FeatureStore
+  word = 'World'
 
-  public word = 'World'
-
-  public changeWord() {
+  changeWord() {
     this.word = 'There'
   }
 
