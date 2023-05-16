@@ -6,7 +6,7 @@ Mobx has a specific lib for React data binding. It is called [Mobx-React](https:
 It exposes utilities like `observer`, `provider` and `inject`.
 
 Note that over time, developers have changed their mind about how to write React apps. (flux, event emitters, HOC, classes, hooks, context,...)
-The same happened to Mobx. Although there are recommended alternative, **this recipe keeps using `provider` and `inject`**.
+The same happened to Mobx. Although there are recommended alternatives, **this recipe keeps using `provider` and `inject`**.
 
 ## RootStore
 As indicated earlier, the app has a "rootStore" that will be available to any component. Using context under the hood, the app is wrapped with Provider like this.
@@ -83,10 +83,11 @@ export default withVM(UserProfile, UserProfile)
 
 
 // Usage
+// UserProfile is getting data automatically, can be imported anywhere and rendered anywhere without dealing with props passing or inject.
 import UserProfile from './UserProfile'
 
 <App>
-  <UserProfile />
+  <UserProfile /> 
 </App>
 
 ```
@@ -104,7 +105,7 @@ Assuming that RootStore contains a UserStore with all sort of logic related to t
 
 Thank to the nature of mobx observables, we can pass full entities (objects) to child components with high performance by default.
 
-Mobx will ensure that any property change to an object will cause React to re-render only the components that use that property. (you get optimized component rendering for free :))
+Mobx will ensure that any property change to an object will cause React to re-render only the components that uses that property. (you get optimized component rendering for free :))
 
 
 ```tsx
