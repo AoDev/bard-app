@@ -32,7 +32,7 @@ function UserDetails (props) {
 
 ```jsx
 // Component
-function UserDetails (props) {
+function UserDetails ({user}) {
   return (
     <div>{user.firstName} {user.lastName} {user.age}</div>
   )
