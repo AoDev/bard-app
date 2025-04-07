@@ -1,0 +1,48 @@
+@import (inline) '~rc-switch/assets/index.css';
+
+.rc-switch {
+  width: 54px;
+  height: 24px;
+  background-color: var(--color-gray-aim);
+  border-color: var(--color-gray-aim);
+  flex-shrink: 0;
+
+  &::after {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.rc-switch-inner-checked,
+.rc-switch-inner-unchecked {
+  color: var(--color-txt-inverse);
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.rc-switch-inner-checked {
+  left: -24px;
+}
+
+.rc-switch-inner-unchecked {
+  left: 27px;
+}
+
+.rc-switch-checked {
+  border: 1px solid var(--color-green-aim);
+  background-color: var(--color-green-aim);
+
+  .rc-switch-inner-checked {
+    left: 4px;
+  }
+
+  .rc-switch-inner-unchecked {
+    left: 54px;
+  }
+
+  &::after {
+    width: 20px;
+    height: 20px;
+    left: 30px;
+  }
+}

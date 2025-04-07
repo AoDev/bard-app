@@ -1,0 +1,17 @@
+<!doctype html>
+<html theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <title>App</title>
+
+    <script>
+      const theme = localStorage.getItem('theme') || 'dark'
+      const htmlBody = window.document.querySelector('html')
+      htmlBody.setAttribute('theme', theme)
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

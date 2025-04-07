@@ -1,0 +1,13 @@
+.uifw-layout {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+@media @screen-min-3x {
+  .uifw-layout {
+    height: 100%;
+    grid-template-columns: 320px 1fr;
+    grid-template-areas: 'uifw-side-menu uifw-content';
+    overflow: hidden;
+  }
+}

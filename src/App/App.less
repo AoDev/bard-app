@@ -1,0 +1,27 @@
+@import './AppUnexpectedError/AppUnexpectedError.less';
+@import './MainSideMenu/MainSideMenu.less';
+@import './Header/Header.less';
+@import './Public/UIFramework/UIFramework.less';
+
+.app {
+  display: grid;
+  grid-template-rows: 52px minmax(0, calc(100dvh - 52px));
+  overflow: hidden;
+
+  grid-template-areas:
+    'header'
+    'main-content';
+
+  @media @screen-min-2x {
+    grid-template-columns: minmax(0, 58px) minmax(0, 1fr);
+    grid-template-areas:
+      'header header'
+      'menu main-content';
+  }
+}
+
+.main-content {
+  grid-area: main-content;
+  height: 100%;
+  overflow: auto;
+}

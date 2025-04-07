@@ -1,0 +1,56 @@
+@note-border-width: 4px;
+
+.note {
+  border-left: @note-border-width solid;
+  padding: 1px @base-gap 1px (@base-gap - @note-border-width);
+}
+
+.note--red {
+  border-left-color: var(--color-red-aim);
+  color: var(--color-red-aim);
+}
+
+.note--blue {
+  border-left-color: var(--color-blue-aim);
+  color: var(--color-blue-aim);
+}
+
+.note--green {
+  border-left-color: var(--color-green-aim);
+  color: var(--color-green-aim);
+}
+
+.note--orange {
+  border-left-color: var(--color-orange-aim);
+  color: var(--color-orange-aim);
+}
+
+.note--neutral {
+  border-left-color: var(--color-txt-default);
+  color: var(--color-txt-default);
+}
+
+.note--blue--with-bg {
+  background-color: var(--color-bg-blue-soft);
+  &:extend(.note--blue);
+}
+
+.note--neutral--with-bg {
+  background-color: var(--color-bg-neutral-soft);
+  &:extend(.note--neutral);
+}
+
+.note--red--with-bg {
+  background-color: var(--color-bg-red-soft);
+  &:extend(.note--red);
+}
+
+.note--green--with-bg {
+  background-color: var(--color-bg-green-soft);
+  &:extend(.note--green);
+}
+
+.note--orange--with-bg {
+  background-color: var(--color-bg-orange-soft);
+  &:extend(.note--orange);
+}
