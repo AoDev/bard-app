@@ -16,7 +16,8 @@ This boilerplate is designed with the following principles in mind:
 - [mobx](https://mobx.js.org/) -  state management
 - [less](https://lesscss.org/) - css pre-processor
 - [rsbuild](https://rsbuild.dev/) - modern bundler
-- [biome](https://biomejs.dev/) - formatter and linter
+- [biome](https://biomejs.dev/) - js/ts formatter and linter
+- [prettier](https://prettier.io/) - other files formatter
 - [typescipt](https://www.typescriptlang.org/) - type safe
 - [vitest](https://vitest.dev/) - Testing framework
 
