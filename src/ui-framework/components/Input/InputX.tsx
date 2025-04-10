@@ -11,6 +11,12 @@ interface IProps<T> extends IInputBasicProp {
   }
 }
 
+/**
+ * InputX is an Input component that automatically binds to a property of the view model.
+ * @example
+ * // We have a vm with {firstName: string, lastName: string}
+ * <InputX vm={vm} name="firstName" />
+ */
 export const InputX = observer(function InputX<vm>({vm, name, id, ...otherProps}: IProps<vm>) {
   return (
     <Input

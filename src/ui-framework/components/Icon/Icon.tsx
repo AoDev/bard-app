@@ -27,14 +27,10 @@ export interface IProps extends React.AllHTMLAttributes<HTMLSpanElement> {
 /**
  * Display an icon from our sprites.
  *
- * __How to use?__
- *
- * Provide the name of the icon prefixed by a '#'.
- *
- * The default size is 32x32.
- * Avoid random sizes. You can use the "small" prop to have a 16x16 icon.
- *
- * There are multiple options to customize the icon and its background.
+ * `name` is the filename of the icon in the sprite (cross.svg -> cross).
+ * @see iconNames.d.ts for all available icons.
+ * @example
+ * <Icon name="cross" size={20} color="red" />
  */
 export function Icon(props: IProps) {
   const {

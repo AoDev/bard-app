@@ -44,6 +44,8 @@ The development server will start and automatically open your default browser to
 - `npm run preview`: Preview production build locally
 - `npm run lint`: Check for lint and type issues.
 - `npm run format`: Format code
+- `npm test`: run tests once
+- `npm run test:watch`: run tests in watch mode
 
 ## Documentation
 
