@@ -1,10 +1,15 @@
+// Taken some of the styles from modern-normalize (https://github.com/sindresorhus/modern-normalize)
+
 html {
-  box-sizing: border-box;
+  box-sizing: border-box; // better box model by default
   height: 100%;
   color: var(--color-txt-default);
   -webkit-tap-highlight-color: transparent;
   background-color: var(--color-bg-default);
-  // line-height: 1.5;
+  -webkit-text-size-adjust: 100%; // Prevent adjustments of font size after orientation changes in iOS.
+  line-height: 1.4;
+  font-family: @font-default;
+  font-size: 16px;
 }
 
 *,
@@ -16,13 +21,17 @@ html {
 
 body {
   margin: 0;
-  font-size: 16px;
-  font-family: @font-default;
   background-color: var(--color-body-bg);
   min-height: 100%;
   overscroll-behavior: contain; // prevent pull to refresh browser action
   scrollbar-gutter: stable;
-  overflow-x: hidden; // prevent horizontal scrolling when playlist is outside of viewport
+  width: 100dvw;
+  overflow-x: hidden; // prevent horizontal scrolling if an element is wider than the viewport
+}
+
+b,
+strong {
+  font-weight: bolder; // corrects font weight in chrome and safari
 }
 
 // Prevent images from shrinking by default in a display flex container
@@ -30,8 +39,41 @@ img {
   flex-shrink: 0;
 }
 
+code,
+kbd,
+samp,
 pre {
   margin: 0;
+  font-family: @font-mono; // Improve consistency of default fonts in all browsers.
+  font-size: 1em; // Correct the odd 'em' font sizing in all browsers.
+}
+
+small {
+  font-size: 80%; // Correct the font size of small elements in all browsers.
+}
+
+// Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+// --- Tables
+
+// Correct table border color inheritance in Chrome and Safari. (https://issues.chromium.org/issues/40615503, https://bugs.webkit.org/show_bug.cgi?id=195016)
+table {
+  border-color: currentcolor;
 }
 
 // --- Reset form elements
@@ -57,7 +99,7 @@ input {
 
   &:focus {
     outline: 0;
-    box-shadow: inset 0 0 2px var(--color-blue-aim);
+    box-shadow: none;
   }
 }
 
