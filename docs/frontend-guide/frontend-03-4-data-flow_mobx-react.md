@@ -1,4 +1,4 @@
-# Passing data to UI components (mobx-react)
+# Passing data to UI components
 
 ## How React components get the stores data?
 
@@ -16,7 +16,7 @@ Here is a contrieved example:
 
 **React stand alone**
 
-```jsx
+```tsx
 // Component
 function UserDetails (props) {
   return (
@@ -30,7 +30,7 @@ function UserDetails (props) {
 
 **Mobx-react**
 
-```jsx
+```tsx
 // Component
 function UserDetails (props) {
   return (
@@ -39,7 +39,7 @@ function UserDetails (props) {
 }
 
 // Usage
-<UserDetails {user}>
+<UserDetails user={user}>
 ```
 
 We will have 99% of our components as `observers`.

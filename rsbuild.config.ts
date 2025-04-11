@@ -3,6 +3,7 @@ import {defineConfig} from '@rsbuild/core'
 import {pluginLess} from '@rsbuild/plugin-less'
 import {pluginReact} from '@rsbuild/plugin-react'
 import {pluginSvgIcons} from 'rsbuild-plugin-svg-icons'
+import {frontendGuidePlugin} from './tools/frontendGuide'
 import {listIconsPlugin} from './tools/iconList'
 import {biomeFormat} from './tools/iconList/formatters/biomeFormat'
 
@@ -43,6 +44,7 @@ export default defineConfig({
       verbose: true,
       formatCode: biomeFormat,
     }),
+    frontendGuidePlugin(),
   ],
   html: {
     template: resolve(SRC_FOLDER, 'index.html'),
@@ -58,8 +60,8 @@ export default defineConfig({
             `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''}`,
             // Allows CSS from same origin and inline styles
             "style-src 'self' 'unsafe-inline'",
-            // Allows images from same origin, data URLs, blob URLs, and our custom cover protocol
-            "img-src 'self' data: blob: cover:",
+            // Allows images from same origin, data URLs, blob URLs, and githubusercontent (for docs images)
+            "img-src 'self' data: blob: https://user-images.githubusercontent.com",
             // Allows fonts from same origin and data URLs
             "font-src 'self' data:",
             // Allows network connections to same origin and blob URLs (for audio playback)

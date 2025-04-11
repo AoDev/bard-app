@@ -10,11 +10,9 @@
     "format": "biome format --write .",
     "lint:fix": "biome check --write .",
     "lint": "biome check --diagnostic-level error && tsc --build --noEmit",
-    "preview": "rsbuild preview"
-  },
-  "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "preview": "rsbuild preview",
+    "test": "vitest --config vitest.config.ts --run",
+    "test:watch": "vitest --config vitest.config.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -26,14 +24,23 @@
     "@types/node": "22.14.0",
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.1",
+    "@types/react-syntax-highlighter": "15.5.13",
     "bard-router": "3.0.0",
+    "chokidar": "3.6.0",
     "fast-glob": "3.3.3",
     "localforage": "1.10.0",
     "lodash": "4.17.21",
     "mobx": "6.13.7",
     "mobx-react": "9.2.0",
     "prettier": "3.5.3",
+    "prism-react-renderer": "2.4.1",
     "rc-switch": "4.1.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-markdown": "10.1.0",
+    "react-syntax-highlighter": "15.6.1",
+    "rehype-raw": "7.0.0",
+    "remark-gfm": "4.0.1",
     "rsbuild-plugin-svg-icons": "0.1.1",
     "typescript": "5.8.2",
     "vitest": "3.1.1"

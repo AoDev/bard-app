@@ -1,7 +1,6 @@
 import {Button, Icon} from '@ui'
 import {observer} from 'mobx-react'
 import {themeIcons} from 'src/config/appConfig'
-import type {IButtonProps} from 'src/ui-framework/components/Button/Button'
 import {DemoButtons} from './DemoButtons'
 import {DemoForms} from './DemoForms'
 import {DemoIcons} from './DemoIcons'
@@ -10,35 +9,55 @@ import {DemoModals} from './DemoModals'
 import {DemoNotes} from './DemoNotes'
 import {DemoTables} from './DemoTables'
 import {DemoTypography} from './DemoTypography'
-import type {UIFrameworkVM} from './UIFrameworkVM'
+import {FrontendGuide} from './FrontendGuide'
+import type {UIFWMenuType, UIFrameworkVM} from './UIFrameworkVM'
 
-type Section = UIFrameworkVM['iSection']
+const UIFWMenu = observer(({vm, menu}: {vm: UIFrameworkVM; menu: UIFWMenuType}) => {
+  const {menuSection, contentId} = vm.contentSelected
+  const isExpanded = menuSection === menu.id
+  const defaultItem = menu.items[0].value
 
-const MenuButton = (props: IButtonProps<Section> & {value: Section}) => {
-  const cssClass = 'block btn--msm'
   return (
-    <Button variant="menu" name="iSection" className={cssClass} {...props}>
-      {props.children}
-    </Button>
-  )
-}
+    <div>
+      <Button
+        className="block"
+        variant="invisible"
+        onClickValue={vm.goToSection}
+        value={defaultItem}
+      >
+        <div className="flex-row-center gap-1 justify-between">
+          <h3 className="h3">{menu.label}</h3>
+          {!isExpanded && <Icon name="caret-down" size={16} />}
+        </div>
+      </Button>
 
-const menuItems: {label: string; value: Section}[] = [
-  {label: 'Buttons', value: 'buttons'},
-  {label: 'Forms', value: 'forms'},
-  {label: 'Icons', value: 'icons'},
-  {label: 'Modals', value: 'modals'},
-  {label: 'Notes', value: 'notes'},
-  {label: 'Typography', value: 'typography'},
-  {label: 'Links', value: 'links'},
-]
+      {isExpanded && (
+        <div className="uifw-section-content">
+          {menu.items.map((item) => (
+            <Button
+              key={item.value}
+              variant="menu"
+              className="nowrap-truncate"
+              onClickValue={vm.goToSection}
+              value={item.value}
+              active={contentId === item.value}
+            >
+              {item.label}
+            </Button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+})
 
 export const UIFramework = observer(({vm}: {vm: UIFrameworkVM}) => {
   const {settings} = vm.rootStore
+  const {contentId} = vm.contentSelected
 
   return (
     <div className="uifw-layout">
-      <div>
+      <div className="scroll-y pad-bottom-2">
         <section className="pad-1">
           <h3 className="heading-section">UI Framework</h3>
           <div className="flex-row-center gap-1">
@@ -48,29 +67,22 @@ export const UIFramework = observer(({vm}: {vm: UIFrameworkVM}) => {
               <Icon size={20} name={themeIcons[settings.theme]} />
             </Button>
           </div>
+
+          <UIFWMenu vm={vm} menu={vm.menus.components} />
+          <UIFWMenu vm={vm} menu={vm.menus['frontend-guide']} />
         </section>
-        <h3 className="h3 pad-1">Components</h3>
-        {menuItems.map((item) => (
-          <MenuButton
-            key={item.value}
-            onClickNameValue={vm.set}
-            value={item.value}
-            active={vm.iSection === item.value}
-          >
-            {item.label}
-          </MenuButton>
-        ))}
       </div>
 
       <div className="height-100p scroll-y pad-default">
-        {vm.iSection === 'buttons' && <DemoButtons vm={vm} />}
-        {vm.iSection === 'forms' && <DemoForms vm={vm} />}
-        {vm.iSection === 'icons' && <DemoIcons vm={vm} />}
-        {vm.iSection === 'modals' && <DemoModals vm={vm} />}
-        {vm.iSection === 'notes' && <DemoNotes vm={vm} />}
-        {vm.iSection === 'tables' && <DemoTables vm={vm} />}
-        {vm.iSection === 'typography' && <DemoTypography />}
-        {vm.iSection === 'links' && <DemoLinks />}
+        {contentId === 'buttons' && <DemoButtons vm={vm} />}
+        {contentId === 'forms' && <DemoForms vm={vm} />}
+        {contentId === 'icons' && <DemoIcons vm={vm} />}
+        {contentId === 'modals' && <DemoModals vm={vm} />}
+        {contentId === 'notes' && <DemoNotes vm={vm} />}
+        {contentId === 'tables' && <DemoTables vm={vm} />}
+        {contentId === 'typography' && <DemoTypography />}
+        {contentId === 'links' && <DemoLinks />}
+        {contentId.startsWith('frontend-') && <FrontendGuide vm={vm} />}
       </div>
     </div>
   )

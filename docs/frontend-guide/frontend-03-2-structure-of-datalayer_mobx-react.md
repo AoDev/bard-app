@@ -1,4 +1,4 @@
-# Structure of the data layer (mobx-react)
+# Structure of the data layer
 
 **Reminder**: One goal of this recipe is to separate data management from UI components as much as possible.
 This way, React components become simple reactive "templates".

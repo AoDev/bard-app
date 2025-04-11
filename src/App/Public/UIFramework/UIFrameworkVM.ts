@@ -1,8 +1,10 @@
+import {includes} from '@lib/array'
 import * as store from '@lib/mobx/store.helpers'
 import {zoomTransition} from '@src/config/dialogConfig'
 import type {RootStore} from '@src/stores'
 import type {DialogVM, IconName} from '@ui'
 import * as mobx from 'mobx'
+import sections from './FrontendGuide/sections.json'
 
 class DemoFormVM {
   set: store.SetMethod<DemoFormVM>
@@ -23,13 +25,73 @@ class DemoFormVM {
   }
 }
 
+const menuSections = ['components', 'frontend-guide'] as const
+export const componentSections = [
+  'modals',
+  'buttons',
+  'forms',
+  'icons',
+  'typography',
+  'tables',
+  'notes',
+  'links',
+] as const
+
+export type MenuSection = (typeof menuSections)[number]
+export type ComponentSection = (typeof componentSections)[number]
+export type ContentId = ComponentSection | `frontend-${string}`
+
+export function isContentId(contentId: unknown): contentId is ContentId {
+  return (
+    typeof contentId === 'string' &&
+    (includes(componentSections, contentId) || contentId.startsWith('frontend-'))
+  )
+}
+
+/**
+ * Get the contentId and menuSection from the router params
+ */
+export function getContentFromParams(params: Record<string, string | number>): {
+  contentId: ContentId
+  menuSection: MenuSection
+} {
+  const {contentid, sectionid} = params
+  const contentId: ContentId = isContentId(contentid) ? contentid : 'buttons'
+  const menuSection: MenuSection = sectionid === 'frontend-guide' ? 'frontend-guide' : 'components'
+  return {contentId, menuSection}
+}
+
+const componentItems: {label: string; value: ComponentSection}[] = componentSections.map(
+  (section) => ({
+    label: section.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase()),
+    value: section,
+  })
+)
+
+const frontendGuideItems = sections.reduce((acc: {label: string; value: ContentId}[], section) => {
+  if (isContentId(section.id)) {
+    acc.push({label: section.title, value: section.id})
+  }
+  return acc
+}, [])
+
+export type UIFWMenuType = {
+  id: MenuSection
+  label: string
+  items: {label: string; value: ContentId}[]
+}
+
 export class UIFrameworkVM {
   set: store.SetMethod<UIFrameworkVM>
   toggle: store.ToggleMethod<UIFrameworkVM>
 
+  menus: Record<MenuSection, UIFWMenuType> = {
+    components: {id: 'components', label: 'Components', items: componentItems},
+    'frontend-guide': {id: 'frontend-guide', label: 'Frontend Guide', items: frontendGuideItems},
+  }
+
   userHasConfirmedModal: null | boolean = null
   demoFormVM = new DemoFormVM()
-
   inputButtonIsLoading = false
   inputButtonDisabled = false
   inputButtonActive = false
@@ -54,8 +116,12 @@ export class UIFrameworkVM {
   iBtnSelected: 'one' | 'two' = 'one'
   rootStore: RootStore
   testModal: DialogVM
-  iSection: 'modals' | 'buttons' | 'forms' | 'icons' | 'typography' | 'tables' | 'notes' | 'links' =
-    'buttons'
+  iSection: ComponentSection | string = 'buttons'
+  iMenuSection: MenuSection = 'components'
+
+  get contentSelected() {
+    return getContentFromParams(this.rootStore.router.params)
+  }
 
   confirmUserAction(hasConfirmed: boolean) {
     this.userHasConfirmedModal = hasConfirmed
@@ -66,6 +132,15 @@ export class UIFrameworkVM {
 
   destroyVM() {
     this.rootStore.uiStore.dialogs.remove([this.testModal])
+  }
+
+  toggleSection(section: MenuSection) {
+    this.iMenuSection = section
+  }
+
+  goToSection(contentId: ContentId) {
+    const sectionId = contentId.startsWith('frontend-') ? 'frontend-guide' : 'components'
+    this.rootStore.router.goTo(`/public/ui-framework?sectionid=${sectionId}&contentid=${contentId}`)
   }
 
   constructor({rootStore}: {rootStore: RootStore}) {

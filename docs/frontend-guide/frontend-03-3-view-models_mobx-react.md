@@ -1,4 +1,4 @@
-# What is a VM - View-Model? (mobx-react)
+# What is a VM - View-Model?
 
 > A VM is a connector between the View Layer and the Data Layer and is used as local state.
 
