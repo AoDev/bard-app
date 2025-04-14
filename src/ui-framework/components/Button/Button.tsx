@@ -4,17 +4,15 @@ import {Loader} from '../Loader'
 import {ButtonBasic, type IButtonBasicProps} from './ButtonBasic'
 
 export type ButtonVariant =
-  | 'blackwhite'
+  | 'primary'
   | 'blue'
   | 'discreet'
   | 'green'
   | 'invisible'
   | 'link'
   | 'menu'
-  | 'neutral'
   | 'red'
   | 'tab'
-  | 'text'
   | 'theader'
   | 'icon'
 

@@ -26,7 +26,7 @@ export const AppUnexpectedError = observer(({rootStore}: {rootStore: RootStore})
         </div>
         <div className="margin-top-1">
           <Button
-            variant="blackwhite"
+            variant="primary"
             onClick={() => window.location.reload()}
             className="button button-secondary"
           >

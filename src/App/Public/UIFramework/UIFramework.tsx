@@ -74,7 +74,7 @@ export const UIFramework = observer(({vm}: {vm: UIFrameworkVM}) => {
       </div>
 
       <div className="height-100p scroll-y pad-default">
-        {contentId === 'buttons' && <DemoButtons vm={vm} />}
+        {contentId === 'buttons' && <DemoButtons vm={vm.demoButtonsVM} />}
         {contentId === 'forms' && <DemoForms vm={vm} />}
         {contentId === 'icons' && <DemoIcons vm={vm} />}
         {contentId === 'modals' && <DemoModals vm={vm} />}

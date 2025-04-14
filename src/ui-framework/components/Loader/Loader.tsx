@@ -4,7 +4,6 @@ interface ILoaderProps {
   label?: string
   className?: string
   small?: boolean
-  white?: boolean
   inline?: boolean
   bar?: boolean
   dot?: boolean

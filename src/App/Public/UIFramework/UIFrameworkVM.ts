@@ -6,6 +6,9 @@ import type {DialogVM, IconName} from '@ui'
 import * as mobx from 'mobx'
 import sections from './FrontendGuide/sections.json'
 
+/**
+ * Specific state for the form demo
+ */
 class DemoFormVM {
   set: store.SetMethod<DemoFormVM>
 
@@ -20,21 +23,45 @@ class DemoFormVM {
 
   constructor() {
     this.set = store.setMethod<DemoFormVM>(this)
+    mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
+  }
+}
 
+/**
+ * Specific state for the buttons demo
+ */
+export class DemoButtonsVM {
+  set: store.SetMethod<DemoButtonsVM>
+
+  iButtonIsLoading = false
+  iButtonDisabled = false
+  iButtonActive = false
+  iButtonFocused = false
+  iButtonCaretRight = false
+  iButtonCaretRightEnd = false
+  iButtonIcon = false
+  iButtonRound = false
+  iButtonNarrow = false
+
+  iBtnSelected: 'one' | 'two' = 'one'
+
+  constructor() {
+    this.set = store.setMethod<DemoButtonsVM>(this)
     mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
   }
 }
 
 const menuSections = ['components', 'frontend-guide'] as const
+
 export const componentSections = [
-  'modals',
   'buttons',
   'forms',
   'icons',
-  'typography',
-  'tables',
-  'notes',
   'links',
+  'modals',
+  'notes',
+  'tables',
+  'typography',
 ] as const
 
 export type MenuSection = (typeof menuSections)[number]
@@ -92,28 +119,19 @@ export class UIFrameworkVM {
 
   userHasConfirmedModal: null | boolean = null
   demoFormVM = new DemoFormVM()
-  inputButtonIsLoading = false
-  inputButtonDisabled = false
-  inputButtonActive = false
-  inputButtonFocused = false
-  inputButtonCaretRightEnd = false
-  inputButtonCaretRight = false
+  demoButtonsVM = new DemoButtonsVM()
   inputNoteWithBackground = false
   iModalFullscreen = false
   iModalWidth: '1x' | '2x' | '3x' = '2x'
   inputModalWithCloseButton = true
   inputHideOnOverlayClick = true
   inputTableNarrow = false
-  inputButtonIcon = false
-  inputButtonRound = false
-  inputButtonNarrow = false
   iIconBgColor = 'var(--color-green-aim)'
   iIconBgPadding = 5
   iIconColor = 'var(--color-txt-inverse)'
   iIconName: IconName = 'caret-right'
   iIconSearch = ''
   iIconSize = 24
-  iBtnSelected: 'one' | 'two' = 'one'
   rootStore: RootStore
   testModal: DialogVM
   iSection: ComponentSection | string = 'buttons'

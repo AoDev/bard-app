@@ -1,22 +1,38 @@
-import {Button, type ButtonVariant, Icon, Input, InputX} from '@ui'
+import {Button, type ButtonVariant, type IButtonProps, Icon, InputX} from '@ui'
 import {observer} from 'mobx-react'
-import type {UIFrameworkVM} from './UIFrameworkVM'
+import type {DemoButtonsVM} from './UIFrameworkVM'
 
 const btnVariants: ButtonVariant[] = [
-  'blue',
-  'discreet',
-  'green',
-  'invisible',
-  'link',
-  'menu',
-  'neutral',
+  'primary',
   'red',
+  'green',
+  'blue',
+
+  'link',
+  'invisible',
+  'menu',
+  'discreet',
+
   'tab',
-  'text',
   'theader',
 ]
 
-export const DemoButtons = observer(({vm}: {vm: UIFrameworkVM}) => {
+type ButtonProperty = keyof IButtonProps<unknown> | 'focused/hover' | 'with icon'
+
+// Define checkbox options for button properties
+const buttonPropertyOptions: Array<{name: keyof DemoButtonsVM; btnProp: ButtonProperty}> = [
+  {name: 'iButtonIsLoading', btnProp: 'isLoading'},
+  {name: 'iButtonDisabled', btnProp: 'disabled'},
+  {name: 'iButtonActive', btnProp: 'active'},
+  {name: 'iButtonFocused', btnProp: 'focused/hover'},
+  {name: 'iButtonCaretRight', btnProp: 'caretRight'},
+  {name: 'iButtonCaretRightEnd', btnProp: 'caretRightEnd'},
+  {name: 'iButtonIcon', btnProp: 'with icon'},
+  {name: 'iButtonRound', btnProp: 'round'},
+  {name: 'iButtonNarrow', btnProp: 'narrow'},
+]
+
+export const DemoButtons = observer(({vm}: {vm: DemoButtonsVM}) => {
   return (
     <div className="grid">
       <section className="panel--simple" id="section-buttons">
@@ -29,25 +45,25 @@ export const DemoButtons = observer(({vm}: {vm: UIFrameworkVM}) => {
               <Button
                 key={variant}
                 variant={variant}
-                active={vm.inputButtonActive}
-                isLoading={vm.inputButtonIsLoading}
-                disabled={vm.inputButtonDisabled}
-                focused={vm.inputButtonFocused}
-                caretRight={vm.inputButtonCaretRight}
-                caretRightEnd={vm.inputButtonCaretRightEnd}
-                round={vm.inputButtonRound}
-                narrow={vm.inputButtonNarrow}
+                active={vm.iButtonActive}
+                isLoading={vm.iButtonIsLoading}
+                disabled={vm.iButtonDisabled}
+                focused={vm.iButtonFocused}
+                caretRight={vm.iButtonCaretRight}
+                caretRightEnd={vm.iButtonCaretRightEnd}
+                round={vm.iButtonRound}
+                narrow={vm.iButtonNarrow}
               >
-                {vm.inputButtonIcon && <Icon name="star" size={24} className="margin-right-1" />}
+                {vm.iButtonIcon && <Icon name="star" size={24} className="margin-right-1" />}
                 {variant}
               </Button>
             ))}
             <Button
               variant="icon"
-              active={vm.inputButtonActive}
-              isLoading={vm.inputButtonIsLoading}
-              disabled={vm.inputButtonDisabled}
-              focused={vm.inputButtonFocused}
+              active={vm.iButtonActive}
+              isLoading={vm.iButtonIsLoading}
+              disabled={vm.iButtonDisabled}
+              focused={vm.iButtonFocused}
             >
               <Icon name="star" size={20} />
             </Button>
@@ -56,96 +72,14 @@ export const DemoButtons = observer(({vm}: {vm: UIFrameworkVM}) => {
         <hr className="margin-1" />
         <div className="pad-default">
           <div className="grid grid-colmin10em">
-            <div>
-              <Input
-                id="inputButtonIsLoading"
-                type="checkbox"
-                value={vm.inputButtonIsLoading}
-                onChangeNameValue={vm.toggle}
-                name="inputButtonIsLoading"
-              />
-              <label className="label margin-left-1" htmlFor="inputButtonIsLoading">
-                isLoading
-              </label>
-            </div>
-            <div>
-              <Input
-                id="inputButtonDisabled"
-                type="checkbox"
-                value={vm.inputButtonDisabled}
-                onChangeNameValue={vm.toggle}
-                name="inputButtonDisabled"
-              />
-              <label className="label margin-left-1" htmlFor="inputButtonDisabled">
-                disabled
-              </label>
-            </div>
-
-            <div>
-              <Input
-                id="inputButtonActive"
-                type="checkbox"
-                value={vm.inputButtonActive}
-                onChangeNameValue={vm.toggle}
-                name="inputButtonActive"
-              />
-              <label className="label margin-left-1" htmlFor="inputButtonActive">
-                active
-              </label>
-            </div>
-            <div>
-              <Input
-                id="inputButtonFocused"
-                type="checkbox"
-                value={vm.inputButtonFocused}
-                onChangeNameValue={vm.toggle}
-                name="inputButtonFocused"
-              />
-              <label className="label margin-left-1" htmlFor="inputButtonFocused">
-                focused/hover
-              </label>
-            </div>
-
-            <div>
-              <Input
-                id="inputButtonCaretRight"
-                type="checkbox"
-                value={vm.inputButtonCaretRight}
-                onChangeNameValue={vm.toggle}
-                name="inputButtonCaretRight"
-              />
-              <label className="label margin-left-1" htmlFor="inputButtonCaretRight">
-                caretRight
-              </label>
-            </div>
-
-            <div>
-              <label>
-                <InputX type="checkbox" vm={vm} name="inputButtonCaretRightEnd" />
-                <span className="label margin-left-1">caretRightEnd</span>{' '}
-              </label>
-            </div>
-
-            <div>
-              <label>
-                <InputX type="checkbox" vm={vm} name="inputButtonIcon" />
-                <span className="label margin-left-1">with icon</span>{' '}
-              </label>
-            </div>
-
-            <div>
-              <label>
-                <InputX type="checkbox" vm={vm} name="inputButtonRound" />
-                <span className="label margin-left-1">round</span>{' '}
-              </label>
-            </div>
-
-            <div>
-              <label>
-                <InputX type="checkbox" vm={vm} name="inputButtonNarrow" />
-                <span className="label margin-left-1">narrow</span>{' '}
-              </label>
-            </div>
+            {buttonPropertyOptions.map(({name, btnProp}) => (
+              <div key={name} className="flex-row-center gap-05">
+                <InputX vm={vm} type="checkbox" name={name} />
+                <label className="label" htmlFor={name}>
+                  {btnProp}
+                </label>
+              </div>
+            ))}
           </div>
         </div>
       </section>

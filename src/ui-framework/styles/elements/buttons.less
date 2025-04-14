@@ -25,8 +25,7 @@ button {
   display: inline-block;
   position: relative;
   text-decoration: none;
-  // overflow: hidden; // not sure why I needed this, will see if that causes problems
-  vertical-align: bottom;
+  vertical-align: bottom; // Not sure why I needed this, should look into it
   line-height: 1;
   font-size: 16px;
 
@@ -37,8 +36,24 @@ button {
   }
 }
 
+a.btn {
+  line-height: 2.7; // Needed when the class is set on a link to align text
+}
+
+// Mixing for btn disabled state
+.btn-disabled (@txt-color, @bg-color) {
+  color: @txt-color;
+  background-color: @bg-color;
+  border-color: @bg-color;
+  box-shadow: none;
+
+  .icon-svg {
+    fill: @txt-color;
+  }
+}
+
 // Mixin for style variant
-.btn-variant-plain (@txt-color, @bg-color, @active-bgcolor: @bg-color) {
+.btn-variant (@txt-color, @bg-color, @active-bgcolor: @bg-color) {
   border: 1px solid @bg-color;
   background-color: @bg-color;
   border-radius: 22px;
@@ -48,14 +63,7 @@ button {
   transition-timing-function: linear;
 
   &.disabled {
-    color: var(--color-btn-disabled-txt);
-    background-color: var(--color-btn-disabled-bg);
-    border-color: var(--color-btn-disabled-bg);
-    box-shadow: none;
-
-    .icon-svg {
-      fill: var(--color-btn-disabled-txt);
-    }
+    .btn-disabled(var(--color-btn-disabled-txt), var(--color-btn-disabled-bg));
   }
 
   .loader-bar {
@@ -67,7 +75,7 @@ button {
   }
 }
 
-.btn-plain-hover(@txt-color, @color-bg, @color-border: @color-bg) {
+.btn-variant-hover(@txt-color, @color-bg, @color-border: @color-bg) {
   &.focus,
   &:focus-visible,
   &:hover {
@@ -77,37 +85,36 @@ button {
     border-color: @color-border;
     &.disabled,
     &:disabled {
-      color: var(--color-btn-disabled-txt);
-      border-color: var(--color-btn-disabled-bg);
-      background-color: var(--color-btn-disabled-bg);
-      box-shadow: none;
+      .btn-disabled(var(--color-btn-disabled-txt), var(--color-btn-disabled-bg));
     }
   }
 }
 
+.btn-variant-active(@txt-color, @bg-color) {
+  &.active {
+    color: @txt-color;
+    background-color: @bg-color;
+  }
+}
+
 .btn--blue {
-  .btn-variant-plain(var(--color-txt-inverse), var(--color-blue-aim));
-  .btn-plain-hover(var(--color-txt-inverse), var(--color-blue-hover));
+  .btn-variant(var(--color-txt-inverse), var(--color-blue-aim));
+  .btn-variant-hover(var(--color-txt-inverse), var(--color-blue-hover));
 }
 
 .btn--green {
-  .btn-variant-plain(var(--color-txt-inverse), var(--color-green-aim));
-  .btn-plain-hover(var(--color-txt-inverse), var(--color-green-hover));
+  .btn-variant(var(--color-txt-inverse), var(--color-green-aim));
+  .btn-variant-hover(var(--color-txt-inverse), var(--color-green-hover));
 }
 
 .btn--red {
-  .btn-variant-plain(var(--color-txt-inverse), var(--color-red-aim));
-  .btn-plain-hover(var(--color-txt-inverse), var(--color-red-hover));
-}
-
-.btn--neutral {
-  .btn-variant-plain(var(--color-txt-inverse), var(--color-neutral-aim));
-  .btn-plain-hover(var(--color-txt-inverse), var(--color-neutral-hover));
+  .btn-variant(var(--color-txt-inverse), var(--color-red-aim));
+  .btn-variant-hover(var(--color-txt-inverse), var(--color-red-hover));
 }
 
 .btn--discreet {
-  .btn-variant-plain(var(--color-txt-default), var(--color-bg-alternative), var(--color-green-aim));
-  .btn-plain-hover(var(--color-txt-default), transparent, var(--color-txt-default));
+  .btn-variant(var(--color-txt-default), var(--color-bg-alternative), var(--color-green-aim));
+  .btn-variant-hover(var(--color-txt-default), transparent, var(--color-txt-default));
 
   &.focus,
   &:focus-visible,
@@ -116,9 +123,9 @@ button {
   }
 }
 
-.btn--blackwhite {
-  .btn-variant-plain(var(--color-txt-max-contrast), var(--color-bg-max-contrast));
-  // .btn-plain-hover(var(--color-txt-inverse), var(--color-blue-hover));
+.btn--primary {
+  .btn-variant(var(--color-txt-max-contrast), var(--color-bg-max-contrast));
+  // .btn-variant-hover(var(--color-txt-inverse), var(--color-blue-hover));
 }
 
 // Keep these before btn--link so that padding and height are overwritten
@@ -132,61 +139,18 @@ button {
   height: auto;
 }
 
-.btn--text {
-  background: transparent;
-  border: 0;
-  color: var(--color-txt-default);
-  height: auto;
-  line-height: 1.15;
-  padding: 0;
-  vertical-align: baseline;
-  position: relative;
-
-  .icon-svg {
-    fill: var(--color-txt-default);
-  }
-
-  .loader-bar {
-    background-color: var(--color-txt-default);
-  }
-
-  &.disabled,
-  &[disabled] {
-    color: var(--color-gray-aim);
-    text-decoration: none;
-  }
-}
-
 .btn--menu {
-  &:extend(.btn--neutral all);
+  .btn-variant(var(--color-txt-default), transparent, var(--color-active-bg));
+  .btn-variant-hover(var(--color-txt-default), var(--color-bg-alternative), transparent);
+  .btn-variant-active(#fff, var(--color-active-bg));
 
-  color: var(--color-txt-default);
-  background-color: transparent;
-  border: 0;
-  border-radius: 0;
+  border-radius: 12px;
   display: block;
   width: 100%;
   text-align: left;
   transition: none;
-
-  &.focus,
-  &:hover,
-  &:focus {
-    border: 0;
-    border-radius: 12px; // looks better with the rounding of the container
-    box-shadow: none;
-    color: var(--color-active-txt);
-    background-color: var(--color-active-bg);
-  }
-
-  &.active,
-  &.active:hover,
-  &.active:focus,
-  &.active.focus {
-    color: #fff;
-    background-color: var(--color-active-bg);
-    border-radius: 12px;
-  }
+  text-transform: uppercase;
+  font-size: 13px;
 }
 
 .btn--link {
@@ -196,8 +160,8 @@ button {
   height: auto;
   line-height: 1.15;
   padding: 0;
-  vertical-align: baseline;
   position: relative;
+  vertical-align: baseline;
 
   .icon-svg {
     fill: var(--color-link);
@@ -231,22 +195,28 @@ button {
 
 .btn--icon,
 .btn--invisible {
+  @txt-color: var(--color-txt-default);
   height: auto;
   border: 0;
   background-color: transparent;
   padding: 0;
-  color: var(--color-txt-default);
+  color: @txt-color;
 
   &.disabled,
   &[disabled] {
     opacity: 0.5;
   }
+
+  .loader-bar {
+    background-color: @txt-color;
+  }
 }
 
 .btn--tab {
+  @txt-color: var(--color-txt-default);
   border: 0;
-  color: var(--color-txt-default);
-  border-bottom: 2px solid transparent;
+  color: @txt-color;
+  border-bottom: 3px solid transparent;
   background-color: transparent;
   text-transform: uppercase;
   font-size: 13px;
@@ -260,6 +230,14 @@ button {
     border-bottom: 3px solid transparent;
     margin: 0 16px;
     transition: border 0.2s ease-out;
+  }
+
+  .icon-svg {
+    fill: @txt-color;
+  }
+
+  .loader-bar {
+    background-color: @txt-color;
   }
 
   &:hover,
@@ -276,10 +254,25 @@ button {
       transition: border 0.2s ease-out;
     }
   }
+
+  &.disabled,
+  &[disabled] {
+    color: var(--color-btn-disabled-txt);
+  }
 }
 
-a.btn {
-  line-height: 2.7; // Needed when the class is set on a link to align text
+// Because btn--tab(s) are centered by default, override this to have left aligned tabs
+.tabs--left {
+  .btn--tab {
+    padding: 0;
+
+    &:after {
+      margin: 0;
+    }
+  }
+  .btn--tab + .btn--tab {
+    margin-left: @base-gap;
+  }
 }
 
 .btn--sticked-horizontal,
@@ -335,7 +328,8 @@ a.btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  flex-shrink: 0; // Prevent shrinking when the button is inside a flex container
+  padding: 0;
 
   &.btn--narrow {
     height: 32px;
@@ -358,8 +352,10 @@ a.btn {
 }
 
 .btn--theader {
+  @txt-color: var(--color-txt-default);
+
   background: transparent;
-  color: var(--color-txt-default);
+  color: @txt-color;
   text-transform: uppercase;
   border: 0;
   font-size: 14px;
@@ -367,6 +363,15 @@ a.btn {
   padding: 0;
   letter-spacing: 0.05em;
   height: 100%;
+
+  &.disabled,
+  &[disabled] {
+    color: var(--color-btn-disabled-txt);
+  }
+
+  .loader-bar {
+    background-color: @txt-color;
+  }
 }
 
 .btn--with-caret {
@@ -377,25 +382,6 @@ a.btn {
 .btn__caret-right {
   position: absolute;
   right: 14px;
-}
-
-.btn--underlined {
-  border-bottom: 2px solid;
-  padding: 10px 0 6px;
-}
-
-// Because btn--tab(s) are centered by default, override this to have left aligned tabs
-.tabs--left {
-  .btn--tab {
-    padding: 0;
-
-    &:after {
-      margin: 0;
-    }
-  }
-  .btn--tab + .btn--tab {
-    margin-left: @base-gap;
-  }
 }
 
 // catch attention
