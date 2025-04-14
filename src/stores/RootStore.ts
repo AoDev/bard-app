@@ -38,7 +38,6 @@ export class RootStore {
     })
     await this.storage.settings.init()
     this.uiStore.init()
-    this.router.goTo('/public/home')
     this.set('appStatus', 'ready')
     return true
   }
