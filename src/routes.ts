@@ -11,7 +11,11 @@ export function planWindowTitle(params: Router['params']) {
 
 export function getRoutes() {
   const routes: Readonly<Record<string, IRoute>> = {
-    '/': {},
+    '/': {
+      intercept(request) {
+        return request.route === '/' ? {...request, route: '/public/home'} : request
+      },
+    },
     '/public': {},
     '/public/ui-framework': {windowTitlePlugin: 'UI Framework'},
     '/public/app-settings': {windowTitlePlugin: 'App settings'},
