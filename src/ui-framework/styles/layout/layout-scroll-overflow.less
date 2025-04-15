@@ -1,0 +1,31 @@
+// OVERFLOW -------------------------------------------------------------- //
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+// Useful to remove the default overflow: hidden on some elements like panels.
+.overflow-initial {
+  overflow: initial !important;
+}
+
+.scroll-x {
+  overflow-x: auto;
+}
+
+.scroll-y {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+// Scroll margin
+// .scroll-margin-1, ...
+
+each(@spacer-values, .(@svalue) {
+  .scroll-margin-@{svalue} {
+    scroll-margin: @base-gap * @svalue;
+  }
+});
