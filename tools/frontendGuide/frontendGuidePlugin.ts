@@ -8,32 +8,26 @@ interface GuideSection {
   id: string
   title: string
   content: string
-  order: number
 }
 
 async function generateGuideSections() {
   // Find all markdown files in the frontend guide directory
-  const files = await glob('docs/frontend-guide/*.md')
+  const files = (await glob('docs/frontend-guide/*.md')).sort((a, b) => a.localeCompare(b))
 
   // Process each file
   const sections: GuideSection[] = await Promise.all(
     files.map(async (file) => {
       const content = await readFile(file, 'utf-8')
       const id = file.split('/').pop()?.replace('.md', '') || ''
-      const order = parseInt(id.split('-')[1]) || 0
       const title = content.split('\n')[0].replace('#', '').trim()
 
       return {
         id,
         title,
         content,
-        order,
       }
     })
   )
-
-  // Sort sections by order
-  sections.sort((a, b) => a.order - b.order)
 
   // Create output directory
   const outputDir = join(process.cwd(), 'src/App/Public/UIFramework/FrontendGuide')

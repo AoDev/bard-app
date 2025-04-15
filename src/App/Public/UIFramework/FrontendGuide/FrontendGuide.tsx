@@ -1,4 +1,5 @@
 import type {Theme} from '@src/config'
+import {Button, Icon} from '@ui'
 import {observer} from 'mobx-react'
 import {type CSSProperties, useMemo} from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -34,6 +35,22 @@ const highlighterThemes: Record<Theme, Record<string, CSSProperties>> = {
   light: oneLight,
 }
 
+/**
+ * Removes "Next" navigation links from markdown content
+ * We do this because the links in markdown only works if viewed on Github
+ * so we replace them with our own next links in this component.
+ * Looks for patterns like `[Next: "..."](...md)` at the end of the content
+ */
+function removeNextLinks(content: string): string {
+  return content
+    .replace(/\n---\n\[Next:.*$/s, '') // Remove if after horizontal rule
+    .replace(/\n\[Next:.*$/s, '') // Remove if at the end directly
+}
+
+/**
+ * Returns the components for the markdown renderer,
+ * especially adapting the theme for the code blocks.
+ */
 function getComponents(theme: Theme): Components {
   return {
     ...reactMarkdownComponents,
@@ -55,19 +72,37 @@ function getComponents(theme: Theme): Components {
 export const FrontendGuide = observer(({vm}: {vm: UIFrameworkVM}) => {
   const {contentId} = vm.contentSelected
   const {theme} = vm.rootStore.settings
-  const currentSection = sections.find((section) => section.id === contentId) || sections[0]
   const components = useMemo(() => getComponents(theme), [theme])
+
+  const currentIndex = sections.findIndex((section) => section.id === contentId)
+
+  if (currentIndex === -1) {
+    return (
+      <div className="panel--simple pad-default" style={containerStyle}>
+        Content not found
+      </div>
+    )
+  }
+
+  const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex + 1] : null
+
   return (
     <div className="panel--simple pad-default" style={containerStyle}>
-      <div className="markdown-bdy">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw]}
-          components={components}
-        >
-          {currentSection.content}
-        </ReactMarkdown>
-      </div>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
+        components={components}
+      >
+        {removeNextLinks(sections[currentIndex].content)}
+      </ReactMarkdown>
+
+      {nextSection && (
+        <Button variant="link" onClickValue={vm.goToSection} value={nextSection.id}>
+          <div className="flex-row-center gap-1">
+            <span>Next: "{nextSection.title}"</span> <Icon name="caret-right" size={12} />
+          </div>
+        </Button>
+      )}
     </div>
   )
 })

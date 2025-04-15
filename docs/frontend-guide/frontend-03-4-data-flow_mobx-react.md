@@ -8,6 +8,12 @@ It exposes utilities like `observer`, `provider` and `inject`.
 Note that over time, developers have changed their mind about how to write React apps. (flux, event emitters, HOC, classes, hooks, context,...)
 The same happened to Mobx. `provider` and `inject` are not "fashion enough" nowadays. **This recipe keeps using `provider` and `inject`**.
 
+### Using the "withVM" utility
+
+`withVM` was created to make dev life easier. It runs the necessary logic to connect UI components + VM + external data stores.
+
+Under the hood it is using mobx-react `inject`, which in turn, is using `React Context`.
+
 ## Differences with stand alone React when passing props
 
 With stand alone React, we are used to pass multiple props to components. With Mobx, we pass entire objects (stores and models) that are observable.

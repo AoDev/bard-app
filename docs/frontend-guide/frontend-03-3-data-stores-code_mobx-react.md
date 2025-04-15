@@ -47,6 +47,11 @@ In 90% of cases you will want **to use the exact same options that were in the e
 
 **In details**
 
+- `undefined` (the second argument): is meant to override the *"auto"* of `makeAutoObservable`.
+
+  **In Practice**: it can happen that we don't want a particular property to become observable.  
+  eg: `makeAutoObservable(this, {myProp: false})` but we rarely need to do this.
+
 - `autoBind: true`: will bind the methods to the instance (the `this` value).
 
   **In practice**: manually binding the `this` value is typically needed when a method is set on a DOM element like a _button onClick handler_. This solves it for us. No need for arrow functions or to call `fn.bind(this)`. (eg: `this.changeMyValue = this.changeMyValue.bind(this)`)
