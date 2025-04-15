@@ -36,7 +36,8 @@ export const DemoTables = observer(({vm}: {vm: UIFrameworkVM}) => {
           </tbody>
         </table>
       </div>
-      <div className="bg-alternative pad-default flex-col-end">
+      <hr className="margin-1" />
+      <div className="pad-default flex-col-end">
         <div className="flex-row-center">
           <div className="margin-right-2">
             <Input

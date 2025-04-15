@@ -87,7 +87,7 @@ export const DemoButtons = observer(({vm}: {vm: DemoButtonsVM}) => {
         <div className="panel__header margin-bottom-2">
           <h3 className="margin-0">Buttons extras</h3>
         </div>
-        <div className="grid-2-col-2x">
+        <div className="flex-row-center gap-2">
           <div style={{width: 'fit-content'}}>
             <div className="btn--sticked-horizontal">
               <Button

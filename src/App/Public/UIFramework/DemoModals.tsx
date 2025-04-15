@@ -31,7 +31,9 @@ export const DemoModals = observer(({vm}: {vm: UIFrameworkVM}) => {
         </div>
       </div>
 
-      <div className="bg-alternative pad-default">
+      <hr className="margin-1" />
+
+      <div className="pad-default">
         <div className="grid grid-colmin10em">
           <div>
             <div>

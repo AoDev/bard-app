@@ -59,7 +59,7 @@ export const UIFramework = observer(({vm}: {vm: UIFrameworkVM}) => {
     <div className="uifw-layout">
       <div className="scroll-y pad-bottom-2">
         <section className="pad-1">
-          <h3 className="heading-section">UI Framework</h3>
+          <h3 className="heading-section margin-top-0">UI Framework</h3>
           <div className="flex-row-center gap-1">
             <span className="label">Theme</span>
             <b>{settings.theme} </b>
@@ -73,7 +73,7 @@ export const UIFramework = observer(({vm}: {vm: UIFrameworkVM}) => {
         </section>
       </div>
 
-      <div className="height-100p scroll-y pad-default">
+      <div className="height-100p scroll-y">
         {contentId === 'buttons' && <DemoButtons vm={vm.demoButtonsVM} />}
         {contentId === 'forms' && <DemoForms vm={vm} />}
         {contentId === 'icons' && <DemoIcons vm={vm} />}

@@ -23,7 +23,9 @@ export const DemoNotes = observer(({vm}: {vm: UIFrameworkVM}) => {
         </Note>
       ))}
 
-      <div className="bg-alternative pad-default">
+      <hr className="margin-1" />
+
+      <div className="pad-default">
         <div className="flex-row-center">
           <div className="margin-right-2">
             <Input
