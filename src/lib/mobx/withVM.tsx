@@ -105,7 +105,6 @@ export function withVM<T extends IViewModel, P extends {rootStore: any}>(
   VM: Constructable<T, P>
 ) {
   const VMProvider = (props: P & IProviderProps) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {rootStore, ...otherProps} = props
     const {current: vm} = useRef(new VM(props))
     useEffect(() => () => {

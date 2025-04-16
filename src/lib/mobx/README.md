@@ -1,4 +1,19 @@
-## Store boilerplate
+## Component snippet
+
+```tsx
+import {observer} from 'mobx-react'
+import type {ComponentVM} from './ComponentVM'
+
+export const Component = observer(({vm}: {vm: ComponentVM}) => {
+  return (
+    <div>
+      Hello
+    </div>
+  )
+})
+```
+
+## Store snippet
 
 ```ts
 import * as store from '@lib/mobx/store.helpers'
@@ -21,7 +36,7 @@ export default class FeatureStore {
 }
 ```
 
-## VM boilerplate
+## VM snippet
 
 ```ts
 import * as store from '@lib/mobx/store.helpers'
