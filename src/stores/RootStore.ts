@@ -1,8 +1,10 @@
 import * as store from '@lib/mobx/store.helpers'
+import {RoutePath} from '@src/routes'
 import type {Router} from 'bard-router'
 import {makeAutoObservable} from 'mobx'
 import {SettingsDataStore, SettingsStore} from './Settings'
 import {UIStore} from './UIStore'
+import {UserStore} from './UserStore'
 
 type AppStatus = 'init' | 'ready'
 
@@ -26,6 +28,7 @@ export class RootStore {
   errorInfo: React.ErrorInfo | null = null
   appStatus: AppStatus = 'init'
   router: Router
+  user: UserStore
 
   async init() {
     // Listen for uncaught errors
@@ -53,6 +56,21 @@ export class RootStore {
     this.uiStore.handledErrorDialog.show()
   }
 
+  async signIn() {
+    const {user, router} = this
+    await user.signIn()
+    if (user.signedIn) {
+      router.goTo(RoutePath.privateHome)
+    }
+  }
+
+  async signOut() {
+    this.router.goTo(RoutePath.signOut)
+    await this.user.signOut()
+    // Cleanup app state
+    this.router.goTo(RoutePath.publicHome)
+  }
+
   constructor(router: Router) {
     this.set = store.setMethod<RootStore>(this)
     this.assign = store.assignMethod<RootStore>(this)
@@ -60,6 +78,7 @@ export class RootStore {
     this.settings = new SettingsStore()
     this.storage = {settings: new SettingsDataStore(this.settings)}
     this.uiStore = new UIStore(this)
+    this.user = new UserStore()
     this.router = router
 
     makeAutoObservable(

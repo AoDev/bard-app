@@ -24,6 +24,7 @@ export type IconName =
   | 'plus'
   | 'refresh'
   | 'settings'
+  | 'signout'
   | 'star'
   | 'sun'
   | 'ui-framework'

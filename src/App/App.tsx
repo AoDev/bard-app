@@ -5,6 +5,7 @@ import {AppUnexpectedError} from './AppUnexpectedError'
 import type {AppVM} from './AppVM'
 import {Header} from './Header'
 import {MainSideMenu} from './MainSideMenu'
+import {Private} from './Private'
 import {Public} from './Public'
 
 export const App = observer(({vm}: {vm: AppVM}) => {
@@ -17,6 +18,7 @@ export const App = observer(({vm}: {vm: AppVM}) => {
         <Header rootStore={vm.rootStore} />
         <div className="main-content">
           <Public />
+          <Private />
         </div>
       </div>
       <MainSideMenu rootStore={vm.rootStore} />

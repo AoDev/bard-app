@@ -33,9 +33,12 @@ export const Home = memo(() => {
         </div>
       </div>
 
-      <div className="pad-default flex-center margin-top-2">
+      <div className="pad-default flex-center justify-between margin-top-2">
         <Link className="link--discreet" to="/public/ui-framework">
           UI Framework
+        </Link>
+        <Link className="link--discreet" to="/public/sign-in">
+          Sign In (demo)
         </Link>
       </div>
     </div>

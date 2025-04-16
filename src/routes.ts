@@ -1,25 +1,47 @@
-import type {IRouteConfig, Router} from 'bard-router'
+import type {IRouteConfig} from 'bard-router'
+import type {RootStore} from './stores/RootStore'
 
 export interface IRoute extends IRouteConfig {
   headerTitle?: string
 }
 
-export function planWindowTitle(params: Router['params']) {
-  const {coinSymbol} = params
-  return typeof coinSymbol === 'string' ? `Plan ${coinSymbol}` : 'Plan'
+function createRoutes<T>(routes: Record<keyof T, IRoute>): Record<keyof T, IRoute> {
+  return routes
 }
 
-export function getRoutes() {
-  const routes: Readonly<Record<string, IRoute>> = {
-    '/': {
+// Useful for type safety when referencing routes but optional
+export const RoutePath = {
+  appSettings: '/public/app-settings',
+  faq: '/public/faq',
+  privateHome: '/private/home',
+  publicHome: '/public/home',
+  root: '/',
+  signIn: '/public/sign-in',
+  signOut: '/public/sign-out',
+  uiFramework: '/public/ui-framework',
+} as const
+
+export function getRoutes(rootStore: RootStore) {
+  return createRoutes({
+    [RoutePath.root]: {
       intercept(request) {
-        return request.route === '/' ? {...request, route: '/public/home'} : request
+        return request.route === '/' ? {...request, route: RoutePath.publicHome} : request
       },
     },
-    '/public': {},
-    '/public/ui-framework': {windowTitlePlugin: 'UI Framework'},
-    '/public/app-settings': {windowTitlePlugin: 'App settings'},
-    '/public/faq': {windowTitlePlugin: 'FAQ'},
-  }
-  return routes
+    [RoutePath.signIn]: {
+      intercept(request) {
+        const {user} = rootStore
+        return user.signedIn ? {route: RoutePath.privateHome} : request
+      },
+    },
+    [RoutePath.uiFramework]: {windowTitlePlugin: 'UI Framework'},
+    [RoutePath.appSettings]: {windowTitlePlugin: 'App settings'},
+    [RoutePath.faq]: {windowTitlePlugin: 'FAQ'},
+    '/private': {
+      intercept(request) {
+        const {user} = rootStore
+        return user.signedIn ? request : {route: RoutePath.signIn}
+      },
+    },
+  })
 }

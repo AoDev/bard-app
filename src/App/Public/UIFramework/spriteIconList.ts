@@ -25,6 +25,7 @@ export const spriteIconList: IconName[] = [
   'plus',
   'refresh',
   'settings',
+  'signout',
   'star',
   'sun',
   'ui-framework',

@@ -9,7 +9,7 @@ import {RootStore} from './stores/RootStore'
 
 const router = new Router()
 const rootStore = new RootStore(router)
-router.routes = getRoutes()
+router.routes = getRoutes(rootStore)
 html5HistoryPlugin.register(router)
 windowTitlePlugin.register(router, window, {prefix: 'App - ', defaultTitle: 'App'})
 router.on('afterNav', () => document.querySelector('.main-content')?.scrollTo(0, 0))
