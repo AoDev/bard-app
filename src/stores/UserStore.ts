@@ -1,10 +1,10 @@
-import * as store from '@lib/mobx/store.helpers'
+import {assignMethod, setMethod} from '@lib/mobx/store.helpers'
 import {sleep} from '@src/lib/async'
 import {makeAutoObservable} from 'mobx'
 
 export class UserStore {
-  set: store.SetMethod<UserStore>
-  assign: store.AssignMethod<UserStore>
+  set = setMethod<UserStore>(this)
+  assign = assignMethod<UserStore>(this)
   signedIn = false
   pending = false
 
@@ -20,8 +20,6 @@ export class UserStore {
   }
 
   constructor() {
-    this.set = store.setMethod<UserStore>(this)
-    this.assign = store.assignMethod<UserStore>(this)
     makeAutoObservable(this, undefined, {deep: false, autoBind: true})
   }
 }

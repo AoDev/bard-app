@@ -1,14 +1,13 @@
-import * as store from '@lib/mobx/store.helpers'
+import {setMethod} from '@lib/mobx/store.helpers'
 import type {RootStore} from '@src/stores/RootStore'
 import {makeAutoObservable} from 'mobx'
 
 export class AppVM {
   rootStore: RootStore
-  set: store.SetMethod<AppVM>
+  set = setMethod<AppVM>(this)
 
   constructor({rootStore}: {rootStore: RootStore}) {
     this.rootStore = rootStore
-    this.set = store.setMethod<AppVM>(this)
     makeAutoObservable(this, {rootStore: false}, {autoBind: true, deep: false})
   }
 }

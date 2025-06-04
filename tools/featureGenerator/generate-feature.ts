@@ -57,14 +57,14 @@ export const ${featureName} = observer(({vm}: {vm: ${featureName}VM}) => {
 `
 
   // Generate ViewModel file
-  const vmContent = `import * as store from '@lib/mobx/store.helpers'
+  const vmContent = `import {setMethod, assignMethod} from '@lib/mobx/store.helpers'
 import type {RootStore} from '@src/stores'
 import {makeAutoObservable} from 'mobx'
 
 export class ${featureName}VM {
   rootStore: RootStore
-  set: store.SetMethod<${featureName}VM>
-  assign: store.AssignMethod<${featureName}VM>
+  set = setMethod<${featureName}VM>(this)
+  assign = assignMethod<${featureName}VM>(this)
 
   destroyVM() {
     // cleanup
@@ -72,29 +72,24 @@ export class ${featureName}VM {
 
   constructor({rootStore}: {rootStore: RootStore}) {
     this.rootStore = rootStore
-    this.set = store.setMethod<${featureName}VM>(this)
-    this.assign = store.assignMethod<${featureName}VM>(this)
     makeAutoObservable(this, {rootStore: false}, {autoBind: true, deep: false})
   }
 }
 `
 
   // Generate Store file if requested
-  const storeContent = `import * as store from '@lib/mobx/store.helpers'
+  const storeContent = `import {setMethod, assignMethod, toggleMethod} from '@lib/mobx/store.helpers'
 import type {RootStore} from '@src/stores'
 import {makeAutoObservable} from 'mobx'
 
 export default class ${featureName}Store {
   rootStore: RootStore
-  set: store.SetMethod<${featureName}Store>
-  assign: store.AssignMethod<${featureName}Store>
-  toggle: store.ToggleMethod<${featureName}Store>
+  set = setMethod<${featureName}Store>(this)
+  assign = assignMethod<${featureName}Store>(this)
+  toggle = toggleMethod<${featureName}Store>(this)
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore
-    this.set = store.setMethod<${featureName}Store>(this)
-    this.assign = store.assignMethod<${featureName}Store>(this)
-    this.toggle = store.toggleMethod<${featureName}Store>(this)
     makeAutoObservable(this, {rootStore: false}, {deep: false, autoBind: true})
   }
 }

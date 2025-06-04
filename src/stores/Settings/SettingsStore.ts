@@ -1,4 +1,4 @@
-import * as store from '@lib/mobx/store.helpers'
+import {assignMethod, setMethod, toggleMethod} from '@lib/mobx/store.helpers'
 import type {Theme} from '@src/config/appConfig'
 import * as mobx from 'mobx'
 
@@ -7,9 +7,9 @@ export interface ISettingsStore {
 }
 
 export class SettingsStore implements ISettingsStore {
-  set: store.SetMethod<SettingsStore>
-  assign: store.AssignMethod<SettingsStore>
-  toggle: store.ToggleMethod<SettingsStore>
+  set = setMethod<SettingsStore>(this)
+  assign = assignMethod<SettingsStore>(this)
+  toggle = toggleMethod<SettingsStore>(this)
 
   theme: Theme = 'dark'
 
@@ -18,9 +18,6 @@ export class SettingsStore implements ISettingsStore {
   }
 
   constructor() {
-    this.set = store.setMethod<SettingsStore>(this)
-    this.assign = store.assignMethod<SettingsStore>(this)
-    this.toggle = store.toggleMethod<SettingsStore>(this)
     mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
   }
 }

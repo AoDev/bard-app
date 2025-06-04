@@ -1,4 +1,4 @@
-import * as store from '@lib/mobx/store.helpers'
+import {assignMethod, setMethod} from '@lib/mobx/store.helpers'
 import {RoutePath} from '@src/routes'
 import type {Router} from 'bard-router'
 import {makeAutoObservable} from 'mobx'
@@ -15,8 +15,8 @@ export type HandledError = {
 }
 
 export class RootStore {
-  set: store.SetMethod<RootStore>
-  assign: store.AssignMethod<RootStore>
+  set = setMethod<RootStore>(this)
+  assign = assignMethod<RootStore>(this)
 
   settings: SettingsStore
   uiStore: UIStore
@@ -72,9 +72,6 @@ export class RootStore {
   }
 
   constructor(router: Router) {
-    this.set = store.setMethod<RootStore>(this)
-    this.assign = store.assignMethod<RootStore>(this)
-
     this.settings = new SettingsStore()
     this.storage = {settings: new SettingsDataStore(this.settings)}
     this.uiStore = new UIStore(this)

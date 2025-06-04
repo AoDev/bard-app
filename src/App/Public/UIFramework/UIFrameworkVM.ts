@@ -1,5 +1,5 @@
 import {includes} from '@lib/array'
-import * as store from '@lib/mobx/store.helpers'
+import {setMethod, toggleMethod} from '@lib/mobx/store.helpers'
 import {zoomTransition} from '@src/config/dialogConfig'
 import type {RootStore} from '@src/stores'
 import type {DialogVM, IconName} from '@ui'
@@ -10,7 +10,7 @@ import sections from './FrontendGuide/sections.json'
  * Specific state for the form demo
  */
 class DemoFormVM {
-  set: store.SetMethod<DemoFormVM>
+  set = setMethod<DemoFormVM>(this)
 
   inputSwitch = false
   inputSelect = 1
@@ -22,7 +22,6 @@ class DemoFormVM {
   ]
 
   constructor() {
-    this.set = store.setMethod<DemoFormVM>(this)
     mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
   }
 }
@@ -31,7 +30,7 @@ class DemoFormVM {
  * Specific state for the buttons demo
  */
 export class DemoButtonsVM {
-  set: store.SetMethod<DemoButtonsVM>
+  set = setMethod<DemoButtonsVM>(this)
 
   iButtonIsLoading = false
   iButtonDisabled = false
@@ -46,7 +45,6 @@ export class DemoButtonsVM {
   iBtnSelected: 'one' | 'two' = 'one'
 
   constructor() {
-    this.set = store.setMethod<DemoButtonsVM>(this)
     mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
   }
 }
@@ -109,8 +107,8 @@ export type UIFWMenuType = {
 }
 
 export class UIFrameworkVM {
-  set: store.SetMethod<UIFrameworkVM>
-  toggle: store.ToggleMethod<UIFrameworkVM>
+  set = setMethod<UIFrameworkVM>(this)
+  toggle = toggleMethod<UIFrameworkVM>(this)
 
   menus: Record<MenuSection, UIFWMenuType> = {
     components: {id: 'components', label: 'Components', items: componentItems},
@@ -163,8 +161,6 @@ export class UIFrameworkVM {
 
   constructor({rootStore}: {rootStore: RootStore}) {
     this.rootStore = rootStore
-    this.set = store.setMethod<UIFrameworkVM>(this)
-    this.toggle = store.toggleMethod<UIFrameworkVM>(this)
 
     mobx.makeAutoObservable(this, {rootStore: false}, {deep: false, autoBind: true})
     this.testModal = this.rootStore.uiStore.dialogs.create({

@@ -22,8 +22,6 @@ export function setMethod<T>(instance: T) {
   })
 }
 
-export type SetMethod<T> = ReturnType<typeof setMethod<T>>
-
 /**
  * Helper to assign properties on a class instance that can not overwrite the class methods.
  */
@@ -32,8 +30,6 @@ export function assignMethod<T extends object>(instance: T) {
     Object.assign(instance, props)
   })
 }
-
-export type AssignMethod<T extends object> = ReturnType<typeof assignMethod<T>>
 
 /**
  * Helper to toggle boolean properties on a class instance.
@@ -44,4 +40,8 @@ export function toggleMethod<T>(instance: T) {
   })
 }
 
-export type ToggleMethod<T> = ReturnType<typeof toggleMethod<T>>
+export const storeHelpers = {
+  setMethod,
+  assignMethod,
+  toggleMethod,
+}
