@@ -53,7 +53,7 @@ a.btn {
 }
 
 // Mixin for style variant
-.btn-variant (@txt-color, @bg-color, @active-bgcolor: @bg-color) {
+.btn-variant (@txt-color, @bg-color) {
   border: 1px solid @bg-color;
   background-color: @bg-color;
   border-radius: 22px;
@@ -113,7 +113,7 @@ a.btn {
 }
 
 .btn--discreet {
-  .btn-variant(var(--color-txt-default), var(--color-bg-alternative), var(--color-green-aim));
+  .btn-variant(var(--color-txt-default), var(--color-bg-alternative));
   .btn-variant-hover(var(--color-txt-default), transparent, var(--color-txt-default));
 
   &.focus,
@@ -140,9 +140,9 @@ a.btn {
 }
 
 .btn--menu {
-  .btn-variant(var(--color-txt-default), transparent, var(--color-active-bg));
+  .btn-variant(var(--color-txt-default), transparent);
   .btn-variant-hover(var(--color-txt-default), var(--color-bg-alternative), transparent);
-  .btn-variant-active(#fff, var(--color-active-bg));
+  .btn-variant-active(#fff, var(--color-purple-bg));
 
   border-radius: 12px;
   display: block;

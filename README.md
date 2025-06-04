@@ -27,7 +27,7 @@ This boilerplate is designed with the following principles in mind:
 
 - Node.js (LTS version recommended)
 
-### Local development
+## Local development
 
 ```
 - git clone
@@ -46,6 +46,14 @@ The development server will start and automatically open your default browser to
 - `npm run format`: Format code
 - `npm test`: run tests once
 - `npm run test:watch`: run tests in watch mode
+
+### CSS intellisense in VS Code / Cursor
+
+For suggestions of CSS classes, use the extension `Zignd.html-css-class-completion`.
+- Check vs code settings for `CSS languages`. They should include: 
+  `"css.enabledLanguages": ["jsx","tsx","html","typescript"],`
+- Build the project once locally, the output CSS will be dist folder.
+- Run the extension command `Cache CSS class definitions`.
 
 ## Documentation
 

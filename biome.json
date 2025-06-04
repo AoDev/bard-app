@@ -34,7 +34,8 @@
       "recommended": true,
       "style": {
         "useNumberNamespace": "off",
-        "noDefaultExport": "info"
+        "noDefaultExport": "info",
+        "useBlockStatements": "error"
       },
       "suspicious": {
         "noGlobalIsFinite": "off",

@@ -1,4 +1,3 @@
-import {isNumber} from '@lib/validators/number'
 import {
   type ChangeEvent,
   type FocusEvent,
@@ -7,6 +6,11 @@ import {
   useEffect,
   useRef,
 } from 'react'
+
+// Avoid depending on external libraries, allowing it to be self contained
+function isNumber(val: unknown): val is number {
+  return typeof val === 'number' && isFinite(val)
+}
 
 export interface ITextAreaProp extends Omit<InputHTMLAttributes<HTMLTextAreaElement>, 'value'> {
   /** Automatically grows the textarea to fit the content. */

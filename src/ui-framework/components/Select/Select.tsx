@@ -29,7 +29,7 @@ interface ObjectBasedSelectProps<T extends object> extends BaseSelectProps {
 }
 
 interface ValueBasedSelectProps extends BaseSelectProps {
-  options: SimpleOption[]
+  options: SimpleOption[] | readonly SimpleOption[]
   value?: SimpleOption
 }
 
@@ -117,13 +117,13 @@ export function Select<T extends object>(props: SelectProps<T>) {
       }
       const {name} = event.target
       let value: T | string | number | undefined = event.target.value
-      const isOptionalLabel = event.target.selectedOptions[0].innerText === optionalLabel
+      const isOptionalLabel = event.target.selectedOptions[0]?.innerText === optionalLabel
 
       if (isOptionalLabel) {
         value = undefined
       } else {
         const shouldParse = isObjectBasedProps(props)
-          ? typeof props.options[0][props.valueKey] === 'number'
+          ? typeof props.options[0]?.[props.valueKey] === 'number'
           : typeof props.options[0] === 'number'
         if (shouldParse) {
           const valueAsNumber = Number(value)

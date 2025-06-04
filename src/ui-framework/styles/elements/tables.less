@@ -80,7 +80,9 @@
   top: 0;
   letter-spacing: 0.05em;
   white-space: nowrap;
-  z-index: 1; // prevent content in the table to go above it on scroll.
+  // prevent content in the table to go above it on scroll.
+  // Might need to adjust if table content has higher z-index.
+  z-index: 3;
 }
 
 .table__separator-row {

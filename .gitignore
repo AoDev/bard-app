@@ -17,4 +17,8 @@ out
 # TypeScript build info
 *.tsbuildinfo
 
+# Security
+.env
+
 tmp
+
