@@ -25,11 +25,14 @@ We strongly emphasize that business data and UI states are two different things.
 We follow the [MVVM pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel). (Model View View-Model)
 
 - The app data (layer) is in external stores while the UI components state are in a VM (view-model).
+
 - We like simple: there is little to no difference to manage local UI state and app data.
   - A VM is also a store but, it's local, temporary and connects external store to components.
   - We don't need react internal state most of the time. (no hooks or classes setState)
   - We just need to know javascript and a couple of things from Mobx.
-- We want most components to be [controlled from outside](https://reactjs.org/docs/forms.html#controlled-components).
+
+- We like a single source of truth and most components to be [controlled from outside](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
+
 - The appearance of the UI is implemented in a UI Framework (Styles and components library).
 
 <img width="576" alt="frontend-layers" src="https://user-images.githubusercontent.com/1526150/107215672-ea1ebe80-6a0b-11eb-9c47-9630179875b2.png">

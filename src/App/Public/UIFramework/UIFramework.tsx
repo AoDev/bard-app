@@ -15,7 +15,7 @@ import type {UIFWMenuType, UIFrameworkVM} from './UIFrameworkVM'
 const UIFWMenu = observer(({vm, menu}: {vm: UIFrameworkVM; menu: UIFWMenuType}) => {
   const {menuSection, contentId} = vm.contentSelected
   const isExpanded = menuSection === menu.id
-  const defaultItem = menu.items[0].value
+  const defaultItem = menu.items[0]?.value
 
   return (
     <div>

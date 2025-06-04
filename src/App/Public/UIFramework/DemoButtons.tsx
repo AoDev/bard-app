@@ -1,4 +1,4 @@
-import {Button, type ButtonVariant, type IButtonProps, Icon, InputX} from '@ui'
+import {Button, ButtonClipboard, type ButtonVariant, type IButtonProps, Icon, InputX} from '@ui'
 import {observer} from 'mobx-react'
 import type {DemoButtonsVM} from './UIFrameworkVM'
 
@@ -83,6 +83,24 @@ export const DemoButtons = observer(({vm}: {vm: DemoButtonsVM}) => {
           </div>
         </div>
       </section>
+
+      <section className="panel--simple pad-default">
+        <div className="panel__header margin-bottom-2">
+          <h3 className="margin-0">Clipboard button</h3>
+        </div>
+        <div className="flex-row-center gap-2">
+          <div className="flex-row-center gap-05">
+            <span className="bg-body">'Hello, world!'</span>
+            <ButtonClipboard text="Hello, world!" top={-1} />
+          </div>
+          <pre>
+            {`
+<ButtonClipboard text="Hello, world!" />
+            `}
+          </pre>
+        </div>
+      </section>
+
       <section className="panel--simple pad-default">
         <div className="panel__header margin-bottom-2">
           <h3 className="margin-0">Buttons extras</h3>

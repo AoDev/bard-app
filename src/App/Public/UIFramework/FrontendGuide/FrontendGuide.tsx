@@ -11,7 +11,7 @@ import remarkGfm from 'remark-gfm'
 import type {UIFrameworkVM} from '../UIFrameworkVM'
 import sections from './sections.json'
 
-const containerStyle: CSSProperties = {maxWidth: '800px'}
+const containerStyle: CSSProperties = {maxWidth: '48em'}
 
 const reactMarkdownComponents: Components = {
   h1: ({children}) => <h1 className="h1">{children}</h1>,
@@ -93,7 +93,9 @@ export const FrontendGuide = observer(({vm}: {vm: UIFrameworkVM}) => {
         rehypePlugins={[rehypeRaw]}
         components={components}
       >
-        {removeNextLinks(sections[currentIndex].content)}
+        {sections[currentIndex]
+          ? removeNextLinks(sections[currentIndex].content)
+          : `Content not found for index ${currentIndex}`}
       </ReactMarkdown>
 
       {nextSection && (

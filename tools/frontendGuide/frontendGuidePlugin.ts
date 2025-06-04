@@ -35,7 +35,7 @@ async function generateGuideSections() {
 
   // Generate JSON file
   const jsonContent = JSON.stringify(sections, null, 2)
-  await writeFile(join(outputDir, 'sections.json'), jsonContent)
+  await writeFile(join(outputDir, 'sections.json'), `${jsonContent}\n`)
 }
 
 /**
