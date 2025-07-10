@@ -1,8 +1,12 @@
 {
-  "name": "rs-bard",
+  "name": "bard-app",
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AoDev/bard-app.git"
+  },
   "scripts": {
     "build": "rsbuild build",
     "check": "biome check --write",
