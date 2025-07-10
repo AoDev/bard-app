@@ -8,7 +8,7 @@
 - [rsbuild](https://rsbuild.dev/) - modern bundler
 - [biome](https://biomejs.dev/) - js/ts formatter and linter
 - [prettier](https://prettier.io/) - other files formatter
-- [typescipt](https://www.typescriptlang.org/) - type safe
+- [typescript](https://www.typescriptlang.org/) - type safe
 - [vitest](https://vitest.dev/) - Testing framework
 
 ## Getting Started
