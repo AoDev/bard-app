@@ -3,7 +3,6 @@ import {defineConfig} from 'vitest/config'
 // biome-ignore lint/style/noDefaultExport: vitest expects default export
 export default defineConfig({
   test: {
-    globals: true,
     environment: 'node',
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
   },
