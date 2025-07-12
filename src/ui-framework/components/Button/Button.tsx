@@ -5,7 +5,6 @@ import {ButtonBasic, type IButtonBasicProps} from './ButtonBasic'
 
 export type ButtonVariant =
   | 'primary'
-  | 'blue'
   | 'discreet'
   | 'green'
   | 'invisible'

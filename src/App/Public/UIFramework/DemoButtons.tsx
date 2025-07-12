@@ -6,7 +6,6 @@ const btnVariants: ButtonVariant[] = [
   'primary',
   'red',
   'green',
-  'blue',
 
   'link',
   'invisible',

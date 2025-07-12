@@ -34,13 +34,12 @@ export const DemoModals = observer(({vm}: {vm: UIFrameworkVM}) => {
       <hr className="margin-1" />
 
       <div className="pad-default">
-        <div className="grid grid-colmin10em">
-          <div>
-            <div>
-              <label className="label" htmlFor="iModalWidth">
-                width
-              </label>
-            </div>
+        <div className="grid grid-colmin10em align-center">
+          <div className="flex-row-center gap-1">
+            <label className="label" htmlFor="iModalWidth">
+              width
+            </label>
+
             <Select
               id="iModalWidths"
               className="select"

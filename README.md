@@ -12,6 +12,4 @@ This boilerplate is designed with the following principles in mind:
 
 ## Development and techs
 
-In short it's a React app.
-
 Check the DEVELOPMENT.md file for details.
