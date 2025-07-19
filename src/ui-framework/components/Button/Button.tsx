@@ -3,17 +3,23 @@ import {Icon} from '../Icon'
 import {Loader} from '../Loader'
 import {ButtonBasic, type IButtonBasicProps} from './ButtonBasic'
 
-export type ButtonVariant =
-  | 'primary'
-  | 'discreet'
-  | 'green'
-  | 'invisible'
-  | 'link'
-  | 'menu'
-  | 'red'
-  | 'tab'
-  | 'theader'
-  | 'icon'
+export const buttonVariants = [
+  'primary',
+  'secondary',
+
+  'red',
+  'green',
+  'invisible',
+
+  'link',
+  'menu',
+  'tab',
+  'theader',
+
+  'icon',
+] as const
+
+export type ButtonVariant = (typeof buttonVariants)[number]
 
 const loaderPlacement: CSSProperties = {
   position: 'absolute',
@@ -43,12 +49,12 @@ const loaderRound = (
 )
 const iconCaretRight = (
   <span className="margin-left-1ch">
-    <Icon name="caret-right" size={14} top={-2} />
+    <Icon name="caret-right" size={14} />
   </span>
 )
 const iconCaretRightEnd = (
-  <span className="margin-left-1ch float-right">
-    <Icon name="caret-right" size={14} top={-2} />
+  <span className="flex-row-end">
+    <Icon name="caret-right" size={14} />
   </span>
 )
 
@@ -70,7 +76,6 @@ export interface IButtonProps<V> extends IButtonBasicProps<V> {
   isLoading?: boolean
   narrow?: boolean
   round?: boolean
-  square?: boolean
   /** Change appearance of the button */
   variant?: ButtonVariant
   sizing?: 'auto' | 'medium' | 'narrow'
@@ -95,7 +100,6 @@ export const Button = memo(function Button<V>(props: IButtonProps<V>) {
     disabled,
     focused = false,
     isLoading = false,
-    square = false,
     variant,
     round = variant === 'icon',
     sizing = 'medium',
@@ -109,8 +113,6 @@ export const Button = memo(function Button<V>(props: IButtonProps<V>) {
   // biome-ignore lint/suspicious/noAssignInExpressions: no worries
   round && (cssClasses += ' btn-round')
   // biome-ignore lint/suspicious/noAssignInExpressions: no worries
-  square && (cssClasses += ' btn-square')
-  // biome-ignore lint/suspicious/noAssignInExpressions: no worries
   active && (cssClasses += ' active')
   // biome-ignore lint/suspicious/noAssignInExpressions: no worries
   focused && (cssClasses += ' focus')
@@ -120,12 +122,10 @@ export const Button = memo(function Button<V>(props: IButtonProps<V>) {
   isLoading && (cssClasses += ' btn-loading')
   // biome-ignore lint/suspicious/noAssignInExpressions: no worries
   narrow && (cssClasses += ' btn--narrow')
-  // biome-ignore lint/suspicious/noAssignInExpressions: no worries
-  variant === 'icon' && (cssClasses += ' bg--hover hover--grow10p')
 
   return (
     <ButtonBasic {...otherProps} className={cssClasses} disabled={disabled || isLoading}>
-      {isLoading && (round ? loaderRound : loader)}
+      {isLoading && variant !== 'icon' && (round ? loaderRound : loader)}
       {children}
       {caretRight && iconCaretRight}
       {caretRightEnd && iconCaretRightEnd}

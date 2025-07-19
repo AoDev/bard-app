@@ -45,6 +45,7 @@ export const InputBasic: FC<IInputBasicProp> = memo(
     style = {},
     value,
     type = 'text',
+    spellCheck = false, // spellcheck is activated by default in browsers, I'd rather optin than optout
     ...otherProps
   }) => {
     const shouldConvertToNumber = type === 'number' || type === 'range' || typeof value === 'number'
@@ -109,6 +110,7 @@ export const InputBasic: FC<IInputBasicProp> = memo(
     return (
       <input
         {...otherProps}
+        spellCheck={spellCheck}
         type={type}
         style={style}
         value={typeof value === 'boolean' ? String(value) : value}

@@ -6,99 +6,22 @@ import type {DialogVM, IconName} from '@ui'
 import * as mobx from 'mobx'
 import sections from './FrontendGuide/sections.json'
 
-/**
- * Specific state for the form demo
- */
-class DemoFormVM {
-  set = setMethod<DemoFormVM>(this)
-
-  inputSwitch = false
-  inputSelect = 1
-  inputSelectOptions = [1, 2, 3, 4, 5]
-  select2 = undefined
-  selectOptions2 = [
-    {id: 1, label: 'one', invalidLabel: true},
-    {id: 2, label: 'two', invalidLabel: true},
-  ]
-
-  constructor() {
-    mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
-  }
-}
-
-/**
- * Specific state for the buttons demo
- */
-export class DemoButtonsVM {
-  set = setMethod<DemoButtonsVM>(this)
-
-  iButtonIsLoading = false
-  iButtonDisabled = false
-  iButtonActive = false
-  iButtonFocused = false
-  iButtonCaretRight = false
-  iButtonCaretRightEnd = false
-  iButtonIcon = false
-  iButtonRound = false
-  iButtonNarrow = false
-
-  iBtnSelected: 'one' | 'two' = 'one'
-
-  constructor() {
-    mobx.makeAutoObservable(this, undefined, {deep: false, autoBind: true})
-  }
-}
-
-const menuSections = ['components', 'frontend-guide'] as const
-
-export const componentSections = [
-  'buttons',
-  'forms',
-  'icons',
-  'links',
-  'modals',
-  'notes',
-  'tables',
-  'typography',
-] as const
+const menuSections = ['components', 'frontend-guide', 'css'] as const
+const componentSections = ['buttons', 'forms', 'icons', 'modals', 'notes'] as const
+const cssSections = ['typography', 'tables', 'links'] as const
 
 export type MenuSection = (typeof menuSections)[number]
 export type ComponentSection = (typeof componentSections)[number]
-export type ContentId = ComponentSection | `frontend-${string}`
+export type CssSection = (typeof cssSections)[number]
+export type FrontendGuideSection = `frontend-${string}`
+export type ContentId = ComponentSection | FrontendGuideSection | CssSection
 
-export function isContentId(contentId: unknown): contentId is ContentId {
-  return (
-    typeof contentId === 'string' &&
-    (includes(componentSections, contentId) || contentId.startsWith('frontend-'))
+function validateGuideData() {
+  return sections.filter(
+    (section): section is {id: FrontendGuideSection; title: string; content: string} =>
+      section.id.startsWith('frontend-')
   )
 }
-
-/**
- * Get the contentId and menuSection from the router params
- */
-export function getContentFromParams(params: Record<string, string | number>): {
-  contentId: ContentId
-  menuSection: MenuSection
-} {
-  const {contentid, sectionid} = params
-  const contentId: ContentId = isContentId(contentid) ? contentid : 'buttons'
-  const menuSection: MenuSection = sectionid === 'frontend-guide' ? 'frontend-guide' : 'components'
-  return {contentId, menuSection}
-}
-
-const componentItems: {label: string; value: ComponentSection}[] = componentSections.map(
-  (section) => ({
-    label: section.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase()),
-    value: section,
-  })
-)
-
-const frontendGuideItems = sections.reduce((acc: {label: string; value: ContentId}[], section) => {
-  if (isContentId(section.id)) {
-    acc.push({label: section.title, value: section.id})
-  }
-  return acc
-}, [])
 
 export type UIFWMenuType = {
   id: MenuSection
@@ -106,18 +29,43 @@ export type UIFWMenuType = {
   items: {label: string; value: ContentId}[]
 }
 
+/**
+ * @example
+ * labelFromContentId('css-typography') // 'CSS Typography'
+ */
+function labelFromContentId(contentId: ContentId) {
+  return contentId.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+}
+
+const componentMenu: UIFWMenuType = {
+  id: 'components',
+  label: 'Components',
+  items: componentSections.map((section) => ({label: labelFromContentId(section), value: section})),
+}
+
+const cssMenu: UIFWMenuType = {
+  id: 'css',
+  label: 'CSS',
+  items: cssSections.map((section) => ({label: labelFromContentId(section), value: section})),
+}
+
+const frontendGuideMenu: UIFWMenuType = {
+  id: 'frontend-guide',
+  label: 'Frontend Guide',
+  items: validateGuideData().map((section) => ({label: section.title, value: section.id})),
+}
+
 export class UIFrameworkVM {
   set = setMethod<UIFrameworkVM>(this)
   toggle = toggleMethod<UIFrameworkVM>(this)
 
   menus: Record<MenuSection, UIFWMenuType> = {
-    components: {id: 'components', label: 'Components', items: componentItems},
-    'frontend-guide': {id: 'frontend-guide', label: 'Frontend Guide', items: frontendGuideItems},
+    components: componentMenu,
+    'frontend-guide': frontendGuideMenu,
+    css: cssMenu,
   }
 
   userHasConfirmedModal: null | boolean = null
-  demoFormVM = new DemoFormVM()
-  demoButtonsVM = new DemoButtonsVM()
   inputNoteWithBackground = false
   iModalFullscreen = false
   iModalWidth: '1x' | '2x' | '3x' = '2x'
@@ -132,12 +80,6 @@ export class UIFrameworkVM {
   iIconSize = 24
   rootStore: RootStore
   testModal: DialogVM
-  iSection: ComponentSection | string = 'buttons'
-  iMenuSection: MenuSection = 'components'
-
-  get contentSelected() {
-    return getContentFromParams(this.rootStore.router.params)
-  }
 
   confirmUserAction(hasConfirmed: boolean) {
     this.userHasConfirmedModal = hasConfirmed
@@ -150,12 +92,18 @@ export class UIFrameworkVM {
     this.rootStore.uiStore.dialogs.remove([this.testModal])
   }
 
-  toggleSection(section: MenuSection) {
-    this.iMenuSection = section
-  }
-
   goToSection(contentId: ContentId) {
-    const sectionId = contentId.startsWith('frontend-') ? 'frontend-guide' : 'components'
+    const sectionId = contentId.startsWith('frontend-')
+      ? 'frontend-guide'
+      : includes(cssSections, contentId)
+        ? 'css'
+        : includes(componentSections, contentId)
+          ? 'components'
+          : undefined
+    if (!sectionId) {
+      console.error('Invalid contentId, could not find corresponding section', contentId)
+      return
+    }
     this.rootStore.router.goTo(`/public/ui-framework?sectionid=${sectionId}&contentid=${contentId}`)
   }
 

@@ -12,7 +12,15 @@ interface IProps<T> {
 const style: CSSProperties = {position: 'absolute', right: '-14px', bottom: '-5px'}
 
 /**
- * Must be placed in a pos-rel container
+ * Adds a clear button to the right of the input
+ * - Must be placed in the same container than the input
+ * - The container must have position relative and in general with a fixed width or display flex
+ * - In most cases you can use the className "input--with-clear-button"
+ * @example
+ * <div className="input--with-clear-button">
+ *   <Input />
+ *   <InputClearButton prop="iTextControlled" vm={demoFormVM} />
+ * </div>
  */
 export const InputClearButton = observer(function InputClearButton<vm>({vm, prop}: IProps<vm>) {
   const clear = useCallback(() => vm.set(prop, ''), [prop, vm])
@@ -22,9 +30,9 @@ export const InputClearButton = observer(function InputClearButton<vm>({vm, prop
   }
   return (
     <Button
+      round
       className={visible ? 'zoom-in hover--grow10p' : 'zoom-out'}
       variant="invisible"
-      square
       style={style}
       onClick={clear}
     >

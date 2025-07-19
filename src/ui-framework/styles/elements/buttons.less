@@ -20,110 +20,117 @@ button {
   }
 }
 
+// Helper mixins for better DX
+.idleColor(@txt-color: var(--color-txt-default), @bg-color: transparent, @border-color: var(--btn-bg-color)) {
+  --btn-txt-color: @txt-color;
+  --btn-bg-color: @bg-color;
+  --btn-border-color: @border-color;
+}
+
+.activeColor(@txt-color: var(--btn-txt-color), @bg-color: var(--btn-bg-color), @border-color: var(--btn-bg-color)) {
+  --btn-active-txt-color: @txt-color;
+  --btn-active-bg-color: @bg-color;
+  --btn-active-border-color: @border-color;
+}
+
+.hoverColor(@txt-color: var(--btn-txt-color), @bg-color: var(--btn-bg-color), @border-color: var(--btn-bg-color)) {
+  --btn-hover-txt-color: @txt-color;
+  --btn-hover-bg-color: @bg-color;
+  --btn-hover-border-color: @border-color;
+}
+
+.disabledColor(@txt-color: var(--color-btn-disabled-txt), @bg-color: var(--color-btn-disabled-bg), @border-color: var(--color-btn-disabled-bg)) {
+  --btn-disabled-txt-color: @txt-color;
+  --btn-disabled-bg-color: @bg-color;
+  --btn-disabled-border-color: @border-color;
+}
+
 .btn {
+  // CSS Variables for button variants
+  // Default values are set to be transparent or inherit, so a base .btn has no decoration
+  .idleColor();
+  .hoverColor();
+  .activeColor();
+  .disabledColor();
+
   .noselect;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   position: relative;
   text-decoration: none;
-  vertical-align: bottom; // Not sure why I needed this, should look into it
   line-height: 1;
   font-size: 16px;
+  justify-content: center;
 
-  &.hover,
-  &.active {
-    text-decoration: none;
-    cursor: default;
-  }
-}
-
-a.btn {
-  line-height: 2.7; // Needed when the class is set on a link to align text
-}
-
-// Mixing for btn disabled state
-.btn-disabled (@txt-color, @bg-color) {
-  color: @txt-color;
-  background-color: @bg-color;
-  border-color: @bg-color;
-  box-shadow: none;
-
-  .icon-svg {
-    fill: @txt-color;
-  }
-}
-
-// Mixin for style variant
-.btn-variant (@txt-color, @bg-color) {
-  border: 1px solid @bg-color;
-  background-color: @bg-color;
+  // Structural styles using variables
+  border: 1px solid var(--btn-border-color);
+  background-color: var(--btn-bg-color);
   border-radius: 22px;
-  color: @txt-color;
+  color: var(--btn-txt-color);
   transition-property: background-color, border-color, transform, box-shadow;
   transition-duration: 0.2s;
   transition-timing-function: linear;
 
-  &.disabled {
-    .btn-disabled(var(--color-btn-disabled-txt), var(--color-btn-disabled-bg));
+  .icon-svg {
+    fill: var(--btn-txt-color);
   }
 
   .loader-bar {
-    background-color: @txt-color;
+    background-color: var(--btn-txt-color);
   }
 
-  .icon-svg {
-    fill: @txt-color;
-  }
-}
-
-.btn-variant-hover(@txt-color, @color-bg, @color-border: @color-bg) {
+  // States
   &.focus,
   &:focus-visible,
   &:hover {
-    color: @txt-color;
+    color: var(--btn-hover-txt-color);
     text-decoration: none; // in case we decorate a link
-    background-color: @color-bg;
-    border-color: @color-border;
+    background-color: var(--btn-hover-bg-color);
+    border-color: var(--btn-hover-border-color);
+
+    // Ensure disabled state overrides hover styles
     &.disabled,
     &:disabled {
-      .btn-disabled(var(--color-btn-disabled-txt), var(--color-btn-disabled-bg));
+      color: var(--btn-disabled-txt-color);
+      background-color: var(--btn-disabled-bg-color);
+      border-color: var(--btn-disabled-border-color);
+      box-shadow: none;
+
+      .icon-svg {
+        fill: var(--btn-disabled-txt-color);
+      }
+    }
+  }
+
+  &.active,
+  &.hover {
+    text-decoration: none;
+    cursor: default;
+  }
+
+  &.active {
+    color: var(--btn-active-txt-color);
+    background-color: var(--btn-active-bg-color);
+  }
+
+  &.disabled,
+  &[disabled] {
+    color: var(--btn-disabled-txt-color);
+    background-color: var(--btn-disabled-bg-color);
+    border-color: var(--btn-disabled-border-color);
+    box-shadow: none;
+
+    .icon-svg {
+      fill: var(--btn-disabled-txt-color);
     }
   }
 }
 
-.btn-variant-active(@txt-color, @bg-color) {
-  &.active {
-    color: @txt-color;
-    background-color: @bg-color;
-  }
-}
+// a.btn {
+//   line-height: 1; // Needed when the class is set on a link to align text
+// }
 
-.btn--green {
-  .btn-variant(var(--color-txt-inverse), var(--color-green-aim));
-  .btn-variant-hover(var(--color-txt-inverse), var(--color-green-hover));
-}
-
-.btn--red {
-  .btn-variant(var(--color-txt-inverse), var(--color-red-aim));
-  .btn-variant-hover(var(--color-txt-inverse), var(--color-red-hover));
-}
-
-.btn--discreet {
-  .btn-variant(var(--color-txt-default), var(--color-bg-alternative));
-  .btn-variant-hover(var(--color-txt-default), transparent, var(--color-txt-default));
-
-  &.focus,
-  &:focus-visible,
-  &:hover {
-    .shadow-button;
-  }
-}
-
-.btn--primary {
-  .btn-variant(var(--color-txt-max-contrast), var(--color-bg-max-contrast));
-  // .btn-variant-hover(var(--color-txt-inverse), var(--color-blue-hover));
-}
-
-// Keep these before btn--link so that padding and height are overwritten
+// Size variants | Keep these before btn--link so that padding and height are overwritten
 .btn--medium {
   height: 44px;
   padding: 0 @base-gap * 1.5;
@@ -134,72 +141,91 @@ a.btn {
   height: auto;
 }
 
-.btn--menu {
-  .btn-variant(var(--color-txt-default), transparent);
-  .btn-variant-hover(var(--color-txt-default), var(--color-bg-alternative), transparent);
-  .btn-variant-active(#fff, var(--color-purple-bg));
+//
+// Variants: Each variant just redefines the CSS variables
+//
 
+.btn--green {
+  .idleColor(var(--color-txt-inverse), var(--color-green-aim));
+  .hoverColor(var(--color-txt-inverse), var(--color-green-hover));
+}
+
+.btn--red {
+  .idleColor(var(--color-txt-inverse), var(--color-red-aim));
+  .hoverColor(var(--color-txt-inverse), var(--color-red-hover));
+}
+
+.btn--secondary {
+  .idleColor(var(--color-txt-default), var(--color-bg-alternative));
+  .hoverColor(var(--color-txt-default), transparent, var(--color-txt-default));
+
+  &.focus,
+  &:focus-visible,
+  &:hover {
+    .shadow-button;
+  }
+}
+
+.btn--primary {
+  .idleColor(var(--color-txt-max-contrast), var(--color-bg-max-contrast));
+  .hoverColor(var(--color-txt-max-contrast), var(--color-bg-max-contrast));
+}
+
+.btn--menu {
+  .activeColor(#fff, var(--color-purple-bg));
+  .hoverColor(var(--color-txt-default), var(--color-bg-alternative), transparent);
+  .nowrap-truncate;
   border-radius: 12px;
-  display: block;
-  width: 100%;
-  text-align: left;
-  transition: none;
-  text-transform: uppercase;
   font-size: 13px;
+  text-align: left;
+  text-transform: uppercase;
+  transition: none;
+  width: 100%;
+  justify-content: flex-start;
 }
 
 .btn--link {
-  background: transparent;
+  .idleColor(var(--color-link));
+  .hoverColor(var(--color-link-hover), transparent, transparent);
+  --btn-disabled-bg-color: transparent;
+
   border: 0;
-  color: var(--color-link);
   height: auto;
   line-height: 1.15;
   padding: 0;
   position: relative;
   vertical-align: baseline;
 
-  .icon-svg {
-    fill: var(--color-link);
-  }
-
   &.focus,
-  &:focus,
+  &:focus-visible,
   &:hover {
-    color: var(--color-link-hover);
     text-decoration: underline;
   }
-
-  .loader-bar {
-    background-color: var(--color-link);
-  }
-
-  &.disabled,
-  &[disabled] {
-    color: var(--color-gray-aim);
-    text-decoration: none;
-  }
 }
 
-// TODO: might rething this
-.btn--link.link {
-  padding: 0;
-  height: auto;
-  text-decoration: underline;
-  vertical-align: baseline;
-}
-
-.btn--icon,
-.btn--invisible {
+.btn--icon {
   @txt-color: var(--color-txt-default);
   height: auto;
   border: 0;
   background-color: transparent;
   padding: 0;
   color: @txt-color;
+  transition: transform 0.2s ease-out;
 
   &.disabled,
   &[disabled] {
     opacity: 0.5;
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  &:not(.disabled) {
+    &.focus,
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.1);
+      background-color: var(--color-bg-alternative);
+    }
   }
 
   .loader-bar {
@@ -208,51 +234,50 @@ a.btn {
 }
 
 .btn--tab {
-  @txt-color: var(--color-txt-default);
+  .idleColor(var(--color-txt-default), transparent, transparent);
+  .hoverColor(var(--color-txt-default), transparent, transparent);
+  .disabledColor(var(--color-btn-disabled-txt), transparent, transparent);
+
   border: 0;
-  color: @txt-color;
-  border-bottom: 3px solid transparent;
-  background-color: transparent;
+  // border-bottom: 3px solid transparent;
   text-transform: uppercase;
   font-size: 13px;
-  padding: 0;
 
   &::after {
     content: '';
-    position: relative;
-    top: 8px;
-    display: block;
     border-bottom: 3px solid transparent;
-    margin: 0 16px;
     transition: border 0.2s ease-out;
-  }
-
-  .icon-svg {
-    fill: @txt-color;
-  }
-
-  .loader-bar {
-    background-color: @txt-color;
+    display: block;
+    position: absolute;
+    width: calc(100% - 32px);
+    bottom: 0px;
+    left: 16px;
   }
 
   &:hover,
-  &:focus,
+  &:focus-visible,
   &.focus {
     &:after {
-      border-bottom: 3px solid var(--color-action--hover);
+      border-bottom-color: var(--color-action--hover);
     }
   }
 
   &.active {
     &::after {
-      border-bottom: 3px solid var(--color-action);
-      transition: border 0.2s ease-out;
+      border-bottom-color: var(--color-action);
     }
   }
 
   &.disabled,
   &[disabled] {
-    color: var(--color-btn-disabled-txt);
+    &:hover,
+    &.focus,
+    &:focus-visible,
+    &.active {
+      &::after {
+        border-bottom-color: var(--color-btn-disabled-bg);
+      }
+    }
   }
 }
 
@@ -316,8 +341,7 @@ a.btn {
   }
 }
 
-.btn-round,
-.btn-square {
+.btn-round {
   width: 44px;
   height: 44px;
   display: flex;
@@ -344,16 +368,21 @@ a.btn {
   &.btn-round {
     min-width: unset;
   }
+
+  &.btn--icon {
+    color: currentColor !important;
+    .icon {
+      .spin;
+    }
+  }
 }
 
 .btn--theader {
-  @txt-color: var(--color-txt-default);
+  .idleColor(var(--color-txt-default), transparent, transparent);
 
-  background: transparent;
-  color: @txt-color;
   text-transform: uppercase;
   border: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   padding: 0;
   letter-spacing: 0.05em;
@@ -362,10 +391,8 @@ a.btn {
   &.disabled,
   &[disabled] {
     color: var(--color-btn-disabled-txt);
-  }
-
-  .loader-bar {
-    background-color: @txt-color;
+    background-color: transparent;
+    border-color: transparent;
   }
 }
 

@@ -10,7 +10,7 @@ export const DemoModals = observer(({vm}: {vm: UIFrameworkVM}) => {
           <h3 className="h3">Modals</h3>
         </div>
         <div className="flex-row-center gap-1">
-          <Button variant="discreet" onClick={vm.testModal.show}>
+          <Button variant="secondary" onClick={vm.testModal.show}>
             Show modal
           </Button>
           <Modal

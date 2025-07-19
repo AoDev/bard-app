@@ -34,7 +34,19 @@ export function getRoutes(rootStore: RootStore) {
         return user.signedIn ? {route: RoutePath.privateHome} : request
       },
     },
-    [RoutePath.uiFramework]: {windowTitlePlugin: 'UI Framework'},
+    [RoutePath.uiFramework]: {
+      windowTitlePlugin: 'UI Framework',
+      intercept(request) {
+        const {contentid, sectionid} = request.params
+        if (!contentid || !sectionid) {
+          return {
+            route: RoutePath.uiFramework,
+            params: {contentid: 'buttons', sectionid: 'components'},
+          }
+        }
+        return request
+      },
+    },
     [RoutePath.appSettings]: {windowTitlePlugin: 'App settings'},
     [RoutePath.faq]: {windowTitlePlugin: 'FAQ'},
     '/private': {

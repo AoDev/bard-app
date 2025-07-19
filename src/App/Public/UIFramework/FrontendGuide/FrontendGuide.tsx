@@ -70,7 +70,8 @@ function getComponents(theme: Theme): Components {
 }
 
 export const FrontendGuide = observer(({vm}: {vm: UIFrameworkVM}) => {
-  const {contentId} = vm.contentSelected
+  const {contentid} = vm.rootStore.router.params
+  const contentId = String(contentid) || ''
   const {theme} = vm.rootStore.settings
   const components = useMemo(() => getComponents(theme), [theme])
 

@@ -24,7 +24,7 @@ export const AppSettings = observer(({vm}: {vm: AppSettingsVM}) => {
             <Button
               round
               className="pad-0 margin-right-1"
-              variant="discreet"
+              variant="secondary"
               onClick={settings.switchTheme}
             >
               <Icon size={20} name={themeIcons[settings.theme]} />
