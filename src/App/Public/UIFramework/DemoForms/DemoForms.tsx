@@ -57,7 +57,7 @@ export const DemoForms = observer(({vm}: {vm: DemoFormsVM}) => {
               InputX - easier DX with mobx
             </label>
             <div>
-              <InputX vm={vm} name="iTextControlled2" />
+              <InputX vm={vm} name="iTextControlled2" withClearBtn />
             </div>
 
             <p className="max-width-1x">
@@ -66,7 +66,7 @@ export const DemoForms = observer(({vm}: {vm: DemoFormsVM}) => {
           </div>
           <pre className="code">
             {`
-<InputX vm={vm} name="iTextControlled2" />
+<InputX vm={vm} name="iTextControlled2" withClearBtn />
             `}
           </pre>
         </div>

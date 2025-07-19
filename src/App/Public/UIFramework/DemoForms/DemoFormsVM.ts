@@ -7,7 +7,7 @@ import * as mobx from 'mobx'
 export class DemoFormsVM {
   set = setMethod<DemoFormsVM>(this)
 
-  iTextControlled = ''
+  iTextControlled = 'delete me'
   iTextControlled2 = ''
   iSwitch = false
   iSelect = 1
