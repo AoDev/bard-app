@@ -1,8 +1,9 @@
 import * as mobxReact from 'mobx-react'
-import {type ComponentType, type FC, memo, useEffect, useRef} from 'react'
+import {type ComponentType, type FC, type MemoExoticComponent, memo, useEffect, useRef} from 'react'
 
-interface IViewModel {
-  destroyVM?: () => void
+export interface IViewModel {
+  init?: () => void | Promise<void>
+  destroyVM?: () => void | Promise<void>
   [x: string]: any
 }
 
@@ -18,87 +19,52 @@ interface IProviderProps {
   rootStore?: any
 }
 
+// A component wrapped in React.memo (like mobx's observer) is an object
+// with a `type` property pointing to the original component.
+const isMemoComponent = (c: unknown): c is MemoExoticComponent<ComponentType<any>> =>
+  typeof c === 'object' && c !== null && 'type' in c
+
 /**
  * Tries to determine a Component's name
  * @param {function} Component
  */
-function getComponentDisplayName<T>(Component: ComponentType<IComponentWithVMProps<T>>) {
-  return Component.displayName || Component.name || Component.constructor?.name || 'Unknown'
+function getComponentDisplayName<T>(
+  Component:
+    | ComponentType<IComponentWithVMProps<T>>
+    | MemoExoticComponent<ComponentType<IComponentWithVMProps<T>>>
+) {
+  if (isMemoComponent(Component)) {
+    const unwrappedComponent = Component.type
+    return unwrappedComponent.displayName || unwrappedComponent.name || 'Unknown'
+  }
+
+  // It's a regular function or class component
+  return Component.displayName || Component.name || 'Unknown'
 }
 
 /**
  * `withVM` is a higher order component that allows to easily keep separated
  * the definition of a component internal state and its actual view (render) part.
  *
- * Thinking in terms of React/Mobx patterns,
- * it can be viewed as a convenient HOC that creates "smart" or "container" components with extras.
- *
- * As a reminder, a `vm` or view-model, is an entity responsible for taking the system business
- * data and use cases and make them available to a user interface, such as a view.
- * In general, using these VM is recommended for top-level sections such as feature pages
- * or stand-alone "widgets".
+ * The `vm` or view-model, is an entity responsible for bridging the business data layer
+ * and the UI. In general, you create a vm for top-level sections such as feature pages
+ * or stand-alone "widgets" and pass it to children components.
  *
  * What `withVM` does technically:
- * - it turns the component it receives as first argument into mobx Observer.
- * - it instantiates a VM when the component is mounted and pass it to the component.
- * - the VM receives the mobx rootStore so that your app state is available to your UI (Component)
+ * - it creates an intermediary React component (= bridge)
+ * - this component will do nothing except instantiating the VM and pass it to the actual UI component.
+ * - the VM will be injected with the mobx rootStore, giving access the the business data layer.
+ * - the rootStore is expected to be provided as a prop called "rootStore" in React Context.
+ * - Optionally, a `init` method can be defined for initialization. (automatically called on mount)
+ * - Optionally, a `destroyVM` method can be defined for cleanup. (automatically called on unmount)
  *
- * Usage example:
- * - The business data and logic is available through a "root store".
- *   [Mobx docs](https://mobx.js.org/defining-data-stores.html#combining-multiple-stores)
- * - This root store is provided as a prop called "rootStore" in React Context.
- *   For example using mobx-react Provider: `<Provider rootStore={rootStore}><App/></Provider>`
- * - Design the VM with the following characteristics:
- *   - the VM constructor expects an object as argument, one property being `rootStore`.
- *   - if necessary, a `destroyVM` method can be defined for cleanup. (automatically called on unmount)
- *
- * Pseudo code snippets:
+ * @example
+ * ```ts
+ * import {withVM} from '@lib/mobx/withVM'
+ * import {ProfileSettings} from './ProfileSettings'
+ * import {ProfileSettingsVM} from './ProfileSettingsVM'
+ * export default withVM(ProfileSettings, ProfileSettingsVM)
  * ```
- * // UserFormComponent.js
- * function UserFormComponent (props) {
- *   const {vm} = props
- *   return (
- *     <div>
- *       <input value={vm.name}/>
- *       <input value={vm.email}/>
- *     </div>
- *   )
- * }
- *
- * // ----------------
- * // UserFormWithVM.js
- * import withVM from '*...*withVM'
- * import UserFormComponent from './UserFormComponent'
- *
- * class UserFormVM {
- *   name = ''
- *   email = ''
- *
- *   destroyVM () {
- *     // can be optionally defined if cleanup necessary
- *   }
- *
- *   constructor ({rootStore}) {
- *     // do something with rootStore
- *     mobx.makeAutoObservable(this)
- *   }
- * }
- *
- * export default withVM(UserFormComponent, UserForm)
- *
- * // ----------------
- * // App
- * import UserFormVM from './UserFormVM'
- * function App {
- *   return (
- *     <div>
- *       <UserFormWithVM/>
- *     </div>
- *   )
- * }
- * ```
- * @param Component
- * @param VM local vm using mobx observables
  */
 export function withVM<T extends IViewModel, P extends {rootStore: any}>(
   Component: ComponentType<IComponentWithVMProps<T>>,
@@ -107,11 +73,13 @@ export function withVM<T extends IViewModel, P extends {rootStore: any}>(
   const VMProvider = (props: P & IProviderProps) => {
     const {rootStore, ...otherProps} = props
     const {current: vm} = useRef(new VM(props))
-    useEffect(() => () => {
-      if (typeof vm.destroyVM === 'function') {
-        vm.destroyVM()
+    useEffect(() => {
+      vm.init?.()
+
+      return () => {
+        vm.destroyVM?.()
       }
-    })
+    }, [])
     return <Component vm={vm} {...otherProps} />
   }
   VMProvider.displayName = `${getComponentDisplayName(Component)}WithVM`

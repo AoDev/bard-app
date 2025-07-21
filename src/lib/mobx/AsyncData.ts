@@ -52,7 +52,7 @@ export class AsyncData<T> implements IAsyncData<T> {
   lastAttempt = 0
   debounce = 0
   error: Error | null = null
-  private readonly initialValue: T
+  readonly initialValue: T
   private readonly fetchHandler: (...args: any) => Promise<T>
   private readonly onError: (err: Error) => void
   static defaultErrorHandler(error: Error) {
