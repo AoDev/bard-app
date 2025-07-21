@@ -2,8 +2,8 @@ import * as mobxReact from 'mobx-react'
 import {type ComponentType, type FC, type MemoExoticComponent, memo, useEffect, useRef} from 'react'
 
 export interface IViewModel {
-  init?: () => void | Promise<void>
-  destroyVM?: () => void | Promise<void>
+  onMount?: () => void | Promise<void>
+  onUnmount?: () => void | Promise<void>
   [x: string]: any
 }
 
@@ -55,8 +55,8 @@ function getComponentDisplayName<T>(
  * - this component will do nothing except instantiating the VM and pass it to the actual UI component.
  * - the VM will be injected with the mobx rootStore, giving access the the business data layer.
  * - the rootStore is expected to be provided as a prop called "rootStore" in React Context.
- * - Optionally, a `init` method can be defined for initialization. (automatically called on mount)
- * - Optionally, a `destroyVM` method can be defined for cleanup. (automatically called on unmount)
+ * - Optionally, a `onMount` method can be defined for initialization.
+ * - Optionally, a `onUnmount` method can be defined for cleanup.
  *
  * @example
  * ```ts
@@ -74,10 +74,10 @@ export function withVM<T extends IViewModel, P extends {rootStore: any}>(
     const {rootStore, ...otherProps} = props
     const {current: vm} = useRef(new VM(props))
     useEffect(() => {
-      vm.init?.()
+      vm.onMount?.()
 
       return () => {
-        vm.destroyVM?.()
+        vm.onUnmount?.()
       }
     }, [])
     return <Component vm={vm} {...otherProps} />
